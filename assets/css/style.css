@@ -109,6 +109,12 @@ main.grid-layout .timer-grid-section {
   height: 100%;
 }
 
+
+#startButton, #pauseButton {
+  margin: auto;
+  display: inline-block;
+}
+
 /* Grid leaderboard */
 main.leader-grid-layout {
   padding-top: 1.5rem;
