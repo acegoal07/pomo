@@ -2,10 +2,26 @@
    --background-color: #c42217;
    --foreground-color: #eed847;
    /*--foreground-color: #58a339; */
-   font-family: 'Fredoka', cursive;
-   /* color: ; */
+   font-family: 'Fredoka', Arial;
+   font-size: px;
 
 }
+
+img {
+   max-width: 50%;
+   height: auto;
+   display: block;
+   margin: auto;
+ }
+
+h1 {
+   font-family: 'Fredoka', cursive;
+   font-size: 50px;
+   text-align: center;
+   text-transform: uppercase;
+   letter-spacing: 2px;
+ }
+
 
 body {
    background-color: var(--background-color);
@@ -53,4 +69,5 @@ main.grid-layout .timer-grid-section {
    background-color: var(--foreground-color);
    color: white;
    border-radius: 0.5rem;
+   background-color: var(--background-color);
 }
