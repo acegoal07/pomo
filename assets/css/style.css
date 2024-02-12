@@ -31,3 +31,31 @@ hr {
    border-color: var(--foreground-color);
    border-radius: 0.1rem;
 }
+
+/* Grid */
+main {
+   display: grid;
+   align-items: center;
+   gap: 10px;
+   grid-template-areas: 
+      "timer"
+      "todo";
+}
+
+@media (min-width: 60em) {
+   main {
+      grid-template-columns: 3fr 5fr 3fr;
+      grid-template-areas:
+         "todo  timer  timer";
+   }
+}
+
+main .todo {
+   grid-area: todo;
+   background-color: blue;
+}
+
+main .timer {
+   grid-area: timer;
+   background-color: yellow;
+}
