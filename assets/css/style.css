@@ -103,15 +103,23 @@ a .add-button-vertical-plus {
 }
 
 main.grid-layout .timer-grid-section {
+  text-align: center;
   grid-area: timer;
   color: white;
   border-radius: 1.5rem;
   height: 100%;
 }
 
+#timer {  /* attempting to make this sit exactly in the centre so it will be in the middle of the gif */
+  color: var(--background-color)
+}
+
+
+.timerBox {
+  text-align: center;
+}
 
 #startButton, #pauseButton {
-  margin: auto;
   display: inline-block;
 }
 
