@@ -49,6 +49,8 @@ main.grid-layout {
    main.grid-layout {
       grid-template-columns: 3fr 5fr 3fr;
       grid-template-areas:
+         "todo  timer  timer"
+         "todo  timer  timer"
          "todo  timer  timer";
    }
 }
