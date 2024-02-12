@@ -64,6 +64,8 @@ main.grid-layout .todo-grid-section {
    background-color: var(--foreground-color);
    color: white;
    border-radius: 0.5rem;
+   min-height: 100%;
+  position: relative;
 }
 
 main.grid-layout .timer-grid-section {
