@@ -114,6 +114,13 @@ main.grid-layout .timer-grid-section {
   color: var(--background-color)
 }
 
+.timerRectangle {
+  background-color: white;
+  height: 2rem;
+  width: 6rem;
+  margin: auto;
+  text-align: center;
+}
 
 .timerBox {
   text-align: center;
