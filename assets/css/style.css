@@ -1,6 +1,10 @@
 :root {
    --background-color: #c42217;
-   --foreground-color: #58a339;
+   --foreground-color: #eed847;
+   /*--foreground-color: #58a339; */
+   font-family: 'Fredoka', cursive;
+   /* color: ; */
+
 }
 
 body {
@@ -16,7 +20,7 @@ hr {
 }
 
 /* Grid */
-main {
+main.grid-layout {
    display: grid;
    align-items: center;
    gap: 10px;
@@ -26,7 +30,7 @@ main {
 }
 
 @media (min-width: 60em) {
-   main {
+   main.grid-layout {
       grid-template-columns: 3fr 5fr 3fr;
       grid-template-areas:
          "todo  timer  timer";
@@ -37,13 +41,16 @@ main {
    margin: 1rem;
 }
 
-main .todo-grid-section {
+main.grid-layout .todo-grid-section {
    grid-area: todo;
    background-color: var(--foreground-color);
    color: white;
    border-radius: 0.5rem;
 }
 
-main .timer-grid-section {
+main.grid-layout .timer-grid-section {
    grid-area: timer;
+   background-color: var(--foreground-color);
+   color: white;
+   border-radius: 0.5rem;
 }
