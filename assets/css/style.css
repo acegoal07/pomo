@@ -27,13 +27,6 @@ body {
   background-color: var(--background-color);
   color: var(--foreground-color);
   margin: 1rem;
-  width: 100%;
-  height: 100%;
-}
-
-html {
-  width: 100%;
-  height: 100%;
 }
 
 hr {
@@ -108,7 +101,6 @@ main.grid-layout .timer-grid-section {
 
 /* Grid leaderboard */
 main.leader-grid-layout {
-  height: 100%;
   padding-top: 0.5rem;
   display: grid;
   align-items: center;
@@ -132,7 +124,7 @@ main.leader-grid-layout .allTime-grid-section {
   border-color: var(--foreground-color);
   color: white;
   border-radius: 0.5rem;
-  height: 100%;
+  height: 96vh;
   position: relative;
 }
 
@@ -142,7 +134,7 @@ main.leader-grid-layout .weekly-grid-section {
   border-color: var(--foreground-color);
   color: white;
   border-radius: 0.5rem;
-  height: 100%;
+  height: 96vh;
   position: relative;
 }
 
