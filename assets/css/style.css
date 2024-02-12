@@ -47,9 +47,9 @@ main.grid-layout {
 
 @media (min-width: 60em) {
   main.grid-layout {
-    grid-template-columns: 3fr 7fr;
+    grid-template-columns: 4fr 7fr;
     grid-template-areas:
-      "todo  timer  timer";
+      "todo  timer";
   }
 }
 
