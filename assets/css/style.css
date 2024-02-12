@@ -37,6 +37,7 @@ hr {
 
 /* Grid homepage */
 main.grid-layout {
+  padding-top: 0.5rem;
   display: grid;
   align-items: center;
   gap: 10px;
@@ -58,6 +59,15 @@ main.grid-layout {
 }
 
 main.grid-layout .todo-grid-section {
+  grid-area: todo;
+  background-color: var(--foreground-color);
+  color: white;
+  border-radius: 1.5rem;
+  height: 96vh;
+  position: relative;
+}
+
+main.grid-layout .timer-grid-section {
   grid-area: todo;
   background-color: var(--foreground-color);
   color: white;
