@@ -32,3 +32,21 @@ function startPomodoro() {
 
 //testing timer
 console.log(timer(shortBreak));
+
+exports.timer_class = class {
+    constructor() {
+        this.workLengthMS;
+        this.breakLengthMS;
+        this.currentPositionMS;
+    }
+
+    startTimer() {
+        this.currentPositionMS = this.workLengthMS;
+        this.timer = setInterval(() => {
+            this.currentPositionMS -= 1000;
+            if (this.currentPositionMS <= 0) {
+                clearInterval(this.timer);
+            }
+        }, 1000);
+    }
+}
