@@ -61,7 +61,7 @@ main.grid-layout .todo-grid-section {
   grid-area: todo;
   background-color: var(--foreground-color);
   color: white;
-  border-radius: 0.5rem;
+  border-radius: 1.5rem;
   height: 96vh;
   position: relative;
 }
@@ -95,13 +95,13 @@ a .add-button-vertical-plus {
 main.grid-layout .timer-grid-section {
   grid-area: timer;
   color: white;
-  border-radius: 0.5rem;
+  border-radius: 1.5rem;
   height: 100%;
 }
 
 /* Grid leaderboard */
 main.leader-grid-layout {
-  padding-top: 0.5rem;
+  padding-top: 1.5rem;
   display: grid;
   align-items: center;
   gap: 10px;
@@ -123,7 +123,7 @@ main.leader-grid-layout .allTime-grid-section {
   border-style: solid;
   border-color: var(--foreground-color);
   color: white;
-  border-radius: 0.5rem;
+  border-radius: 1.5rem;
   height: 96vh;
   position: relative;
 }
@@ -133,7 +133,7 @@ main.leader-grid-layout .weekly-grid-section {
   border-style: solid;
   border-color: var(--foreground-color);
   color: white;
-  border-radius: 0.5rem;
+  border-radius: 1.5rem;
   height: 96vh;
   position: relative;
 }
@@ -142,7 +142,7 @@ main.leader-grid-layout .weekly-grid-section {
   text-align: center;
   color: var(--background-color);
   background-color: var(--foreground-color);
-  border-radius: 0.5rem;
+  border-radius: 1.5rem;
   padding: 1rem;
   font-size: 1.5rem;
 }
