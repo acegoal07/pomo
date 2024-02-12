@@ -27,6 +27,13 @@ body {
   background-color: var(--background-color);
   color: var(--foreground-color);
   margin: 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  width: 100%;
+  height: 100%;
 }
 
 hr {
@@ -47,7 +54,7 @@ main.grid-layout {
 
 @media (min-width: 60em) {
   main.grid-layout {
-    grid-template-columns: 4fr 7fr;
+    grid-template-columns: 3fr 7fr;
     grid-template-areas:
       "todo  timer";
   }
@@ -101,6 +108,8 @@ main.grid-layout .timer-grid-section {
 
 /* Grid leaderboard */
 main.leader-grid-layout {
+  height: 100%;
+  padding-top: 0.5rem;
   display: grid;
   align-items: center;
   gap: 10px;
@@ -123,7 +132,7 @@ main.leader-grid-layout .allTime-grid-section {
   border-color: var(--foreground-color);
   color: white;
   border-radius: 0.5rem;
-  height: 96vh;
+  height: 100%;
   position: relative;
 }
 
@@ -133,8 +142,17 @@ main.leader-grid-layout .weekly-grid-section {
   border-color: var(--foreground-color);
   color: white;
   border-radius: 0.5rem;
-  height: 96vh;
+  height: 100%;
   position: relative;
+}
+
+.leaderEntry {
+  text-align: center;
+  color: var(--background-color);
+  background-color: var(--foreground-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-size: 1.5rem;
 }
 
 
