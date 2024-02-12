@@ -9,25 +9,8 @@ body {
    margin: 1rem;
 }
 
-header {
-   background-color: var(--foreground-color);
-   color: white;
-   padding: 1em;
-   text-align: center;
-   border-radius: 1em;
-}
-
-.header-title {
-   padding-bottom: 0;
-   margin-bottom: 0;
-}
-
-.header-description {
-   padding-top: 0;
-   margin-top: 0.1rem;
-}
-
 hr {
+   margin-top: 1rem;
    border-color: var(--foreground-color);
    border-radius: 0.1rem;
 }
@@ -50,12 +33,17 @@ main {
    }
 }
 
-main .todo {
-   grid-area: todo;
-   background-color: blue;
+.grid-container {
+   margin: 1rem;
 }
 
-main .timer {
+main .todo-grid-section {
+   grid-area: todo;
+   background-color: var(--foreground-color);
+   color: white;
+   border-radius: 0.5rem;
+}
+
+main .timer-grid-section {
    grid-area: timer;
-   background-color: yellow;
 }
