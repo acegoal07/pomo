@@ -1,59 +1,60 @@
 :root {
-   --background-color: #c42217;
-   --foreground-color: #eed847;
-   /*--foreground-color: #58a339; */
-   font-family: 'Fredoka', Arial;
-   font-size: px;
+  --background-color: #c42217;
+  --foreground-color: #eed847;
+  /*--foreground-color: #58a339; */
+  font-family: 'Fredoka', Arial;
+  font-size: px;
 }
 
 img {
-   max-width: 35%;
-   height: auto;
-   display: block;
-   margin: auto;
- }
+  max-width: 35%;
+  height: auto;
+  display: block;
+  margin: auto;
+}
 
 h1 {
-   font-family: 'Fredoka', cursive;
-   font-size: 60px;
-   text-align: center;
-   text-transform: uppercase;
-   letter-spacing: 2px;
- }
+  font-family: 'Fredoka', cursive;
+  font-size: 60px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0;
+}
 
 
 body {
-   background-color: var(--background-color);
-   color: var(--foreground-color);
-   margin: 1rem;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  margin: 1rem;
 }
 
 hr {
-   margin-top: 1rem;
-   border-color: var(--foreground-color);
-   border-radius: 0.1rem;
+  margin-top: 1rem;
+  border-color: var(--foreground-color);
+  border-radius: 0.1rem;
 }
 
-/* Grid */
+/* Grid homepage */
 main.grid-layout {
-   display: grid;
-   align-items: center;
-   gap: 10px;
-   grid-template-areas: 
-      "timer"
-      "todo";
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  grid-template-areas:
+    "timer"
+    "todo";
 }
 
 @media (min-width: 60em) {
-   main.grid-layout {
-      grid-template-columns: 3fr 5fr 3fr;
-      grid-template-areas:
-         "todo  timer  timer";
-   }
+  main.grid-layout {
+    grid-template-columns: 3fr 7fr;
+    grid-template-areas:
+      "todo  timer  timer";
+  }
 }
 
 .grid-container {
-   margin: 1rem;
+  margin: 1rem;
 }
 
 main.grid-layout .todo-grid-section {
@@ -65,18 +66,103 @@ main.grid-layout .todo-grid-section {
   position: relative;
 }
 
+a .add-button-circle {
+  border-radius: 1.5rem;
+  width: 60px;
+  height: 60px;
+  background-color: var(--background-color);
+  cursor: pointer;
+}
+
+a .add-button-horizontal-plus {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 50%;
+  height: 12.5%;
+  left: 25%;
+  top: 43.75%;
+}
+
+a .add-button-vertical-plus {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 12.5%;
+  height: 50%;
+  left: 43.75%;
+  top: 12.5%;
+}
+
 main.grid-layout .timer-grid-section {
-   grid-area: timer;
-   color: white;
-   border-radius: 0.5rem;
+  grid-area: timer;
+  color: white;
+  border-radius: 0.5rem;
+  height: 100%;
+}
+
+/* Grid leaderboard */
+main.leader-grid-layout {
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  grid-template-areas:
+    "weekly"
+    "all-time";
+}
+
+@media (min-width: 60em) {
+  main.leader-grid-layout {
+    grid-template-columns: 2fr 2fr;
+    grid-template-areas:
+      "weekly" "all-time";
+  }
+}
+
+main.leader-grid-layout .allTime-grid-section {
+  grid-area: "all-time";
+  border-style: solid;
+  border-color: var(--foreground-color);
+  color: white;
+  border-radius: 0.5rem;
+  height: 96vh;
+  position: relative;
+}
+
+main.leader-grid-layout .weekly-grid-section {
+  grid-area: "weekly";
+  border-style: solid;
+  border-color: var(--foreground-color);
+  color: white;
+  border-radius: 0.5rem;
+  height: 96vh;
+  position: relative;
+}
+
+
+
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 100%;
 }
 
 
-#form {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   height: 100%;
+#buttons {
+
+  background-color: yellow;
+  border-radius: 7pt;
+  width: 80px;
+  height: 25px;
+  margin: 3px;
+  font-size: 12pt;
+  text-align: center;
+}
+
+#inputs {
+  border-width: 4px;
+  border-color: green;
+  border-radius: 6px;
+  margin: 3px;
+  height: 25px;
 }
