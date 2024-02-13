@@ -79,7 +79,6 @@ a .add-button-circle {
   width: 60px;
   height: 60px;
   background-color: var(--background-color);
-  cursor: pointer;
 }
 
 a .add-button-horizontal-plus {
@@ -108,19 +107,23 @@ main.grid-layout .timer-grid-section {
   height: 100%;
 }
 
-#timer {  /* attempting to make this sit exactly in the centre so it will be in the middle of the gif */
-  color: var(--background-color);
-  padding-top: 0.4rem;
+#timer {
+  padding-top: 0;
+  padding-bottom: 0.5rem;
 }
 
-.timerRectangle {
+#timerGif {
+  padding: 0;
+}
+
+/*/.timerRectangle {
   background-color: white;
   height: 2rem;
   width: 6rem;
   margin: auto;
   text-align: center;
   border-radius: 1.5rem;
-}
+}/*/
 
 .timerBox {
   text-align: center;
@@ -133,7 +136,8 @@ main.grid-layout .timer-grid-section {
   width: fit-content;
 }
 
-#startButton, #pauseButton {
+#startButton,
+#pauseButton {
   display: inline-block;
 }
 
@@ -185,6 +189,61 @@ main.leader-grid-layout .weekly-grid-section {
   font-size: 1.5rem;
 }
 
+.is-clickable {
+  cursor: pointer;
+}
+
+.popup {
+  /* how do you put something like this in the middle of the screen? */
+  /* what do you mean? what's it for? */
+  /* to take the inputs in for the todo items */
+  /* Same as normally would. Just put everything in the code for the button in index  */
+  /* Oh bet im gonna see how you blur the screen behind the popup */
+  /* Okay cool, I didn't wanna link it to your button yet because I was sacred to ruin it. But I think it's ready to be linked now. It's mostlyjust styling and content needed.  */
+
+  /* Yeah looks good just needs some formating  */
+  /* (Thumbs up emoji) */
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #c42217;
+  padding: 20px;
+  border: 2px solid #eed847;
+  border-width: 15px;
+  /* Ive moved it above the main class so its not affected by the blur */
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  width: 1200px;
+  height: 600px;
+  animation: popupAnimation 0.5s forwards;
+}
+
+@keyframes popupAnimation {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* If you apply this to the main it should blur the screen */
+.blur-filter {
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
+
+/* Below Is For The Login Screen */
 #form {
   display: flex;
   flex-direction: column;
@@ -213,6 +272,14 @@ main.leader-grid-layout .weekly-grid-section {
   height: 25px;
 }
 
-.is-clickable {
-  cursor: pointer;
-}
+
+
+
+/* Yo, you with alex? yes u cunt  can ypu ask him to have a look at the blur lol  no fight me  he said it works tell him to open the popup then close it alex said your a cuck you are a bitch your bitch damn right
+
+
+YOU BROKE IT DARA YOU SILLY CUNT <3 */
+
+/* here */
+/* h   e   l   p */
+/* Nevermind, think I fou  */

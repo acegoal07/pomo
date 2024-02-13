@@ -58,6 +58,10 @@ class pomoTimer{
     this.setCurrentPositionMS(this.timerLengthMS);
     const timer = setInterval(() => {
       if (this.currentPositionMS > 0 && this.timerActive) {
+        var timerText = document.getElementById("timer");
+        var minuteValue = Math.floor(this.currentPositionMS / 60000)
+        var actualValue = (minuteValue + ":" + (this.currentPositionMS % 60000)/1000);
+        timerText.innerHTML = actualValue;
         this.currentPositionMS -= 1000;
       } else {
         clearInterval(timer);
@@ -80,15 +84,12 @@ window.onload = function() {
     timer.setTimerLength(25 * 60 * 1000)
       .startTimer();
 
-    console.log(timer);
-
     const test = setInterval(() => {
       console.log(timer.getCurrentPosition());
       console.log(timer.getCurrentPositionMS());
-      if (timer.getCurrentPositionMS() === 1491000) {
-          clearInterval(test);
-          timer.stopTimer();
-          console.log(timer);
+      if (timer.getCurrentPositionMS() === 0) {
+        clearInterval(test);
+        timer.stopTimer();
       }
     }, 1000);
   });
