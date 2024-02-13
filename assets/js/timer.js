@@ -1,125 +1,42 @@
-// Timer needs to be 25 minutes, 5 minutes x 4 then 15 minutes
-
-const work = 25 * 60;
-const shortBreak = 5 * 60;
-const longBreak = 15 * 60;
-
-let timer;
-
-const pomodoros = 0;
-
-function timer(time) {
-  timer = time;
-  setTimeout(() => {
-    timer--;
-    if (timer > 0) {
-        timer(timer);
-    }
-  }, 1000);
-}
-
-function startPomodoro() {
-  timer(work);
-  timer(shortBreak);
-  timer(work);
-  timer(shortBreak);
-  timer(work);
-  timer(shortBreak);
-  timer(work);
-  timer(longBreak);
-  pomodoros++;
-}
-
-//testing timer
-console.log(timer(shortBreak));
-
-
-
-
-
-
-exports.pomoTimer= class {
+class pomoTimer{
   constructor() {
-    this.workLengthMS;
-    this.currentWorkPositionMS;
-    this.breakLengthMS;
-    this.currentBreakPositionMS;
+    this.timerLengthMS = null;
+    this.currentPositionMS = null;
     this.timerActive = false;
     this.pomodoros = 0;
   }
 
   /**
-   * @param {Boolean} isDefault
-   * @param {int} customInput
+   * @param {int} msInput
    * @returns {pomoTimer}
    */
-  setWorkTimer(isDefault = true, customInput = null) {
-    if (isDefault && customInput === null) {
-      this.workLengthMS = 25 * 60 * 1000;
-    } else if (customInput !== null) {
-      alert("Custom input should be null as isDefault is true!!!")
-    } else {
-      this.workLengthMS = customInput * 60 * 1000;
+  setTimerLength(msInput) {
+    if (msInput < 0 || msInput === null) {
+      throw new Error("Timer length must be greater than 0");
     }
-    return this;
-  }
-
-  /**
-   * @param {Boolean} isDefault
-   * @param {int} customInput
-   * @returns {pomoTimer}
-   */
-  setBreakTimer(isDefault = true, customInput = null) {
-    if (isDefault && customInput === null) {
-      this.BreakLengthMS = 5 * 60 * 1000;
-    } else if (customInput !== null) {
-      alert("Custom input should be null as isDefault is true!!!")
-    } else {
-      this.breakLengthMS = customInput * 60 * 1000;
-    }
+    this.timerLengthMS = msInput;
     return this;
   }
 
   /**
    * @returns {int}
    */
-  getCurrentWorkPositionMS() {
-    return this.currentWorkPositionMS;
+  getCurrentPositionMS() {
+    return this.currentPositionMS;
   }
 
   /**
    * @returns {int}
    */
-  getCurrentWorkPosition() {
-    return (this.currentWorkPositionMS / 1000) * 60;
+  getCurrentPosition() {
+    return (this.currentPositionMS / 1000) * 60;
   }
 
   /**
    * @param {int} ms
    */
-  setCurrentWorkPositionMS(ms) {
-    this.currentWorkPositionMS = ms;
-  }
-
-  /**
-   * @returns {int}
-   */
-  getCurrentBreakPositionMS() {
-    return this.currentBreakPositionMS;
-  }
-
-  /**
-   * @returns {int}
-   */
-  getCurrentBreakPosition() {
-    return (this.currentBreakPositionMS / 1000) * 60;
-  }
-
-  /**
-   * @param {int} ms
-   */
-  setCurrentBreakPositionMS(ms) {
-    this.currentBreakPositionMS = ms;
+  setCurrentPositionMS(ms) {
+    this.currentPositionMS = ms;
   }
 
   /**
@@ -138,20 +55,41 @@ exports.pomoTimer= class {
 
   startTimer() {
     this.timerActive = true;
-    do {
-      let workTimer = setInterval(() => {
-        if (this.currentWorkPositionMS <= 0) {
-          clearInterval(workTimer);
-          this.startBreakTimer();
-        } else {
-          this.currentWorkPositionMS -= 1000;
-        }
-      }, 1000);
-    } while (this.currentWorkPositionMS > 0 && this.timerActive);
+    this.setCurrentPositionMS(this.timerLengthMS);
+    const timer = setInterval(() => {
+      if (this.currentPositionMS > 0 && this.timerActive) {
+        this.currentPositionMS -= 1000;
+      } else {
+        clearInterval(timer);
+        this.timerActive = false;
+        this.currentPositionMS = 0;
+      }
+    }, 1000);
   }
 
-  // Create a function to stop the timer
   stopTimer() {
     this.timerActive = false;
   }
 }
+
+
+window.onload = function() {
+  document.querySelector("#startButton").addEventListener('click', () => {
+    const timer = new pomoTimer();
+
+    timer.setTimerLength(25 * 60 * 1000)
+      .startTimer();
+
+    console.log(timer);
+
+    const test = setInterval(() => {
+      console.log(timer.getCurrentPosition());
+      console.log(timer.getCurrentPositionMS());
+      if (timer.getCurrentPositionMS() === 1491000) {
+          clearInterval(test);
+          timer.stopTimer();
+          console.log(timer);
+      }
+    }, 1000);
+  });
+};

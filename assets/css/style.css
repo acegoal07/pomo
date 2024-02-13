@@ -129,7 +129,7 @@ main.grid-layout .timer-grid-section {
   padding: 1rem;
   margin: auto;
   margin-top: 2rem;
-  height: fit-content;
+  width: -moz-fit-content;
   width: fit-content;
 }
 
