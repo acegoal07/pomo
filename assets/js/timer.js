@@ -11,10 +11,10 @@ const pomodoros = 0;
 function timer(time) {
   timer = time;
   setTimeout(() => {
-      timer--;
-      if (timer > 0) {
-          timer(timer);
-      }
+    timer--;
+    if (timer > 0) {
+        timer(timer);
+    }
   }, 1000);
 }
 
@@ -38,22 +38,26 @@ console.log(timer(shortBreak));
 
 
 
-exports.timer_class = class {
+exports.pomoTimer= class {
   constructor() {
     this.workLengthMS;
     this.currentWorkPositionMS;
     this.breakLengthMS;
     this.currentBreakPositionMS;
+    this.timerActive = false;
+    this.pomodoros = 0;
   }
 
   /**
    * @param {Boolean} isDefault
    * @param {int} customInput
-   * @returns {exports.timer_class}
+   * @returns {pomoTimer}
    */
-  setWorkTimer(isDefault == true, customInput) {
-    if (isDefault) {
+  setWorkTimer(isDefault = true, customInput = null) {
+    if (isDefault && customInput === null) {
       this.workLengthMS = 25 * 60 * 1000;
+    } else if (customInput !== null) {
+      alert("Custom input should be null as isDefault is true!!!")
     } else {
       this.workLengthMS = customInput * 60 * 1000;
     }
@@ -63,36 +67,52 @@ exports.timer_class = class {
   /**
    * @param {Boolean} isDefault
    * @param {int} customInput
-   * @returns {exports.timer_class}
+   * @returns {pomoTimer}
    */
-  setBreakTimer(isDefault == true, customInput) {
-    if (isDefault) {
-      this.BreakeLengthMS = 5 * 60 * 1000;
+  setBreakTimer(isDefault = true, customInput = null) {
+    if (isDefault && customInput === null) {
+      this.BreakLengthMS = 5 * 60 * 1000;
+    } else if (customInput !== null) {
+      alert("Custom input should be null as isDefault is true!!!")
     } else {
-      this.breakLenghtMS = customInput * 60 * 1000;
+      this.breakLengthMS = customInput * 60 * 1000;
     }
     return this;
   }
 
   /**
-   * returns {int}
+   * @returns {int}
    */
-  getCurrentPositionMS() {
-    return this.currentPositionMS;
+  getCurrentWorkPositionMS() {
+    return this.currentWorkPositionMS;
   }
 
   /**
-   * returns {int}
+   * @returns {int}
    */
-  getCurrentPosition() {
-    return (this.currentPositionMS / 1000) * 60;
+  getCurrentWorkPosition() {
+    return (this.currentWorkPositionMS / 1000) * 60;
   }
 
   /**
    * @param {int} ms
    */
   setCurrentWorkPositionMS(ms) {
-    this.currentPositionMS = ms;
+    this.currentWorkPositionMS = ms;
+  }
+
+  /**
+   * @returns {int}
+   */
+  getCurrentBreakPositionMS() {
+    return this.currentBreakPositionMS;
+  }
+
+  /**
+   * @returns {int}
+   */
+  getCurrentBreakPosition() {
+    return (this.currentBreakPositionMS / 1000) * 60;
   }
 
   /**
@@ -100,5 +120,38 @@ exports.timer_class = class {
    */
   setCurrentBreakPositionMS(ms) {
     this.currentBreakPositionMS = ms;
+  }
+
+  /**
+   * @returns {int}
+   */
+  getPomodoros() {
+    return this.pomodoros;
+  }
+
+  /**
+   * @param {int} pomodoros
+   */
+  addPomodoros(pomodoros) {
+    this.pomodoros += pomodoros;
+  }
+
+  startTimer() {
+    this.timerActive = true;
+    do {
+      let workTimer = setInterval(() => {
+        if (this.currentWorkPositionMS <= 0) {
+          clearInterval(workTimer);
+          this.startBreakTimer();
+        } else {
+          this.currentWorkPositionMS -= 1000;
+        }
+      }, 1000);
+    } while (this.currentWorkPositionMS > 0 && this.timerActive);
+  }
+
+  // Create a function to stop the timer
+  stopTimer() {
+    this.timerActive = false;
   }
 }
