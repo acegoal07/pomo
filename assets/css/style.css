@@ -119,6 +119,7 @@ main.grid-layout .timer-grid-section {
   width: 6rem;
   margin: auto;
   text-align: center;
+  border-radius: 1.5rem;
 }
 
 .timerBox {
