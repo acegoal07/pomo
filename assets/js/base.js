@@ -9,9 +9,15 @@ window.onfocus = function() {
 
 window.addEventListener('load', () => {
   document.querySelector("#todo-add-button").addEventListener('click', () => {
-    
+    alert("Add button clicked");
   });
 
+  document.querySelector("#startButton").addEventListener('click', () => {
+    alert("Start button clicked");
+  });
 
+  document.querySelector("#stopButton").addEventListener('click', () => {
+    alert("Stop button clicked");
+  });
   
 });
