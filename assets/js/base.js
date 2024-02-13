@@ -16,7 +16,7 @@ window.addEventListener('load', () => {
     alert("Start button clicked");
   });
 
-  document.querySelector("#stopButton").addEventListener('click', () => {
+  document.querySelector("#pauseButton").addEventListener('click', () => {
     alert("Stop button clicked");
   });
   
