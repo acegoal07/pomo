@@ -212,3 +212,7 @@ main.leader-grid-layout .weekly-grid-section {
   margin: 3px;
   height: 25px;
 }
+
+.is-clickable {
+  cursor: pointer;
+}
