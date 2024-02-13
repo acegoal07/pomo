@@ -46,9 +46,9 @@ main.grid-layout {
     "todo";
 }
 
-@media (min-width: 60em) {
+@media (min-width: 70em) {
   main.grid-layout {
-    grid-template-columns: 3fr 7fr;
+    grid-template-columns: 4fr 7fr;
     grid-template-areas:
       "todo  timer";
   }
@@ -69,9 +69,7 @@ main.grid-layout .todo-grid-section {
 
 main.grid-layout .timer-grid-section {
   grid-area: todo;
-  background-color: var(--foreground-color);
   color: white;
-  border-radius: 1.5rem;
   height: 96vh;
   position: relative;
 }
@@ -124,6 +122,13 @@ main.grid-layout .timer-grid-section {
 
 .timerBox {
   text-align: center;
+  background-color: var(--foreground-color);
+  border-radius: 1.5rem;
+  padding: 1rem;
+  margin: auto;
+  margin-top: 2rem;
+  height: fit-content;
+  width: fit-content;
 }
 
 #startButton, #pauseButton {
