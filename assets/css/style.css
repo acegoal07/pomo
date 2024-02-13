@@ -109,7 +109,8 @@ main.grid-layout .timer-grid-section {
 }
 
 #timer {  /* attempting to make this sit exactly in the centre so it will be in the middle of the gif */
-  color: var(--background-color)
+  color: var(--background-color);
+  padding-top: 0.4rem;
 }
 
 .timerRectangle {
@@ -182,8 +183,6 @@ main.leader-grid-layout .weekly-grid-section {
   padding: 1rem;
   font-size: 1.5rem;
 }
-
-
 
 #form {
   display: flex;
