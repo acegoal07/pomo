@@ -122,6 +122,7 @@ main.grid-layout .timer-grid-section {
   grid-area: timer;
   text-align: center;
   position: relative;
+  max-height: 96vh;
   height: 100%;
 }
 
@@ -131,7 +132,9 @@ main.grid-layout .timer-grid-section {
   color: white;
   border-radius: 1.5rem;
   height: fit-content;
+  width: fit-content;
   padding: 1rem;
+  margin: auto;
 }
 
 #pauseButton, #startButton {
@@ -142,6 +145,7 @@ main.grid-layout .timer-grid-section {
   position: relative;
   height: 300px;
   width: 300px;
+  margin: auto;
 }
 
 .baseTimerCircle {
@@ -247,8 +251,8 @@ main.leader-grid-layout .weekly-grid-section {
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index: 1000;
-  width: 1200px;
-  height: 600px;
+  width: 75%;
+  height: 75%;
   animation: popupAnimation 0.5s forwards;
 }
 
@@ -359,12 +363,14 @@ a .todo-close-btn-line-2 {
 
 .todo-item {
   display: flex;
-  align-items: center;
+  margin: auto;
   margin-top: 20px;
   margin-bottom: 20px; 
+  width: 90%;
   padding: 10px; 
   border-radius: 30px; 
   background-color: #77b255;
+  align-items: center;
 }
 
 .todo-list-container {
