@@ -2,7 +2,7 @@ const { pomoTimer } = require("./timer");
 
 const timer = new pomoTimer();
 
-timer.setTimerLength(25 * 60 * 1000)
+timer.setTimerLength(25 * 60 * 100)
    .startTimer();
 
 console.log(timer);

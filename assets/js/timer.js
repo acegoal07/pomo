@@ -64,10 +64,13 @@ class pomoTimer{
     this.timerActive = true;
     this.currentPositionMS -= 1000;
     const timer = setInterval(() => {
-      if (this.currentPositionMS > 0 && this.isActive()) {
-        const actualValue = msToTime(this.currentPositionMS);
+      if (this.getCurrentPositionMS()  > 0 && this.isActive()) {
+        const actualValue = msToTime(this.getCurrentPositionMS() );
         document.querySelector("#timerText").innerHTML = actualValue;
-        setCircleDashArray();
+        
+        const timeFraction = this.getCurrentPositionMS()  / this.timerLengthMS;
+        setCircleDashArray(timeFraction);
+        
         if (this.blured) {
           document.title = actualValue;
         }
@@ -102,7 +105,7 @@ window.onload = function() {
   document.querySelector("#startButton").addEventListener('click', () => {
     if (!timer.isActive()) {
       if (timer.getCurrentPositionMS() === 0) {
-        timer.setTimerLength(25 * 60 * 1000)
+        timer.setTimerLength(10000)
           .startTimer();        
       } else {
         timer.startTimer();

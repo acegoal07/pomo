@@ -2,8 +2,8 @@ window.addEventListener('load', () => {
   // Open todo popup button listner
   document.querySelector("#todo-add-button").addEventListener('click', () => {
     const popup = document.querySelector("#popup");
-    popup.style.display = "block";
     popup.style.animation = "popupOpenAnimation 0.5s forwards";
+    popup.style.display = "block";
     document.querySelector("main").classList.add("blur-filter");
     document.querySelector("#todo-add-button").classList.remove("is-clickable");
   });

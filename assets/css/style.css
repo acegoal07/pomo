@@ -1,18 +1,24 @@
 :root {
   --background-color: #c42217;
   --foreground-color: #eed847;
-  /*--foreground-color: #58a339; */
   font-family: 'Fredoka', Arial;
-  font-size: px;
+  /* font-size: px; */
 }
 
-img {
+/* Images */
+img.logo {
   max-width: 35%;
   height: auto;
   display: block;
   margin: auto;
 }
 
+img.timer-controls {
+  display: block;
+  margin: 1rem;
+}
+
+/* Body */
 h1 {
   font-family: 'Fredoka', cursive;
   font-size: 60px;
@@ -21,7 +27,6 @@ h1 {
   letter-spacing: 2px;
   margin-bottom: 0;
 }
-
 
 body {
   background-color: var(--background-color);
@@ -35,7 +40,7 @@ hr {
   border-radius: 0.1rem;
 }
 
-/* Grid homepage */
+/* Timer and todo grid */
 main.grid-layout {
   padding-top: 0.5rem;
   display: grid;
@@ -74,7 +79,7 @@ main.grid-layout .todo-grid-section {
   overflow: auto;
 }
 
-a .add-button-circle {
+a .todo-add-btn-background {
   border-radius: 1.5rem;
   width: 60px;
   height: 60px;
@@ -82,9 +87,10 @@ a .add-button-circle {
   position: absolute;
   top: 20px;
   left: 20px;
+  transition: transform 0.2s ease;
 }
 
-a .add-button-horizontal-plus {
+a .todo-add-btn-horizontal-plus {
   position: relative;
   background-color: #FFFFFF;
   width: 50%;
@@ -93,7 +99,7 @@ a .add-button-horizontal-plus {
   top: 43.75%;
 }
 
-a .add-button-vertical-plus {
+a .todo-add-btn-vertical-plus {
   position: relative;
   background-color: #FFFFFF;
   width: 12.5%;
@@ -102,18 +108,12 @@ a .add-button-vertical-plus {
   top: 12.5%;
 }
 
-
-.add-button-circle {
-  transition: transform 0.2s ease;
-}
-
-.add-button-circle:hover {
+.todo-add-btn-background:hover {
   transform: translateY(-5px); 
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
-  /* transition: transform 0.2s ease; */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.add-button-circle:not(:hover) {
+.todo-add-btn-background:not(:hover) {
   transform: translateY(0);
 }
 
@@ -122,22 +122,15 @@ main.grid-layout .timer-grid-section {
   grid-area: timer;
   text-align: center;
   position: relative;
-}
-
-.grid-container {
-  background-color: var(--foreground-color);
-  color: white;
-  border-radius: 1.5rem;
-  height: 90vh;
+  height: 100%;
 }
 
 .timer-container {
   position: relative;
-}
-
-
-#timerImg {
-  
+  background-color: var(--foreground-color);
+  color: white;
+  border-radius: 1.5rem;
+  height: fit-content;
 }
 
 #pauseButton, #startButton {
@@ -161,13 +154,13 @@ main.grid-layout .timer-grid-section {
 }
 
 #timer {
-  color: #77B255;
+  color: white;
   position: absolute;
   font-size: 2.7rem;
   transform: translate(-50%, -50%);
   width: 300px;
   height: 300px;
-  top: 0;
+  top: 40%;
   left: 50%;
   display: flex;
   align-items: center;
@@ -181,13 +174,12 @@ main.grid-layout .timer-grid-section {
   transform: rotate(90deg);
   transform-origin: center;
   transition: 1s linear all;
-  stroke: currentColor;
+  stroke: #77B258;
 }
 
 .base-timerSvg {
   transform: scaleX(-1);
 }
-
 
 /* Grid leaderboard */
 main.leader-grid-layout {
@@ -259,7 +251,7 @@ main.leader-grid-layout .weekly-grid-section {
   animation: popupAnimation 0.5s forwards;
 }
 
-@keyframes popupAnimation {
+@keyframes popupOpenAnimation {
   0% {
     transform: translate(-50%, -50%) scale(0.5);
     opacity: 0;
@@ -283,24 +275,6 @@ main.leader-grid-layout .weekly-grid-section {
   }
 }
 
-.popup-close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 30px;
-  color: white;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  line-height: 1;
-}
-
-.popup-close-btn:hover {
-  color: red;
-}
-
 /* If you apply this to the main it should blur the screen */
 .blur-filter {
   -webkit-filter: blur(2px);
@@ -310,7 +284,6 @@ main.leader-grid-layout .weekly-grid-section {
   filter: blur(2px);
 }
 
-
 /* Below Is For The Login Screen */
 #form {
   display: flex;
@@ -319,7 +292,6 @@ main.leader-grid-layout .weekly-grid-section {
   justify-content: center;
   height: 100%;
 }
-
 
 #buttons {
 
@@ -340,13 +312,46 @@ main.leader-grid-layout .weekly-grid-section {
   height: 25px;
 }
 
-.popup-close-btn {
-  background-color: var(--foreground-color);
-  color: white;
+/* Todo popup */
+a .todo-close-btn-background {
   border-radius: 1.5rem;
-  padding: 1rem;
+  width: 60px;
+  height: 60px;
+  background-color: var(--foreground-color);
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  transition: transform 0.2s ease;
 }
 
+a .todo-close-btn-line-1 {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 50%;
+  height: 12.5%;
+  left: 25%;
+  top: 43.75%;
+  transform: rotatez(45deg);
+}
+
+a .todo-close-btn-line-2 {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 12.5%;
+  height: 50%;
+  left: 43.75%;
+  top: 12.5%;
+  transform: rotate(45deg);
+}
+
+.todo-close-btn-background:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.todo-close-btn-background:not(:hover) {
+  transform: translateY(0);
+}
 
 .todo-item {
   display: flex;
@@ -392,7 +397,6 @@ main.leader-grid-layout .weekly-grid-section {
   transform: translateY(0);
   box-shadow: none;
 }
-
 
 
 

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-
- 
+  
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,23 +23,27 @@
   <div id="popup" class="popup">
     <h1>This is an important message</h1>
     <h2>I AM FRUSTRATED</h2>
-    <!-- <button onclick="togglePopup()">Close</button> -->
-    <a id="todo-close-popup" class="popup-close-btn is-clickable">×</a>
+    <a id="todo-close-popup" class="is-clickable">
+      <div class="todo-close-btn-background is-clickable" role="button">
+        <div class="todo-close-btn-line-1"></div>
+        <div class="todo-close-btn-line-2"></div>
+      </div>
+    </a>
   </div>
 
   <script src="script.js"></script>
 
   <!-- POPUP TEST, IF YOU DELETE I WILL DECAPITATE YOU -->
-
+  
   <main class="grid-layout">
     <div class="todo-grid-section">
       <div class="grid-container">
         <h1>TO DO:</h1>
 
         <a role="button">
-          <div id="todo-add-button" class="add-button-circle is-clickable"                   role="button">
-            <div class="add-button-horizontal-plus"></div>
-            <div class="add-button-vertical-plus"></div>
+          <div id="todo-add-button" class="todo-add-btn-background is-clickable" role="button">
+            <div class="todo-add-btn-horizontal-plus"></div>
+            <div class="todo-add-btn-vertical-plus"></div>
           </div>
 
           <div class="todo-item">
@@ -79,37 +82,64 @@
               <div class="todo-text">You are blind if you don't know what the timer doing</div>
             </div>
           </div>
-          
+          <div class="todo-item">
+            <div class="todo-item-container">
+              <div class="todo-checkbox"></div>
+              <div class="todo-text">Panic over, timer doin what timer sposed to be doin</div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <div class="todo-item-container">
+              <div class="todo-checkbox"></div>
+              <div class="todo-text">The timer told me Dara is gay</div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <div class="todo-item-container">
+              <div class="todo-checkbox"></div>
+              <div class="todo-text">I agree with the timer</div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <div class="todo-item-container">
+              <div class="todo-checkbox"></div>
+              <div class="todo-text">I agree with the timer</div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <div class="todo-item-container">
+              <div class="todo-checkbox"></div>
+              <div class="todo-text">I agree with the timer</div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <div class="todo-item-container">
+              <div class="todo-checkbox"></div>
+              <div class="todo-text">I agree with the timer</div>
+            </div>
+          </div>
         </a>
       </div>
     </div>
 
     <div class="timer-grid-section">
-      <img src="assets/images/POMONew.png" alt="">
+      <img class="logo" src="assets/images/POMONew.png" alt="">
       
-      <!--<div class="grid-container">
-        
-      
-
-        <!--<div class="timer-container">
-
-          <!--<img class="timerImg" src="assets/images/timerimg.png" alt=""                   height="3000px" width="1000px"">
-          <h1 id="timer">25:00</h1> -->
+        <div class="timer-container">
 
           <div class="timerRing">
           </div>
-
-          
-          
-        <!--</div>-->
-
-        <a id="startButton" role="button" class="is-clickable"><img src="assets/images/playButWhite.png"
-          alt="Start Button" height="200px" width="200px"></a>
-        <a id="pauseButton" role="button" class="is-clickable"><img src="assets/images/pauseButWhite.png"
-          alt="Pause Button" height="200px" width="200px"></a>
           
 
-      <!--</div>-->
+        <a id="startButton">
+          <img class="timer-controls is-clickable" src="assets/images/playButWhite.png" alt="Start Button" height="100px" width="100px">
+        </a>
+        <a id="pauseButton">
+          <img class="timer-controls is-clickable" src="assets/images/pauseButWhite.png" alt="Pause Button" height="100px" width="100px">
+        </a>
+
+          </div>
+          
     </div>
 
   </main>
