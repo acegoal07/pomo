@@ -70,13 +70,13 @@ main.grid-layout .todo-grid-section {
   color: white;
   border-radius: 1.5rem;
   /* Whats this height here for? */
-  /* height: fit-content; */
+  max-height: 96vh;
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3)
 }
 
 .todo-grid-section {
-  overflow: auto;
+  overflow: hidden;
 }
 
 a .todo-add-btn-background {
@@ -131,6 +131,7 @@ main.grid-layout .timer-grid-section {
   color: white;
   border-radius: 1.5rem;
   height: fit-content;
+  padding: 1rem;
 }
 
 #pauseButton, #startButton {
@@ -251,6 +252,10 @@ main.leader-grid-layout .weekly-grid-section {
   animation: popupAnimation 0.5s forwards;
 }
 
+.popup h2 {
+  text-align: center;
+}
+
 @keyframes popupOpenAnimation {
   0% {
     transform: translate(-50%, -50%) scale(0.5);
@@ -294,7 +299,6 @@ main.leader-grid-layout .weekly-grid-section {
 }
 
 #buttons {
-
   background-color: yellow;
   border-radius: 7pt;
   width: 80px;
@@ -361,6 +365,11 @@ a .todo-close-btn-line-2 {
   padding: 10px; 
   border-radius: 30px; 
   background-color: #77b255;
+}
+
+.todo-list-container {
+  overflow: auto;
+  height: 82vh;
 }
 
 .todo-item-container {

@@ -64,8 +64,9 @@ class pomoTimer{
     this.timerActive = true;
     this.currentPositionMS -= 1000;
     const timer = setInterval(() => {
-      if (this.getCurrentPositionMS()  > 0 && this.isActive()) {
-        const actualValue = msToTime(this.getCurrentPositionMS() );
+      if (this.isActive()) {
+        if (this.getCurrentPositionMS() === 0) {this.timerActive = false;}
+        const actualValue = this.getCurrentPositionMS === 0 ? "00:00" : msToTime(this.getCurrentPositionMS());
         document.querySelector("#timerText").innerHTML = actualValue;
         
         const timeFraction = this.getCurrentPositionMS()  / this.timerLengthMS;
@@ -110,10 +111,11 @@ window.onload = function() {
       } else {
         timer.startTimer();
       }
-       const timeDisplay = setInterval(() => {
-        if (timer.getCurrentPositionMS() === 0) {
+      const timeDisplay = setInterval(() => {
+        if (timer.getCurrentPositionMS() === -1000) {
           clearInterval(timeDisplay);
-          timer.stopTimer();
+          timer.stopTimer();          
+          timer.setCurrentPositionMS(0);
         }
       }, 1000);     
     }
