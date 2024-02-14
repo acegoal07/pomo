@@ -11,6 +11,7 @@ img.logo {
   height: auto;
   display: block;
   margin: auto;
+  padding-bottom: 10%;
 }
 
 img.timer-controls {
@@ -70,6 +71,7 @@ main.grid-layout .todo-grid-section {
   color: white;
   border-radius: 1.5rem;
   /* Whats this height here for? */
+  /* Just trust that if you remove it then everything goes to shit. Not             instantly but eventaully... */
   max-height: 96vh;
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3)
@@ -172,6 +174,14 @@ main.grid-layout .timer-grid-section {
   justify-content: center;
 }
 
+.timerLeaves {
+  top: 7%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  padding: 0;
+}
+
 
 .path-remaining {
   stroke-width: 7px;
@@ -179,7 +189,7 @@ main.grid-layout .timer-grid-section {
   transform: rotate(90deg);
   transform-origin: center;
   transition: 1s linear all;
-  stroke: #77B258;
+  stroke: var(--background-color);
 }
 
 .base-timerSvg {
@@ -254,6 +264,42 @@ main.leader-grid-layout .weekly-grid-section {
   width: 75%;
   height: 75%;
   animation: popupAnimation 0.5s forwards;
+}
+
+#todo-input {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 2px solid #77b255;
+  font-size: 18px;
+}
+
+.popup-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 50px;
+  background-color: #77b255;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  }
+
+.popup-button:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+}
+
+.popup-button:not(:hover) {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .popup h2 {
@@ -412,14 +458,6 @@ a .todo-close-btn-line-2 {
   transform: translateY(0);
   box-shadow: none;
 }
-
-
-
-
-
-
-
-
 
 
 .base-timer {
