@@ -42,22 +42,6 @@ class pomoTimer{
   }
 
   /**
-   * @returns {int}
-   */
-  getPomodoros() {
-    return this.pomodoros;
-  }
-
-  /**
-   * @param {int} pomodoros
-   * @returns {pomoTimer}
-   */
-  addPomodoros(pomodoros) {
-    this.pomodoros += pomodoros;
-    return this;
-  }
-
-  /**
    * @returns {boolean}
    */
   isActive() {
@@ -80,13 +64,8 @@ class pomoTimer{
     this.timerActive = true;
     this.currentPositionMS -= 1000;
     const timer = setInterval(() => {
-      if (this.currentPositionMS > 0 && this.timerActive) {
-        var minuteValue = Math.floor(this.currentPositionMS / 60000);        
-        var secondValue = Math.floor((this.currentPositionMS % 60000) / 1000);
-        if (secondValue.toString().length === 1) {
-          secondValue = secondValue + "0";
-        }
-        var actualValue = minuteValue + ":" + secondValue;
+      if (this.currentPositionMS > 0 && this.isActive()) {
+        const actualValue = msToTime(this.currentPositionMS);
         document.querySelector("#timerText").innerHTML = actualValue;
         setCircleDashArray();
         if (this.blured) {
@@ -119,8 +98,8 @@ window.onfocus = function() {
 };
 
 window.onload = function() {
+  // Start timer button
   document.querySelector("#startButton").addEventListener('click', () => {
-
     if (!timer.isActive()) {
       if (timer.getCurrentPositionMS() === 0) {
         timer.setTimerLength(25 * 60 * 1000)
@@ -136,10 +115,27 @@ window.onload = function() {
       }, 1000);     
     }
   });
-
+  // Pause timer button
   document.querySelector("#pauseButton").addEventListener('click', () => {
     timer.stopTimer();
   });
   
 };
 
+// Miliseconds to timestamp
+function msToTime(s) {
+
+  function pad(n, z) {
+    z = z || 2;
+    return ('00' + n).slice(-z);
+  }
+
+  var ms = s % 1000;
+  s = (s - ms) / 1000;
+  var secs = s % 60;
+  s = (s - secs) / 60;
+  var mins = s % 60;
+  var hrs = (s - mins) / 60;
+  
+  return hrs > 0 ? pad(hrs) + ':' + pad(mins) + ':' + pad(secs) : pad(mins) + ':' + pad(secs);
+}

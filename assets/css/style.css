@@ -64,14 +64,15 @@ main.grid-layout .todo-grid-section {
   background-color: var(--foreground-color);
   color: white;
   border-radius: 1.5rem;
-  height: 110vh;
+  /* Whats this height here for? */
+  /* height: fit-content; */
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3)
 }
 
-/* .todo-grid-section {
-  overflow: hidden;
-} */
+.todo-grid-section {
+  overflow: auto;
+}
 
 a .add-button-circle {
   border-radius: 1.5rem;
