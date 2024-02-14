@@ -267,12 +267,13 @@ main.leader-grid-layout .weekly-grid-section {
 }
 
 #todo-input {
-  width: 80%;
+  width: 95%;
   padding: 10px;
+  margin-top:  20px;
   margin-bottom: 20px;
-  border-radius: 10px;
-  border: 2px solid #77b255;
-  font-size: 18px;
+  border-radius: 20px;
+  border: 5px solid #77b255;
+  font-size: 20px;
 }
 
 .popup-button {
