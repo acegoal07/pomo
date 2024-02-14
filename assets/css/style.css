@@ -66,6 +66,7 @@ main.grid-layout .todo-grid-section {
   border-radius: 1.5rem;
   height: 110vh;
   position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3)
 }
 
 /* .todo-grid-section {
