@@ -58,27 +58,28 @@ main.grid-layout {
   margin: 1rem;
 }
 
+/* TO DO LIST GRID */
 main.grid-layout .todo-grid-section {
   grid-area: todo;
   background-color: var(--foreground-color);
   color: white;
   border-radius: 1.5rem;
-  height: 96vh;
+  height: 110vh;
   position: relative;
 }
 
-main.grid-layout .timer-grid-section {
-  grid-area: todo;
-  color: white;
-  height: 96vh;
-  position: relative;
-}
+/* .todo-grid-section {
+  overflow: hidden;
+} */
 
 a .add-button-circle {
   border-radius: 1.5rem;
   width: 60px;
   height: 60px;
-  background-color: var(--background-color);
+  background-color: #77b255;
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 
 a .add-button-horizontal-plus {
@@ -99,47 +100,92 @@ a .add-button-vertical-plus {
   top: 12.5%;
 }
 
+
+.add-button-circle {
+  transition: transform 0.2s ease;
+}
+
+.add-button-circle:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+  /* transition: transform 0.2s ease; */
+}
+
+.add-button-circle:not(:hover) {
+  transform: translateY(0);
+}
+
+/* TIMER GRID */
 main.grid-layout .timer-grid-section {
-  text-align: center;
   grid-area: timer;
+  text-align: center;
+  position: relative;
+}
+
+.grid-container {
+  background-color: var(--foreground-color);
   color: white;
   border-radius: 1.5rem;
-  height: 100%;
+  height: 90vh;
+}
+
+.timer-container {
+  position: relative;
+}
+
+
+#timerImg {
+  
+}
+
+#pauseButton, #startButton {
+  display: inline-block;
+}
+
+.baseTimer {
+  position: relative;
+  height: 300px;
+  width: 300px;
+}
+
+.baseTimerCircle {
+  fill: none;
+  stroke: none;
+}
+
+.timerPathElapsed {
+  stroke-width: 7px;
+  stroke: grey;  
 }
 
 #timer {
-  padding-top: 0;
-  padding-bottom: 0.5rem;
+  color: #77B255;
+  position: absolute;
+  font-size: 2.7rem;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  top: 0;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#timerGif {
-  padding: 0;
+
+.path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  stroke: currentColor;
 }
 
-/*/.timerRectangle {
-  background-color: white;
-  height: 2rem;
-  width: 6rem;
-  margin: auto;
-  text-align: center;
-  border-radius: 1.5rem;
-}/*/
-
-.timerBox {
-  text-align: center;
-  background-color: var(--foreground-color);
-  border-radius: 1.5rem;
-  padding: 1rem;
-  margin: auto;
-  margin-top: 2rem;
-  width: -moz-fit-content;
-  width: fit-content;
+.base-timerSvg {
+  transform: scaleX(-1);
 }
 
-#startButton,
-#pauseButton {
-  display: inline-block;
-}
 
 /* Grid leaderboard */
 main.leader-grid-layout {
@@ -194,15 +240,6 @@ main.leader-grid-layout .weekly-grid-section {
 }
 
 .popup {
-  /* how do you put something like this in the middle of the screen? */
-  /* what do you mean? what's it for? */
-  /* to take the inputs in for the todo items */
-  /* Same as normally would. Just put everything in the code for the button in index  */
-  /* Oh bet im gonna see how you blur the screen behind the popup */
-  /* Okay cool, I didn't wanna link it to your button yet because I was sacred to ruin it. But I think it's ready to be linked now. It's mostlyjust styling and content needed.  */
-
-  /* Yeah looks good just needs some formating  */
-  /* (Thumbs up emoji) */
   display: none;
   position: fixed;
   top: 50%;
@@ -210,9 +247,8 @@ main.leader-grid-layout .weekly-grid-section {
   transform: translate(-50%, -50%);
   background-color: #c42217;
   padding: 20px;
-  border: 2px solid #eed847;
+  border: 2px solid #77b255;
   border-width: 15px;
-  /* Ive moved it above the main class so its not affected by the blur */
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index: 1000;
@@ -231,6 +267,36 @@ main.leader-grid-layout .weekly-grid-section {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
   }
+}
+
+@keyframes popupCloseAnimation {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.popup-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+.popup-close-btn:hover {
+  color: red;
 }
 
 /* If you apply this to the main it should blur the screen */
@@ -272,14 +338,83 @@ main.leader-grid-layout .weekly-grid-section {
   height: 25px;
 }
 
+.popup-close-btn {
+  background-color: var(--foreground-color);
+  color: white;
+  border-radius: 1.5rem;
+  padding: 1rem;
+}
+
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px; 
+  padding: 10px; 
+  border-radius: 30px; 
+  background-color: #77b255;
+}
+
+.todo-item-container {
+  flex-grow: 1; 
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.todo-checkbox {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #000;
+  margin-right: 10px; 
+  border-radius: 15px;
+  flex-shrink: 0;
+}
+
+.todo-text {
+  flex-grow: 1;
+}
+
+.todo-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.todo-item:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+}
+
+.todo-item:not(:hover) {
+  transform: translateY(0);
+  box-shadow: none;
+}
 
 
 
-/* Yo, you with alex? yes u cunt  can ypu ask him to have a look at the blur lol  no fight me  he said it works tell him to open the popup then close it alex said your a cuck you are a bitch your bitch damn right
 
 
-YOU BROKE IT DARA YOU SILLY CUNT <3 */
 
-/* here */
-/* h   e   l   p */
-/* Nevermind, think I fou  */
+
+
+
+
+
+.base-timer {
+  position: relative;
+  height: 300px;
+  width: 300px;
+}
+
+/* Removes SVG styling that would hide the time label */
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+/* The SVG path that displays the timer's progress */
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: grey;
+}

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 
+ 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,18 +11,21 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="assets/js/base.js"></script>
   <script src="assets/js/timer.js"></script>
+  <script src="assets/js/timerRing.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
   <!-- POPUP TEST, IF YOU DELETE I WILL DECAPITATE YOU -->
   <div id="popup" class="popup">
-    <h2>This is an important message</h2>
-    <p>love you too</p>
-    <button onclick="togglePopup()">Close</button>
+    <h1>This is an important message</h1>
+    <h2>I AM FRUSTRATED</h2>
+    <!-- <button onclick="togglePopup()">Close</button> -->
+    <a id="todo-close-popup" class="popup-close-btn is-clickable">×</a>
   </div>
 
   <script src="script.js"></script>
@@ -34,27 +38,60 @@
         <h1>TO DO:</h1>
 
         <a role="button">
-          <div id="todo-add-button" class="add-button-circle is-clickable" role="button">
+          <div id="todo-add-button" class="add-button-circle is-clickable"                   role="button">
             <div class="add-button-horizontal-plus"></div>
             <div class="add-button-vertical-plus"></div>
           </div>
+
+          <div class="todo-item">
+            <div class="todo-item-container">
+            <div class="todo-checkbox"></div>
+            <div class="todo-text">This is a test task with alot of text in hopes that the container will grow with the text. If not I will cry. I need just a little bit more text to make sure that the container will grow. and we are nearly there.</div>
+              </div>
+          </div>
+          <div class="todo-item">
+            <div class="todo-item-container">
+            <div class="todo-checkbox"></div>
+            <div class="todo-text">It worked so I am not crying.</div>
+              </div>
+          </div>
+          <div class="todo-item">
+            <div class="todo-item-container">
+            <div class="todo-checkbox"></div>
+            <div class="todo-text">Kill Alan</div>
+              </div>
+          </div>
+          
         </a>
       </div>
     </div>
 
     <div class="timer-grid-section">
-      <div class="grid-container">
-        <img src="assets/images/POMONew.png" alt="">
-        <div class="timerBox">
-          <img id="timerGif" src="assets/images/timer.gif" alt="" height=1000 width=1000>
-          <h1 id="timer"></h1>
-          <a id="startButton" role="button" class="is-clickable"><img src="assets/images/start.png" alt="Start Button"
-              height="200px" width="200px"></a>
-          <a id="pauseButton" role="button" class="is-clickable"><img src="assets/images/pause.png" alt="Pause Button"
-              height="200px" width="200px"></a>
-        </div>
+      <img src="assets/images/POMONew.png" alt="">
+      
+      <!--<div class="grid-container">
+        
+      
 
-      </div>
+        <!--<div class="timer-container">
+
+          <!--<img class="timerImg" src="assets/images/timerimg.png" alt="" height="3000px" width="1000px"">
+          <h1 id="timer">25:00</h1> -->
+
+          <div class="timerRing">
+          </div>
+
+          
+          
+        <!--</div>-->
+
+        <a id="startButton" role="button" class="is-clickable"><img src="assets/images/playButWhite.png"
+          alt="Start Button" height="200px" width="200px"></a>
+        <a id="pauseButton" role="button" class="is-clickable"><img src="assets/images/pauseButWhite.png"
+          alt="Pause Button" height="200px" width="200px"></a>
+          
+
+      <!--</div>-->
     </div>
 
   </main>
