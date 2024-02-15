@@ -203,7 +203,7 @@ main.grid-layout .timer-grid-section {
 }
 
 /* Grid leaderboard */
-main.leader-grid-layout {
+.leader-grid {
   padding-top: 1.5rem;
   display: grid;
   align-items: center;
@@ -221,7 +221,7 @@ main.leader-grid-layout {
   }
 }
 
-main.leader-grid-layout .allTime-grid-section {
+.allTime-grid-section {
   grid-area: "all-time";
   border-style: solid;
   border-color: var(--foreground-color);
@@ -231,7 +231,7 @@ main.leader-grid-layout .allTime-grid-section {
   position: relative;
 }
 
-main.leader-grid-layout .weekly-grid-section {
+.weekly-grid-section {
   grid-area: "weekly";
   border-style: solid;
   border-color: var(--foreground-color);

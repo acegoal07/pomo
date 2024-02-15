@@ -106,7 +106,7 @@ window.onload = function() {
   document.querySelector("#startButton").addEventListener('click', () => {
     if (!timer.isActive()) {
       if (timer.getCurrentPositionMS() === 0) {
-        timer.setTimerLength(100000)
+        timer.setTimerLength(25*60000)
           .startTimer();        
       } else {
         timer.startTimer();
