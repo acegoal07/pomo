@@ -65,25 +65,25 @@ main.grid-layout {
   }
 }
 
-.grid-container {
-  margin: 1rem;
+.todo-container {
+  background-color: var(--foreground-color);
+  color: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  max-height: 90vh;
+  height: 100%;
+  overflow: hidden;
 }
 
 /* TO DO LIST GRID */
 main.grid-layout .todo-grid-section {
   grid-area: todo;
-  background-color: var(--foreground-color);
-  color: white;
-  border-radius: 1.5rem;
-  /* Whats this height here for? */
-  /* Just trust that if you remove it then everything goes to shit. Not             instantly but eventaully... */
-  max-height: 96vh;
+  padding: 1rem;
+  /* Something is wrong with it help */
   position: relative;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3)
-}
-
-.todo-grid-section {
-  overflow: hidden;
+  max-height: 90vh;
+  height: 100%;
 }
 
 a .todo-add-btn-background {
@@ -92,8 +92,8 @@ a .todo-add-btn-background {
   height: 60px;
   background-color: #77b255;
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 30px;
+  left: 30px;
   transition: transform 0.2s ease;
 }
 
@@ -116,7 +116,7 @@ a .todo-add-btn-vertical-plus {
 }
 
 .todo-add-btn-background:hover {
-  transform: translateY(-5px); 
+  transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -144,7 +144,8 @@ main.grid-layout .timer-grid-section {
   margin: auto;
 }
 
-#pauseButton, #startButton {
+#pauseButton,
+#startButton {
   display: inline-block;
 }
 
@@ -162,7 +163,7 @@ main.grid-layout .timer-grid-section {
 
 .timerPathElapsed {
   stroke-width: 7px;
-  stroke: grey;  
+  stroke: grey;
   fill: var(--background-color);
 }
 
@@ -204,7 +205,6 @@ main.grid-layout .timer-grid-section {
 
 /* Grid leaderboard */
 .leader-grid {
-  padding-top: 1.5rem;
   display: grid;
   align-items: center;
   gap: 10px;
@@ -237,7 +237,7 @@ main.grid-layout .timer-grid-section {
   border-color: var(--foreground-color);
   color: white;
   border-radius: 1.5rem;
-  height: 96vh;
+  height: 90vh;
   position: relative;
 }
 
@@ -275,7 +275,7 @@ main.grid-layout .timer-grid-section {
 #todo-input {
   width: 95%;
   padding: 10px;
-  margin-top:  20px;
+  margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 20px;
   border: 5px solid #77b255;
@@ -296,12 +296,11 @@ main.grid-layout .timer-grid-section {
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
-  }
+}
 
 .popup-button:hover {
-  transform: translateY(-5px); 
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .popup-button:not(:hover) {
@@ -406,7 +405,7 @@ a .todo-close-btn-line-2 {
 }
 
 .todo-close-btn-background:hover {
-  transform: translateY(-5px); 
+  transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -418,21 +417,21 @@ a .todo-close-btn-line-2 {
   display: flex;
   margin: auto;
   margin-top: 20px;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
   width: 90%;
-  padding: 10px; 
-  border-radius: 30px; 
+  padding: 10px;
+  border-radius: 30px;
   background-color: #77b255;
   align-items: center;
 }
 
 .todo-list-container {
   overflow: auto;
-  height: 82vh;
+  max-height: 82vh;
 }
 
 .todo-item-container {
-  flex-grow: 1; 
+  flex-grow: 1;
   display: flex;
   align-items: center;
   font-size: 18px;
@@ -442,7 +441,7 @@ a .todo-close-btn-line-2 {
   width: 40px;
   height: 40px;
   border: 3px solid #000;
-  margin-right: 10px; 
+  margin-right: 10px;
   border-radius: 15px;
   flex-shrink: 0;
 }
@@ -457,8 +456,8 @@ a .todo-close-btn-line-2 {
 }
 
 .todo-item:hover {
-  transform: translateY(-5px); 
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .todo-item:not(:hover) {

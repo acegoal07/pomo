@@ -53,3 +53,12 @@ window.addEventListener('load', () => {
 function setCircleDashArray(value) {
   document.querySelector("#base-timer-path-remaining").setAttribute("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
 }
+// Timer colour function
+function setTimerColor(bool = false) {
+  const clock = document.querySelector("#base-timer-path-remaining");
+  if (bool) {
+    
+  } else {
+    
+  }
+}

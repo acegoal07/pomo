@@ -1,5 +1,5 @@
 ///////////////// Timer class //////////////////
-class pomoTimer{
+class pomoTimer {
   constructor() {
     this.timerLengthMS = null;
     this.currentPositionMS = 0;
@@ -65,13 +65,12 @@ class pomoTimer{
     this.currentPositionMS -= 1000;
     const timer = setInterval(() => {
       if (this.isActive()) {
-        if (this.getCurrentPositionMS() === 0) {this.timerActive = false;}
+        if (this.getCurrentPositionMS() === 0) { this.timerActive = false; }
         const actualValue = this.getCurrentPositionMS === 0 ? "00:00" : msToTime(this.getCurrentPositionMS());
         document.querySelector("#timerText").innerHTML = actualValue;
-        
-        const timeFraction = this.getCurrentPositionMS()  / this.timerLengthMS;
-        setCircleDashArray(timeFraction);
-        
+
+        setCircleDashArray(this.getCurrentPositionMS() / this.timerLengthMS);
+
         if (this.blured) {
           document.title = actualValue;
         }
@@ -82,7 +81,7 @@ class pomoTimer{
       }
     }, 1000);
   }
-  
+
   stopTimer() {
     this.timerActive = false;
   }
@@ -107,24 +106,24 @@ window.onload = function() {
     if (!timer.isActive()) {
       if (timer.getCurrentPositionMS() === 0) {
         timer.setTimerLength(10000)
-          .startTimer();        
+          .startTimer();
       } else {
         timer.startTimer();
       }
       const timeDisplay = setInterval(() => {
         if (timer.getCurrentPositionMS() === -1000) {
           clearInterval(timeDisplay);
-          timer.stopTimer();          
+          timer.stopTimer();
           timer.setCurrentPositionMS(0);
         }
-      }, 1000);     
+      }, 1000);
     }
   });
   // Pause timer button
   document.querySelector("#pauseButton").addEventListener('click', () => {
     timer.stopTimer();
   });
-  
+
 };
 
 // Miliseconds to timestamp
@@ -141,6 +140,6 @@ function msToTime(s) {
   s = (s - secs) / 60;
   var mins = s % 60;
   var hrs = (s - mins) / 60;
-  
+
   return hrs > 0 ? pad(hrs) + ':' + pad(mins) + ':' + pad(secs) : pad(mins) + ':' + pad(secs);
 }
