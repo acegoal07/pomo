@@ -41,6 +41,11 @@ hr {
   border-radius: 0.1rem;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Timer and todo grid */
 main.grid-layout {
   padding-top: 0.5rem;
@@ -158,6 +163,7 @@ main.grid-layout .timer-grid-section {
 .timerPathElapsed {
   stroke-width: 7px;
   stroke: grey;  
+  fill: var(--background-color);
 }
 
 #timer {
