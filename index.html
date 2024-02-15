@@ -39,70 +39,81 @@
   
   <main class="grid-layout">
     <div class="weekly-container">
-    <div class="todo-grid-section">
-      <div class="grid-container">
-        <h1>TO DO:</h1>
-
-        <a role="button">
-          <div id="todo-add-button" class="todo-add-btn-background is-clickable" role="button">
-            <div class="todo-add-btn-horizontal-plus"></div>
-            <div class="todo-add-btn-vertical-plus"></div>
-          </div>
-        </a>
-
-          <div class="todo-list-container">
-            <div class="todo-item">
-              <div class="todo-item-container">
-                <div class="todo-checkbox"></div>
-                <div class="todo-text">This is a test task with alot of text in hopes that the container will grow with the text. If not I will cry. I need just a little bit more text to make sure that the container will grow. and we are nearly there.</div>
+      <div class="todo-grid-section">
+        <div class="grid-container">
+          <h1>TO DO:</h1>
+  
+          <a role="button">
+            <div id="todo-add-button" class="todo-add-btn-background is-clickable" role="button">
+              <div class="todo-add-btn-horizontal-plus"></div>
+              <div class="todo-add-btn-vertical-plus"></div>
+            </div>
+          </a>
+  
+            <div class="todo-list-container">
+              <div class="todo-item">
+                <div class="todo-item-container">
+                  <div class="todo-checkbox"></div>
+                  <div class="todo-text">This is a test task with alot of text in hopes that the container will grow with the text. If not I will cry. I need just a little bit more text to make sure that the container will grow. and we are nearly there.</div>
+                </div>
+              </div>
+              <div class="todo-item">
+                <div class="todo-item-container">
+                  <div class="todo-checkbox"></div>
+                  <div class="todo-text">It worked so I am not crying.</div>
+                </div>
+              </div>
+              <div class="todo-item">
+                <div class="todo-item-container">
+                  <div class="todo-checkbox"></div>
+                  <div class="todo-text">Kill Alan</div>
+                </div>
               </div>
             </div>
-            <div class="todo-item">
-              <div class="todo-item-container">
-                <div class="todo-checkbox"></div>
-                <div class="todo-text">It worked so I am not crying.</div>
-              </div>
-            </div>
-            <div class="todo-item">
-              <div class="todo-item-container">
-                <div class="todo-checkbox"></div>
-                <div class="todo-text">Kill Alan</div>
-              </div>
-            </div>
-          </div>
+        </div>
       </div>
-    </div>
     </div>
 
     <div class="timer-grid-section">
       <div class="alltime-container">
-
-      <header>
-      <img class="logo" src="assets/images/POMONew.webp" alt="">
-      <a id="leaderboardButton">
-      <img src="assets/images/leaderboard.webp" class="is-clickable" alt="Leaderboard button" height="50px" width="50px"></a>
-      </header>
-      
+        <header>
+          <img class="logo" src="assets/images/POMONew.webp" alt="">
+          <a id="leaderboardButton">
+            <img src="assets/images/leaderboard.webp" class="is-clickable" alt="Leaderboard button" height="50px" width="50px">
+          </a>
+        </header>
+        
         <div class="timer-container">
-
+  
           <img class="timerLeaves" src="assets/images/timerLeaves.webp" alt="" height = 250px width=312.5px>
 
           <div class="timerRing">
+            <div class="baseTimer">
+              <svg class="base-timerSvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g class="baseTimerCircle">
+                  <circle class="timerPathElapsed" cx="50" cy="50" r="45" />
+                  <path id="base-timer-path-remaining" stroke-dasharray="283" class="path-remaining" d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"></path>
+                </g>
+              </svg>
+              <span id="timer">
+                <h1 id="timerText">25:00</h1>
+              </span>
+            </div>
           </div>
-          
+            
           <a id="startButton">
             <img class="timer-controls is-clickable" src="assets/images/playButWhite.webp" alt="Start Button" height="100px" width="100px">
           </a>
           <a id="pauseButton">
             <img class="timer-controls is-clickable" src="assets/images/pauseButWhite.webp" alt="Pause Button" height="100px" width="100px">
           </a>
-
+            
         </div>
-          
-    </div>
+        
+      </div>
+      
     </div>
     
   </main>
 </body>
-
 </html>

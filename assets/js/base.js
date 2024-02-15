@@ -17,19 +17,12 @@ window.addEventListener('load', () => {
     document.querySelector("main").classList.remove("blur-filter");
     document.querySelector("#todo-add-button").classList.add("is-clickable");
   });
-
-
-
-  const todoInput = document.querySelector("#todo-input");
-  const addTodoButton = document.querySelector("#addTodoButton");
-
-
-  function addTodo() {
-
+  // Add todo button listner
+  document.querySelector("#addTodoButton").addEventListener("click", () => {
+    const todoInput = document.querySelector("#todo-input");
     const todoText = todoInput.value;
 
     if (todoText.trim() !== "") {
-
       const todoItemContainer = document.createElement("div");
       todoItemContainer.classList.add("todo-item-container");
 
@@ -47,24 +40,16 @@ window.addEventListener('load', () => {
       todoItem.classList.add("todo-item");
       todoItem.appendChild(todoItemContainer);
 
-      const todoListContainer = document.querySelector(".todo-list-container");
-      todoListContainer.appendChild(todoItem);
+      document.querySelector(".todo-list-container").appendChild(todoItem);
 
       todoInput.value = "";
 
-      closePopup();
-        }
-      }
-
-      function closePopup() {
-        const popup = document.querySelector("#popup");
-        popup.style.display = "none";
-        document.querySelector("main").classList.remove("blur-filter");
-      }
-  
-
-  addTodoButton.addEventListener("click", addTodo);
-
-
-  
+      document.querySelector("#popup").style.display = "none";
+      document.querySelector("main").classList.remove("blur-filter");
+    }
+  });
 });
+// Timer count down function
+function setCircleDashArray(value) {
+  document.querySelector("#base-timer-path-remaining").setAttribute("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
+}
