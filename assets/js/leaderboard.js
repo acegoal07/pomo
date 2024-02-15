@@ -5,9 +5,9 @@ window.addEventListener('load', () => {
   const leaderboardButton = document.querySelector("#leaderboardButton");
   leaderboardButton.addEventListener('click', loadLeaderboard);
 
-document.querySelector('.to-do-container').insertAdjacentHTML('beforeend', '<div class="leader-grid"><div class="weekly-grid-section"><div class="grid-container"><h1>Weekly</h1><p class="leaderEntry">Leader yay</p> </div></div></div>');
+document.querySelector('.weekly-container').insertAdjacentHTML('beforeend', '<div class="leader-grid"><div class="weekly-grid-section"><div class="grid-container"><h1>Weekly</h1><p class="leaderEntry">Leader yay</p> </div></div></div>');
 
-document.querySelector('.timer-grid-section').insertAdjacentHTML('beforeend', '<div class="leader-grid"><div class="allTime-grid-section"><div class="grid-container"><h1>All Time</h1><p class="leaderEntry">Leader yay</p> </div></div></div>');
+document.querySelector('.alltime-container').insertAdjacentHTML('beforeend', '<div class="leader-grid"><div class="allTime-grid-section"><div class="grid-container"><h1>All Time</h1><p class="leaderEntry">Leader yay</p> </div></div></div>');
 
   weekly = document.querySelector('.weekly-grid-section');
   weekly.style.display = 'none';
