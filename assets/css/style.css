@@ -196,7 +196,7 @@ main.grid-layout .timer-grid-section {
   transform: rotate(90deg);
   transform-origin: center;
   transition: 1s linear all;
-  stroke: var(--background-color);
+  /* stroke: var(--background-color); */
 }
 
 .base-timerSvg {

@@ -107,14 +107,18 @@ window.onload = function() {
       if (timer.getCurrentPositionMS() === 0) {
         timer.setTimerLength(10000)
           .startTimer();
+        setTimerColor("green");
       } else {
         timer.startTimer();
       }
+      const halfWay = timer.timerLengthMS / 2;
       const timeDisplay = setInterval(() => {
         if (timer.getCurrentPositionMS() === -1000) {
           clearInterval(timeDisplay);
           timer.stopTimer();
           timer.setCurrentPositionMS(0);
+        } else if (timer.getCurrentPositionMS() === halfWay) {
+          setTimerColor("blue");
         }
       }, 1000);
     }
@@ -123,7 +127,6 @@ window.onload = function() {
   document.querySelector("#pauseButton").addEventListener('click', () => {
     timer.stopTimer();
   });
-
 };
 
 // Miliseconds to timestamp

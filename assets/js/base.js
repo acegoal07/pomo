@@ -1,3 +1,4 @@
+// On load checker
 window.addEventListener('load', () => {
   // Open todo popup button listner
   document.querySelector("#todo-add-button").addEventListener('click', () => {
@@ -53,12 +54,10 @@ window.addEventListener('load', () => {
 function setCircleDashArray(value) {
   document.querySelector("#base-timer-path-remaining").setAttribute("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
 }
-// Timer colour function
-function setTimerColor(bool = false) {
-  const clock = document.querySelector("#base-timer-path-remaining");
-  if (bool) {
-    
-  } else {
-    
-  }
+// Timer colour function (i have an idea)
+/**
+ * @param {String} input
+ */
+function setTimerColor(input) {
+  document.querySelector("#base-timer-path-remaining").style.stroke = input == null ? "green" : input;
 }
