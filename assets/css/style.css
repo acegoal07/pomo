@@ -94,6 +94,7 @@ a .todo-add-btn-background {
   position: absolute;
   top: 30px;
   left: 30px;
+  -moz-transition: transform 0.2s ease;
   transition: transform 0.2s ease;
 }
 
@@ -195,6 +196,7 @@ main.grid-layout .timer-grid-section {
   stroke-linecap: round;
   transform: rotate(90deg);
   transform-origin: center;
+  -moz-transition: 1s linear all;
   transition: 1s linear all;
   /* stroke: var(--background-color); */
 }
@@ -295,6 +297,7 @@ main.grid-layout .timer-grid-section {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  -moz-transition: transform 0.2s ease, box-shadow 0.2s ease;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -381,6 +384,7 @@ a .todo-close-btn-background {
   position: absolute;
   top: 10px;
   right: 20px;
+  -moz-transition: transform 0.2s ease;
   transition: transform 0.2s ease;
 }
 
@@ -451,6 +455,7 @@ a .todo-close-btn-line-2 {
 }
 
 .todo-item {
+  -moz-transition: transform 0.2s ease, box-shadow 0.2s ease;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
