@@ -53,7 +53,6 @@ window.addEventListener('load', () => {
     document.querySelector("#todo-add-button").classList.remove("is-clickable");
     document.querySelector("#leaderboardButton").classList.remove("is-clickable");
     document.querySelector("#loginButton").classList.remove("is-clickable");
-    popup.style.backgroundImage = "url('assets/images/9DD98468-DF35-4F15-BB27-B73566C7DDA6.gif')";
   });
   // Close leaderboard popup button
   document.querySelector("#leaderboard-close-popup").addEventListener('click', () => {
@@ -66,7 +65,6 @@ window.addEventListener('load', () => {
     document.querySelector("#todo-add-button").classList.add("is-clickable");
     document.querySelector("#leaderboardButton").classList.add("is-clickable");
     document.querySelector("#loginButton").classList.add("is-clickable");
-    document.body.style.backgroundImage = "url('assets/images/9DD98468-DF35-4F15-BB27-B73566C7DDA6.gif')";
   });
 
   /////////////// Login popup ////////////////////////
@@ -133,11 +131,17 @@ window.addEventListener('load', () => {
   /////////////// Timer Buttons ///////////////
 
   // Start timer button
+  var pomodoros = 0;
+  var index = 0;
+  const times = [25,5,25,5,25,5,25,15]
+  let currentTime;
+
   document.querySelector("#startButton").addEventListener('click', () => {
     if (!timer.isActive()) {
       if (timer.getCurrentPositionMS() === 0) {
         setTimerColor("#64AB1F");
-        timer.setTimerLength(10000)
+        currentTime = times[index]*1000; //keeping it as 1000 and not 60000 just to make tests easier
+        timer.setTimerLength(currentTime)
           .startTimer();
       } else {
         timer.startTimer();
@@ -155,6 +159,13 @@ window.addEventListener('load', () => {
           setTimerColor("orange");
         }
       }, 1000);
+    }
+    if (index < 7) {
+      index++;
+    } else {
+      index = 0;
+      pomodoros++;
+      document.querySelector('#pomCount').textContent = pomodoros;
     }
   });
   // Pause timer button
