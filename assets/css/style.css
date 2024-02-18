@@ -208,42 +208,29 @@ main.grid-layout .timer-grid-section {
   transform: scaleX(-1);
 }
 
-/* Grid leaderboard */
-.leader-grid {
-  display: grid;
-  align-items: center;
-  gap: 10px;
-  grid-template-areas:
-    "weekly"
-    "all-time";
-}
-
-@media (min-width: 60em) {
-  main.leader-grid-layout {
-    grid-template-columns: 2fr 2fr;
-    grid-template-areas:
-      "weekly" "all-time";
-  }
-}
+/* leaderboard */
 
 .allTime-grid-section {
-  grid-area: "all-time";
   border-style: solid;
   border-color: var(--foreground-color);
   color: white;
   border-radius: 1.5rem;
   height: 96vh;
-  position: relative;
+  position: absolute;
+  margin-left: 30rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
 }
 
 .weekly-grid-section {
-  grid-area: "weekly";
   border-style: solid;
   border-color: var(--foreground-color);
   color: white;
   border-radius: 1.5rem;
   height: 90vh;
-  position: relative;
+  position: absolute;
+  padding-left: 5rem;
+  padding-right: 5rem;
 }
 
 .leaderEntry {
@@ -282,6 +269,7 @@ main.grid-layout .timer-grid-section {
   font-size: 2rem;
   border-radius: 3px;
   cursor: pointer;
+  padding-left: 1rem;
 }
 
 #todo-input {
