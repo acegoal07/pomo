@@ -33,6 +33,7 @@ body {
   background-color: var(--background-color);
   color: var(--foreground-color);
   margin: 1rem;
+
 }
 
 hr {
@@ -77,13 +78,15 @@ main.grid-layout {
 }
 
 /* TO DO LIST GRID */
+/* WHOEVER IS BREAKING THE TO DO LIST FUCK OFF OR ALAN WILL CIRCUMCISE YOU - Alan here, can confirm the above,Lmaoooo*/
 main.grid-layout .todo-grid-section {
   grid-area: todo;
   padding: 1rem;
-  /* Something is wrong with it help */
   position: relative;
   max-height: 90vh;
-  height: 100%;
+  height: 90%;
+  /* It's only broken in mobile view, it shouldn't be that wide when you go to that view, there should be lots of whitespace on the sides , oh shit, I don't know how hes managed that lol, probably something to do with the container its in, yeah probably, I'll do it tomorrow, too tired right now, fair enough, ill leave it alone and will look at it with ya tomz, okay cool thanks, see you tomorrow, gonna log off now, alright, see ya tomz mate, :)*/
+  /* It's Alex, he keeps breaking my list when there was nothing wrong with it -_- , ffs*/
 }
 
 a .todo-add-btn-background {
@@ -132,6 +135,7 @@ main.grid-layout .timer-grid-section {
   position: relative;
   max-height: 96vh;
   height: 100%;
+  margin-bottom: 7vh;
 }
 
 .timer-container {
@@ -268,8 +272,12 @@ main.grid-layout .timer-grid-section {
   color: white;
   font-size: 2rem;
   border-radius: 3px;
-  cursor: pointer;
+  margin-top: 1rem;
   padding-left: 1rem;
+}
+
+#leaderboardButton {
+  margin-top: 1rem;
 }
 
 #todo-input {
@@ -352,7 +360,7 @@ main.grid-layout .timer-grid-section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 50%;
 }
 
 #buttons {
@@ -366,11 +374,15 @@ main.grid-layout .timer-grid-section {
 }
 
 #inputs {
-  border-width: 4px;
+  border-width: 6px;
   border-color: green;
-  border-radius: 6px;
+  border-radius: 13px;
   margin: 3px;
   height: 25px;
+  -moz-border-radius: 13px;
+  -webkit-border-radius: 13px;
+  -khtml-border-radius: 13px;
+
 }
 
 /* Todo popup */
@@ -419,7 +431,7 @@ a .todo-close-btn-line-2 {
   display: flex;
   margin: auto;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   width: 90%;
   padding: 10px;
   border-radius: 30px;
@@ -428,7 +440,7 @@ a .todo-close-btn-line-2 {
 }
 
 .todo-list-container {
-  overflow: auto;
+  overflow: scroll;
   max-height: 82vh;
 }
 
@@ -437,6 +449,7 @@ a .todo-close-btn-line-2 {
   display: flex;
   align-items: center;
   font-size: 18px;
+
 }
 
 .todo-checkbox {

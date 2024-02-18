@@ -1,4 +1,6 @@
+// Timer class caller
 const timer = new pomoTimer();
+// Focus listener
 let doctitle = document.title;
 window.onblur = function() {
   timer.setBlured(true);
@@ -10,13 +12,20 @@ window.onfocus = function() {
 // On load checker
 window.addEventListener('load', () => {
   setTimerColor("var(--background-color)");
+
+  /////////////// Todo popup ////////////////////////
+
   // Open todo popup button listner
   document.querySelector("#todo-add-button").addEventListener('click', () => {
+    if (document.querySelector("#leaderboard").style.display === "block" || document.querySelector("#login").style.display === "block") { return; }
     const popup = document.querySelector("#popup");
+    if (popup.style.display === "block") { return; }
     popup.style.animation = "popupOpenAnimation 0.5s forwards";
     popup.style.display = "block";
     document.querySelector("main").classList.add("blur-filter");
     document.querySelector("#todo-add-button").classList.remove("is-clickable");
+    document.querySelector("#leaderboardButton").classList.remove("is-clickable");
+    document.querySelector("#loginButton").classList.remove("is-clickable");
   });
   // Close todo popup button listern
   document.querySelector("#todo-close-popup").addEventListener('click', () => {
@@ -27,7 +36,68 @@ window.addEventListener('load', () => {
     }, 500);
     document.querySelector("main").classList.remove("blur-filter");
     document.querySelector("#todo-add-button").classList.add("is-clickable");
+    document.querySelector("#leaderboardButton").classList.add("is-clickable");
+    document.querySelector("#loginButton").classList.add("is-clickable");
   });
+
+  /////////////// Leaderboard popup ////////////////////////
+
+  // Open leaderboard popup button
+  document.querySelector("#leaderboardButton").addEventListener('click', () => {
+    if (document.querySelector("#popup").style.display === "block" || document.querySelector("#login").style.display === "block") { return; }
+    const popup = document.querySelector("#leaderboard");
+    if (popup.style.display === "block") { return; }
+    popup.style.animation = "popupOpenAnimation 0.5s forwards";
+    popup.style.display = "block";
+    document.querySelector("main").classList.add("blur-filter");
+    document.querySelector("#todo-add-button").classList.remove("is-clickable");
+    document.querySelector("#leaderboardButton").classList.remove("is-clickable");
+    document.querySelector("#loginButton").classList.remove("is-clickable");
+    popup.style.backgroundImage = "url('assets/images/9DD98468-DF35-4F15-BB27-B73566C7DDA6.gif')";
+  });
+  // Close leaderboard popup button
+  document.querySelector("#leaderboard-close-popup").addEventListener('click', () => {
+    const popup = document.querySelector("#leaderboard");
+    popup.style.animation = "popupCloseAnimation 0.5s forwards";
+    setTimeout(function() {
+      popup.style.display = "none";
+    }, 500);
+    document.querySelector("main").classList.remove("blur-filter");
+    document.querySelector("#todo-add-button").classList.add("is-clickable");
+    document.querySelector("#leaderboardButton").classList.add("is-clickable");
+    document.querySelector("#loginButton").classList.add("is-clickable");
+    document.body.style.backgroundImage = "url('assets/images/9DD98468-DF35-4F15-BB27-B73566C7DDA6.gif')";
+  });
+
+  /////////////// Login popup ////////////////////////
+
+  // Open login popup button
+  document.querySelector("#loginButton").addEventListener('click', () => {
+    if (document.querySelector("#popup").style.display === "block" || document.querySelector("#leaderboard").style.display === "block") { return; }
+    const popup = document.querySelector("#login");
+    if (popup.style.display === "block") { return; }
+    popup.style.animation = "popupOpenAnimation 0.5s forwards";
+    popup.style.display = "block";
+    document.querySelector("main").classList.add("blur-filter");
+    document.querySelector("#todo-add-button").classList.remove("is-clickable");
+    document.querySelector("#leaderboardButton").classList.remove("is-clickable");
+    document.querySelector("#loginButton").classList.remove("is-clickable");
+  });
+  // Close login popup button
+  document.querySelector("#login-close-popup").addEventListener('click', () => {
+    const popup = document.querySelector("#login");
+    popup.style.animation = "popupCloseAnimation 0.5s forwards";
+    setTimeout(function() {
+      popup.style.display = "none";
+    }, 500);
+    document.querySelector("main").classList.remove("blur-filter");
+    document.querySelector("#todo-add-button").classList.add("is-clickable");
+    document.querySelector("#leaderboardButton").classList.add("is-clickable");
+    document.querySelector("#loginButton").classList.add("is-clickable");
+  });
+
+  /////////////// Popup function buttons ///////////////
+
   // Add todo button listner
   document.querySelector("#addTodoButton").addEventListener("click", () => {
     const todoInput = document.querySelector("#todo-input");
@@ -59,16 +129,9 @@ window.addEventListener('load', () => {
       document.querySelector("main").classList.remove("blur-filter");
     }
   });
-  // Leaderboard open button
-  document.querySelector("#leaderboardButton").addEventListener('click', () => {
-      document.querySelector('#leaderboard').style.display = 'block';
-      document.querySelector("main").classList.add("blur-filter");
-  });
-  // Leaderboard close button
-  document.querySelector("#leaderboard-close-popup").addEventListener('click', () => {
-    document.querySelector('#leaderboard').style.display = 'none';
-    document.querySelector("main").classList.remove("blur-filter");
-  })
+
+  /////////////// Timer Buttons ///////////////
+
   // Start timer button
   document.querySelector("#startButton").addEventListener('click', () => {
     if (!timer.isActive()) {
@@ -98,17 +161,10 @@ window.addEventListener('load', () => {
   document.querySelector("#pauseButton").addEventListener('click', () => {
     timer.stopTimer();
   });
-  //open login button
-  document.querySelector("#loginButton").addEventListener('click', () => {
-    document.querySelector('#login').style.display = 'block';
-    document.querySelector("main").classList.add("blur-filter");
-  })
-  //close login button
-  document.querySelector("#login-close-popup").addEventListener('click', () => {
-    document.querySelector('#login').style.display = 'none';
-    document.querySelector("main").classList.remove("blur-filter");
-  });
 });
+
+/////////////// Additional functions ///////////////
+
 /**
  * Timer count down function
  * @param {int} value

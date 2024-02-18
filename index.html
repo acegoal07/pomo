@@ -34,15 +34,15 @@
   </div>
 
   <div class="popup" id="login">
-      <h1>Enter your details:</h1>
-      <form id="form" action="login" method="post">
-        <input id="inputs" type="text" name="username" placeholder="Username" required>
-        <input id="inputs" type="password" name="password" placeholder="Password" required>
-        <button id="buttons" type="submit">Login</button>
-        <button id="buttons" type="submit">Register</button>
-      </form>
-      
-      <a id="login-close-popup" class="is-clickable">
+    <h1>Enter your details:</h1>
+    <form id="form" action="login" method="post">
+      <input id="inputs" type="text" name="username" placeholder="Username" required>
+      <input id="inputs" type="password" name="password" placeholder="Password" required>
+      <button id="buttons" type="submit">Login</button>
+      <button id="buttons" type="submit">Register</button>
+    </form>
+
+    <a id="login-close-popup" class="is-clickable">
       <div class="todo-close-btn-background is-clickable" role="button">
         <div class="todo-close-btn-line-1"></div>
         <div class="todo-close-btn-line-2"></div>
@@ -51,22 +51,22 @@
   </div>
 
   <div class="popup" id="leaderboard">
-      <div class="weekly-grid-section">
+    <div class="weekly-grid-section">
       <h1>Weekly</h1>
       <p class="leaderEntry">Leader yay</p>
-      </div>
+    </div>
 
-      <div class="allTime-grid-section">
+    <div class="allTime-grid-section">
       <h1>All Time</h1>
       <p class="leaderEntry">Leader yay</p>
-      </div>
+    </div>
 
-      <a id="leaderboard-close-popup" class="is-clickable">
-        <div class="todo-close-btn-background is-clickable" role="button">
-          <div class="todo-close-btn-line-1"></div>
-          <div class="todo-close-btn-line-2"></div>
-        </div>
-      </a>
+    <a id="leaderboard-close-popup" class="is-clickable">
+      <div class="todo-close-btn-background is-clickable" role="button">
+        <div class="todo-close-btn-line-1"></div>
+        <div class="todo-close-btn-line-2"></div>
+      </div>
+    </a>
   </div>
 
   <!-- POPUP TEST, IF YOU DELETE I WILL DECAPITATE YOU -->
@@ -96,7 +96,31 @@
             <div class="todo-item">
               <div class="todo-item-container">
                 <div class="todo-checkbox"></div>
-                <div class="todo-text">It worked so I am not crying.</div>
+                <div class="todo-text">Why the fuck are always bullying Dara, Ill stop them</div>
+              </div>
+            </div>
+            <div class="todo-item">
+              <div class="todo-item-container">
+                <div class="todo-checkbox"></div>
+                <div class="todo-text">BE KIND TO DARA - (Dara approves of this message.)</div>
+              </div>
+            </div>
+            <div class="todo-item">
+              <div class="todo-item-container">
+                <div class="todo-checkbox"></div>
+                <div class="todo-text">Abbie is a kinky lesbian. That's kinda gay.</div>
+              </div>
+            </div>
+            <div class="todo-item">
+              <div class="todo-item-container">
+                <div class="todo-checkbox"></div>
+                <div class="todo-text">Masturbation leads to sex #GatewayTUG</div>
+              </div>
+            </div>
+            <div class="todo-item">
+              <div class="todo-item-container">
+                <div class="todo-checkbox"></div>
+                <div class="todo-text">Alex still wets the bed</div>
               </div>
             </div>
             <div class="todo-item">
@@ -138,68 +162,60 @@
             <div class="todo-item">
               <div class="todo-item-container">
                 <div class="todo-checkbox"></div>
-                <div class="todo-text">Kill Alan</div>
+                <div class="todo-text">This is Alan and i confirm i want to be killed already :)</div>
               </div>
             </div>
             <div class="todo-item">
               <div class="todo-item-container">
                 <div class="todo-checkbox"></div>
-                <div class="todo-text">Kill Alan</div>
-              </div>
-            </div>
-            <div class="todo-item">
-              <div class="todo-item-container">
-                <div class="todo-checkbox"></div>
-                <div class="todo-text">Kill Alan</div>
+                <div class="todo-text">This is a happy group</div>
               </div>
             </div>
           </div>
         </div>
-        
       </div>
     </div>
 
     <div class="timer-grid-section">
-        <header>
-          <img class="logo" src="assets/images/POMONew.webp" alt="">
-          <a id="leaderboardButton">
-            <img src="assets/images/leaderboard.webp" class="is-clickable" alt="Leaderboard button" height="50px"
-              width="50px">
-          </a>
-          <a id="loginButton">login</a>
-        </header>
+      <header>
+        <img class="logo" src="assets/images/POMONew.webp" alt="">
+        <a id="leaderboardButton" class="is-clickable">
+          <img src="assets/images/leaderboard.webp" alt="Leaderboard button" height="50px" width="50px">
+        </a>
+        <a id="loginButton" class="is-clickable">login</a>
+      </header>
 
-        <div class="timer-container">
+      <div class="timer-container">
 
-          <img class="timerLeaves" src="assets/images/timerLeaves.webp" alt="" height=250px width=312.5px>
+        <img class="timerLeaves" src="assets/images/timerLeaves.webp" alt="" height=250px width=312.5px>
 
-          <div class="timerRing">
-            <div class="baseTimer">
-              <svg class="base-timerSvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <g class="baseTimerCircle">
-                  <circle class="timerPathElapsed" cx="50" cy="50" r="45" />
-                  <path id="base-timer-path-remaining" stroke-dasharray="283" class="path-remaining"
-                    d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"></path>
-                </g>
-              </svg>
-              <span id="timer">
-                <h1 id="timerText">25:00</h1>
-              </span>
-            </div>
+        <div class="timerRing">
+          <div class="baseTimer">
+            <svg class="base-timerSvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <g class="baseTimerCircle">
+                <circle class="timerPathElapsed" cx="50" cy="50" r="45" />
+                <path id="base-timer-path-remaining" stroke-dasharray="283" class="path-remaining"
+                  d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"></path>
+              </g>
+            </svg>
+            <span id="timer">
+              <h1 id="timerText">25:00</h1>
+            </span>
           </div>
-
-          <a id="startButton">
-            <img class="timer-controls is-clickable" src="assets/images/playButWhite.webp" alt="Start Button"
-              height="100px" width="100px">
-          </a>
-          <a id="pauseButton">
-            <img class="timer-controls is-clickable" src="assets/images/pauseButWhite.webp" alt="Pause Button"
-              height="100px" width="100px">
-          </a>
-
         </div>
 
+        <a id="startButton">
+          <img class="timer-controls is-clickable" src="assets/images/playButWhite.webp" alt="Start Button"
+            height="100px" width="100px">
+        </a>
+        <a id="pauseButton">
+          <img class="timer-controls is-clickable" src="assets/images/pauseButWhite.webp" alt="Pause Button"
+            height="100px" width="100px">
+        </a>
+
       </div>
+
+    </div>
 
     </div>
 

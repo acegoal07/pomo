@@ -66,7 +66,7 @@ class pomoTimer {
     this.currentPositionMS -= 1000;
     const timer = setInterval(() => {
       if (this.isActive()) {
-        if (this.getCurrentPositionMS() === 0 && !this.audioActive) { 
+        if (this.getCurrentPositionMS() === 0 && !this.audioActive) {
           this.timerActive = false;
           // this.playAlarm();
         }
@@ -93,7 +93,7 @@ class pomoTimer {
 
   playAlarm() {
     const alarmAudio = new Audio('assets/sounds/digitalAlarm.wav');
-    alarmAudio.addEventListener("ended" , () => {
+    alarmAudio.addEventListener("ended", () => {
       this.audioActive = false;
       console.log("Audio ended TEST");
     })
