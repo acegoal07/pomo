@@ -6,6 +6,7 @@
 }
 
 /* Images */
+
 img.logo {
   max-width: 35%;
   height: auto;
@@ -195,7 +196,10 @@ main.grid-layout .timer-grid-section {
   stroke-width: 7px;
   stroke-linecap: round;
   transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
   transform-origin: center;
+  -webkit-transition: 1s linear all;
   -moz-transition: 1s linear all;
   transition: 1s linear all;
   /* stroke: var(--background-color); */
@@ -272,6 +276,13 @@ main.grid-layout .timer-grid-section {
   width: 75%;
   height: 75%;
   animation: popupAnimation 0.5s forwards;
+}
+
+#loginButton {
+  color: white;
+  font-size: 2rem;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 #todo-input {

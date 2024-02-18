@@ -6,6 +6,7 @@ class pomoTimer {
     this.timerActive = false;
     this.pomodoros = 0;
     this.blured = false;
+    this.audioActive = false;
   }
 
   /**
@@ -65,7 +66,10 @@ class pomoTimer {
     this.currentPositionMS -= 1000;
     const timer = setInterval(() => {
       if (this.isActive()) {
-        if (this.getCurrentPositionMS() === 0) { this.timerActive = false; }
+        if (this.getCurrentPositionMS() === 0 && !this.audioActive) { 
+          this.timerActive = false;
+          // this.playAlarm();
+        }
         const actualValue = this.getCurrentPositionMS === 0 ? "00:00" : msToTime(this.getCurrentPositionMS());
         document.querySelector("#timerText").innerHTML = actualValue;
 
@@ -80,69 +84,25 @@ class pomoTimer {
         this.timerActive = false;
       }
     }, 1000);
+    // this.audioActive = false;
   }
 
   stopTimer() {
     this.timerActive = false;
   }
-}
 
-///////////////// Eventhandlers and stuff //////////////////
-
-const timer = new pomoTimer();
-
-let doctitle = document.title;
-window.onblur = function() {
-  timer.setBlured(true);
-};
-window.onfocus = function() {
-  timer.setBlured(false);
-  document.title = doctitle;
-};
-
-window.onload = function() {
-  // Start timer button
-  document.querySelector("#startButton").addEventListener('click', () => {
-    if (!timer.isActive()) {
-      if (timer.getCurrentPositionMS() === 0) {
-        timer.setTimerLength(10000)
-          .startTimer();
-        setTimerColor("green");
-      } else {
-        timer.startTimer();
+  playAlarm() {
+    const alarmAudio = new Audio('assets/sounds/digitalAlarm.wav');
+    alarmAudio.addEventListener("ended" , () => {
+      this.audioActive = false;
+      console.log("Audio ended TEST");
+    })
+    alarmAudio.play();
+    this.audioActive = true;
+    setInterval(() => {
+      if (!this.audioActive) {
+        alarmAudio.pause();
       }
-      const halfWay = timer.timerLengthMS / 2;
-      const timeDisplay = setInterval(() => {
-        if (timer.getCurrentPositionMS() === -1000) {
-          clearInterval(timeDisplay);
-          timer.stopTimer();
-          timer.setCurrentPositionMS(0);
-        } else if (timer.getCurrentPositionMS() === halfWay) {
-          setTimerColor("blue");
-        }
-      }, 1000);
-    }
-  });
-  // Pause timer button
-  document.querySelector("#pauseButton").addEventListener('click', () => {
-    timer.stopTimer();
-  });
-};
-
-// Miliseconds to timestamp
-function msToTime(s) {
-
-  function pad(n, z) {
-    z = z || 2;
-    return ('00' + n).slice(-z);
+    }, 10);
   }
-
-  var ms = s % 1000;
-  s = (s - ms) / 1000;
-  var secs = s % 60;
-  s = (s - secs) / 60;
-  var mins = s % 60;
-  var hrs = (s - mins) / 60;
-
-  return hrs > 0 ? pad(hrs) + ':' + pad(mins) + ':' + pad(secs) : pad(mins) + ':' + pad(secs);
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -8,9 +8,8 @@
   <link rel="shortcut icon" href="assets/images/favi.ico">
   <meta name="description" content="A focus tracker">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/base.js"></script>
   <script src="assets/js/timer.js"></script>
-  <script src="assets/js/leaderboard.js"></script>
+  <script src="assets/js/base.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
@@ -32,6 +31,24 @@
         <div class="todo-close-btn-line-2"></div>
       </div>
     </a>
+  </div>
+
+  <div class="popup" id="login">
+    <h1>Enter your details:</h1>
+    <form id="form" action="login" method="post">
+      <input id="inputs" type="text" name="username" placeholder="Username" required>
+      <input id="inputs" type="password" name="password" placeholder="Password" required>
+      <button id="buttons" type="submit">Login</button>
+      <button id="buttons" type="submit">Register</button>
+    </form>
+    
+    <a id="login-close-popup" class="is-clickable">
+    <div class="todo-close-btn-background is-clickable" role="button">
+      <div class="todo-close-btn-line-1"></div>
+      <div class="todo-close-btn-line-2"></div>
+    </div>
+</a>
+    
   </div>
 
   <!-- POPUP TEST, IF YOU DELETE I WILL DECAPITATE YOU -->
@@ -141,6 +158,7 @@
             <img src="assets/images/leaderboard.webp" class="is-clickable" alt="Leaderboard button" height="50px"
               width="50px">
           </a>
+          <a id="loginButton">Login</a>
         </header>
 
         <div class="timer-container">
