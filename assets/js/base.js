@@ -59,28 +59,16 @@ window.addEventListener('load', () => {
       document.querySelector("main").classList.remove("blur-filter");
     }
   });
-  // Leaderboard button listner
+  // Leaderboard open button
   document.querySelector("#leaderboardButton").addEventListener('click', () => {
-    const weekly = document.querySelector('.weekly-grid-section');
-    weekly.style.display = 'none';
-
-    const allTime = document.querySelector('.allTime-grid-section')
-    allTime.style.display = 'none';
-    const toDo = document.querySelector('.todo-container');
-    const timer = document.querySelector('.timer-container');
-
-    if (toDo.style.display != 'none') {
-      toDo.style.display = 'none';
-      timer.style.display = 'none';
-      weekly.style.display = 'block';
-      allTime.style.display = 'block';
-    } else {
-      toDo.style.display = 'block';
-      timer.style.display = 'block';
-      weekly.style.display = 'none';
-      allTime.style.display = 'none';
-    }
+      document.querySelector('#leaderboard').style.display = 'block';
+      document.querySelector("main").classList.add("blur-filter");
   });
+  // Leaderboard close button
+  document.querySelector("#leaderboard-close-popup").addEventListener('click', () => {
+    document.querySelector('#leaderboard').style.display = 'none';
+    document.querySelector("main").classList.remove("blur-filter");
+  })
   // Start timer button
   document.querySelector("#startButton").addEventListener('click', () => {
     if (!timer.isActive()) {
