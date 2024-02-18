@@ -133,14 +133,14 @@ window.addEventListener('load', () => {
   // Start timer button
   var pomodoros = 0;
   var index = 0;
-  const times = [25,5,25,5,25,5,25,15]
+  const times = [25, 5, 25, 5, 25, 5, 25, 15];
   let currentTime;
 
   document.querySelector("#startButton").addEventListener('click', () => {
     if (!timer.isActive()) {
       if (timer.getCurrentPositionMS() === 0) {
         setTimerColor("#64AB1F");
-        currentTime = times[index]*1000; //keeping it as 1000 and not 60000 just to make tests easier
+        currentTime = times[index] * 1000; // keeping it as 1000 and not 60000 just to make tests easier 
         timer.setTimerLength(currentTime)
           .startTimer();
       } else {

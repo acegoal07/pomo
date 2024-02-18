@@ -63,7 +63,6 @@ class pomoTimer {
       this.setCurrentPositionMS(this.timerLengthMS);
     }
     this.timerActive = true;
-    this.currentPositionMS -= 1000;
     const timer = setInterval(() => {
       if (this.isActive()) {
         if (this.getCurrentPositionMS() === 0 && !this.audioActive) {
