@@ -222,27 +222,57 @@ main.grid-layout .banner-grid-section {
 
 /* leaderboard */
 
+
+/*ive added a grid layout to fix issues on mobile however this is not complete yet..... but better - Alan */
+#leaderboard {
+  display: grid;
+  padding-top: 0.5rem;
+  overflow: scroll;
+  align-items: center;
+  gap: 1 px;
+  grid-template-areas:
+    "header"
+    "weekly"
+    "allTime";
+}
+
+
+@media (min-width: 70em) {
+  #leaderboard {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "header header"
+      "weekly allTime";
+  }
+}
+
+
 .allTime-grid-section {
+  max-width: 50%;
+  grid-area: allTime;
   border-style: solid;
   border-color: var(--foreground-color);
   color: white;
   border-radius: 1.5rem;
-  position: absolute;
-  margin-left: 30rem;
+  position: relative;
   padding-left: 5rem;
   padding-right: 5rem;
   height: fit-content;
 }
 
 .weekly-grid-section {
+  max-width: 50%;
+  grid-area: weekly;
   border-style: solid;
   border-color: var(--foreground-color);
   color: white;
   border-radius: 1.5rem;
-  position: absolute;
+  position: relative;
   padding-left: 5rem;
   padding-right: 5rem;
   height: fit-content;
+  margin-bottom: 90px;
+  margin-top: 110px;
 }
 
 .leaderEntry {
@@ -448,7 +478,7 @@ a .todo-close-btn-line-2 {
 }
 
 .todo-list-container {
-  overflow:auto;
+  overflow: auto;
   max-height: 82vh;
 }
 
