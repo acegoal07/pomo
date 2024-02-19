@@ -4,9 +4,8 @@ class pomoTimer {
     this.timerLengthMS = null;
     this.currentPositionMS = 0;
     this.timerActive = false;
-    this.pomodoros = 0;
     this.blured = false;
-    this.audioActive = false;
+    this.alarmActive = false;
   }
 
   /**
@@ -83,7 +82,7 @@ class pomoTimer {
         this.timerActive = false;
       }
     }, 1000);
-    // this.audioActive = false;
+    // this.alarmActive = false;
   }
 
   stopTimer() {
@@ -93,11 +92,11 @@ class pomoTimer {
   playAlarm() {
     const alarmAudio = new Audio('assets/sounds/digitalAlarm.wav');
     alarmAudio.addEventListener("ended", () => {
-      this.audioActive = false;
+      this.alarmActive = false;
       console.log("Audio ended TEST");
     })
     alarmAudio.play();
-    this.audioActive = true;
+    this.alarmActive = true;
     setInterval(() => {
       if (!this.audioActive) {
         alarmAudio.pause();

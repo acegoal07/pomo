@@ -11,7 +11,7 @@ img.logo {
   height: auto;
   display: block;
   margin: auto;
-  padding-bottom: 10%;
+  margin-bottom: 2rem;
 }
 
 img.timer-controls {
@@ -42,27 +42,24 @@ hr {
   border-radius: 0.1rem;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-/* Timer and todo grid */
+/* grid */
 main.grid-layout {
   padding-top: 0.5rem;
   display: grid;
   align-items: center;
   gap: 10px;
   grid-template-areas:
+    "header"
     "timer"
     "todo";
 }
 
 @media (min-width: 70em) {
   main.grid-layout {
-    grid-template-columns: 4fr 7fr;
+    grid-template-columns: 2fr 2fr;
     grid-template-areas:
-      "todo  timer";
+      "header header"
+      "todo  timer"
   }
 }
 
@@ -138,6 +135,13 @@ main.grid-layout .timer-grid-section {
   margin-bottom: 7vh;
 }
 
+main.grid-layout .banner-grid-section {
+  grid-area: header;
+  text-align: center;
+  display: flex;
+  height: 100%;
+}
+
 .timer-container {
   position: relative;
   background-color: var(--foreground-color);
@@ -207,6 +211,10 @@ main.grid-layout .timer-grid-section {
   transition: 1s linear all;
   /* stroke: var(--background-color); */
 }
+
+/*  */
+
+
 
 .base-timerSvg {
   transform: scaleX(-1);
@@ -440,7 +448,7 @@ a .todo-close-btn-line-2 {
 }
 
 .todo-list-container {
-  overflow: scroll;
+  overflow:auto;
   max-height: 82vh;
 }
 
@@ -513,8 +521,4 @@ a .todo-close-btn-line-2 {
   right: 8%;
   font-family: 'Fredoka', cursive;
   font-size: 50px;
-}
-
-footer {
-  padding: 3%;
 }

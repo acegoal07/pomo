@@ -131,7 +131,7 @@ window.addEventListener('load', () => {
   /////////////// Timer Buttons ///////////////
 
   // Start timer button
-  var pomodoros = 0;
+  var pomodoros = 0; //Will change this to work with the timer class , didn't realise an attribute already existed, so ALEX leave it alone, meddler , i will change it hahahahahahahaha. Just working on stuff.
   var index = 0;
   const times = [25, 5, 25, 5, 25, 5, 25, 15];
   let currentTime;
@@ -153,19 +153,19 @@ window.addEventListener('load', () => {
           clearInterval(timeDisplay);
           timer.stopTimer();
           timer.setCurrentPositionMS(0);
+          if (index < 7) {
+            index++;
+          } else {
+            index = 0;
+            pomodoros++;
+            document.querySelector('#pomCount').textContent = pomodoros;
+          }
         } else if (timer.getCurrentPositionMS() < quarterWay) {
           setTimerColor("var(--background-color)");
         } else if (timer.getCurrentPositionMS() < halfWay) {
           setTimerColor("orange");
         }
       }, 1000);
-    }
-    if (index < 7) {
-      index++;
-    } else {
-      index = 0;
-      pomodoros++;
-      document.querySelector('#pomCount').textContent = pomodoros;
     }
   });
   // Pause timer button
