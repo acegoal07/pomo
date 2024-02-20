@@ -48,7 +48,7 @@ window.addEventListener('load', () => {
     const popup = document.querySelector("#leaderboard");
     if (popup.style.display === "block") { return; }
     popup.style.animation = "popupOpenAnimation 0.5s forwards";
-    popup.style.display = "block";
+    popup.style.display = "grid";
     document.querySelector("main").classList.add("blur-filter");
     document.querySelector("#todo-add-button").classList.remove("is-clickable");
     document.querySelector("#leaderboardButton").classList.remove("is-clickable");
