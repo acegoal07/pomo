@@ -40,6 +40,9 @@ window.addEventListener('load', () => {
     document.querySelector("#loginButton").classList.add("is-clickable");
   });
 
+
+
+
   /////////////// Leaderboard popup ////////////////////////
 
   // Open leaderboard popup button
@@ -80,7 +83,20 @@ window.addEventListener('load', () => {
     document.querySelector("#todo-add-button").classList.remove("is-clickable");
     document.querySelector("#leaderboardButton").classList.remove("is-clickable");
     document.querySelector("#loginButton").classList.remove("is-clickable");
-  });
+    document.querySelector("#regPage").classList.remove("show");
+    document.querySelector("#regPage").classList.add("hide");
+    document.querySelector("#reg").classList.remove("hide");
+    document.querySelector("#inputUsername").classList.remove("hide");
+    document.querySelector("#inputPassword").classList.remove("hide");
+    document.querySelector("#buttonLogin").classList.remove("hide");
+    
+  });;
+
+  
+
+
+
+
   // Close login popup button
   document.querySelector("#login-close-popup").addEventListener('click', () => {
     const popup = document.querySelector("#login");
@@ -92,7 +108,35 @@ window.addEventListener('load', () => {
     document.querySelector("#todo-add-button").classList.add("is-clickable");
     document.querySelector("#leaderboardButton").classList.add("is-clickable");
     document.querySelector("#loginButton").classList.add("is-clickable");
+    document.querySelector("#regPage").classList.remove("hide");
   });
+
+
+
+
+
+
+  //reg button and page WORK IN PROGRESS- WILL BE USED TO GO TO /////////////////////////////////
+
+  document.querySelector("#reg").addEventListener('click', (evt) =>{
+    //prevent defualt action
+    evt.preventDefault();
+    console.log("reg button clicked");
+    //remove all elements from the page
+    document.querySelector("#reg").classList.add("hide");
+    document.querySelector("#inputUsername").classList.add("hide");
+    document.querySelector("#inputPassword").classList.add("hide");
+    document.querySelector("#buttonLogin").classList.add("hide");
+    document.querySelector("#regPage").classList.remove("hide");
+    document.querySelector("#regPage").classList.add("show");
+
+
+  });
+
+
+
+  
+
 
   /////////////// Popup function buttons ///////////////
 

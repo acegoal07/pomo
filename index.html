@@ -34,13 +34,30 @@
   </div>
 
   <div class="popup" id="login">
+
+    <div id="loginForm">
     <h1>Enter your details:</h1>
     <form id="form" action="login" method="post">
-      <input id="inputs" type="text" name="username" placeholder="AlanIsGay" required>
-      <input id="inputs" type="password" name="password" placeholder="WhichIsTrue" required>
-      <button id="buttons" type="submit">Login</button>
-      <button id="buttons" type="submit">Register</button>
-    </form>
+      <input id="inputUsername" type="text" name="username" placeholder="Username">
+      <input id="inputPassword" type="password" name="password" placeholder="Password">
+      <button id="reg" type="">Don't have an account? Click Here To Register</button>
+      <button id="buttonLogin" type="submit">Login</button>
+       </form>
+    </div>
+      
+      <div id="regPage">
+        <h1>Register</h1>
+        <form id="regForm" action="register" method="post">
+          <input id="regUsername" type="text" name="username" placeholder="Username">
+          <input id="ConfirmRegUsername" type="text" name="username" placeholder="Confirm Username">
+          <input id="regPassword" type="password" name="password" placeholder="Password">
+          <input id="ConfirmRegPassword" type="password" name="password" placeholder="Confirm Password">
+          <button id="regButton" type="submit">Register</button>
+        </form>
+      </div>
+
+      
+   
 
     <a id="login-close-popup" class="is-clickable">
       <div class="todo-close-btn-background is-clickable" role="button">
@@ -61,7 +78,7 @@
     <div class="allTime-grid-section">
       <h1>All Time</h1>
       <p class="leaderEntry">Leader yay</p>
-      <p class="leaderEntry">Leader yay</p>
+      <p class="leaderEntry">Dara yay</p>
       <p class="leaderEntry">Leader yay</p>
     </div>
 

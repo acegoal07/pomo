@@ -238,7 +238,6 @@ main.grid-layout .banner-grid-section {
 
 @media (min-width: 70em) {
   #leaderboard {
-
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "header header"
@@ -401,7 +400,7 @@ main.grid-layout .banner-grid-section {
   height: 50%;
 }
 
-#buttons {
+#buttonLogin {
   background-color: yellow;
   border-radius: 7pt;
   width: 80px;
@@ -411,7 +410,12 @@ main.grid-layout .banner-grid-section {
   text-align: center;
 }
 
-#inputs {
+#buttonReg {
+  background-color: var(---background-color);
+
+}
+
+#inputPassword {
   border-width: 6px;
   border-color: green;
   border-radius: 13px;
@@ -420,7 +424,17 @@ main.grid-layout .banner-grid-section {
   -moz-border-radius: 13px;
   -webkit-border-radius: 13px;
   -khtml-border-radius: 13px;
+}
 
+#inputUsername {
+  border-width: 6px;
+  border-color: green;
+  border-radius: 13px;
+  margin: 3px;
+  height: 25px;
+  -moz-border-radius: 13px;
+  -webkit-border-radius: 13px;
+  -khtml-border-radius: 13px;
 }
 
 /* Todo popup */
@@ -552,3 +566,22 @@ a .todo-close-btn-line-2 {
   font-family: 'Fredoka', cursive;
   font-size: 50px;
 }
+
+#reg{
+  background-color:inherit;
+  border:none;
+  color:yellow;
+}
+
+.hide{
+  display:none;
+}
+
+.show{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 10%;
+}
+
