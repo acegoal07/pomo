@@ -13,9 +13,6 @@ class pomoTimer {
    * @returns {pomoTimer}
    */
   setTimerLength(msInput) {
-    if (msInput < 0 || msInput === null) {
-      throw new Error("Timer length must be greater than 0");
-    }
     this.timerLengthMS = msInput;
     return this;
   }
@@ -64,7 +61,7 @@ class pomoTimer {
     this.timerActive = true;
     const timer = setInterval(() => {
       if (this.isActive()) {
-        if (this.getCurrentPositionMS() === 0 && !this.audioActive) {
+        if (this.getCurrentPositionMS() === 0 && !this.alarmActive) {
           this.timerActive = false;
           // this.playAlarm();
         }
@@ -98,9 +95,9 @@ class pomoTimer {
     alarmAudio.play();
     this.alarmActive = true;
     setInterval(() => {
-      if (!this.audioActive) {
+      if (!this.alarmActive) {
         alarmAudio.pause();
       }
-    }, 10);
+    }, 100);
   }
 }
