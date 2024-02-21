@@ -12,6 +12,7 @@ img.logo {
   display: block;
   margin: auto;
   margin-bottom: 2rem;
+  padding-bottom: 2em;
 }
 
 img.timer-controls {
@@ -131,6 +132,7 @@ main.grid-layout .timer-grid-section {
   max-height: 96vh;
   height: 100%;
   margin-bottom: 7vh;
+  margin-top: 16vh;
 }
 
 main.grid-layout .banner-grid-section {
