@@ -578,6 +578,7 @@ a .todo-close-btn-line-2 {
 }
 
 /* DONT ASK ABOUT THE COLOR BUT ANYWAY LOOK PRETTY SCROLL BAR - Alan */
+/* One question, why? */
 ::-webkit-scrollbar {
   width: 20px;
   background-color: #77b255;
