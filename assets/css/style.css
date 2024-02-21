@@ -32,7 +32,8 @@ h1 {
 body {
   background-color: var(--background-color);
   color: var(--foreground-color);
-  margin: 1rem;
+  margin: 4rem;
+
 
 }
 
@@ -68,9 +69,9 @@ main.grid-layout {
   color: white;
   border-radius: 1.5rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  padding: 1rem;
+  padding-bottom: 2em;
   max-height: 90vh;
-  height: 100%;
+  height: 90%;
   overflow: hidden;
 }
 
@@ -558,21 +559,20 @@ a .todo-close-btn-line-2 {
   font-size: 50px;
 }
 
-#reg{
-  background-color:inherit;
-  border:none;
-  color:yellow;
+#reg {
+  background-color: inherit;
+  border: none;
+  color: yellow;
 }
 
-.hide{
-  display:none;
+.hide {
+  display: none;
 }
 
-.show{
+.show {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 10%;
 }
-
