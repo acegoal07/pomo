@@ -12,7 +12,6 @@ img.logo {
   display: block;
   margin: auto;
   margin-bottom: 2rem;
-  padding-bottom: 2em;
 }
 
 img.timer-controls {
@@ -33,8 +32,7 @@ h1 {
 body {
   background-color: var(--background-color);
   color: var(--foreground-color);
-  margin: 4rem;
-
+  margin: 1rem;
 
 }
 
@@ -70,10 +68,11 @@ main.grid-layout {
   color: white;
   border-radius: 1.5rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  padding-bottom: 2em;
+  padding: 1rem;
   max-height: 90vh;
-  height: 90%;
+  height: 100%;
   overflow: hidden;
+  padding-bottom: 6vh;
 }
 
 /* TO DO LIST GRID */
@@ -132,7 +131,6 @@ main.grid-layout .timer-grid-section {
   max-height: 96vh;
   height: 100%;
   margin-bottom: 7vh;
-  margin-top: 16vh;
 }
 
 main.grid-layout .banner-grid-section {
