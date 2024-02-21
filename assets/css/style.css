@@ -403,7 +403,6 @@ main.grid-layout .banner-grid-section {
 
 #buttonReg {
   background-color: var(---background-color);
-
 }
 
 #inputPassword {
@@ -493,7 +492,6 @@ a .todo-close-btn-line-2 {
   display: flex;
   align-items: center;
   font-size: 18px;
-
 }
 
 .todo-checkbox {
@@ -583,13 +581,11 @@ a .todo-close-btn-line-2 {
   width: 20px;
   background-color: #77b255;
   border-radius: 15px;
-
 }
 
 ::-webkit-scrollbar-thumb {
   background: #ff00bb;
   border-radius: 5px;
-
 }
 
 ::-webkit-scrollbar-corner {
