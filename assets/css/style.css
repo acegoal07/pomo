@@ -2,7 +2,6 @@
   --background-color: #c42217;
   --foreground-color: #eed847;
   font-family: 'Fredoka', Arial;
-  /* font-size: px; */
 }
 
 /* Images */
@@ -483,8 +482,9 @@ a .todo-close-btn-line-2 {
   align-items: center;
 }
 
+
 .todo-list-container {
-  overflow: auto;
+  overflow: scroll;
   max-height: 82vh;
 }
 
@@ -575,4 +575,22 @@ a .todo-close-btn-line-2 {
   align-items: center;
   justify-content: center;
   height: 10%;
+}
+
+/* DONT ASK ABOUT THE COLOR BUT ANYWAY LOOK PRETTY SCROLL BAR - Alan */
+::-webkit-scrollbar {
+  width: 20px;
+  background-color: #77b255;
+  border-radius: 15px;
+
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff00bb;
+  border-radius: 5px;
+
+}
+
+::-webkit-scrollbar-corner {
+  background-color: green;
 }
