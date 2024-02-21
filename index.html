@@ -18,15 +18,13 @@
 
 <body>
 
-  <!-- POPUP TEST, IF YOU DELETE I WILL DECAPITATE YOU -->
-
   <div id="popup" class="popup">
     <h1>ADD YOUR TASK:</h1>
     <h2>Insert the details of your task below</h2>
     <input type="text" id="todo-input" placeholder="Enter your to-do item here">
     <button id="addTodoButton" class="popup-button">Add To-Do</button>
     <a id="todo-close-popup" class="is-clickable">
-      <div class="todo-close-btn-background is-clickable" role="button">
+      <div class="todo-close-btn-background is-clickable">
         <div class="todo-close-btn-line-1"></div>
         <div class="todo-close-btn-line-2"></div>
       </div>
@@ -34,33 +32,29 @@
   </div>
 
   <div class="popup" id="login">
-
-    <div id="loginForm">
-    <h1>Enter your details:</h1>
-    <form id="form" action="login" method="post">
-      <input id="inputUsername" type="text" name="username" placeholder="Username" required>
-      <input id="inputPassword" type="password" name="password" placeholder="Password" required>
-      <button id="reg" type="reset">Don't have an account? Click Here To Register</button>
-      <button id="buttonLogin" type="submit">Login</button>
-       </form>
+    <div id="loginPage">
+      <h1>Enter your details:</h1>
+      <form id="loginForm" action="login" method="post">
+        <input id="inputUsername" type="text" name="username" placeholder="Username" required>
+        <input id="inputPassword" type="password" name="password" placeholder="Password" required>
+        <button id="reg" type="reset">Don't have an account? Click Here To Register</button>
+        <button id="buttonLogin" type="submit">Login</button>
+      </form>
     </div>
-      
-      <div id="regPage">
-        <h1>Register</h1>
-        <form id="regForm" action="register" method="post">
-          <input id="regUsername" type="text" name="username" placeholder="Username" required>
-          <input id="ConfirmRegUsername" type="text" name="username" placeholder="Confirm Username" required>
-          <input id="regPassword" type="password" name="password" placeholder="Password" required>
-          <input id="ConfirmRegPassword" type="password" name="password" placeholder="Confirm Password" required>
-          <button id="regButton" type="submit">Register</button>
-        </form>
-      </div>
 
-      
-   
+    <div id="regPage">
+      <h1>Register</h1>
+      <form id="regForm" action="register" method="post">
+        <input id="regUsername" type="text" name="username" placeholder="Username" required>
+        <input id="ConfirmRegUsername" type="text" name="username" placeholder="Confirm Username" required>
+        <input id="regPassword" type="password" name="password" placeholder="Password" required>
+        <input id="ConfirmRegPassword" type="password" name="password" placeholder="Confirm Password" required>
+        <button id="regButton" type="submit">Register</button>
+      </form>
+    </div>
 
     <a id="login-close-popup" class="is-clickable">
-      <div class="todo-close-btn-background is-clickable" role="button">
+      <div class="todo-close-btn-background is-clickable">
         <div class="todo-close-btn-line-1"></div>
         <div class="todo-close-btn-line-2"></div>
       </div>
@@ -83,14 +77,12 @@
     </div>
 
     <a id="leaderboard-close-popup" class="is-clickable">
-      <div class="todo-close-btn-background is-clickable" role="button">
+      <div class="todo-close-btn-background is-clickable">
         <div class="todo-close-btn-line-1"></div>
         <div class="todo-close-btn-line-2"></div>
       </div>
     </a>
   </div>
-
-  <!-- POPUP TEST, IF YOU DELETE I WILL DECAPITATE YOU -->
 
   <main class="grid-layout">
     <div class="banner-grid-section">
@@ -108,8 +100,8 @@
         <div class="todo-container">
           <h1>TO DO:</h1>
 
-          <a role="button">
-            <div id="todo-add-button" class="todo-add-btn-background is-clickable" role="button">
+          <a>
+            <div id="todo-add-button" class="todo-add-btn-background is-clickable">
               <div class="todo-add-btn-horizontal-plus"></div>
               <div class="todo-add-btn-vertical-plus"></div>
             </div>
@@ -153,13 +145,11 @@
       </div>
     </div>
 
-
-
     <div class="timer-grid-section">
 
       <div class="timer-container">
 
-        <img class="timerLeaves" src="assets/images/timerLeaves.webp" alt="Tomato " height=250px width=312.5px>
+        <img class="timerLeaves" src="assets/images/timerLeaves.webp" alt="Tomato" height="250px" width="312.5px">
 
         <div class="timerRing">
           <div class="baseTimer">
@@ -185,14 +175,11 @@
             height="100px" width="100px">
         </a>
 
-
       </div>
 
     </div>
-    </div>
 
   </main>
-
 </body>
 
 </html>

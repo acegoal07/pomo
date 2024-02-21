@@ -75,15 +75,12 @@ main.grid-layout {
 }
 
 /* TO DO LIST GRID */
-/* WHOEVER IS BREAKING THE TO DO LIST FUCK OFF OR ALAN WILL CIRCUMCISE YOU - Alan here, can confirm the above,Lmaoooo*/
 main.grid-layout .todo-grid-section {
   grid-area: todo;
   padding: 1rem;
   position: relative;
   max-height: 90vh;
   height: 90%;
-  /* It's only broken in mobile view, it shouldn't be that wide when you go to that view, there should be lots of whitespace on the sides , oh shit, I don't know how hes managed that lol, probably something to do with the container its in, yeah probably, I'll do it tomorrow, too tired right now, fair enough, ill leave it alone and will look at it with ya tomz, okay cool thanks, see you tomorrow, gonna log off now, alright, see ya tomz mate, :)*/
-  /* It's Alex, he keeps breaking my list when there was nothing wrong with it -_- , ffs*/
 }
 
 a .todo-add-btn-background {
@@ -147,7 +144,8 @@ main.grid-layout .banner-grid-section {
   background-color: var(--foreground-color);
   color: white;
   border-radius: 1.5rem;
-  height: fit-content;
+  height: auto;
+  width: -moz-fit-content;
   width: fit-content;
   padding: 1rem;
   margin: auto;
@@ -202,9 +200,9 @@ main.grid-layout .banner-grid-section {
 .path-remaining {
   stroke-width: 7px;
   stroke-linecap: round;
-  transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
+  transform: rotate(90deg);
   transform-origin: center;
   -webkit-transition: 1s linear all;
   -moz-transition: 1s linear all;
@@ -212,16 +210,11 @@ main.grid-layout .banner-grid-section {
   /* stroke: var(--background-color); */
 }
 
-/*  */
-
-
-
 .base-timerSvg {
   transform: scaleX(-1);
 }
 
 /* leaderboard */
-
 
 /*ive added a grid layout to fix issues on mobile however this is not complete yet..... but better - Alan */
 #leaderboard {
@@ -235,7 +228,6 @@ main.grid-layout .banner-grid-section {
     "allTime";
 }
 
-
 @media (min-width: 70em) {
   #leaderboard {
     grid-template-columns: 1fr 1fr;
@@ -244,7 +236,6 @@ main.grid-layout .banner-grid-section {
       "weekly allTime";
   }
 }
-
 
 .allTime-grid-section {
   max-width: 50%;
@@ -256,7 +247,7 @@ main.grid-layout .banner-grid-section {
   position: relative;
   padding-left: 5rem;
   padding-right: 5rem;
-  height: fit-content;
+  height: auto;
 }
 
 .weekly-grid-section {
@@ -269,7 +260,7 @@ main.grid-layout .banner-grid-section {
   position: relative;
   padding-left: 5rem;
   padding-right: 5rem;
-  height: fit-content;
+  height: auto;
   margin-bottom: 90px;
   margin-top: 110px;
 }
@@ -392,7 +383,7 @@ main.grid-layout .banner-grid-section {
 }
 
 /* Below Is For The Login Screen */
-#form {
+#loginForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -418,23 +409,23 @@ main.grid-layout .banner-grid-section {
 #inputPassword {
   border-width: 6px;
   border-color: green;
-  border-radius: 13px;
   margin: 3px;
   height: 25px;
-  -moz-border-radius: 13px;
-  -webkit-border-radius: 13px;
-  -khtml-border-radius: 13px;
+  -moz-border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -khtml-border-radius: 1rem;
+  border-radius: 1rem;
 }
 
 #inputUsername {
   border-width: 6px;
   border-color: green;
-  border-radius: 13px;
   margin: 3px;
   height: 25px;
-  -moz-border-radius: 13px;
-  -webkit-border-radius: 13px;
-  -khtml-border-radius: 13px;
+  -moz-border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -khtml-border-radius: 1rem;
+  border-radius: 1rem;
 }
 
 /* Todo popup */

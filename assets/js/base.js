@@ -1,13 +1,13 @@
 // Timer class caller
 const timer = new pomoTimer();
 // Focus listener
-let doctitle = document.title;
-window.onblur = function() {
+let docTitle = document.title;
+window.onblur = function () {
   timer.setBlured(true);
 };
-window.onfocus = function() {
+window.onfocus = function () {
   timer.setBlured(false);
-  document.title = doctitle;
+  document.title = docTitle;
 };
 // On load checker
 window.addEventListener('load', () => {
@@ -15,7 +15,7 @@ window.addEventListener('load', () => {
 
   /////////////// Todo popup ////////////////////////
 
-  // Open todo popup button listner
+  // Open todo popup button listener
   document.querySelector("#todo-add-button").addEventListener('click', () => {
     if (document.querySelector("#leaderboard").style.display === "block" || document.querySelector("#login").style.display === "block") { return; }
     const popup = document.querySelector("#popup");
@@ -27,21 +27,18 @@ window.addEventListener('load', () => {
     document.querySelector("#leaderboardButton").classList.remove("is-clickable");
     document.querySelector("#loginButton").classList.remove("is-clickable");
   });
-  // Close todo popup button listern
+  // Close todo popup button listener
   document.querySelector("#todo-close-popup").addEventListener('click', () => {
     const popup = document.querySelector("#popup");
     popup.style.animation = "popupCloseAnimation 0.5s forwards";
-    setTimeout(function() {
+    setTimeout(function () {
       popup.style.display = "none";
+      document.querySelector("#todo-add-button").classList.add("is-clickable");
+      document.querySelector("#leaderboardButton").classList.add("is-clickable");
+      document.querySelector("#loginButton").classList.add("is-clickable");
     }, 500);
     document.querySelector("main").classList.remove("blur-filter");
-    document.querySelector("#todo-add-button").classList.add("is-clickable");
-    document.querySelector("#leaderboardButton").classList.add("is-clickable");
-    document.querySelector("#loginButton").classList.add("is-clickable");
   });
-
-
-
 
   /////////////// Leaderboard popup ////////////////////////
 
@@ -61,13 +58,13 @@ window.addEventListener('load', () => {
   document.querySelector("#leaderboard-close-popup").addEventListener('click', () => {
     const popup = document.querySelector("#leaderboard");
     popup.style.animation = "popupCloseAnimation 0.5s forwards";
-    setTimeout(function() {
+    setTimeout(function () {
       popup.style.display = "none";
+      document.querySelector("#todo-add-button").classList.add("is-clickable");
+      document.querySelector("#leaderboardButton").classList.add("is-clickable");
+      document.querySelector("#loginButton").classList.add("is-clickable");
     }, 500);
     document.querySelector("main").classList.remove("blur-filter");
-    document.querySelector("#todo-add-button").classList.add("is-clickable");
-    document.querySelector("#leaderboardButton").classList.add("is-clickable");
-    document.querySelector("#loginButton").classList.add("is-clickable");
   });
 
   /////////////// Login popup ////////////////////////
@@ -89,38 +86,28 @@ window.addEventListener('load', () => {
     document.querySelector("#inputUsername").classList.remove("hide");
     document.querySelector("#inputPassword").classList.remove("hide");
     document.querySelector("#buttonLogin").classList.remove("hide");
-    
-  });;
-
-  
-
-
-
-
+  });
   // Close login popup button
   document.querySelector("#login-close-popup").addEventListener('click', () => {
     const popup = document.querySelector("#login");
     popup.style.animation = "popupCloseAnimation 0.5s forwards";
-    setTimeout(function() {
+    setTimeout(function () {
       popup.style.display = "none";
+      document.querySelector("#todo-add-button").classList.add("is-clickable");
+      document.querySelector("#leaderboardButton").classList.add("is-clickable");
+      document.querySelector("#loginButton").classList.add("is-clickable");
+      document.querySelector("#regPage").classList.remove("hide");
     }, 500);
     document.querySelector("main").classList.remove("blur-filter");
-    document.querySelector("#todo-add-button").classList.add("is-clickable");
-    document.querySelector("#leaderboardButton").classList.add("is-clickable");
-    document.querySelector("#loginButton").classList.add("is-clickable");
-    document.querySelector("#regPage").classList.remove("hide");
   });
 
-
-
-
-
-
   //reg button and page WORK IN PROGRESS- WILL BE USED TO GO TO /////////////////////////////////
+  /////////////// Registration page button ////////////////////////
+  // Wil be moved down to the bottom with the login one when finished
 
-  document.querySelector("#reg").addEventListener('click', (evt) =>{
-    //prevent defualt action
-    evt.preventDefault();
+  document.querySelector("#reg").addEventListener('click', (event) => {
+    //prevent default action
+    event.preventDefault();
     console.log("reg button clicked");
     //remove all elements from the page
     document.querySelector("#reg").classList.add("hide");
@@ -129,18 +116,11 @@ window.addEventListener('load', () => {
     document.querySelector("#buttonLogin").classList.add("hide");
     document.querySelector("#regPage").classList.remove("hide");
     document.querySelector("#regPage").classList.add("show");
-
-
   });
-
-
-
-  
-
 
   /////////////// Popup function buttons ///////////////
 
-  // Add todo button listner
+  // Add todo button listener
   document.querySelector("#addTodoButton").addEventListener("click", () => {
     const todoInput = document.querySelector("#todo-input");
     const todoText = todoInput.value;
@@ -175,7 +155,7 @@ window.addEventListener('load', () => {
   /////////////// Timer Buttons ///////////////
 
   // Start timer button
-  var pomodoros = 0; //Will change this to work with the timer class , didn't realise an attribute already existed, so ALEX leave it alone, meddler , i will change it hahahahahahahaha. Just working on stuff.
+  var pomodoros = 0;
   var index = 0;
   const times = [25, 5, 25, 5, 25, 5, 25, 15];
   let currentTime;
@@ -184,7 +164,7 @@ window.addEventListener('load', () => {
     if (!timer.isActive()) {
       if (timer.getCurrentPositionMS() === 0) {
         setTimerColor("#64AB1F");
-        currentTime = times[index] * 1000; // keeping it as 1000 and not 60000 just to make tests easier 
+        currentTime = times[index] * 1000; // Needs to be switched back to 60000 when testing is finished
         timer.setTimerLength(currentTime)
           .startTimer();
       } else {
@@ -216,6 +196,13 @@ window.addEventListener('load', () => {
   document.querySelector("#pauseButton").addEventListener('click', () => {
     timer.stopTimer();
   });
+
+  /////////////// Login button ///////////////
+
+  // Login submit button
+  document.querySelector("#loginForm").addEventListener('submit', (event) => {
+    event.preventDefault();
+  });
 });
 
 /////////////// Additional functions ///////////////
@@ -235,7 +222,7 @@ function setTimerColor(input) {
   document.querySelector("#base-timer-path-remaining").style.stroke = input == null ? "green" : input;
 }
 /**
- * Miliseconds to timestamp
+ * Milliseconds to timestamp
  * @param {Number} s
  * @returns {String}
  */
