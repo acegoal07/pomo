@@ -33,9 +33,11 @@ class pomoTimer {
 
   /**
    * @param {int} ms
+   * @returns {pomoTimer}
    */
   setCurrentPositionMS(ms) {
     this.currentPositionMS = ms;
+    return this;
   }
 
   /**
