@@ -9,7 +9,7 @@ window.onfocus = function () {
   timer.setBlured(false);
   document.title = docTitle;
 };
-// On load checker
+// On load handler
 window.addEventListener('load', () => {
   setTimerColor("var(--background-color)");
 
@@ -100,11 +100,11 @@ window.addEventListener('load', () => {
     }, 500);
     document.querySelector("main").classList.remove("blur-filter");
   });
-
-  //reg button and page WORK IN PROGRESS- WILL BE USED TO GO TO /////////////////////////////////
-  /////////////// Registration page button ////////////////////////
-  // Wil be moved down to the bottom with the login one when finished
-
+  // Login submit button
+  document.querySelector("#loginForm").addEventListener('submit', (event) => {
+    event.preventDefault();
+  });
+  // Registration submit button
   document.querySelector("#reg").addEventListener('click', (event) => {
     //prevent default action
     event.preventDefault();
@@ -195,13 +195,6 @@ window.addEventListener('load', () => {
   // Pause timer button
   document.querySelector("#pauseButton").addEventListener('click', () => {
     timer.stopTimer();
-  });
-
-  /////////////// Login button ///////////////
-
-  // Login submit button
-  document.querySelector("#loginForm").addEventListener('submit', (event) => {
-    event.preventDefault();
   });
 });
 
