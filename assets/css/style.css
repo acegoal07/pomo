@@ -79,7 +79,7 @@ main.grid-layout .todo-grid-section {
   grid-area: todo;
   padding: 1rem;
   position: relative;
-  /* height: 90%; */
+  height: 90%;
 }
 
 a .todo-add-btn-background {
