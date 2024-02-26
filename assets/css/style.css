@@ -1,595 +1,461 @@
+/* Main body universal css */
 :root {
-  --background-color: #c42217;
-  --foreground-color: #eed847;
-  font-family: 'Fredoka', Arial;
-}
-
-/* Images */
-img.logo {
-  max-width: 400px;
-  height: auto;
-  display: block;
-  margin: auto;
-  margin-bottom: 2rem;
-}
-
-img.timer-controls {
-  display: block;
-  margin: 1rem;
-}
-
-/* Body */
-h1 {
-  font-family: 'Fredoka', cursive;
-  font-size: 60px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 0;
+   --background-color: #c42217;
+   --foreground-color: #eed847;
+   --accent-color: #77b255;
+   --accent-color-hover: #5da036;
+   font-family: 'Fredoka', Arial;
 }
 
 body {
-  background-color: var(--background-color);
-  color: var(--foreground-color);
-  margin: 1rem;
-
+   background-color: var(--background-color);
+   color: var(--foreground-color);
+   margin: 1rem;
 }
 
-hr {
-  margin-top: 1rem;
-  border-color: var(--foreground-color);
-  border-radius: 0.1rem;
+h1 {
+   font-family: 'Fredoka', cursive;
+   font-size: 60px;
+   text-align: center;
+   text-transform: uppercase;
+   letter-spacing: 2px;
 }
 
-/* grid */
-main.grid-layout {
-  padding-top: 0.5rem;
-  display: grid;
-  align-items: center;
-  gap: 10px;
-  grid-template-areas:
-    "header"
-    "timer"
-    "todo";
+h2 {
+   text-align: center;
 }
 
-@media (min-width: 70em) {
-  main.grid-layout {
-    grid-template-columns: 2fr 2fr;
-    grid-template-areas:
-      "header header"
-      "todo  timer"
-  }
-}
-
-.todo-container {
-  background-color: var(--foreground-color);
-  color: white;
-  border-radius: 1.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  padding: 1rem;
-  max-height: 90%;
-  height: 100%;
-  overflow: hidden;
-  padding-bottom: 6vh;
-}
-
-/* TO DO LIST GRID */
-main.grid-layout .todo-grid-section {
-  grid-area: todo;
-  padding: 1rem;
-  position: relative;
-  height: 90%;
-}
-
-a .todo-add-btn-background {
-  border-radius: 1.5rem;
-  width: 60px;
-  height: 60px;
-  background-color: #77b255;
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  -moz-transition: transform 0.2s ease;
-  transition: transform 0.2s ease;
-}
-
-a .todo-add-btn-horizontal-plus {
-  position: relative;
-  background-color: #FFFFFF;
-  width: 50%;
-  height: 12.5%;
-  left: 25%;
-  top: 43.75%;
-}
-
-a .todo-add-btn-vertical-plus {
-  position: relative;
-  background-color: #FFFFFF;
-  width: 12.5%;
-  height: 50%;
-  left: 43.75%;
-  top: 12.5%;
-}
-
-.todo-add-btn-background:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.todo-add-btn-background:not(:hover) {
-  transform: translateY(0);
-}
-
-/* TIMER GRID */
-main.grid-layout .timer-grid-section {
-  grid-area: timer;
-  text-align: center;
-  position: relative;
-  max-height: 80%;
-  height: 100%;
-  margin-bottom: 7vh;
-}
-
-main.grid-layout .banner-grid-section {
-  grid-area: header;
-  text-align: center;
-  display: flex;
-  height: 100%;
-}
-
-.timer-container {
-  position: relative;
-  background-color: var(--foreground-color);
-  color: white;
-  border-radius: 1.5rem;
-  height: auto;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 1rem;
-  margin: auto;
-}
-
-#pauseButton,
-#startButton {
-  display: inline-block;
-}
-
-.baseTimer {
-  position: relative;
-  height: 300px;
-  width: 300px;
-  margin: auto;
-}
-
-.baseTimerCircle {
-  fill: none;
-  stroke: none;
-}
-
-.timerPathElapsed {
-  stroke-width: 7px;
-  stroke: grey;
-  fill: var(--background-color);
-}
-
-#timer {
-  color: white;
-  position: absolute;
-  font-size: 2.7rem;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  height: 300px;
-  top: 40%;
-  left: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.timerLeaves {
-  top: 7%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  padding: 0;
-}
-
-
-.path-remaining {
-  stroke-width: 7px;
-  stroke-linecap: round;
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  transform: rotate(90deg);
-  transform-origin: center;
-  -webkit-transition: 1s linear all;
-  -moz-transition: 1s linear all;
-  transition: 1s linear all;
-  /* stroke: var(--background-color); */
-}
-
-.base-timerSvg {
-  transform: scaleX(-1);
-}
-
-/* leaderboard */
-
-/*ive added a grid layout to fix issues on mobile however this is not complete yet..... but better - Alan */
-#leaderboard {
-  padding-top: 0.5rem;
-  overflow: scroll;
-  align-items: center;
-  gap: 1 px;
-  grid-template-areas:
-    "header"
-    "weekly"
-    "allTime";
-}
-
-@media (min-width: 70em) {
-  #leaderboard {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "header header"
-      "weekly allTime";
-  }
-}
-
-.allTime-grid-section {
-  max-width: 50%;
-  grid-area: allTime;
-  border-style: solid;
-  border-color: var(--foreground-color);
-  color: white;
-  border-radius: 1.5rem;
-  position: relative;
-  padding-left: 5rem;
-  padding-right: 5rem;
-  height: auto;
-}
-
-.weekly-grid-section {
-  max-width: 50%;
-  grid-area: weekly;
-  border-style: solid;
-  border-color: var(--foreground-color);
-  color: white;
-  border-radius: 1.5rem;
-  position: relative;
-  padding-left: 5rem;
-  padding-right: 5rem;
-  height: auto;
-  margin-bottom: 90px;
-  margin-top: 110px;
-}
-
-.leaderEntry {
-  text-align: center;
-  color: var(--background-color);
-  background-color: var(--foreground-color);
-  border-radius: 1.5rem;
-  padding: 1rem;
-  font-size: 1.5rem;
-}
-
-.is-clickable {
-  cursor: pointer;
-}
-
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #c42217;
-  padding: 20px;
-  border: 2px solid #77b255;
-  border-width: 15px;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  width: 75%;
-  height: 75%;
-  animation: popupAnimation 0.5s forwards;
-}
-
-#loginButton {
-  color: white;
-  font-size: 2rem;
-  border-radius: 3px;
-  margin-top: 1rem;
-  padding-left: 1rem;
-  margin-left: 1rem;
-}
-
-#leaderboardButton {
-  margin-top: 1rem;
-}
-
-#todo-input {
-  width: 95%;
-  padding: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-radius: 20px;
-  border: 5px solid #77b255;
-  font-size: 20px;
-}
-
-.popup-button {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 150px;
-  height: 50px;
-  background-color: #77b255;
-  color: white;
-  font-size: 18px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  -moz-transition: transform 0.2s ease, box-shadow 0.2s ease;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.popup-button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.popup-button:not(:hover) {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-.popup h2 {
-  text-align: center;
-}
-
-@keyframes popupOpenAnimation {
-  0% {
-    transform: translate(-50%, -50%) scale(0.5);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes popupCloseAnimation {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(-50%, -50%) scale(0.5);
-    opacity: 0;
-  }
-}
-
-/* If you apply this to the main it should blur the screen */
 .blur-filter {
-  -webkit-filter: blur(2px);
-  -moz-filter: blur(2px);
-  -o-filter: blur(2px);
-  -ms-filter: blur(2px);
-  filter: blur(2px);
+   -webkit-filter: blur(2px);
+   -moz-filter: blur(2px);
+   -o-filter: blur(2px);
+   -ms-filter: blur(2px);
+   filter: blur(2px);
 }
 
-/* Below Is For The Login Screen */
-#loginForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 50%;
-}
-
-#buttonLogin {
-  background-color: yellow;
-  border-radius: 7pt;
-  width: 80px;
-  height: 25px;
-  margin: 3px;
-  font-size: 12pt;
-  text-align: center;
-}
-
-#buttonReg {
-  background-color: var(---background-color);
-}
-
-#inputPassword {
-  border-width: 6px;
-  border-color: green;
-  margin: 3px;
-  height: 25px;
-  -moz-border-radius: 1rem;
-  -webkit-border-radius: 1rem;
-  -khtml-border-radius: 1rem;
-  border-radius: 1rem;
-}
-
-#inputUsername {
-  border-width: 6px;
-  border-color: green;
-  margin: 3px;
-  height: 25px;
-  -moz-border-radius: 1rem;
-  -webkit-border-radius: 1rem;
-  -khtml-border-radius: 1rem;
-  border-radius: 1rem;
-}
-
-/* Todo popup */
-a .todo-close-btn-background {
-  border-radius: 1.5rem;
-  width: 60px;
-  height: 60px;
-  background-color: var(--foreground-color);
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  -moz-transition: transform 0.2s ease;
-  transition: transform 0.2s ease;
-}
-
-a .todo-close-btn-line-1 {
-  position: relative;
-  background-color: #FFFFFF;
-  width: 50%;
-  height: 12.5%;
-  left: 25%;
-  top: 43.75%;
-  transform: rotatez(45deg);
-}
-
-a .todo-close-btn-line-2 {
-  position: relative;
-  background-color: #FFFFFF;
-  width: 12.5%;
-  height: 50%;
-  left: 43.75%;
-  top: 12.5%;
-  transform: rotate(45deg);
-}
-
-.todo-close-btn-background:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.todo-close-btn-background:not(:hover) {
-  transform: translateY(0);
-}
-
-.todo-item {
-  display: flex;
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 40px;
-  width: 90%;
-  padding: 10px;
-  border-radius: 30px;
-  background-color: #77b255;
-  align-items: center;
-}
-
-
-.todo-list-container {
-  overflow: scroll;
-  max-height: 82vh;
-}
-
-.todo-item-container {
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  font-size: 18px;
-}
-
-.todo-checkbox {
-  width: 40px;
-  height: 40px;
-  border: 3px solid #000;
-  margin-right: 10px;
-  border-radius: 15px;
-  flex-shrink: 0;
-}
-
-.todo-text {
-  flex-grow: 1;
-}
-
-.todo-item {
-  -moz-transition: transform 0.2s ease, box-shadow 0.2s ease;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
-}
-
-.todo-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.todo-item:not(:hover) {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-
-.base-timer {
-  position: relative;
-  height: 300px;
-  width: 300px;
-}
-
-/* Removes SVG styling that would hide the time label */
-.base-timer__circle {
-  fill: none;
-  stroke: none;
-}
-
-/* The SVG path that displays the timer's progress */
-.base-timer__path-elapsed {
-  stroke-width: 7px;
-  stroke: grey;
-}
-
-.pomodoroCounter {
-  position: absolute;
-  right: 2%;
-  height: 4.6rem;
-  width: 5rem;
-  margin-right: 10rem;
-}
-
-#pomCount {
-  color: white;
-  position: absolute;
-  right: 8%;
-  font-family: 'Fredoka', cursive;
-  font-size: 50px;
-  margin-right: 10rem;
-}
-
-#reg {
-  background-color: inherit;
-  border: none;
-  color: yellow;
+.hide-clickable {
+   cursor: default !important;
 }
 
 .hide {
-  display: none;
+   display: none;
 }
 
-.show {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 10%;
+/* Images */
+img.banner-image {
+   max-width: 25rem;
+   height: auto;
+   display: block;
+   margin: auto;
+   margin-bottom: 0;
 }
 
-/* DONT ASK ABOUT THE COLOR BUT ANYWAY LOOK PRETTY SCROLL BAR - Alan */
-/* One question, why? */
-::-webkit-scrollbar {
-  width: 20px;
-  background-color: #77b255;
-  border-radius: 15px;
+img.timer-controls {
+   display: block;
+   margin: 1rem;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #ff00bb;
-  border-radius: 5px;
+/* Main grid */
+main.grid-layout {
+   display: grid;
+   grid-gap: 10px;
+   align-items: center;
+   grid-template-areas:
+      "banner"
+      "nav"
+      "timer"
+      "todo";
 }
 
-::-webkit-scrollbar-corner {
-  background-color: green;
+@media (min-width: 50em) {
+   main.grid-layout {
+      grid-template-columns: 2fr 1fr;
+      grid-template-areas:
+         "banner banner"
+         "nav nav"
+         "todo timer";
+   }
+}
+
+/* Nav */
+main.grid-layout div.nav-grid-section {
+   grid-area: nav;
+   height: 100%;
+   margin: auto;
+}
+
+div.pomodoro-counter-container {
+   position: relative;
+   display: inline-block;
+   width: 5rem;
+   height: 4.6rem;
+}
+
+div.pomodoro-counter-container>img.pomodoro-tomato {
+   height: 4.6rem;
+   width: 5rem;
+}
+
+div.pomodoro-counter-container>label.pomodoro-counter {
+   color: white;
+   position: absolute;
+   left: 1.6rem;
+   top: 0.7rem;
+   font-family: 'Fredoka', cursive;
+   font-size: 50px;
+}
+
+img#leaderboardButton {
+   display: inline-block;
+   height: 4.6rem;
+   cursor: pointer;
+}
+
+img#loginButton {
+   display: inline-block;
+   cursor: pointer;
+   color: white;
+   height: 4.6rem;
+}
+
+/* Banner */
+main.grid-layout div.banner-grid-section {
+   grid-area: banner;
+}
+
+/* Timer */
+main.grid-layout div.timer-grid-section {
+   grid-area: timer;
+}
+
+div.timer-grid-section div.timer-grid-container {
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+   position: relative;
+   background-color: var(--foreground-color);
+   color: white;
+   border-radius: 1.5rem;
+   padding: 1rem;
+   margin: auto;
+   width: -moz-fit-content;
+   width: fit-content;
+}
+
+a#pauseButton,
+a#startButton {
+   display: inline-block;
+}
+
+.baseTimer {
+   position: relative;
+   height: 18.75rem;
+   width: 18.75rem;
+   margin: auto;
+}
+
+.baseTimerCircle {
+   fill: none;
+   stroke: none;
+}
+
+.timerPathElapsed {
+   stroke-width: 7px;
+   stroke: grey;
+   fill: var(--background-color);
+}
+
+span#timer {
+   color: white;
+   position: absolute;
+   font-size: 2.7rem;
+   -webkit-transform: translate(-50%, -50%);
+   -o-transform: translate(-50%, -50%);
+   -ms-transform: translate(-50%, -50%);
+   -moz-transform: translate(-50%, -50%);
+   transform: translate(-50%, -50%);
+   width: 18.75rem;
+   height: 18.75rem;
+   top: 50%;
+   left: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+div.timer-controls-container {
+   text-align: center;
+}
+
+img.timer-controls {
+   cursor: pointer;
+}
+
+path.path-remaining {
+   stroke-width: 7px;
+   stroke-linecap: round;
+   -webkit-transform: rotate(90deg);
+   -webkit-transform-origin: center;
+   -o-transform: rotate(90deg);
+   -o-transform-origin: center;
+   -ms-transform: rotate(90deg);
+   -ms-transform-origin: center;
+   -moz-transform: rotate(90deg);
+   -moz-transform-origin: center;
+   transform: rotate(90deg);
+   transform-origin: center;
+   -webkit-transition: 1s linear all;
+   -o-transition: 1s linear all;
+   -moz-transition: 1s linear all;
+   transition: 1s linear all;
+}
+
+/* Todo */
+main.grid-layout div.todo-grid-section {
+   grid-area: todo;
+   margin: 1rem;
+}
+
+div.todo-grid-section div.todo-grid-container {
+   background-color: var(--foreground-color);
+   color: white;
+   border-radius: 1.5rem;
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+   padding: 1rem;
+}
+
+div.todo-add-btn-background {
+   border-radius: 1.5rem;
+   width: 4rem;
+   height: 4rem;
+   background-color: var(--accent-color);
+   -webkit-transition: transform 0.2s ease;
+   -o-transition: transform 0.2s ease;
+   -ms-transition: transform 0.2s ease;
+   -moz-transition: transform 0.2s ease;
+   transition: transform 0.2s ease;
+   cursor: pointer;
+}
+
+div.todo-add-btn-background:hover {
+   -webkit-transform: translateY(-5px);
+   -o-transform: translateY(-5px);
+   -ms-transform: translateY(-5px);
+   -moz-transform: translateY(-5px);
+   transform: translateY(-5px);
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+div.todo-add-btn-background>div.todo-add-btn-horizontal-plus {
+   position: relative;
+   background-color: #FFFFFF;
+   width: 50%;
+   height: 12.5%;
+   left: 25%;
+   top: 43.75%;
+}
+
+div.todo-add-btn-background>div.todo-add-btn-vertical-plus {
+   position: relative;
+   background-color: #FFFFFF;
+   width: 12.5%;
+   height: 50%;
+   left: 43.75%;
+   top: 12.5%;
+}
+
+a>div.todo-list-container {
+   height: 100%;
+   overflow: scroll;
+}
+
+div.todo-list-container>div.todo-item {
+   cursor: pointer;
+   display: flex;
+   margin-top: 1rem;
+   border-radius: 1.5rem;
+   background-color: var(--accent-color);
+   align-items: center;
+   padding: 1rem;
+   -webkit-transition: transform 0.2s ease, box-shadow 0.2s ease;
+   -o-transition: transform 0.2s ease, box-shadow 0.2s ease;
+   -moz-transition: transform 0.2s ease, box-shadow 0.2s ease;
+   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+div.todo-item:hover {
+   transform: translateY(-5px);
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+div.todo-item-container {
+   align-items: center;
+   display: inline-flex;
+   font-size: 18px;
+}
+
+h1.todo-header {
+   margin-top: 1rem;
+   margin-bottom: 0;
+}
+
+/* Popup */
+div.popup {
+   display: none;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: #c42217;
+   padding: 2rem;
+   border: 5px solid var(--accent-color);
+   border-radius: 1.5rem;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+   z-index: 1000;
+   width: 80%;
+   height: 80%;
+   -webkit-animation: popupOpenAnimation 0.5s forwards;
+   -moz-animation: popupOpenAnimation 0.5s forwards;
+   -o-animation: popupOpenAnimation 0.5s forwards;
+   animation: popupOpenAnimation 0.5s forwards;
+}
+
+@keyframes popupOpenAnimation {
+   0% {
+      -webkit-transform: translate(-50%, -50%) scale(0.5);
+      -o-transform: translate(-50%, -50%) scale(0.5);
+      -ms-transform: translate(-50%, -50%) scale(0.5);
+      -moz-transform: translate(-50%, -50%) scale(0.5);
+      transform: translate(-50%, -50%) scale(0.5);
+      opacity: 0;
+   }
+
+   100% {
+      -webkit-transform: translate(-50%, -50%) scale(1);
+      -o-transform: translate(-50%, -50%) scale(1);
+      -ms-transform: translate(-50%, -50%) scale(1);
+      -moz-transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+   }
+}
+
+@keyframes popupCloseAnimation {
+   0% {
+      -webkit-transform: translate(-50%, -50%) scale(1);
+      -o-transform: translate(-50%, -50%) scale(1);
+      -ms-transform: translate(-50%, -50%) scale(1);
+      -moz-transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+   }
+
+   100% {
+      -webkit-transform: translate(-50%, -50%) scale(0.5);
+      -o-transform: translate(-50%, -50%) scale(0.5);
+      -ms-transform: translate(-50%, -50%) scale(0.5);
+      -moz-transform: translate(-50%, -50%) scale(0.5);
+      transform: translate(-50%, -50%) scale(0.5);
+      opacity: 0;
+   }
+}
+
+a>div.popup-close-btn-background {
+   border-radius: 1.5rem;
+   width: 60px;
+   height: 60px;
+   background-color: var(--foreground-color);
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   -webkit-transition: transform 0.2s ease;
+   -moz-transition: transform 0.2s ease;
+   -o-transition: transform 0.2s ease;
+   -ms-transition: transform 0.2s ease;
+   transition: transform 0.2s ease;
+   cursor: pointer;
+}
+
+div.popup-close-btn-background>div.popup-close-btn-line-1 {
+   position: relative;
+   background-color: #FFFFFF;
+   width: 50%;
+   height: 12.5%;
+   left: 25%;
+   top: 43.75%;
+   -webkit-transform: rotateZ(45deg);
+   -moz-transform: rotatez(45deg);
+   -o-transform: rotatez(45deg);
+   -ms-transform: rotatez(45deg);
+   transform: rotatez(45deg);
+}
+
+div.popup-close-btn-background>div.popup-close-btn-line-2 {
+   position: relative;
+   background-color: #FFFFFF;
+   width: 12.5%;
+   height: 50%;
+   left: 43.75%;
+   top: 12.5%;
+   -webkit-transform: rotate(45deg);
+   -moz-transform: rotate(45deg);
+   -o-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   transform: rotate(45deg);
+}
+
+div.popup-close-btn-background:hover {
+   -webkit-transform: translateY(-5px);
+   -moz-transform: translateY(-5px);
+   -o-transform: translateY(-5px);
+   -ms-transform: translateY(-5px);
+   transform: translateY(-5px);
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Forms */
+form.popup-form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   height: 50%;
+   gap: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+   width: 50%;
+   padding: 1rem;
+   font-size: large;
+   border: 3px solid var(--accent-color);
+   border-radius: 1rem;
+   background-color: var(--foreground-color);
+}
+
+button[type="reset"] {
+   width: -moz-fit-content;
+   width: fit-content;
+   padding: 1rem;
+   font-size: large;
+   border-radius: 1rem;
+   background-color: var(--accent-color);
+   cursor: pointer;
+   border: none;
+}
+
+button[type="reset"]:hover {
+   background-color: var(--accent-color-hover);
+}
+
+button[type="submit"] {
+   width: -moz-fit-content;
+   width: fit-content;
+   padding: 1rem;
+   font-size: large;
+   border-radius: 1rem;
+   border: none;
+   background-color: var(--accent-color);
+   cursor: pointer;
+}
+
+button[type="submit"]:hover {
+   background-color: var(--accent-color-hover);
 }

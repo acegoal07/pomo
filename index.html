@@ -2,182 +2,186 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pomo</title>
-  <link rel="shortcut icon" href="assets/images/favi.ico">
-  <meta name="description" content="A focus tracker">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/timer.js"></script>
-  <script src="assets/js/base.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap" rel="stylesheet">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Pomo</title>
+   <link rel="shortcut icon" href="assets/images/favi.ico">
+   <link rel="stylesheet" href="assets/css/style.css">
+   <meta name="description" content="A focus tracker">
+   <script src="assets/js/timer.js"></script>
+   <script src="assets/js/base.js"></script>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-  <div id="popup" class="popup">
-    <h1>ADD YOUR TASK:</h1>
-    <h2>Insert the details of your task below</h2>
-    <input type="text" id="todo-input" placeholder="Enter your to-do item here">
-    <button id="addTodoButton" class="popup-button">Add To-Do</button>
-    <a id="todo-close-popup" class="is-clickable">
-      <div class="todo-close-btn-background is-clickable">
-        <div class="todo-close-btn-line-1"></div>
-        <div class="todo-close-btn-line-2"></div>
-      </div>
-    </a>
-  </div>
-
-  <div class="popup" id="login">
-    <div id="loginPage">
-      <h1>Enter your details:</h1>
-      <form id="loginForm" action="login" method="post">
-        <input id="inputUsername" type="text" name="username" placeholder="Username" required>
-        <input id="inputPassword" type="password" name="password" placeholder="Password" required>
-        <button id="reg" type="reset">Don't have an account? Click Here To Register</button>
-        <button id="buttonLogin" type="submit">Login</button>
+   <!-- Popups -->
+   <div id="popup" class="popup">
+      <h1>ADD YOUR TASK:</h1>
+      <h2>Insert the details of your task below</h2>
+      <form id="createTodoForm" method="post" class="popup-form">
+         <input type="text" id="todo-input" placeholder="Enter your to-do item here">
+         <button id="addTodoButton" type="submit">Add To-Do</button>
       </form>
-    </div>
+      <a id="todo-close-popup">
+         <div class="popup-close-btn-background">
+            <div class="popup-close-btn-line-1"></div>
+            <div class="popup-close-btn-line-2"></div>
+         </div>
+      </a>         
+   </div>
 
-    <div id="regPage">
-      <h1>Register</h1>
-      <form id="regForm" action="register" method="post">
-        <input id="regUsername" type="text" name="username" placeholder="Username" required>
-        <input id="ConfirmRegUsername" type="text" name="username" placeholder="Confirm Username" required>
-        <input id="regPassword" type="password" name="password" placeholder="Password" required>
-        <input id="ConfirmRegPassword" type="password" name="password" placeholder="Confirm Password" required>
-        <button id="regButton" type="submit">Register</button>
-      </form>
-    </div>
-
-    <a id="login-close-popup" class="is-clickable">
-      <div class="todo-close-btn-background is-clickable">
-        <div class="todo-close-btn-line-1"></div>
-        <div class="todo-close-btn-line-2"></div>
+   <div class="popup" id="login">
+      <div id="loginPage">
+         <h1>Enter your details:</h1>
+         <form id="loginForm" method="post" class="popup-form">
+            <input id="inputUsername" type="text" name="username" placeholder="Username" required>
+            <input id="inputPassword" type="password" name="password" placeholder="Password" required>
+            <button id="goToRegister" type="reset">Don't have an account? Click Here To Register</button>
+            <button id="buttonLogin" type="submit">Login</button>
+         </form>
       </div>
-    </a>
-  </div>
 
-  <div class="popup" id="leaderboard">
-    <div class="weekly-grid-section">
-      <h1>Weekly</h1>
-      <p class="leaderEntry">Leader yay</p>
-      <p class="leaderEntry">Leader yay</p>
-      <p class="leaderEntry">Leader yay</p>
-    </div>
-
-    <div class="allTime-grid-section">
-      <h1>All Time</h1>
-      <p class="leaderEntry">Leader yay</p>
-      <p class="leaderEntry">Dara yay</p>
-      <p class="leaderEntry">Leader yay</p>
-    </div>
-
-    <a id="leaderboard-close-popup" class="is-clickable">
-      <div class="todo-close-btn-background is-clickable">
-        <div class="todo-close-btn-line-1"></div>
-        <div class="todo-close-btn-line-2"></div>
+      <div id="registrationPage" class="hide">
+         <h1>Register:</h1>
+         <form id="regForm" method="post" class="popup-form">
+            <input id="regUsername" type="text" name="username" placeholder="Username" required>
+            <input id="regPassword" type="password" name="password" placeholder="Password" required>
+            <input id="ConfirmRegPassword" type="password" name="password" placeholder="Confirm Password" required>
+            <button id="goToLogin" type="reset">Already have an account? Click Here To Login</button>
+            <button id="regButton" type="submit">Register</button>
+         </form>
       </div>
-    </a>
-  </div>
 
-  <main class="grid-layout">
-    <div class="banner-grid-section">
-      <label for="pomodoroCounter" id="pomCount">0</label>
-      <img class="pomodoroCounter" src="assets/images/pomodoro.png" alt="">
-      <img class="logo" src="assets/images/POMONew.webp" alt="">
-      <a id="leaderboardButton" class="is-clickable">
-        <img src="assets/images/leaderboard.webp" alt="Leaderboard button" height="50px" width="50px">
+      <a id="login-close-popup">
+         <div class="popup-close-btn-background">
+            <div class="popup-close-btn-line-1"></div>
+            <div class="popup-close-btn-line-2"></div>
+         </div>
       </a>
-      <a id="loginButton" class="is-clickable">login</a>
-    </div>
+   </div>
 
-    <div class="todo-grid-section">
-      <div class="todo-container">
-        <h1>TO DO:</h1>
-
-        <a>
-          <div id="todo-add-button" class="todo-add-btn-background is-clickable">
-            <div class="todo-add-btn-horizontal-plus"></div>
-            <div class="todo-add-btn-vertical-plus"></div>
-          </div>
-        </a>
-
-        <div class="todo-list-container">
-          <div class="todo-item">
-            <div class="todo-item-container">
-              <div class="todo-checkbox"></div>
-              <div class="todo-text">This is a test task with alot of text in hopes that the container will grow with
-                the text. If not I will cry. I need just a little bit more text to make sure that the container will
-                grow. and we are nearly there.</div>
-            </div>
-          </div>
-          <div class="todo-item">
-            <div class="todo-item-container">
-              <div class="todo-checkbox"></div>
-              <div class="todo-text">This is a test task with alot of text in hopes that the container will grow with
-                the text. If not I will cry. I need just a little bit more text to make sure that the container will
-                grow. and we are nearly there.</div>
-            </div>
-          </div>
-          <div class="todo-item">
-            <div class="todo-item-container">
-              <div class="todo-checkbox"></div>
-              <div class="todo-text">This is a test task with alot of text in hopes that the container will grow with
-                the text. If not I will cry. I need just a little bit more text to make sure that the container will
-                grow. and we are nearly there.</div>
-            </div>
-          </div>
-          <div class="todo-item">
-            <div class="todo-item-container">
-              <div class="todo-checkbox"></div>
-              <div class="todo-text">This is a test task with alot of text in hopes that the container will grow with
-                the text. If not I will cry. I need just a little bit more text to make sure that the container will
-                grow. and we are nearly there.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="timer-grid-section">
-
-      <div class="timer-container">
-
-        <img class="timerLeaves" src="assets/images/timerLeaves.webp" alt="Tomato" height="250px" width="312.5px">
-
-        <div class="timerRing">
-          <div class="baseTimer">
-            <svg class="base-timerSvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <g class="baseTimerCircle">
-                <circle class="timerPathElapsed" cx="50" cy="50" r="45" />
-                <path id="base-timer-path-remaining" stroke-dasharray="283" class="path-remaining"
-                  d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"></path>
-              </g>
-            </svg>
-            <span id="timer">
-              <h1 id="timerText">25:00</h1>
-            </span>
-          </div>
-        </div>
-
-        <a id="startButton">
-          <img class="timer-controls is-clickable" src="assets/images/playButWhite.webp" alt="Start Button"
-            height="100px" width="100px">
-        </a>
-        <a id="pauseButton">
-          <img class="timer-controls is-clickable" src="assets/images/pauseButWhite.webp" alt="Pause Button"
-            height="100px" width="100px">
-        </a>
-
+   <div class="popup" id="leaderboard">
+      <div class="weekly-grid-section">
+         <h1>Weekly</h1>
+         <p class="leaderEntry">Leader yay</p>
+         <p class="leaderEntry">Leader yay</p>
+         <p class="leaderEntry">Leader yay</p>
       </div>
 
-    </div>
+      <div class="allTime-grid-section">
+         <h1>All Time</h1>
+         <p class="leaderEntry">Leader yay</p>
+         <p class="leaderEntry">Dara yay</p>
+         <p class="leaderEntry">Leader yay</p>
+      </div>
 
-  </main>
+      <a id="leaderboard-close-popup">
+         <div class="popup-close-btn-background">
+            <div class="popup-close-btn-line-1"></div>
+            <div class="popup-close-btn-line-2"></div>
+         </div>
+      </a>
+   </div>
+   <main class="grid-layout">
+      <!-- Banner -->
+      <div class="banner-grid-section">
+         <img class="banner-image" src="assets/images/POMONew.webp" alt="pomo logo">
+      </div>
+      <!-- Nav -->
+      <div class="nav-grid-section">
+         <img id="leaderboardButton" src="assets/images/leaderboard.webp" alt="Leaderboard button">
+         <div class="pomodoro-counter-container">
+            <label class="pomodoro-counter" id="pomoCounter">0</label>
+            <img class="pomodoro-tomato " src="assets/images/pomodoro.png" alt="Tomato">
+         </div>
+
+         <img id="loginButton" src="assets/images/login.webp" alt="Login button">
+      </div>
+      <!-- Timer -->
+      <div class="timer-grid-section">
+         <div class="timer-grid-container">
+            <div class="timerRing">
+               <div class="baseTimer">
+                  <svg class="base-timerSvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                     <g class="baseTimerCircle">
+                        <circle class="timerPathElapsed" cx="50" cy="50" r="45" />
+                        <path id="base-timer-path-remaining" stroke-dasharray="283" class="path-remaining"
+                           d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"></path>
+                     </g>
+                  </svg>
+                  <span id="timer">
+                     <h1 id="timerText">25:00</h1>
+                  </span>
+               </div>
+            </div>
+            <div class="timer-controls-container">
+               <a id="startButton">
+                  <img class="timer-controls" src="assets/images/playButWhite.webp" alt="Start Button" height="100px"
+                     width="100px">
+               </a>
+               <a id="pauseButton">
+                  <img class="timer-controls" src="assets/images/pauseButWhite.webp" alt="Pause Button" height="100px"
+                     width="100px">
+               </a>
+            </div>
+         </div>
+      </div>
+      <!-- Todo -->
+      <div class="todo-grid-section">
+         <div class="todo-grid-container">
+            <h1 class="todo-header">TO DO:</h1>
+            <div id="todo-add-button" class="todo-add-btn-background">
+               <div class="todo-add-btn-horizontal-plus"></div>
+               <div class="todo-add-btn-vertical-plus"></div>
+            </div>
+            <div class="todo-list-container">
+               <div class="todo-item">
+                  <div class="todo-item-container">
+                     <div class="todo-text">This is a test task with alot of text in hopes that the container will grow
+                        with
+                        the text. If not I will cry. I need just a little bit more text to make sure that the container
+                        will
+                        grow. and we are nearly there.</div>
+                  </div>
+               </div>
+
+               <div class="todo-item">
+                  <div class="todo-item-container">
+                     <div class="todo-text">This is a test task with alot of text in hopes that the container will grow
+                        with
+                        the text. If not I will cry. I need just a little bit more text to make sure that the container
+                        will
+                        grow. and we are nearly there.</div>
+                  </div>
+               </div>
+
+               <div class="todo-item">
+                  <div class="todo-item-container">
+                     <div class="todo-text">This is a test task with alot of text in hopes that the container will grow
+                        with
+                        the text. If not I will cry. I need just a little bit more text to make sure that the container
+                        will
+                        grow. and we are nearly there.</div>
+                  </div>
+               </div>
+
+               <div class="todo-item">
+                  <div class="todo-item-container">
+                     <div class="todo-text">This is a test task with alot of text in hopes that the container will grow
+                        with
+                        the text. If not I will cry. I need just a little bit more text to make sure that the container
+                        will
+                        grow. and we are nearly there.</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+   </main>
 </body>
 
 </html>
