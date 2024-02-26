@@ -6,7 +6,7 @@
 
 /* Images */
 img.logo {
-  max-width: 35%;
+  max-width: 400px;
   height: auto;
   display: block;
   margin: auto;
@@ -68,7 +68,7 @@ main.grid-layout {
   border-radius: 1.5rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   padding: 1rem;
-  max-height: 90vh;
+  max-height: 90%;
   height: 100%;
   overflow: hidden;
   padding-bottom: 6vh;
@@ -79,8 +79,7 @@ main.grid-layout .todo-grid-section {
   grid-area: todo;
   padding: 1rem;
   position: relative;
-  max-height: 90vh;
-  height: 90%;
+  /* height: 90%; */
 }
 
 a .todo-add-btn-background {
@@ -127,7 +126,7 @@ main.grid-layout .timer-grid-section {
   grid-area: timer;
   text-align: center;
   position: relative;
-  max-height: 96vh;
+  max-height: 80%;
   height: 100%;
   margin-bottom: 7vh;
 }
