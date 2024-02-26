@@ -15,10 +15,10 @@ body {
 
 h1 {
    font-family: 'Fredoka', cursive;
-   font-size: 60px;
+   font-size: 3.75rem;
    text-align: center;
    text-transform: uppercase;
-   letter-spacing: 2px;
+   letter-spacing: 0.125rem;
 }
 
 h2 {
@@ -58,7 +58,7 @@ img.timer-controls {
 /* Main grid */
 main.grid-layout {
    display: grid;
-   grid-gap: 10px;
+   grid-gap: 0.625rem;
    align-items: center;
    grid-template-areas:
       "banner"
@@ -102,7 +102,7 @@ div.pomodoro-counter-container>label.pomodoro-counter {
    left: 1.6rem;
    top: 0.7rem;
    font-family: 'Fredoka', cursive;
-   font-size: 50px;
+   font-size: 3.125rem;
 }
 
 img#leaderboardButton {
@@ -158,7 +158,7 @@ a#startButton {
 }
 
 .timerPathElapsed {
-   stroke-width: 7px;
+   stroke-width: 0.438rem;
    stroke: grey;
    fill: var(--background-color);
 }
@@ -190,7 +190,7 @@ img.timer-controls {
 }
 
 path.path-remaining {
-   stroke-width: 7px;
+   stroke-width: 0.438rem;
    stroke-linecap: round;
    -webkit-transform: rotate(90deg);
    -webkit-transform-origin: center;
@@ -289,7 +289,7 @@ div.todo-item:hover {
 div.todo-item-container {
    align-items: center;
    display: inline-flex;
-   font-size: 18px;
+   font-size: 1.125rem;
 }
 
 h1.todo-header {
@@ -360,12 +360,12 @@ div.popup {
 
 a>div.popup-close-btn-background {
    border-radius: 1.5rem;
-   width: 60px;
-   height: 60px;
+   width: 3.75rem;
+   height: 3.75rem;
    background-color: var(--foreground-color);
    position: absolute;
-   top: 20px;
-   right: 20px;
+   top: 1.25rem;
+   right: 1.25rem;
    -webkit-transition: transform 0.2s ease;
    -moz-transition: transform 0.2s ease;
    -o-transition: transform 0.2s ease;
@@ -417,7 +417,7 @@ form.popup-form {
    flex-direction: column;
    align-items: center;
    height: 50%;
-   gap: 10px;
+   gap: 0.625rem;
 }
 
 input[type="text"],
