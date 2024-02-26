@@ -1,0 +1,35 @@
+main.new-grid-layout {
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  grid-template-areas:
+    "nav"
+    "banner"
+    "timer"
+    "todo";
+}
+
+@media (min-width: 70em) {
+  main.new-grid-layout {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "nav banner"
+      "todo timer";
+  }
+}
+
+main.new-grid-layout div.new-nav-grid-section {
+  grid-area: nav;
+}
+
+main.new-grid-layout div.new-banner-grid-section {
+  grid-area: banner;
+}
+
+main.new-grid-layout div.new-timer-grid-section {
+  grid-area: timer;
+}
+
+main.new-grid-layout div.new-todo-grid-section {
+  grid-area: todo;
+}
