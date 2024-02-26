@@ -13,7 +13,7 @@ window.onfocus = function () {
 window.addEventListener('load', () => {
    setTimerColor("var(--background-color)");
 
-   /////////////// Todo popup ////////////////////////
+   /////////////// Todo popup ///////////////
 
    // Open todo popup button listener
    document.querySelector("#todo-add-button").addEventListener('click', () => {
@@ -34,7 +34,7 @@ window.addEventListener('load', () => {
       document.querySelector("main").classList.remove("blur-filter");
    });
 
-   /////////////// Leaderboard popup ////////////////////////
+   /////////////// Leaderboard popup ///////////////
 
    // Open leaderboard popup button
    document.querySelector("#leaderboardButton").addEventListener('click', () => {
@@ -55,7 +55,7 @@ window.addEventListener('load', () => {
       document.querySelector("main").classList.remove("blur-filter");
    });
 
-   /////////////// Login popup ////////////////////////
+   /////////////// Login popup ///////////////
 
    // Open login popup button
    document.querySelector("#loginButton").addEventListener('click', () => {
@@ -72,7 +72,6 @@ window.addEventListener('load', () => {
       popup.style.animation = "popupCloseAnimation 0.5s forwards";
       setTimeout(function () {
          popup.style.display = "none";
-         document.querySelector("#registrationPage").classList.remove("hide");
       }, 500);
       document.querySelector("main").classList.remove("blur-filter");
    });
