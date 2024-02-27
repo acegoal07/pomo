@@ -43,7 +43,7 @@ h2 {
 
 /* Images */
 img.banner-image {
-   max-width: 25rem;
+   max-width: 18rem;
    height: auto;
    display: block;
    margin: auto;
@@ -67,7 +67,7 @@ main.grid-layout {
       "todo";
 }
 
-@media (min-width: 50em) {
+@media (min-width: 70em) {
    main.grid-layout {
       grid-template-columns: 2fr 1fr;
       grid-template-areas:
