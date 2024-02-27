@@ -53,6 +53,8 @@ img.banner-image {
 img.timer-controls {
    display: block;
    margin: 1rem;
+   width: 6rem;
+   cursor: pointer;
 }
 
 /* Main grid */
@@ -147,9 +149,7 @@ a#startButton {
 
 .baseTimer {
    position: relative;
-   height: 18.75rem;
    width: 18.75rem;
-   margin: auto;
 }
 
 .baseTimerCircle {
@@ -185,10 +185,6 @@ div.timer-controls-container {
    text-align: center;
 }
 
-img.timer-controls {
-   cursor: pointer;
-}
-
 path.path-remaining {
    stroke-width: 0.438rem;
    stroke-linecap: round;
@@ -212,6 +208,13 @@ path.path-remaining {
 main.grid-layout div.todo-grid-section {
    grid-area: todo;
    margin: 1rem;
+}
+
+@media only screen and (max-width: 1120px) {
+   main.grid-layout div.todo-grid-section {
+      margin-left: 0;
+      margin-right: 0;
+   }
 }
 
 div.todo-grid-section div.todo-grid-container {
@@ -423,39 +426,26 @@ form.popup-form {
 input[type="text"],
 input[type="password"] {
    width: 50%;
-   padding: 1rem;
+   padding: 0.7rem;
    font-size: large;
    border: 3px solid var(--accent-color);
    border-radius: 1rem;
    background-color: var(--foreground-color);
 }
 
-button[type="reset"] {
-   width: -moz-fit-content;
-   width: fit-content;
-   padding: 1rem;
-   font-size: large;
-   border-radius: 1rem;
-   background-color: var(--accent-color);
-   cursor: pointer;
-   border: none;
-}
-
-button[type="reset"]:hover {
-   background-color: var(--accent-color-hover);
-}
-
+button[type="reset"],
 button[type="submit"] {
    width: -moz-fit-content;
    width: fit-content;
-   padding: 1rem;
+   padding: 0.7rem;
    font-size: large;
    border-radius: 1rem;
-   border: none;
    background-color: var(--accent-color);
    cursor: pointer;
+   border: none;
 }
 
+button[type="reset"]:hover,
 button[type="submit"]:hover {
    background-color: var(--accent-color-hover);
 }

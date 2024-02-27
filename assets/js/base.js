@@ -106,8 +106,8 @@ window.addEventListener('load', () => {
          const todoItemContainer = document.createElement("div");
          todoItemContainer.classList.add("todo-item-container");
 
-         const checkbox = document.createElement("div");
-         checkbox.classList.add("todo-checkbox");
+         // const checkbox = document.createElement("div");
+         // checkbox.classList.add("todo-checkbox");
 
          const todoTextElement = document.createElement("div");
          todoTextElement.classList.add("todo-text");
