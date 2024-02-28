@@ -265,10 +265,10 @@ div.todo-add-btn-background>div.todo-add-btn-vertical-plus {
    top: 12.5%;
 }
 
-a>div.todo-list-container {
+/* a>div.todo-list-container {
    height: 100%;
    overflow: scroll;
-}
+} */
 
 div.todo-list-container>div.todo-item {
    cursor: pointer;
@@ -303,6 +303,7 @@ h1.todo-header {
 /* Popup */
 div.popup {
    display: none;
+   overflow: auto;
    position: fixed;
    top: 50%;
    left: 50%;
@@ -313,8 +314,9 @@ div.popup {
    border-radius: 1.5rem;
    box-shadow: 0 0 10px #0000004d;
    z-index: 1000;
+   height: auto;
    width: 80%;
-   height: 90%;
+   /* height: 90%; */
    -webkit-animation: popupOpenAnimation 0.5s forwards;
    -moz-animation: popupOpenAnimation 0.5s forwards;
    -o-animation: popupOpenAnimation 0.5s forwards;

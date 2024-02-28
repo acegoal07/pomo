@@ -113,7 +113,7 @@ window.addEventListener('load', () => {
          todoTextElement.classList.add("todo-text");
          todoTextElement.textContent = todoText;
 
-         todoItemContainer.appendChild(checkbox);
+         // todoItemContainer.appendChild(checkbox);
          todoItemContainer.appendChild(todoTextElement);
 
          const todoItem = document.createElement("div");
