@@ -43,8 +43,8 @@ h2 {
 
 /* Images */
 img.banner-image {
-   max-width: 18rem;
-   height: auto;
+   max-width: 28rem;
+   width: 100%;
    display: block;
    margin: auto;
    margin-bottom: 0;
