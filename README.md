@@ -1,6 +1,6 @@
 # Pomo - The focus tracker
 
-https://acegoal07.dev/CI536-Integrated-Group-Project/
+https://acegoal07.dev/pomo
 
 ## The team behind the project
 
