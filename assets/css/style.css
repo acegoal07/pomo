@@ -224,8 +224,7 @@ div.todo-grid-section div.todo-grid-container {
    box-shadow: 0 5px 15px #0000004d;
    padding: 1rem;
    max-height: 40%;
-   height: -moz-fit-content;
-   height: fit-content;
+   height: auto;
 }
 
 div.todo-add-btn-background {
