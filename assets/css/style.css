@@ -4,6 +4,7 @@
    --foreground-color: #eed847;
    --accent-color: #77b255;
    --accent-color-hover: #5da036;
+   --shadow-color: #0000004d;
    font-family: 'Fredoka', Arial;
 }
 
@@ -131,7 +132,7 @@ main.grid-layout div.timer-grid-section {
 }
 
 div.timer-grid-section div.timer-grid-container {
-   box-shadow: 0 5px 15px #0000004d;
+   box-shadow: 0 5px 15px var(--shadow-color);
    position: relative;
    background-color: var(--foreground-color);
    color: white;
@@ -221,7 +222,7 @@ div.todo-grid-section div.todo-grid-container {
    background-color: var(--foreground-color);
    color: white;
    border-radius: 1.5rem;
-   box-shadow: 0 5px 15px #0000004d;
+   box-shadow: 0 5px 15px var(--shadow-color);
    padding: 1rem;
    max-height: 40%;
    height: auto;
@@ -246,7 +247,7 @@ div.todo-add-btn-background:hover {
    -ms-transform: translateY(-5px);
    -moz-transform: translateY(-5px);
    transform: translateY(-5px);
-   box-shadow: 0 5px 15px #0000004d;
+   box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 div.todo-add-btn-background>div.todo-add-btn-horizontal-plus {
@@ -292,7 +293,7 @@ div.todo-list-container>div.todo-item {
 
 div.todo-item:hover {
    transform: translateY(-5px);
-   box-shadow: 0 5px 15px #0000004d;
+   box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 div.todo-item-container {
@@ -318,7 +319,7 @@ div.popup {
    padding: 2rem;
    border: 5px solid var(--accent-color);
    border-radius: 1.5rem;
-   box-shadow: 0 0 10px #0000004d;
+   box-shadow: 0 0 10px var(--shadow-color);
    z-index: 1000;
    height: auto;
    width: 80%;
@@ -419,7 +420,7 @@ div.popup-close-btn-background:hover {
    -o-transform: translateY(-5px);
    -ms-transform: translateY(-5px);
    transform: translateY(-5px);
-   box-shadow: 0 5px 15px #0000004d;
+   box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 /* Forms */
