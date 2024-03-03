@@ -292,6 +292,10 @@ div.todo-list-container>div.todo-item {
 }
 
 div.todo-item:hover {
+   -webkit-transform: translateY(-5px);
+   -o-transform: translateY(-5px);
+   -ms-transform: translateY(-5px);
+   -moz-transform: translateY(-5px);
    transform: translateY(-5px);
    box-shadow: 0 5px 15px var(--shadow-color);
 }
@@ -314,6 +318,10 @@ div.popup {
    position: fixed;
    top: 50%;
    left: 50%;
+   -webkit-transform: translate(-50%, -50%);
+   -o-transform: translate(-50%, -50%);
+   -ms-transform: translate(-50%, -50%);
+   -moz-transform: translate(-50%, -50%);
    transform: translate(-50%, -50%);
    background-color: var(--background-color);
    padding: 2rem;
@@ -486,7 +494,7 @@ body.error-page a {
    background-color: var(--accent-color);
    border: none;
    text-decoration: none;
-   color: white;
+   color: #000;
    -webkit-transition: transform 0.2s ease;
    -moz-transition: transform 0.2s ease;
    -o-transition: transform 0.2s ease;
