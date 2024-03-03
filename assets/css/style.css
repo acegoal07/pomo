@@ -458,3 +458,48 @@ button[type="reset"]:hover,
 button[type="submit"]:hover {
    background-color: var(--accent-color-hover);
 }
+
+/* 404 Page */
+body.error-page {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   height: 100vh;
+}
+
+body.error-page h1 {
+   margin-bottom: 0;
+}
+
+body.error-page h2 {
+   font-size: 2rem;
+   margin-top: 0;
+   padding-bottom: 1rem;
+}
+
+body.error-page a {
+   padding: 1rem;
+   font-size: 1.5rem;
+   border-radius: 1rem;
+   background-color: var(--accent-color);
+   border: none;
+   text-decoration: none;
+   color: white;
+   -webkit-transition: transform 0.2s ease;
+   -moz-transition: transform 0.2s ease;
+   -o-transition: transform 0.2s ease;
+   -ms-transition: transform 0.2s ease;
+   transition: transform 0.2s ease;
+}
+
+body.error-page a:hover {
+   -webkit-transform: translateY(-5px);
+   -moz-transform: translateY(-5px);
+   -o-transform: translateY(-5px);
+   -ms-transform: translateY(-5px);
+   transform: translateY(-5px);
+   box-shadow: 0 5px 15px var(--shadow-color);
+   background-color: var(--accent-color-hover);
+}
