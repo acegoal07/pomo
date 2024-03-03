@@ -140,7 +140,7 @@ window.addEventListener('load', () => {
    document.querySelector("#startButton").addEventListener('click', () => {
       if (!timer.isActive()) {
          if (timer.getCurrentPositionMS() === 0) {
-            setTimerColor("#64AB1F");
+            setTimerColor("var(--accent-color)");
             currentTime = times[index] * 1000; // Needs to be switched back to 60000 when testing is finished
             timer.setTimerLength(currentTime)
                .startTimer();

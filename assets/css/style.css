@@ -223,6 +223,9 @@ div.todo-grid-section div.todo-grid-container {
    border-radius: 1.5rem;
    box-shadow: 0 5px 15px #0000004d;
    padding: 1rem;
+   max-height: 40%;
+   height: -moz-fit-content;
+   height: fit-content;
 }
 
 div.todo-add-btn-background {
@@ -265,19 +268,23 @@ div.todo-add-btn-background>div.todo-add-btn-vertical-plus {
    top: 12.5%;
 }
 
-/* a>div.todo-list-container {
+div.todo-list-container {
+   max-height: 28rem;
    height: 100%;
    overflow: scroll;
-} */
+}
 
 div.todo-list-container>div.todo-item {
    cursor: pointer;
    display: flex;
+   margin: auto;
    margin-top: 1rem;
+   margin-bottom: 1rem;
    border-radius: 1.5rem;
    background-color: var(--accent-color);
    align-items: center;
    padding: 1rem;
+   width: 90%;
    -webkit-transition: transform 0.2s ease, box-shadow 0.2s ease;
    -o-transition: transform 0.2s ease, box-shadow 0.2s ease;
    -moz-transition: transform 0.2s ease, box-shadow 0.2s ease;
