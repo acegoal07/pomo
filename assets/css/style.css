@@ -154,6 +154,9 @@ img#leaderboardButton {
    display: inline-block;
    height: 4.6rem;
    cursor: pointer;
+   border-radius: 2.5rem;
+   padding: 0;
+   margin: 0;
 }
 
 img#loginButton {
@@ -166,7 +169,8 @@ img#loginButton {
    margin: 0;
 }
 
-img#loginButton:hover {
+img#loginButton:hover,
+img#leaderboardButton:hover {
    -webkit-transform: translateY(-5px);
    -o-transform: translateY(-5px);
    -ms-transform: translateY(-5px);
@@ -238,15 +242,15 @@ div.timer-controls-container {
 path.path-remaining {
    stroke-width: 0.438rem;
    stroke-linecap: round;
-   -webkit-transform: rotatey(90deg);
-   -webkit-transform-origin: center;
-   -o-transform: rotatey(90deg);
-   -o-transform-origin: center;
-   -ms-transform: rotatey(90deg);
-   -ms-transform-origin: center;
-   -moz-transform: rotatey(90deg);
-   -moz-transform-origin: center;
+   -webkit-transform: rotate(90deg);
+   -o-transform: rotate(90deg);
+   -ms-transform: rotate(90deg);
+   -moz-transform: rotate(90deg);
    transform: rotate(90deg);
+   -webkit-transform-origin: center;
+   -o-transform-origin: center;
+   -ms-transform-origin: center;
+   -moz-transform-origin: center;
    transform-origin: center;
 }
 
@@ -310,14 +314,7 @@ div.play-icon-container>div.play-icon:after {
    transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
 }
 
-div.play-icon-container>div.play-icon:hover,
-div.play-icon-container>div.play-icon:hover:before,
-div.play-icon-container>div.play-icon:hover:after {
-   background-color: var(--accent-color);
-}
-
 div.pause-icon-container {
-   width: auto;
    height: 6rem;
    cursor: pointer;
    display: inline-block;
@@ -326,7 +323,7 @@ div.pause-icon-container {
 div.pause-icon-container>div.pause-icon-line-1 {
    position: relative;
    display: inline-block;
-   background-color: #FFFFFF;
+   background-color: #FFF;
    width: 2rem;
    height: 100%;
    left: -5%;
@@ -337,7 +334,7 @@ div.pause-icon-container>div.pause-icon-line-1 {
 div.pause-icon-container>div.pause-icon-line-2 {
    display: inline-block;
    position: relative;
-   background-color: #FFFFFF;
+   background-color: #FFF;
    width: 2rem;
    height: 100%;
    left: 5%;
@@ -346,14 +343,11 @@ div.pause-icon-container>div.pause-icon-line-2 {
 }
 
 div.pause-icon-container:hover div.pause-icon-line-1,
-div.pause-icon-container:hover div.pause-icon-line-2 {
+div.pause-icon-container:hover div.pause-icon-line-2,
+div.play-icon-container>div.play-icon:hover,
+div.play-icon-container>div.play-icon:hover:before,
+div.play-icon-container>div.play-icon:hover:after {
    background-color: var(--accent-color);
-   /* -webkit-transform: translateY(-5px);
-   -o-transform: translateY(-5px);
-   -ms-transform: translateY(-5px);
-   -moz-transform: translateY(-5px);
-   transform: translateY(-5px);
-   box-shadow: 0 5px 15px var(--shadow-color); */
 }
 
 /* Todo */
