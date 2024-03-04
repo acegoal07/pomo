@@ -101,6 +101,14 @@ img.banner-image {
    margin-bottom: 0;
 }
 
+img.timerLeaves {
+   top: 7%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   position: absolute;
+   padding: 0;
+ }
+
 /* Main grid */
 main.grid-layout {
    display: grid;
