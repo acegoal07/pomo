@@ -8,6 +8,10 @@
    font-family: 'Fredoka', Arial;
 }
 
+html {
+   scroll-behavior: smooth;
+}
+
 body {
    background-color: var(--background-color);
    color: var(--foreground-color);
@@ -40,6 +44,52 @@ h2 {
 
 .hide {
    display: none;
+}
+
+/* 404 Page */
+body.error-page {
+   display: flex;
+   -ms-flex-direction: column;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   height: 100%;
+}
+
+body.error-page h1 {
+   margin-bottom: 0;
+}
+
+body.error-page h2 {
+   font-size: 2rem;
+   margin-top: 0;
+   padding-bottom: 1rem;
+}
+
+body.error-page a {
+   padding: 1rem;
+   font-size: 1.5rem;
+   border-radius: 1rem;
+   background-color: var(--accent-color);
+   border: none;
+   text-decoration: none;
+   color: #000;
+   -webkit-transition: transform 0.2s ease;
+   -moz-transition: transform 0.2s ease;
+   -o-transition: transform 0.2s ease;
+   -ms-transition: transform 0.2s ease;
+   transition: transform 0.2s ease;
+}
+
+body.error-page a:hover {
+   -webkit-transform: translateY(-5px);
+   -moz-transform: translateY(-5px);
+   -o-transform: translateY(-5px);
+   -ms-transform: translateY(-5px);
+   transform: translateY(-5px);
+   box-shadow: 0 5px 15px var(--shadow-color);
+   background-color: var(--accent-color-hover);
 }
 
 /* Images */
@@ -205,6 +255,117 @@ path.path-remaining {
    transition: 1s linear all;
 }
 
+.play-icon-container {
+   transform: rotate(90deg);
+}
+
+.play-icon {
+   cursor: pointer;
+   position: relative;
+   background-color: white;
+   text-align: left;
+   display: block;
+   margin: 2rem;
+}
+
+.play-icon:before,
+.play-icon:after {
+   content: '';
+   position: absolute;
+   background-color: inherit;
+}
+
+.play-icon,
+.play-icon:before,
+.play-icon:after {
+   width: 4rem;
+   height: 4rem;
+   border-top-right-radius: 30%;
+}
+
+.play-icon {
+   -webkit-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+   -o-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+   -ms-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+   -moz-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+   transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+}
+
+.play-icon:before {
+   -webkit-transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
+   -o-transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
+   -ms-transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
+   -moz-transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
+   transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
+}
+
+.play-icon:after {
+   -webkit-transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
+   -o-transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
+   -ms-transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
+   -moz-transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
+   transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
+}
+
+.play-icon:hover,
+.play-icon:hover:before,
+.play-icon:hover:after {
+   background-color: var(--accent-color);
+   /* box-shadow: 0 5px 15px var(--shadow-color); */
+}
+
+/* .pause-icon {
+   cursor: pointer;
+   margin: 1rem;
+   box-sizing: border-box;
+   position: relative;
+   display: block;
+   width: 6rem;
+   height: 6rem;
+   border-left: 2.5rem solid;
+   border-right: 2.5rem solid;
+}
+
+.pause-icon:hover {
+   border-left-color: var(--accent-color);
+   border-right-color: var(--accent-color);
+} */
+
+div.pause-icon-container {
+   width: auto;
+   height: 6rem;
+   cursor: pointer;
+}
+
+div.pause-icon-container>div.pause-icon-line-1 {
+   position: relative;
+   display: inline-block;
+   background-color: #FFFFFF;
+   width: 2rem;
+   height: 100%;
+   left: -5%;
+   border-radius: 0.5rem;
+   margin-bottom: 1rem;
+
+}
+
+div.pause-icon-container>div.pause-icon-line-2 {
+   display: inline-block;
+   position: relative;
+   background-color: #FFFFFF;
+   width: 2rem;
+   height: 100%;
+   left: 5%;
+   border-radius: 0.5rem;
+   margin-bottom: 1rem;
+}
+
+div.pause-icon-container:hover div.pause-icon-line-1,
+div.pause-icon-container:hover div.pause-icon-line-2 {
+   background-color: var(--accent-color);
+   /* box-shadow: 0 5px 15px var(--shadow-color); */
+}
+
 /* Todo */
 main.grid-layout div.todo-grid-section {
    grid-area: todo;
@@ -271,7 +432,7 @@ div.todo-add-btn-background>div.todo-add-btn-vertical-plus {
 div.todo-list-container {
    max-height: 28rem;
    height: 100%;
-   overflow: scroll;
+   overflow: auto;
 }
 
 div.todo-list-container>div.todo-item {
@@ -331,7 +492,6 @@ div.popup {
    z-index: 1000;
    height: auto;
    width: 80%;
-   /* height: 90%; */
    -webkit-animation: popupOpenAnimation 0.5s forwards;
    -moz-animation: popupOpenAnimation 0.5s forwards;
    -o-animation: popupOpenAnimation 0.5s forwards;
@@ -434,9 +594,11 @@ div.popup-close-btn-background:hover {
 /* Forms */
 form.popup-form {
    display: flex;
+   -ms-flex-direction: column;
    flex-direction: column;
    align-items: center;
    height: 50%;
+
    gap: 0.625rem;
 }
 
@@ -464,50 +626,5 @@ button[type="submit"] {
 
 button[type="reset"]:hover,
 button[type="submit"]:hover {
-   background-color: var(--accent-color-hover);
-}
-
-/* 404 Page */
-body.error-page {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   text-align: center;
-   height: 100vh;
-}
-
-body.error-page h1 {
-   margin-bottom: 0;
-}
-
-body.error-page h2 {
-   font-size: 2rem;
-   margin-top: 0;
-   padding-bottom: 1rem;
-}
-
-body.error-page a {
-   padding: 1rem;
-   font-size: 1.5rem;
-   border-radius: 1rem;
-   background-color: var(--accent-color);
-   border: none;
-   text-decoration: none;
-   color: #000;
-   -webkit-transition: transform 0.2s ease;
-   -moz-transition: transform 0.2s ease;
-   -o-transition: transform 0.2s ease;
-   -ms-transition: transform 0.2s ease;
-   transition: transform 0.2s ease;
-}
-
-body.error-page a:hover {
-   -webkit-transform: translateY(-5px);
-   -moz-transform: translateY(-5px);
-   -o-transform: translateY(-5px);
-   -ms-transform: translateY(-5px);
-   transform: translateY(-5px);
-   box-shadow: 0 5px 15px var(--shadow-color);
    background-color: var(--accent-color-hover);
 }
