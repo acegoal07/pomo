@@ -243,12 +243,12 @@ path.path-remaining {
    transition: 1s linear all;
 }
 
-.play-icon-container {
+div.play-icon-container {
    transform: rotate(90deg);
    display: inline-block;
 }
 
-.play-icon {
+div.play-icon-container>div.play-icon {
    cursor: pointer;
    position: relative;
    background-color: white;
@@ -257,22 +257,22 @@ path.path-remaining {
    margin: 2rem;
 }
 
-.play-icon:before,
-.play-icon:after {
+div.play-icon-container>div.play-icon:before,
+div.play-icon-container>div.play-icon:after {
    content: '';
    position: absolute;
    background-color: inherit;
 }
 
-.play-icon,
-.play-icon:before,
-.play-icon:after {
+div.play-icon,
+div.play-icon:before,
+div.play-icon:after {
    width: 4rem;
    height: 4rem;
    border-top-right-radius: 30%;
 }
 
-.play-icon {
+div.play-icon-container>div.play-icon {
    -webkit-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
    -o-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
    -ms-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
@@ -280,7 +280,7 @@ path.path-remaining {
    transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
 }
 
-.play-icon:before {
+div.play-icon-container>div.play-icon:before {
    -webkit-transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
    -o-transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
    -ms-transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
@@ -288,7 +288,7 @@ path.path-remaining {
    transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
 }
 
-.play-icon:after {
+div.play-icon-container>div.play-icon:after {
    -webkit-transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
    -o-transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
    -ms-transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
@@ -296,11 +296,10 @@ path.path-remaining {
    transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
 }
 
-.play-icon:hover,
-.play-icon:hover:before,
-.play-icon:hover:after {
+div.play-icon-container>div.play-icon:hover,
+div.play-icon-container>div.play-icon:hover:before,
+div.play-icon-container>div.play-icon:hover:after {
    background-color: var(--accent-color);
-   /* box-shadow: 0 5px 15px var(--shadow-color); */
 }
 
 div.pause-icon-container {
@@ -336,7 +335,6 @@ div.pause-icon-container>div.pause-icon-line-2 {
 div.pause-icon-container:hover div.pause-icon-line-1,
 div.pause-icon-container:hover div.pause-icon-line-2 {
    background-color: var(--accent-color);
-   /* box-shadow: 0 5px 15px var(--shadow-color); */
 }
 
 /* Todo */

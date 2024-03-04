@@ -33,6 +33,34 @@ window.addEventListener('load', () => {
       }, 500);
       document.querySelector("main").classList.remove("blur-filter");
    });
+   // Add todo button listener
+   document.querySelector("#addTodoButton").addEventListener("click", (event) => {
+      event.preventDefault();
+      const todoInput = document.querySelector("#todo-input");
+      const todoText = todoInput.value;
+
+      if (todoText.trim() !== "") {
+         const todoItemContainer = document.createElement("div");
+         todoItemContainer.classList.add("todo-item-container");
+
+         const todoTextElement = document.createElement("div");
+         todoTextElement.classList.add("todo-text");
+         todoTextElement.textContent = todoText;
+         
+         todoItemContainer.appendChild(todoTextElement);
+
+         const todoItem = document.createElement("div");
+         todoItem.classList.add("todo-item");
+         todoItem.appendChild(todoItemContainer);
+
+         document.querySelector(".todo-list-container").appendChild(todoItem);
+
+         todoInput.value = "";
+
+         document.querySelector("#popup").style.display = "none";
+         document.querySelector("main").classList.remove("blur-filter");
+      }
+   });
 
    /////////////// Leaderboard popup ///////////////
 
@@ -53,6 +81,9 @@ window.addEventListener('load', () => {
          popup.style.display = "none";
       }, 500);
       document.querySelector("main").classList.remove("blur-filter");
+   });
+   // Switch between all time and weekly leaderboard
+   document.querySelector("#leaderboard-switch-button").addEventListener('click', () => {
    });
 
    /////////////// Login popup ///////////////
@@ -92,41 +123,6 @@ window.addEventListener('load', () => {
    // Login submit button
    document.querySelector("#loginForm").addEventListener('submit', (event) => {
       event.preventDefault();
-   });
-
-   /////////////// Popup function buttons ///////////////
-
-   // Add todo button listener
-   document.querySelector("#addTodoButton").addEventListener("click", (event) => {
-      event.preventDefault();
-      const todoInput = document.querySelector("#todo-input");
-      const todoText = todoInput.value;
-
-      if (todoText.trim() !== "") {
-         const todoItemContainer = document.createElement("div");
-         todoItemContainer.classList.add("todo-item-container");
-
-         // const checkbox = document.createElement("div");
-         // checkbox.classList.add("todo-checkbox");
-
-         const todoTextElement = document.createElement("div");
-         todoTextElement.classList.add("todo-text");
-         todoTextElement.textContent = todoText;
-
-         // todoItemContainer.appendChild(checkbox);
-         todoItemContainer.appendChild(todoTextElement);
-
-         const todoItem = document.createElement("div");
-         todoItem.classList.add("todo-item");
-         todoItem.appendChild(todoItemContainer);
-
-         document.querySelector(".todo-list-container").appendChild(todoItem);
-
-         todoInput.value = "";
-
-         document.querySelector("#popup").style.display = "none";
-         document.querySelector("main").classList.remove("blur-filter");
-      }
    });
 
    /////////////// Timer Buttons ///////////////
