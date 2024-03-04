@@ -12,6 +12,7 @@ window.onfocus = function () {
 // On load handler
 window.addEventListener('load', () => {
    setTimerColor("var(--background-color)");
+   document.querySelector("#base-timer-path-remaining").classList.add("path-remaining-tranistion");
 
    /////////////// Todo popup ///////////////
 

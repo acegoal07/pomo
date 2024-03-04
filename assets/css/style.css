@@ -101,14 +101,6 @@ img.banner-image {
    margin-bottom: 0;
 }
 
-img.timerLeaves {
-   top: 7%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   position: absolute;
-   padding: 0;
- }
-
 /* Main grid */
 main.grid-layout {
    display: grid;
@@ -134,7 +126,6 @@ main.grid-layout {
 /* Nav */
 main.grid-layout div.nav-grid-section {
    grid-area: nav;
-   height: 100%;
    margin: auto;
 }
 
@@ -170,6 +161,18 @@ img#loginButton {
    cursor: pointer;
    color: white;
    height: 4.6rem;
+   border-radius: 2.5rem;
+   padding: 0;
+   margin: 0;
+}
+
+img#loginButton:hover {
+   -webkit-transform: translateY(-5px);
+   -o-transform: translateY(-5px);
+   -ms-transform: translateY(-5px);
+   -moz-transform: translateY(-5px);
+   transform: translateY(-5px);
+   box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 /* Banner */
@@ -235,20 +238,23 @@ div.timer-controls-container {
 path.path-remaining {
    stroke-width: 0.438rem;
    stroke-linecap: round;
-   -webkit-transform: rotate(90deg);
+   -webkit-transform: rotatey(90deg);
    -webkit-transform-origin: center;
-   -o-transform: rotate(90deg);
+   -o-transform: rotatey(90deg);
    -o-transform-origin: center;
-   -ms-transform: rotate(90deg);
+   -ms-transform: rotatey(90deg);
    -ms-transform-origin: center;
-   -moz-transform: rotate(90deg);
+   -moz-transform: rotatey(90deg);
    -moz-transform-origin: center;
    transform: rotate(90deg);
    transform-origin: center;
+}
+
+path.path-remaining-tranistion {
    -webkit-transition: 1s linear all;
    -o-transition: 1s linear all;
    -moz-transition: 1s linear all;
-   transition: 1s linear all;
+   transition: 1s linear all;   
 }
 
 div.play-icon-container {
@@ -326,7 +332,6 @@ div.pause-icon-container>div.pause-icon-line-1 {
    left: -5%;
    border-radius: 0.5rem;
    margin-bottom: 1rem;
-
 }
 
 div.pause-icon-container>div.pause-icon-line-2 {
@@ -343,6 +348,12 @@ div.pause-icon-container>div.pause-icon-line-2 {
 div.pause-icon-container:hover div.pause-icon-line-1,
 div.pause-icon-container:hover div.pause-icon-line-2 {
    background-color: var(--accent-color);
+   /* -webkit-transform: translateY(-5px);
+   -o-transform: translateY(-5px);
+   -ms-transform: translateY(-5px);
+   -moz-transform: translateY(-5px);
+   transform: translateY(-5px);
+   box-shadow: 0 5px 15px var(--shadow-color); */
 }
 
 /* Todo */
@@ -577,7 +588,6 @@ form.popup-form {
    flex-direction: column;
    align-items: center;
    height: 50%;
-
    gap: 0.625rem;
 }
 
