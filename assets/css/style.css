@@ -101,13 +101,6 @@ img.banner-image {
    margin-bottom: 0;
 }
 
-img.timer-controls {
-   display: block;
-   margin: 1rem;
-   width: 6rem;
-   cursor: pointer;
-}
-
 /* Main grid */
 main.grid-layout {
    display: grid;
@@ -193,11 +186,6 @@ div.timer-grid-section div.timer-grid-container {
    width: fit-content;
 }
 
-a#pauseButton,
-a#startButton {
-   display: inline-block;
-}
-
 .baseTimer {
    position: relative;
    width: 18.75rem;
@@ -257,6 +245,7 @@ path.path-remaining {
 
 .play-icon-container {
    transform: rotate(90deg);
+   display: inline-block;
 }
 
 .play-icon {
@@ -314,27 +303,11 @@ path.path-remaining {
    /* box-shadow: 0 5px 15px var(--shadow-color); */
 }
 
-/* .pause-icon {
-   cursor: pointer;
-   margin: 1rem;
-   box-sizing: border-box;
-   position: relative;
-   display: block;
-   width: 6rem;
-   height: 6rem;
-   border-left: 2.5rem solid;
-   border-right: 2.5rem solid;
-}
-
-.pause-icon:hover {
-   border-left-color: var(--accent-color);
-   border-right-color: var(--accent-color);
-} */
-
 div.pause-icon-container {
    width: auto;
    height: 6rem;
    cursor: pointer;
+   display: inline-block;
 }
 
 div.pause-icon-container>div.pause-icon-line-1 {
