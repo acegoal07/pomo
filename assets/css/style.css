@@ -28,7 +28,7 @@ h1 {
 
 h2 {
    text-align: center;
-   color: white;
+   color: #fff;
 }
 
 .blur-filter {
@@ -139,7 +139,7 @@ div.pomodoro-counter-container {
 }
 
 div.pomodoro-counter-container>label.pomodoro-counter {
-   color: white;
+   color: #fff;
    position: absolute;
    left: 1.6rem;
    top: 0.6rem;
@@ -155,6 +155,11 @@ img#loginButton {
    border-radius: 2.5rem;
    padding: 0;
    margin: 0;
+   -webkit-transition: transform 0.2s ease;
+   -o-transition: transform 0.2s ease;
+   -ms-transition: transform 0.2s ease;
+   -moz-transition: transform 0.2s ease;
+   transition: transform 0.2s ease;
 }
 
 img#loginButton:hover,
@@ -181,7 +186,7 @@ div.timer-grid-section div.timer-grid-container {
    box-shadow: 0 5px 15px var(--shadow-color);
    position: relative;
    background-color: var(--foreground-color);
-   color: white;
+   color: #fff;
    border-radius: 1.5rem;
    padding: 1rem;
    margin: auto;
@@ -201,12 +206,12 @@ div.timer-grid-section div.timer-grid-container {
 
 .timerPathElapsed {
    stroke-width: 0.438rem;
-   stroke: grey;
+   stroke: #808080;
    fill: var(--background-color);
 }
 
 span#timer {
-   color: white;
+   color: #fff;
    position: absolute;
    font-size: 2.7rem;
    -webkit-transform: translate(-50%, -50%);
@@ -257,7 +262,7 @@ div.play-icon-container {
 div.play-icon-container>div.play-icon {
    cursor: pointer;
    position: relative;
-   background-color: white;
+   background-color: #fff;
    text-align: left;
    display: block;
    margin: 2rem;
@@ -308,7 +313,7 @@ div.pause-icon-container {
 div.pause-icon-container>div.pause-icon-line-1 {
    position: relative;
    display: inline-block;
-   background-color: #FFF;
+   background-color: #fff;
    width: 2rem;
    height: 100%;
    left: -5%;
@@ -319,7 +324,7 @@ div.pause-icon-container>div.pause-icon-line-1 {
 div.pause-icon-container>div.pause-icon-line-2 {
    display: inline-block;
    position: relative;
-   background-color: #FFF;
+   background-color: #fff;
    width: 2rem;
    height: 100%;
    left: 5%;
@@ -350,7 +355,7 @@ main.grid-layout div.todo-grid-section {
 
 div.todo-grid-section div.todo-grid-container {
    background-color: var(--foreground-color);
-   color: white;
+   color: #fff;
    border-radius: 1.5rem;
    box-shadow: 0 5px 15px var(--shadow-color);
    padding: 1rem;
@@ -382,7 +387,7 @@ div.todo-add-btn-background:hover {
 
 div.todo-add-btn-background>div.todo-add-btn-horizontal-plus {
    position: relative;
-   background-color: #FFFFFF;
+   background-color: #fff;
    width: 50%;
    height: 12.5%;
    left: 25%;
@@ -391,7 +396,7 @@ div.todo-add-btn-background>div.todo-add-btn-horizontal-plus {
 
 div.todo-add-btn-background>div.todo-add-btn-vertical-plus {
    position: relative;
-   background-color: #FFFFFF;
+   background-color: #fff;
    width: 12.5%;
    height: 50%;
    left: 43.75%;
@@ -525,7 +530,7 @@ a>div.popup-close-btn-background {
 
 div.popup-close-btn-background>div.popup-close-btn-line-1 {
    position: relative;
-   background-color: #FFFFFF;
+   background-color: #fff;
    width: 50%;
    height: 12.5%;
    left: 25%;
@@ -539,7 +544,7 @@ div.popup-close-btn-background>div.popup-close-btn-line-1 {
 
 div.popup-close-btn-background>div.popup-close-btn-line-2 {
    position: relative;
-   background-color: #FFFFFF;
+   background-color: #fff;
    width: 12.5%;
    height: 50%;
    left: 43.75%;
@@ -575,9 +580,16 @@ input[type="password"] {
    width: 50%;
    padding: 0.7rem;
    font-size: large;
-   border: 3px solid var(--accent-color);
+   outline: 3px solid var(--accent-color);
+   border: none;
    border-radius: 1rem;
-   background-color: white;
+   background-color: #fff;
+   box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+   outline: 3px solid var(--foreground-color);
 }
 
 button[type="reset"],
@@ -585,14 +597,27 @@ button[type="submit"] {
    width: -moz-fit-content;
    width: fit-content;
    padding: 0.7rem;
+   margin: 0.3rem;
    font-size: large;
    border-radius: 1rem;
    background-color: var(--accent-color);
    cursor: pointer;
    border: none;
+   box-shadow: 0 2px 5px var(--shadow-color);
+   -webkit-transition: transform 0.2s ease;
+   -o-transition: transform 0.2s ease;
+   -ms-transition: transform 0.2s ease;
+   -moz-transition: transform 0.2s ease;
+   transition: transform 0.2s ease;
 }
 
 button[type="reset"]:hover,
 button[type="submit"]:hover {
+   -webkit-transform: translateY(-5px);
+   -moz-transform: translateY(-5px);
+   -o-transform: translateY(-5px);
+   -ms-transform: translateY(-5px);
+   transform: translateY(-5px);
    background-color: var(--accent-color-hover);
+   box-shadow: 0 5px 15px var(--shadow-color);
 }
