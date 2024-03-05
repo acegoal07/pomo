@@ -464,8 +464,8 @@ div.popup {
    border-radius: 1.5rem;
    box-shadow: 0 0 10px var(--shadow-color);
    z-index: 1000;
-   height: auto;
-   width: 80%;
+   height: 60%;
+   width: 50%;
    -webkit-animation: popupOpenAnimation 0.5s forwards;
    -moz-animation: popupOpenAnimation 0.5s forwards;
    -o-animation: popupOpenAnimation 0.5s forwards;
