@@ -6,6 +6,7 @@
    --accent-color-hover: #5da036;
    --shadow-color: #0000004d;
    font-family: 'Fredoka', Arial;
+  h1
 }
 
 html {
@@ -28,6 +29,7 @@ h1 {
 
 h2 {
    text-align: center;
+  color: white;
 }
 
 .blur-filter {
@@ -267,6 +269,7 @@ div.play-icon-container>div.play-icon:after {
    content: '';
    position: absolute;
    background-color: inherit;
+  
 }
 
 div.play-icon,
@@ -457,12 +460,12 @@ div.popup {
    transform: translate(-50%, -50%);
    background-color: var(--background-color);
    padding: 2rem;
-   border: 5px solid var(--accent-color);
+   border: 10px solid var(--accent-color);
    border-radius: 1.5rem;
    box-shadow: 0 0 10px var(--shadow-color);
    z-index: 1000;
-   height: auto;
-   width: 80%;
+   height: 60%;
+   width: 50%;
    -webkit-animation: popupOpenAnimation 0.5s forwards;
    -moz-animation: popupOpenAnimation 0.5s forwards;
    -o-animation: popupOpenAnimation 0.5s forwards;
@@ -579,7 +582,7 @@ input[type="password"] {
    font-size: large;
    border: 3px solid var(--accent-color);
    border-radius: 1rem;
-   background-color: var(--foreground-color);
+   background-color: white;
 }
 
 button[type="reset"],
