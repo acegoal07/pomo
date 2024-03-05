@@ -153,8 +153,9 @@ window.addEventListener('load', () => {
                clearInterval(timeDisplay);
                timer.stopTimer();
                timer.setCurrentPositionMS(0);
-               if (notificationPermission && document.hasFocus() === false) {
-                  const notification = new Notification("Pomodoro Timer", {
+               if (getNotificationPermission() && document.hasFocus() === false) {
+                  const notification = new Notification("Pomo Timer", {
+                     title: "Pomo Timer",
                      body: `${times[index] === 25 ? "Its time for your break comeback and start the timer" : "Your break has finished comeback!"}`,
                      lang: "en-GB",
                      icon: "assets/images/favi.webp"
@@ -192,12 +193,11 @@ window.addEventListener('load', () => {
       timer.stopTimer();
    });
 
-   /////////////// Notification request ///////////////
+   /////////////// Notification settings ///////////////
+
+   // Notification permission request
    Notification.requestPermission().then(function (result) {
-      console.log("notification permission requested: " + result)
-      if (result === "granted") {
-         notificationPermission = true;
-      }
+      console.log("notification permission requested: " + result);
    });
 });
 
@@ -237,4 +237,11 @@ function msToTime(s) {
 
    // return pad(hrs) + ':' + pad(mins) + ':' + pad(secs) + '.' + pad(ms);
    return pad(mins) + ':' + pad(secs);
+}
+/**
+ * Notification permission getter
+ * @returns {Boolean}
+ */
+function getNotificationPermission() {
+   return Notification.permission === "granted" ? true : false;
 }

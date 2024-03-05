@@ -5,8 +5,7 @@
    --accent-color: #77b255;
    --accent-color-hover: #5da036;
    --shadow-color: #0000004d;
-   font-family: 'Fredoka', Arial;
-  h1
+   font-family: 'Fredoka', Arial, sans-serif;
 }
 
 html {
@@ -262,6 +261,11 @@ div.play-icon-container>div.play-icon {
    text-align: left;
    display: block;
    margin: 2rem;
+   -webkit-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+   -o-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+   -ms-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+   -moz-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+   transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
 }
 
 div.play-icon-container>div.play-icon:before,
@@ -278,14 +282,6 @@ div.play-icon:after {
    width: 4rem;
    height: 4rem;
    border-top-right-radius: 30%;
-}
-
-div.play-icon-container>div.play-icon {
-   -webkit-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
-   -o-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
-   -ms-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
-   -moz-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
-   transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
 }
 
 div.play-icon-container>div.play-icon:before {
