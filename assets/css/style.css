@@ -28,7 +28,7 @@ h1 {
 
 h2 {
    text-align: center;
-  color: white;
+   color: white;
 }
 
 .blur-filter {
@@ -273,7 +273,6 @@ div.play-icon-container>div.play-icon:after {
    content: '';
    position: absolute;
    background-color: inherit;
-  
 }
 
 div.play-icon,
