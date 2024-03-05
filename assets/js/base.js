@@ -1,5 +1,7 @@
 // Timer class caller
 const timer = new pomoTimer();
+// Notification permission flag
+let notificationPermission = false;
 // Focus listener
 let docTitle = document.title;
 window.onblur = function () {
@@ -151,6 +153,25 @@ window.addEventListener('load', () => {
                clearInterval(timeDisplay);
                timer.stopTimer();
                timer.setCurrentPositionMS(0);
+               if (notificationPermission && document.hasFocus() === false) {
+                  const notification = new Notification("Pomodoro Timer", {
+                     body: `${times[index] === 25 ? "Its time for your break comeback and start the timer" : "Your break has finished comeback!"}`,
+                     lang: "en-GB",
+                     icon: "assets/images/favi.webp"
+                  });
+                  notification.onclick = function () {
+                     window.focus();
+                     notification.close();
+                  };
+                  notification.onshow = function () {
+                     setTimeout(() => {
+                        notification.close();
+                     }, 5000);
+                  };
+                  notification.onerror = function (error) {
+                     console.log("Notification error: " + error);
+                  }
+               }
                if (index < 7) {
                   index++;
                } else {
@@ -169,6 +190,14 @@ window.addEventListener('load', () => {
    // Pause timer button
    document.querySelector("#pauseButton").addEventListener('click', () => {
       timer.stopTimer();
+   });
+
+   /////////////// Notification request ///////////////
+   Notification.requestPermission().then(function (result) {
+      console.log("notification permission requested: " + result)
+      if (result === "granted") {
+         notificationPermission = true;
+      }
    });
 });
 
