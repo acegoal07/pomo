@@ -4,7 +4,7 @@ class pomoTimer {
       this.timerLengthMS = null;
       this.currentPositionMS = 0;
       this.timerActive = false;
-      this.blured = false;
+      this.blurred = false;
       this.alarmActive = false;
    }
 
@@ -51,8 +51,8 @@ class pomoTimer {
     * @param {boolean} bool
     * @returns {pomoTimer}
     */
-   setBlured(bool) {
-      this.blured = bool;
+   setBlurred(bool) {
+      this.blurred = bool;
       return this;
    }
 
@@ -72,7 +72,7 @@ class pomoTimer {
 
             setCircleDashArray(this.getCurrentPositionMS() / this.timerLengthMS);
 
-            if (this.blured) {
+            if (this.blurred) {
                document.title = actualValue;
             }
             this.currentPositionMS -= 1000;

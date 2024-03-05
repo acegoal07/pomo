@@ -5,10 +5,10 @@ let notificationPermission = false;
 // Focus listener
 let docTitle = document.title;
 window.onblur = function () {
-   timer.setBlured(true);
+   timer.setBlurred(true);
 };
 window.onfocus = function () {
-   timer.setBlured(false);
+   timer.setBlurred(false);
    document.title = docTitle;
 };
 // On load handler
