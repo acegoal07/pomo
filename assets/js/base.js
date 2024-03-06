@@ -1,9 +1,7 @@
 // Timer class caller
-const timer = new pomoTimer();
-// Notification permission flag
-let notificationPermission = false;
+const timer = new PomoTimer();
 // Focus listener
-let docTitle = document.title;
+const docTitle = document.title;
 window.onblur = function () {
    timer.setBlurred(true);
 };
@@ -49,7 +47,7 @@ window.addEventListener('load', () => {
          const todoTextElement = document.createElement("div");
          todoTextElement.classList.add("todo-text");
          todoTextElement.textContent = todoText;
-         
+
          todoItemContainer.appendChild(todoTextElement);
 
          const todoItem = document.createElement("div");
@@ -131,8 +129,8 @@ window.addEventListener('load', () => {
    /////////////// Timer Buttons ///////////////
 
    // Start timer button
-   var pomodoros = 0;
-   var index = 0;
+   let pomodoros = 0;
+   let index = 0;
    const times = [25, 5, 25, 5, 25, 5, 25, 15];
    let currentTime;
 
@@ -184,6 +182,8 @@ window.addEventListener('load', () => {
                setTimerColor("var(--background-color)");
             } else if (timer.getCurrentPositionMS() < halfWay) {
                setTimerColor("orange");
+            } else {
+               void (0);
             }
          }, 1000);
       }
@@ -208,7 +208,7 @@ window.addEventListener('load', () => {
  * @param {int} value
  */
 function setCircleDashArray(value) {
-   document.querySelector("#base-timer-path-remaining").setAttribute("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
+   document.querySelector("#base-timer-path-remaining").setAttribute.bind(document.querySelector("#base-timer-path-remaining"))("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
 }
 /**
  * Timer colour function
@@ -228,20 +228,18 @@ function msToTime(s) {
       return ('00' + n).slice(-z);
    }
 
-   var ms = s % 1000;
+   const ms = s % 1000;
    s = (s - ms) / 1000;
-   var secs = s % 60;
+   const secs = s % 60;
    s = (s - secs) / 60;
-   var mins = s % 60;
-   var hrs = (s - mins) / 60;
+   const mins = s % 60;
 
-   // return pad(hrs) + ':' + pad(mins) + ':' + pad(secs) + '.' + pad(ms);
-   return pad(mins) + ':' + pad(secs);
+   return `${pad(mins)}:${pad(secs)}`;
 }
 /**
  * Notification permission getter
  * @returns {Boolean}
  */
 function getNotificationPermission() {
-   return Notification.permission === "granted" ? true : false;
+   return Notification.permission === "granted";
 }

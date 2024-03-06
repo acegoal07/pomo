@@ -1,5 +1,5 @@
 ///////////////// Timer class //////////////////
-class pomoTimer {
+class PomoTimer {
    constructor() {
       this.timerLengthMS = null;
       this.currentPositionMS = 0;
@@ -10,7 +10,7 @@ class pomoTimer {
 
    /**
     * @param {int} msInput
-    * @returns {pomoTimer}
+    * @returns {PomoTimer}
     */
    setTimerLength(msInput) {
       this.timerLengthMS = msInput;
@@ -33,7 +33,7 @@ class pomoTimer {
 
    /**
     * @param {int} ms
-    * @returns {pomoTimer}
+    * @returns {PomoTimer}
     */
    setCurrentPositionMS(ms) {
       this.currentPositionMS = ms;
@@ -49,7 +49,7 @@ class pomoTimer {
 
    /**
     * @param {boolean} bool
-    * @returns {pomoTimer}
+    * @returns {PomoTimer}
     */
    setBlurred(bool) {
       this.blurred = bool;
@@ -67,7 +67,7 @@ class pomoTimer {
                this.timerActive = false;
                // this.playAlarm();
             }
-            const actualValue = this.getCurrentPositionMS === 0 ? "00:00" : msToTime(this.getCurrentPositionMS());
+            const actualValue = this.getCurrentPositionMS == 0 ? "00:00" : msToTime(this.getCurrentPositionMS());
             document.querySelector("#timerText").innerHTML = actualValue;
 
             setCircleDashArray(this.getCurrentPositionMS() / this.timerLengthMS);

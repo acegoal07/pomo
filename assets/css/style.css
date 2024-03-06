@@ -48,27 +48,29 @@ h2 {
 }
 
 /* 404 Page */
-body.error-page {
+html.error-page {
    display: flex;
-   -ms-flex-direction: column;
-   flex-direction: column;
-   align-items: center;
    justify-content: center;
+   align-items: center;
    text-align: center;
    height: 100%;
 }
 
-body.error-page h1 {
+html.error-page h1 {
    margin-bottom: 0;
 }
 
-body.error-page h2 {
+html.error-page h2 {
    font-size: 2rem;
    margin-top: 0;
-   padding-bottom: 1rem;
 }
 
-body.error-page a {
+html.error-page div.a-container {
+   display: flex;
+   justify-content: center;
+}
+
+html.error-page a {
    padding: 1rem;
    font-size: 1.5rem;
    border-radius: 1rem;
@@ -83,7 +85,7 @@ body.error-page a {
    transition: transform 0.2s ease;
 }
 
-body.error-page a:hover {
+html.error-page a:hover {
    -webkit-transform: translateY(-5px);
    -moz-transform: translateY(-5px);
    -o-transform: translateY(-5px);
@@ -584,7 +586,6 @@ input[type="password"] {
    border: none;
    border-radius: 1rem;
    background-color: #fff;
-   box-shadow: 0 2px 5px var(--shadow-color);
 }
 
 input[type="text"]:focus,
@@ -603,7 +604,6 @@ button[type="submit"] {
    background-color: var(--accent-color);
    cursor: pointer;
    border: none;
-   box-shadow: 0 2px 5px var(--shadow-color);
    -webkit-transition: transform 0.2s ease;
    -o-transition: transform 0.2s ease;
    -ms-transition: transform 0.2s ease;
