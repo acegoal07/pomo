@@ -11,6 +11,10 @@ window.onfocus = function () {
 };
 // On load handler
 window.addEventListener('load', () => {
+   /////////////// Onload changes ///////////////
+   if (Notification.permission !== "granted") {
+      Notification.requestPermission();
+   }
    setTimerColor("var(--background-color)");
    document.querySelector("#base-timer-path-remaining").classList.add("path-remaining-transition");
 
@@ -191,13 +195,6 @@ window.addEventListener('load', () => {
    // Pause timer button
    document.querySelector("#pauseButton").addEventListener('click', () => {
       timer.stopTimer();
-   });
-
-   /////////////// Notification settings ///////////////
-
-   // Notification permission request
-   Notification.requestPermission().then(function (result) {
-      console.log("notification permission requested: " + result);
    });
 });
 

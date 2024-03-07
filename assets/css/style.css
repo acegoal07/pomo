@@ -474,6 +474,13 @@ div.popup {
    animation: popupOpenAnimation 0.5s forwards;
 }
 
+@media only screen and (max-width: 1120px) {
+   div.popup {
+      width: 80%;
+      height: 85%;
+   }
+}
+
 @keyframes popupOpenAnimation {
    0% {
       -webkit-transform: translate(-50%, -50%) scale(0.5);
@@ -573,7 +580,6 @@ form.popup-form {
    -ms-flex-direction: column;
    flex-direction: column;
    align-items: center;
-   height: 50%;
    gap: 0.625rem;
 }
 
@@ -581,7 +587,7 @@ input[type="text"],
 input[type="password"] {
    width: 50%;
    padding: 0.7rem;
-   font-size: large;
+   font-size: 1.5rem;
    outline: 3px solid var(--accent-color);
    border: none;
    border-radius: 1rem;
@@ -599,7 +605,7 @@ button[type="submit"] {
    width: fit-content;
    padding: 0.7rem;
    margin: 0.3rem;
-   font-size: large;
+   font-size: 1.5rem;
    border-radius: 1rem;
    background-color: var(--accent-color);
    cursor: pointer;
