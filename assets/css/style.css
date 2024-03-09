@@ -10,6 +10,32 @@
 
 html {
   scroll-behavior: smooth;
+
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #eed847;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track-piece {
+    background: #eed847;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+
+  }
 }
 
 body {
@@ -17,7 +43,7 @@ body {
   color: var(--foreground-color);
   margin: 1rem;
 }
-
+S
 h1 {
   font-family: 'Fredoka', cursive;
   font-size: 3.75rem;
