@@ -6,13 +6,9 @@
   --accent-color-hover: #5da036;
   --shadow-color: #0000004d;
   font-family: 'Fredoka', Arial, sans-serif;
-}
-
-html {
-  scroll-behavior: smooth;
 
   ::-webkit-scrollbar {
-    width: 20px;
+    width: 15px;
   }
 
   /* Track */
@@ -25,6 +21,9 @@ html {
   ::-webkit-scrollbar-thumb {
     background: red;
     border-radius: 10px;
+    outline-style: ridge;
+    outline-color: #000000;
+    outline-width: 1px;
   }
 
   ::-webkit-scrollbar-track-piece {
@@ -33,9 +32,12 @@ html {
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #b30000;
-
+    background: #940000;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -43,7 +45,7 @@ body {
   color: var(--foreground-color);
   margin: 1rem;
 }
-S
+
 h1 {
   font-family: 'Fredoka', cursive;
   font-size: 3.75rem;
@@ -460,7 +462,6 @@ div.todo-item-container {
   align-items: center;
   display: inline-flex;
   font-size: 1.125rem;
-
 }
 
 h1.todo-header {
@@ -633,6 +634,7 @@ button[type="submit"] {
   background-color: var(--accent-color);
   cursor: pointer;
   border: none;
+  color: white;
   -webkit-transition: transform 0.2s ease;
   -o-transition: transform 0.2s ease;
   -ms-transition: transform 0.2s ease;
