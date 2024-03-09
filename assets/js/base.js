@@ -9,7 +9,7 @@ window.onfocus = function () {
    timer.setBlurred(false);
    document.title = docTitle;
 };
-// On load handler
+// Onload handler
 window.addEventListener('load', () => {
    /////////////// Onload changes ///////////////
    if (Notification.permission !== "granted") {
@@ -19,24 +19,21 @@ window.addEventListener('load', () => {
    document.querySelector("#base-timer-path-remaining").classList.add("path-remaining-transition");
 
    /////////////// Todo popup ///////////////
-
    // Open todo popup button listener
    document.querySelector("#todo-add-button").addEventListener('click', () => {
-      if (document.querySelector("#leaderboard").style.display === "block" || document.querySelector("#login").style.display === "block") { return; }
-      const popup = document.querySelector("#popup");
+      if (document.querySelector("#leaderboard-popup").style.display === "block" || document.querySelector("#login-popup").style.display === "block") { return; }
+      const popup = document.querySelector("#todo-popup");
       if (popup.style.display === "block") { return; }
       popup.style.animation = "popupOpenAnimation 0.5s forwards";
       popup.style.display = "block";
-      document.querySelector("main").classList.add("blur-filter");
    });
    // Close todo popup button listener
    document.querySelector("#todo-close-popup").addEventListener('click', () => {
-      const popup = document.querySelector("#popup");
+      const popup = document.querySelector("#todo-popup");
       popup.style.animation = "popupCloseAnimation 0.5s forwards";
       setTimeout(function () {
          popup.style.display = "none";
       }, 500);
-      document.querySelector("main").classList.remove("blur-filter");
    });
    // Add todo button listener
    document.querySelector("#addTodoButton").addEventListener("click", (event) => {
@@ -62,54 +59,51 @@ window.addEventListener('load', () => {
 
          todoInput.value = "";
 
-         document.querySelector("#popup").style.display = "none";
-         document.querySelector("main").classList.remove("blur-filter");
+         const popup = document.querySelector("#todo-popup");
+         popup.style.animation = "popupCloseAnimation 0.5s forwards";
+         setTimeout(function () {
+            popup.style.display = "none";
+         }, 500);
       }
    });
 
    /////////////// Leaderboard popup ///////////////
-
    // Open leaderboard popup button
    document.querySelector("#leaderboardButton").addEventListener('click', () => {
-      if (document.querySelector("#popup").style.display === "block" || document.querySelector("#login").style.display === "block") { return; }
-      const popup = document.querySelector("#leaderboard");
+      if (document.querySelector("#todo-popup").style.display === "block" || document.querySelector("#login-popup").style.display === "block") { return; }
+      const popup = document.querySelector("#leaderboard-popup");
       if (popup.style.display === "block") { return; }
       popup.style.animation = "popupOpenAnimation 0.5s forwards";
-      popup.style.display = "grid";
-      document.querySelector("main").classList.add("blur-filter");
+      popup.style.display = "block";
    });
    // Close leaderboard popup button
    document.querySelector("#leaderboard-close-popup").addEventListener('click', () => {
-      const popup = document.querySelector("#leaderboard");
+      const popup = document.querySelector("#leaderboard-popup");
       popup.style.animation = "popupCloseAnimation 0.5s forwards";
       setTimeout(function () {
          popup.style.display = "none";
       }, 500);
-      document.querySelector("main").classList.remove("blur-filter");
    });
    // Switch between all time and weekly leaderboard
    document.querySelector("#leaderboard-switch-button").addEventListener('click', () => {
    });
 
    /////////////// Login popup ///////////////
-
    // Open login popup button
    document.querySelector("#loginButton").addEventListener('click', () => {
-      if (document.querySelector("#popup").style.display === "block" || document.querySelector("#leaderboard").style.display === "block") { return; }
-      const popup = document.querySelector("#login");
+      if (document.querySelector("#todo-popup").style.display === "block" || document.querySelector("#leaderboard-popup").style.display === "block") { return; }
+      const popup = document.querySelector("#login-popup");
       if (popup.style.display === "block") { return; }
       popup.style.animation = "popupOpenAnimation 0.5s forwards";
       popup.style.display = "block";
-      document.querySelector("main").classList.add("blur-filter");
    });
    // Close login popup button
    document.querySelector("#login-close-popup").addEventListener('click', () => {
-      const popup = document.querySelector("#login");
+      const popup = document.querySelector("#login-popup");
       popup.style.animation = "popupCloseAnimation 0.5s forwards";
       setTimeout(function () {
          popup.style.display = "none";
       }, 500);
-      document.querySelector("main").classList.remove("blur-filter");
    });
    // Registration page switch button
    document.querySelector("#goToRegister").addEventListener('click', (event) => {
@@ -131,7 +125,6 @@ window.addEventListener('load', () => {
    });
 
    /////////////// Timer Buttons ///////////////
-
    // Start timer button
    let pomodoros = 0;
    let index = 0;
@@ -199,7 +192,6 @@ window.addEventListener('load', () => {
 });
 
 /////////////// Additional functions ///////////////
-
 /**
  * Timer count down function
  * @param {int} value

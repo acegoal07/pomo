@@ -18,73 +18,81 @@
 
 <body>
   <!-- Add todo popup -->
-  <div id="popup" class="popup">
-    <h1>ADD YOUR TASK:</h1>
-    <h2>Insert the details of your task below</h2>
-    <form id="createTodoForm" method="post" class="popup-form">
-      <input type="text" id="todo-input" placeholder="Enter your to-do item here">
-      <button id="addTodoButton" type="submit">Add To-Do</button>
-    </form>
-    <a id="todo-close-popup">
-      <div class="popup-close-btn-background">
-        <div class="popup-close-btn-line-1"></div>
-        <div class="popup-close-btn-line-2"></div>
-      </div>
-    </a>
+  <div id="todo-popup" class="popup">
+    <div class="popup-content">
+      <a id="todo-close-popup">
+        <div class="popup-close-btn-background">
+          <div class="popup-close-btn-line-1"></div>
+          <div class="popup-close-btn-line-2"></div>
+        </div>
+      </a>
+      <h1>ADD YOUR TASK:</h1>
+      <h2>Insert the details of your task below</h2>
+      <form id="createTodoForm" method="post" class="popup-form">
+        <input type="text" id="todo-input" placeholder="Enter your to-do item here">
+        <button id="addTodoButton" type="submit">Add To-Do</button>
+      </form>
+    </div>
   </div>
   <!-- Login/registration popup -->
-  <div class="popup" id="login">
-    <div id="loginPage">
-      <h1>Enter your details:</h1>
-      <form id="loginForm" method="post" class="popup-form">
-        <input id="inputUsername" type="text" name="username" placeholder="Username" required>
-        <input id="inputPassword" type="password" name="password" placeholder="Password" required>
-        <button id="goToRegister" type="reset">Don't have an account? Click Here To Register</button>
-        <button id="buttonLogin" type="submit">Login</button>
-      </form>
-    </div>
+  <div id="login-popup" class="popup">
+    <div class="popup-content">
+      <a id="login-close-popup">
+        <div class="popup-close-btn-background">
+          <div class="popup-close-btn-line-1"></div>
+          <div class="popup-close-btn-line-2"></div>
+        </div>
+      </a>
 
-    <div id="registrationPage" class="hide">
-      <h1>Register your account:</h1>
-      <form id="regForm" method="post" class="popup-form">
-        <input id="regUsername" type="text" name="username" placeholder="Username" required>
-        <input id="regPassword" type="password" name="password" placeholder="Password" required>
-        <input id="ConfirmRegPassword" type="password" name="password" placeholder="Confirm Password" required>
-        <button id="goToLogin" type="reset">Already have an account? Click Here To Login</button>
-        <button id="regButton" type="submit">Register</button>
-      </form>
-    </div>
-
-    <a id="login-close-popup">
-      <div class="popup-close-btn-background">
-        <div class="popup-close-btn-line-1"></div>
-        <div class="popup-close-btn-line-2"></div>
+      <div id="loginPage">
+        <h1>Enter your details:</h1>
+        <form id="loginForm" method="post" class="popup-form">
+          <input id="inputUsername" type="text" name="username" placeholder="Username" required>
+          <input id="inputPassword" type="password" name="password" placeholder="Password" required>
+          <button id="goToRegister" type="reset">Don't have an account? Click Here To Register</button>
+          <button id="buttonLogin" type="submit">Login</button>
+        </form>
       </div>
-    </a>
+
+      <div id="registrationPage" class="hide">
+        <h1>Register your account:</h1>
+        <form id="regForm" method="post" class="popup-form">
+          <input id="regUsername" type="text" name="username" placeholder="Username" required>
+          <input id="regPassword" type="password" name="password" placeholder="Password" required>
+          <input id="ConfirmRegPassword" type="password" name="password" placeholder="Confirm Password" required>
+          <button id="goToLogin" type="reset">Already have an account? Click Here To Login</button>
+          <button id="regButton" type="submit">Register</button>
+        </form>
+      </div>
+
+    </div>
   </div>
   <!-- Weekly/all time leaderboard popup -->
-  <div class="popup" id="leaderboard">
-    <a id="leaderboard-switch-button"></a>
-    <div class="weekly-grid-section">
-      <h1>Weekly</h1>
-      <p class="leaderEntry">Leader yay</p>
-      <p class="leaderEntry">Leader yay</p>
-      <p class="leaderEntry">Leader yay</p>
-    </div>
-
-    <div class="allTime-grid-section">
-      <h1>All Time</h1>
-      <p class="leaderEntry">Leader yay</p>
-      <p class="leaderEntry">Dara yay</p>
-      <p class="leaderEntry">Leader yay</p>
-    </div>
-
-    <a id="leaderboard-close-popup">
-      <div class="popup-close-btn-background">
-        <div class="popup-close-btn-line-1"></div>
-        <div class="popup-close-btn-line-2"></div>
+  <div id="leaderboard-popup" class="popup">
+    <div class="popup-content">
+      <a id="leaderboard-close-popup">
+        <div class="popup-close-btn-background">
+          <div class="popup-close-btn-line-1"></div>
+          <div class="popup-close-btn-line-2"></div>
+        </div>
+      </a>
+      
+      <a id="leaderboard-switch-button"></a>
+      <div class="weekly-grid-section">
+        <h1>Weekly</h1>
+        <p class="leaderEntry">Leader yay</p>
+        <p class="leaderEntry">Leader yay</p>
+        <p class="leaderEntry">Leader yay</p>
       </div>
-    </a>
+
+      <div class="allTime-grid-section">
+        <h1>All Time</h1>
+        <p class="leaderEntry">Leader yay</p>
+        <p class="leaderEntry">Dara yay</p>
+        <p class="leaderEntry">Leader yay</p>
+      </div>
+
+    </div>
   </div>
   <main class="grid-layout">
     <!-- Banner -->
@@ -94,7 +102,6 @@
     <!-- Nav -->
     <div class="nav-grid-section">
       <img id="leaderboardButton" src="assets/images/leaderboardIcon.webp" alt="Leaderboard button">
-
       <div class="pomodoro-counter-container">
         <label class="pomodoro-counter" id="pomoCounter">0</label>
         <div class="pomoRing">
@@ -109,7 +116,6 @@
           </div>
         </div>
       </div>
-
       <img id="loginButton" src="assets/images/loginIcon.webp" alt="Login button">
     </div>
     <!-- Timer -->
