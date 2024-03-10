@@ -5,6 +5,7 @@
    --accent-color: #77b255;
    --accent-color-hover: #5da036;
    --shadow-color: #0000004d;
+   --text-outline-thickness: 3px;
    font-family: 'Fredoka', Arial, sans-serif;
 }
 
@@ -35,7 +36,10 @@ h2 {
    display: none;
 }
 
-::-webkit-scrollbar {
+/* Not too thick not too thin haha */
+
+/* Commented out, doesn't work properly and accessibilty problems. */
+/* ::-webkit-scrollbar {
    width: 15px;
 }
 
@@ -58,7 +62,7 @@ h2 {
 
 ::-webkit-scrollbar-thumb:hover {
    background: #940000;
-}
+} */
 
 /* 404 Page */
 html.error-page {
@@ -70,7 +74,7 @@ html.error-page {
 }
 
 html.error-page h1 {
-   margin-bottom: 0; 
+   margin-bottom: 0;
 }
 
 html.error-page h2 {
@@ -241,7 +245,8 @@ span#timer {
    display: flex;
    align-items: center;
    justify-content: center;
-   -webkit-text-stroke: 3px black;
+   text-shadow: #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness),
+      #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
 }
 
 div.timer-controls-container {
@@ -460,7 +465,8 @@ div.todo-item-container {
 h1.todo-header {
    margin-top: 1rem;
    margin-bottom: 0;
-   -webkit-text-stroke: 3px black;
+   text-shadow: #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness),
+      #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
 }
 
 /* Popup */
