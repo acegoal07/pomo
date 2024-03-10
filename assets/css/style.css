@@ -1,4 +1,4 @@
-/* Main body universal css */
+/* ////////////// Main body universal css \\\\\\\\\\\\\\ */
 :root {
    --background-color: #c42217;
    --foreground-color: #eed847;
@@ -62,7 +62,7 @@ h2 {
    background: #940000;
 } */
 
-/* 404 Page */
+/* ////////////// 404 Page \\\\\\\\\\\\\\ */
 html.error-page {
    display: flex;
    justify-content: center;
@@ -110,7 +110,7 @@ html.error-page a:hover {
    background-color: var(--accent-color-hover);
 }
 
-/* Images */
+/* ////////////// Images \\\\\\\\\\\\\\ */
 img.banner-image {
    max-width: 28rem;
    width: 100%;
@@ -119,7 +119,7 @@ img.banner-image {
    margin-bottom: 0;
 }
 
-/* Main grid */
+/* Main grid \\\\\\\\\\\\\\ */
 main.grid-layout {
    display: grid;
    grid-gap: 0.625rem;
@@ -141,7 +141,7 @@ main.grid-layout {
    }
 }
 
-/* Nav */
+/* ////////////// Nav \\\\\\\\\\\\\\ */
 main.grid-layout div.nav-grid-section {
    grid-area: nav;
    margin: auto;
@@ -190,12 +190,12 @@ img#leaderboardButton:hover {
    box-shadow: 0 5px 15px var(--shadow-color);
 }
 
-/* Banner */
+/* ////////////// Banner \\\\\\\\\\\\\\ */
 main.grid-layout div.banner-grid-section {
    grid-area: banner;
 }
 
-/* Timer */
+/* ////////////// Timer \\\\\\\\\\\\\\ */
 main.grid-layout div.timer-grid-section {
    grid-area: timer;
 }
@@ -361,7 +361,7 @@ div.play-icon-container>div.play-icon:hover:after {
    background-color: var(--accent-color);
 }
 
-/* Todo */
+/* ////////////// Todo \\\\\\\\\\\\\\ */
 main.grid-layout div.todo-grid-section {
    grid-area: todo;
    margin: 1rem;
@@ -471,7 +471,7 @@ h1.todo-header {
       #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
 }
 
-/* Popup */
+/* ////////////// Popup \\\\\\\\\\\\\\ */
 div.popup {
    display: none;
    position: fixed;
@@ -575,7 +575,7 @@ div.popup-close-btn-background:hover div.popup-close-btn-line-2 {
    background-color: var(--accent-color);
 }
 
-/* Forms */
+/* ////////////// Forms \\\\\\\\\\\\\\ */
 form.popup-form {
    display: flex;
    -ms-flex-direction: column;
