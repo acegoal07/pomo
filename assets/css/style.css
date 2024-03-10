@@ -268,10 +268,10 @@ path.path-remaining {
 }
 
 path.path-remaining-transition {
-   -webkit-transition: stroke-dasharray 1s linear;
-   -o-transition: stroke-dasharray 1s linear;
-   -moz-transition: stroke-dasharray 1s linear;
-   transition: stroke-dasharray 1s linear;
+   -webkit-transition: all 1s linear;
+   -o-transition: all 1s linear;
+   -moz-transition: all 1s linear;
+   transition: all 1s linear;
 }
 
 div.play-icon-container {
