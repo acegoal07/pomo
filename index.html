@@ -102,20 +102,22 @@
     <!-- Nav -->
     <div class="nav-grid-section">
       <img id="leaderboardButton" src="assets/images/leaderboardIcon.webp" alt="Leaderboard button">
+
       <div class="pomodoro-counter-container">
         <label class="pomodoro-counter" id="pomoCounter">0</label>
-        <div class="pomoRing">
-          <div class="basePomo">
-            <svg class="basePomoSVG" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <g class="basePomoCircle">
-                <circle class="pomoPathElapsed" cx="51" cy="51" r="46" />
-                <path id="base-pomo-path-remaining" stroke-dasharray="283" class="path-remaining"
-                  d="M 51, 51 m -46, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"></path>
-              </g>
-            </svg>
-          </div>
+
+        <div class="progress-ring-container">
+
+          <svg class="progress-ring" width="85" height="85">
+            <circle class="progress-ring-circle" stroke="#77b255" stroke-width="8" fill="transparent" r="35.5" cx="42.5"
+              cy="42.5" />
+          </svg>
+
         </div>
+
+
       </div>
+
       <img id="loginButton" src="assets/images/loginIcon.webp" alt="Login button">
     </div>
     <!-- Timer -->
