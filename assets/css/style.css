@@ -5,7 +5,7 @@
    --accent-color: #77b255;
    --accent-color-hover: #5da036;
    --shadow-color: #0000004d;
-   --text-outline-thickness: 3px;
+   --text-outline-thickness: 5px;
    font-family: 'Fredoka', Arial, sans-serif;
 }
 
@@ -36,9 +36,7 @@ h2 {
    display: none;
 }
 
-/* Not too thick not too thin haha */
-
-/* Commented out, doesn't work properly and accessibility problems */
+/* Commented out, doesn't work properly and accessibil ity problems */
 /* ::-webkit-scrollbar {
    width: 15px;
 }
