@@ -177,6 +177,7 @@ img#loginButton {
    -ms-transition: transform 0.2s ease;
    -moz-transition: transform 0.2s ease;
    transition: transform 0.2s ease;
+   box-shadow: 0 3px 5px var(--shadow-color);
 }
 
 img#loginButton:hover,
@@ -393,6 +394,7 @@ div.todo-add-btn-background {
    -moz-transition: transform 0.2s ease;
    transition: transform 0.2s ease;
    cursor: pointer;
+   box-shadow: 0 3px 5px var(--shadow-color);
 }
 
 div.todo-add-btn-background:hover {
@@ -443,6 +445,7 @@ div.todo-list-container>div.todo-item {
    -o-transition: transform 0.2s ease, box-shadow 0.2s ease;
    -moz-transition: transform 0.2s ease, box-shadow 0.2s ease;
    transition: transform 0.2s ease, box-shadow 0.2s ease;
+   box-shadow: 0 3px 5px var(--shadow-color);
 }
 
 div.todo-item:hover {
@@ -451,7 +454,7 @@ div.todo-item:hover {
    -ms-transform: translateY(-5px);
    -moz-transform: translateY(-5px);
    transform: translateY(-5px);
-   box-shadow: 0 5px 15px var(--shadow-color);
+   box-shadow: 0 5px 15px var(--shadow-color) !important;
 }
 
 div.todo-item-container {
@@ -526,6 +529,7 @@ a>div.popup-close-btn-background {
    transition: transform 0.2s ease;
    cursor: pointer;
    margin: 0.5rem;
+   box-shadow: 0 3px 5px var(--shadow-color);
 }
 
 div.popup-close-btn-background>div.popup-close-btn-line-1 {
