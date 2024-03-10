@@ -12,7 +12,7 @@ window.onfocus = function () {
 // Onload handler
 window.addEventListener('load', () => {
    /////////////// Onload changes ///////////////
-   if (Notification.permission !== "granted") {
+   if (!getNotificationPermission() && !isIOS()) {
       Notification.requestPermission();
    }
    setTimerColor("var(--background-color)");
@@ -230,5 +230,21 @@ function msToTime(s) {
  * @returns {Boolean}
  */
 function getNotificationPermission() {
+   if (isIOS()) {
+      return false;
+   }
    return Notification.permission === "granted";
+}
+/**
+ * Check if the user is using an iOS device
+ * @returns {Boolean}
+ */
+function isIOS() {
+   const browserInfo = navigator.userAgent.toLowerCase();
+
+   if (/iphone/.exec(browserInfo) || /ipad/.exec(browserInfo)) {
+      return true;
+   }
+
+   return !!(['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platforms));
 }
