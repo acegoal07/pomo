@@ -212,18 +212,21 @@ div.timer-grid-section div.timer-grid-container {
    width: fit-content;
 }
 
-.baseTimer {
+.base-timer {
    position: relative;
-   width: 18.75rem;
+   width: 18rem;
+   height: 18rem;
+   border-radius: 10rem;
+   background-color: var(--background-color);
 }
 
-.baseTimerCircle {
+.base-timer-circle {
    fill: none;
    stroke: none;
 }
 
-.timerPathElapsed {
-   stroke-width: 0.438rem;
+.timer-path-elapsed {
+   stroke-width: 0.5rem;
    stroke: #808080;
    fill: var(--background-color);
 }
@@ -237,8 +240,6 @@ span#timer {
    -ms-transform: translate(-50%, -50%);
    -moz-transform: translate(-50%, -50%);
    transform: translate(-50%, -50%);
-   width: 18.75rem;
-   height: 18.75rem;
    top: 50%;
    left: 50%;
    display: flex;
@@ -253,7 +254,7 @@ div.timer-controls-container {
 }
 
 path.path-remaining {
-   stroke-width: 0.438rem;
+   stroke-width: 0.5rem;
    stroke-linecap: round;
    -webkit-transform: rotate(90deg);
    -o-transform: rotate(90deg);
