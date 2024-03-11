@@ -5,7 +5,7 @@
    --accent-color: #77b255;
    --accent-color-hover: #5da036;
    --shadow-color: #0000004d;
-   --text-outline-thickness: 5px;
+   --text-outline-thickness: 4px;
    font-family: 'Fredoka', Arial, sans-serif;
 }
 
@@ -35,32 +35,6 @@ h2 {
 .hide {
    display: none;
 }
-
-/* STOP UN-COMMENTING THIS YOU CHIMPANZEE */
-/* ::-webkit-scrollbar {
-  width: 15px;
-}
-
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px var(--foreground-color);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--background-color);
-  border-radius: 10px;
-  outline-style: ridge;
-  outline-color: #000000;
-  outline-width: 1px;
-}
-
-::-webkit-scrollbar-track-piece {
-  background: var(--foreground-color);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #940000;
-} */
 
 /* 404 Page */
 html.error-page {
@@ -156,7 +130,6 @@ div.pomodoro-counter-container>label.pomodoro-counter {
    font-size: 3.125rem;
 }
 
-/* Sorry i fiddled but it looks good */
 .pomodoro-counter-container {
    position: relative;
    display: flex;
@@ -223,6 +196,7 @@ div.timer-grid-section div.timer-grid-container {
 }
 
 .base-timer {
+   /* Dara this is the bit */
    position: relative;
    width: 18rem;
    height: 18rem;
