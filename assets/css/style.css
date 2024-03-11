@@ -443,7 +443,7 @@ div.todo-list-container {
 }
 
 div.todo-list-container>div.todo-item {
-   overflow-wrap: anywhere;
+   word-break: break-word;
    cursor: pointer;
    display: flex;
    margin: auto;
