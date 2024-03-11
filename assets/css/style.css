@@ -36,7 +36,7 @@ h2 {
   display: none;
 }
 
-/* Commented out, doesn't work properly and accessibil ity problems */
+/* Commented out, doesn't work properly and accessibility problems */
 /* ::-webkit-scrollbar {
    width: 15px;
 }
@@ -144,12 +144,14 @@ main.grid-layout {
 /* Nav */
 main.grid-layout div.nav-grid-section {
   grid-area: nav;
-  margin: auto;
+  display: inline-flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 div.pomodoro-counter-container {
   position: relative;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   text-align: center;
   height: 4.6rem;
@@ -162,6 +164,8 @@ div.pomodoro-counter-container>label.pomodoro-counter {
   top: 0.3rem;
   font-family: 'Fredoka', cursive;
   font-size: 3.125rem;
+  text-shadow: #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness),
+    #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
 }
 
 /* Sorry i fiddled but it looks good */
