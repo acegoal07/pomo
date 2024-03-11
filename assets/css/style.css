@@ -186,6 +186,7 @@ img#loginButton {
   -ms-transition: transform 0.2s ease;
   -moz-transition: transform 0.2s ease;
   transition: transform 0.2s ease;
+   box-shadow: 0 5px 15px var(--shadow-color);
 
 }
 
@@ -217,6 +218,7 @@ div.timer-grid-section div.timer-grid-container {
   margin: auto;
   width: -moz-fit-content;
   width: fit-content;
+  box-shadow: 0 3px 5px var(--shadow-color);
 }
 
 .base-timer {
@@ -224,7 +226,9 @@ div.timer-grid-section div.timer-grid-container {
   width: 18rem;
   height: 18rem;
   border-radius: 10rem;
-  background-color: var(--background-color);
+   background: transparent:
+   box-shadow: 0 5px 15px var(--shadow-color);
+ 
 }
 
 .base-timer-circle {
@@ -402,6 +406,7 @@ div.todo-add-btn-background {
   -moz-transition: transform 0.2s ease;
   transition: transform 0.2s ease;
   cursor: pointer;
+   box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 div.todo-add-btn-background:hover {
@@ -452,6 +457,7 @@ div.todo-list-container>div.todo-item {
   -o-transition: transform 0.2s ease, box-shadow 0.2s ease;
   -moz-transition: transform 0.2s ease, box-shadow 0.2s ease;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+   box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 div.todo-item:hover {
