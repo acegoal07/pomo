@@ -70,7 +70,7 @@ class PomoTimer {
             const actualValue = this.getCurrentPositionMS == 0 ? "00:00" : msToTime(this.getCurrentPositionMS());
             document.querySelector("#timerText").innerHTML = actualValue;
 
-            setCircleDashArray(this.getCurrentPositionMS() / this.timerLengthMS);
+            setTimerProgress(this.getCurrentPositionMS() / this.timerLengthMS);
 
             if (this.blurred) {
                document.title = actualValue;
