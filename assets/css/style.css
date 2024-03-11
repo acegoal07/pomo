@@ -36,30 +36,30 @@ h2 {
   display: none;
 }
 
-/* Commented out, doesn't work properly and accessibility problems */
+/* STOP UN-COMMENTING THIS YOU CHIMPANZEE */
 /* ::-webkit-scrollbar {
-   width: 15px;
+  width: 15px;
 }
 
 ::-webkit-scrollbar-track {
-   box-shadow: inset 0 0 5px var(--foreground-color);
-   border-radius: 10px;
+  box-shadow: inset 0 0 5px var(--foreground-color);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-   background: var(--background-color);
-   border-radius: 10px;
-   outline-style: ridge;
-   outline-color: #000000;
-   outline-width: 1px;
+  background: var(--background-color);
+  border-radius: 10px;
+  outline-style: ridge;
+  outline-color: #000000;
+  outline-width: 1px;
 }
 
 ::-webkit-scrollbar-track-piece {
-   background: var(--foreground-color);
+  background: var(--foreground-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-   background: #940000;
+  background: #940000;
 } */
 
 /* 404 Page */
@@ -106,7 +106,6 @@ html.error-page a:hover {
   -o-transform: translateY(-5px);
   -ms-transform: translateY(-5px);
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px var(--shadow-color);
   background-color: var(--accent-color-hover);
 }
 
@@ -149,26 +148,25 @@ main.grid-layout div.nav-grid-section {
   gap: 10px;
 }
 
-div.pomodoro-counter-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  height: 4.6rem;
-  width: 4.6rem;
-}
-
 div.pomodoro-counter-container>label.pomodoro-counter {
   color: #fff;
   position: absolute;
   top: 0.3rem;
   font-family: 'Fredoka', cursive;
   font-size: 3.125rem;
-  text-shadow: #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness),
-    #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
 }
 
 /* Sorry i fiddled but it looks good */
+.pomodoro-counter-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 4.6rem;
+  width: 4.6rem;
+   text-shadow: #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness),
+    #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
+}
 
 .progress-ring-circle {
   stroke-dasharray: 10;
@@ -188,7 +186,7 @@ img#loginButton {
   -ms-transition: transform 0.2s ease;
   -moz-transition: transform 0.2s ease;
   transition: transform 0.2s ease;
-  box-shadow: 0 3px 5px var(--shadow-color);
+
 }
 
 img#loginButton:hover,
@@ -198,7 +196,6 @@ img#leaderboardButton:hover {
   -ms-transform: translateY(-5px);
   -moz-transform: translateY(-5px);
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 /* Banner */
@@ -212,7 +209,6 @@ main.grid-layout div.timer-grid-section {
 }
 
 div.timer-grid-section div.timer-grid-container {
-  box-shadow: 0 5px 15px var(--shadow-color);
   position: relative;
   background-color: var(--foreground-color);
   color: #fff;
@@ -229,7 +225,6 @@ div.timer-grid-section div.timer-grid-container {
   height: 18rem;
   border-radius: 10rem;
   background-color: var(--background-color);
-  box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .base-timer-circle {
@@ -390,7 +385,6 @@ div.todo-grid-section div.todo-grid-container {
   background-color: var(--foreground-color);
   color: #fff;
   border-radius: 1.5rem;
-  box-shadow: 0 5px 15px var(--shadow-color);
   padding: 1rem;
   max-height: 40%;
   height: auto;
@@ -407,7 +401,6 @@ div.todo-add-btn-background {
   -moz-transition: transform 0.2s ease;
   transition: transform 0.2s ease;
   cursor: pointer;
-  box-shadow: 0 3px 5px var(--shadow-color);
 }
 
 div.todo-add-btn-background:hover {
@@ -416,7 +409,6 @@ div.todo-add-btn-background:hover {
   -ms-transform: translateY(-5px);
   -moz-transform: translateY(-5px);
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 div.todo-add-btn-background>div.todo-add-btn-horizontal-plus {
@@ -444,6 +436,7 @@ div.todo-list-container {
 }
 
 div.todo-list-container>div.todo-item {
+  overflow-wrap: anywhere;
   cursor: pointer;
   display: flex;
   margin: auto;
@@ -458,7 +451,6 @@ div.todo-list-container>div.todo-item {
   -o-transition: transform 0.2s ease, box-shadow 0.2s ease;
   -moz-transition: transform 0.2s ease, box-shadow 0.2s ease;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 3px 5px var(--shadow-color);
 }
 
 div.todo-item:hover {

@@ -255,28 +255,17 @@ function isIOS() {
 
 //this is pomo progress ring stuff, alex i give you permission to meddle and put things where you want them when im done hahahahaha. Still working on it.
 
-var circle = document.querySelector('circle');
+// Tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut tut 
+
+var circle = document.querySelector('#counter-circle');
 var radius = circle.r.baseVal.value;
 var circumference = radius * 2 * Math.PI;
-
 
 circle.style.strokeDasharray = `${circumference} ${circumference}`;
 circle.style.strokeDashoffset = `${circumference}`;
 
 function setProgress(percent) {
-  const offset = circumference - percent / 100 * circumference;
-  circle.style.strokeDashoffset = offset;
+  circle.style.strokeDashoffset = circumference - percent / 100 * circumference;
 }
 
-const input = document.querySelector('input');
-setProgress(input.value);
 
-/*test stuff, this will eventually be incremented based on the timer but this is just easier to 
-do whilst im making it */
-
-var percent = 0;
-
-window.addEventListener('keyup', () => {
-  setProgress(percent);
-  percent = percent + 5;
-});
