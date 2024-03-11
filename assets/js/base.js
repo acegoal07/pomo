@@ -130,6 +130,7 @@ window.addEventListener('load', () => {
   let index = 0;
   const times = [25, 5, 25, 5, 25, 5, 25, 15];
   let currentTime;
+  let pomoProgress = 0;
 
   document.querySelector("#startButton").addEventListener('click', () => {
     if (!timer.isActive()) {
@@ -170,9 +171,12 @@ window.addEventListener('load', () => {
           }
           if (index < 7) {
             index++;
+            pomoProgress = pomoProgress + 12.5;
+            setProgress(pomoProgress);
           } else {
             index = 0;
             pomodoros++;
+            pomoProgress = 0;
             document.querySelector('#pomoCounter').textContent = pomodoros;
           }
         } else if (timer.getCurrentPositionMS() < quarterWay) {
