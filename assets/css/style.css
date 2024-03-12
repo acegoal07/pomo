@@ -12,7 +12,6 @@
 html {
    scroll-behavior: smooth;
    -webkit-user-select: none;
-   -khtml-user-select: none;
    -moz-user-select: none;
    -ms-user-select: none;
    user-select: none;
@@ -30,6 +29,8 @@ h1 {
    text-align: center;
    text-transform: uppercase;
    letter-spacing: 0.125rem;
+   text-shadow: #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness),
+      #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
 }
 
 h2 {
@@ -486,6 +487,7 @@ div.popup-background {
    background-color: var(--shadow-color);
    -webkit-backdrop-filter: blur(5px);
    backdrop-filter: blur(5px);
+   transition: 0.5s all ease;
 }
 
 div.popup-background>div.popup-content {
@@ -494,9 +496,22 @@ div.popup-background>div.popup-content {
    border: 8px solid var(--accent-color);
    background-color: var(--background-color);
    width: 80%;
+   max-width: 60rem;
    height: 80%;
    border-radius: 1.5rem;
    overflow: auto;
+}
+
+@media only screen and (max-width: 1120px) {
+   div.popup-background>div.popup-content {
+      padding: 10px;
+      width: 85%;
+   }
+}
+
+h1.popup-header {
+   margin-top: 3.8rem;
+   margin-bottom: 1.5rem;
 }
 
 @keyframes popupOpenAnimation {
@@ -531,7 +546,6 @@ a>div.popup-close-btn-background {
    -ms-transition: transform 0.2s ease;
    transition: transform 0.2s ease;
    cursor: pointer;
-   margin: 0.5rem;
    box-shadow: 0 3px 5px var(--shadow-color);
 }
 
