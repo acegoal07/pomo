@@ -9,6 +9,13 @@ window.onfocus = function () {
    timer.setBlurred(false);
    document.title = docTitle;
 };
+// Disable drag and drop
+window.ondragstart = function () {
+   return false;
+}
+window.ondrop = function () {
+   return false;
+}
 // Onload handler
 window.addEventListener('load', () => {
    /////////////// Onload changes ///////////////
