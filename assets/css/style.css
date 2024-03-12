@@ -54,7 +54,7 @@ html.error-page h2 {
    margin-top: 0;
 }
 
-html.error-page div.a-container {
+html.error-page div.error-page-a-container {
    display: flex;
    justify-content: center;
 }
@@ -141,8 +141,19 @@ div.pomodoro-counter-container>label.pomodoro-counter {
       #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
 }
 
-.progress-ring-circle {
+.pomodoro-counter-circle {
+   stroke-width: 10px;
+   fill: transparent;
+}
+
+.pomodoro-counter-circle.pomodoro-counter-circle-track {
+   stroke: #808080;
+}
+
+.pomodoro-counter-circle.pomodoro-counter-circle-progress {
+   stroke-linecap: round;
    stroke-dasharray: 10;
+   stroke: var(--accent-color);
    transition: stroke-dashoffset 1s linear;
 }
 
@@ -195,7 +206,7 @@ div.timer-grid-section div.timer-grid-container {
    box-shadow: 0 5px 15px var(--shadow-color);
 }
 
-.base-timer {
+div.timer-container {
    /* Dara this is the bit */
    position: relative;
    width: 18rem;
@@ -205,15 +216,37 @@ div.timer-grid-section div.timer-grid-container {
    background-color: #808080;
 }
 
-.base-timer-circle {
+div.timer-container g.timer-background {
    fill: none;
    stroke: none;
 }
 
-.timer-path-elapsed {
+g.timer-background>circle.timer-path-elapsed {
    stroke-width: 0.5rem;
    stroke: #808080;
    fill: var(--background-color);
+}
+
+g.timer-background>path.timer-path-remaining {
+   stroke-width: 0.5rem;
+   stroke-linecap: round;
+   -webkit-transform: rotate(90deg);
+   -o-transform: rotate(90deg);
+   -ms-transform: rotate(90deg);
+   -moz-transform: rotate(90deg);
+   transform: rotate(90deg);
+   -webkit-transform-origin: center;
+   -o-transform-origin: center;
+   -ms-transform-origin: center;
+   -moz-transform-origin: center;
+   transform-origin: center;
+}
+
+g.timer-background>path.path-remaining-transition {
+   -webkit-transition: all 1s linear;
+   -o-transition: all 1s linear;
+   -moz-transition: all 1s linear;
+   transition: all 1s linear;
 }
 
 span#timer {
@@ -236,28 +269,6 @@ span#timer {
 
 div.timer-controls-container {
    text-align: center;
-}
-
-path.path-remaining {
-   stroke-width: 0.5rem;
-   stroke-linecap: round;
-   -webkit-transform: rotate(90deg);
-   -o-transform: rotate(90deg);
-   -ms-transform: rotate(90deg);
-   -moz-transform: rotate(90deg);
-   transform: rotate(90deg);
-   -webkit-transform-origin: center;
-   -o-transform-origin: center;
-   -ms-transform-origin: center;
-   -moz-transform-origin: center;
-   transform-origin: center;
-}
-
-path.path-remaining-transition {
-   -webkit-transition: all 1s linear;
-   -o-transition: all 1s linear;
-   -moz-transition: all 1s linear;
-   transition: all 1s linear;
 }
 
 div.play-icon-container {
@@ -458,11 +469,11 @@ h1.todo-header {
 }
 
 /* Popup */
-div.popup {
+div.popup-background {
    display: none;
+   justify-content: center;
    position: fixed;
    z-index: 1;
-   padding-top: 3rem;
    left: 0;
    top: 0;
    width: 100%;
@@ -472,7 +483,7 @@ div.popup {
    backdrop-filter: blur(5px);
 }
 
-div.popup>div.popup-content {
+div.popup-background>div.popup-content {
    margin: auto;
    padding: 20px;
    border: 8px solid var(--accent-color);

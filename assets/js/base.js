@@ -16,16 +16,14 @@ window.addEventListener('load', () => {
       Notification.requestPermission();
    }
    setTimerColor("var(--background-color)");
-   document.querySelector("#base-timer-path-remaining").classList.add("path-remaining-transition");
+   document.querySelector("#timer-path-remaining").classList.add("path-remaining-transition");
 
    /////////////// Todo popup ///////////////
    // Open todo popup button listener
    document.querySelector("#todo-add-button").addEventListener('click', () => {
-      if (document.querySelector("#leaderboard-popup").style.display === "block" || document.querySelector("#login-popup").style.display === "block") { return; }
       const popup = document.querySelector("#todo-popup");
-      if (popup.style.display === "block") { return; }
       popup.style.animation = "popupOpenAnimation 0.5s forwards";
-      popup.style.display = "block";
+      popup.style.display = "flex";
    });
    // Close todo popup button listener
    document.querySelector("#todo-close-popup").addEventListener('click', () => {
@@ -70,11 +68,9 @@ window.addEventListener('load', () => {
    /////////////// Leaderboard popup ///////////////
    // Open leaderboard popup button
    document.querySelector("#leaderboardButton").addEventListener('click', () => {
-      if (document.querySelector("#todo-popup").style.display === "block" || document.querySelector("#login-popup").style.display === "block") { return; }
       const popup = document.querySelector("#leaderboard-popup");
-      if (popup.style.display === "block") { return; }
       popup.style.animation = "popupOpenAnimation 0.5s forwards";
-      popup.style.display = "block";
+      popup.style.display = "flex";
    });
    // Close leaderboard popup button
    document.querySelector("#leaderboard-close-popup").addEventListener('click', () => {
@@ -91,11 +87,9 @@ window.addEventListener('load', () => {
    /////////////// Login popup ///////////////
    // Open login popup button
    document.querySelector("#loginButton").addEventListener('click', () => {
-      if (document.querySelector("#todo-popup").style.display === "block" || document.querySelector("#leaderboard-popup").style.display === "block") { return; }
       const popup = document.querySelector("#login-popup");
-      if (popup.style.display === "block") { return; }
       popup.style.animation = "popupOpenAnimation 0.5s forwards";
-      popup.style.display = "block";
+      popup.style.display = "flex";
    });
    // Close login popup button
    document.querySelector("#login-close-popup").addEventListener('click', () => {
@@ -177,7 +171,7 @@ window.addEventListener('load', () => {
                   index = 0;
                   pomodoros++;
                   pomoProgress = 0;
-                  document.querySelector('#pomoCounter').textContent = pomodoros;
+                  document.querySelector('#pomodoro-counter').textContent = pomodoros;
                }
             } else if (timer.getCurrentPositionMS() < quarterWay) {
                setTimerColor("var(--background-color)");
@@ -201,7 +195,7 @@ window.addEventListener('load', () => {
  * @param {int} value
  */
 function setTimerProgress(value) {
-   document.querySelector("#base-timer-path-remaining").setAttribute.bind(document.querySelector("#base-timer-path-remaining"))("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
+   document.querySelector("#timer-path-remaining").setAttribute.bind(document.querySelector("#timer-path-remaining"))("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
 }
 const circle = document.querySelector('#counter-circle');
 const radius = circle.r.baseVal.value;
@@ -220,7 +214,7 @@ function setPomoCounterProgress(percent) {
  * @param {String} input
  */
 function setTimerColor(input) {
-   document.querySelector("#base-timer-path-remaining").style.stroke = input == null ? "green" : input;
+   document.querySelector("#timer-path-remaining").style.stroke = input == null ? "green" : input;
 }
 /**
  * Milliseconds to timestamp
