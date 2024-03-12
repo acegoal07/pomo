@@ -506,6 +506,7 @@ div.popup-background>div.popup-content {
    div.popup-background>div.popup-content {
       padding: 10px;
       width: 85%;
+      height: 85%;
    }
 }
 
