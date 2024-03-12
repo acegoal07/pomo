@@ -106,23 +106,37 @@ window.addEventListener('load', () => {
          popup.style.display = "none";
       }, 500);
    });
-   // Registration page switch button
-   document.querySelector("#goToRegister").addEventListener('click', (event) => {
-      event.preventDefault();
-      // Remove all elements from the page
-      document.querySelector("#registrationPage").classList.remove("hide");
-      document.querySelector("#loginPage").classList.add("hide");
-   });
    // Login page switch button
-   document.querySelector("#goToLogin").addEventListener('click', (event) => {
-      event.preventDefault();
+   document.querySelector("#go-to-registration").addEventListener('click', () => {
       // Remove all elements from the page
-      document.querySelector("#registrationPage").classList.add("hide");
-      document.querySelector("#loginPage").classList.remove("hide");
+      document.querySelector("#registration-page").classList.remove("hide");
+      document.querySelector("#login-page").classList.add("hide");
    });
    // Login submit button
-   document.querySelector("#loginForm").addEventListener('submit', (event) => {
+   document.querySelector("#login-form").addEventListener('submit', (event) => {
       event.preventDefault();
+      event.target.reset();
+      const popup = document.querySelector("#login-popup");
+      popup.style.animation = "popupCloseAnimation 0.5s forwards";
+      setTimeout(function () {
+         popup.style.display = "none";
+      }, 500);
+   });
+   // Registration page switch button
+   document.querySelector("#go-to-login").addEventListener('click', () => {
+      // Remove all elements from the page
+      document.querySelector("#registration-page").classList.add("hide");
+      document.querySelector("#login-page").classList.remove("hide");
+   });
+   // Registration submit button
+   document.querySelector("#registration-form").addEventListener('submit', (event) => {
+      event.preventDefault();
+      event.target.reset();
+      const popup = document.querySelector("#login-popup");
+      popup.style.animation = "popupCloseAnimation 0.5s forwards";
+      setTimeout(function () {
+         popup.style.display = "none";
+      }, 500);
    });
 
    /////////////// Timer Buttons ///////////////
@@ -132,7 +146,6 @@ window.addEventListener('load', () => {
    const times = [25, 5, 25, 5, 25, 5, 25, 15];
    let currentTime;
    let pomoProgress = 0;
-
    document.querySelector("#startButton").addEventListener('click', () => {
       if (!timer.isActive()) {
          if (timer.getCurrentPositionMS() === 0) {
