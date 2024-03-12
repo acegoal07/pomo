@@ -128,7 +128,7 @@ main.grid-layout div.nav-grid-section {
    gap: 10px;
 }
 
-div.pomodoro-counter-container>label.pomodoro-counter {
+div.pomodoro-counter-container>span.pomodoro-counter {
    color: #fff;
    position: absolute;
    top: 0.3rem;
@@ -136,7 +136,7 @@ div.pomodoro-counter-container>label.pomodoro-counter {
    font-size: 3.125rem;
 }
 
-.pomodoro-counter-container {
+div.pomodoro-counter-container {
    position: relative;
    display: flex;
    justify-content: center;
