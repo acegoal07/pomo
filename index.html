@@ -19,7 +19,7 @@
 <body>
    <!-- Add todo popup -->
    <div id="todo-popup" class="popup-background">
-      <div class="popup-content">
+      <div class="popup-body">
          <a id="todo-close-popup">
             <div class="popup-close-btn-background">
                <div class="popup-close-btn-line-1"></div>
@@ -37,7 +37,7 @@
 
    <!-- Login/registration popup -->
    <div id="login-popup" class="popup-background">
-      <div class="popup-content">
+      <div class="popup-body">
          <a id="login-close-popup">
             <div class="popup-close-btn-background">
                <div class="popup-close-btn-line-1"></div>
@@ -72,7 +72,7 @@
 
    <!-- Weekly/all time leaderboard popup -->
    <div id="leaderboard-popup" class="popup-background">
-      <div class="popup-content">
+      <div class="popup-body">
          <a id="leaderboard-close-popup">
             <div class="popup-close-btn-background">
                <div class="popup-close-btn-line-1"></div>
@@ -80,21 +80,27 @@
             </div>
          </a>
 
-         <a id="leaderboard-switch-button"></a>
-         <div class="weekly-grid-section">
+         <div id="leaderboard-weekly">
             <h1 class="popup-header">Weekly</h1>
-            <p class="leaderEntry">Leader yay</p>
-            <p class="leaderEntry">Leader yay</p>
-            <p class="leaderEntry">Leader yay</p>
+            <ul class="leaderboard-list">
+               <li class="leaderboard-entry">Weekly leader yay</li>
+               <li class="leaderboard-entry">Weekly leader yay</li>
+               <li class="leaderboard-entry">Weekly leader yay</li>
+            </ul>
          </div>
 
-         <div class="allTime-grid-section">
+         <div class="hide" id="leaderboard-all-time">
             <h1 class="popup-header">All Time</h1>
-            <p class="leaderEntry">Leader yay</p>
-            <p class="leaderEntry">Dara yay</p>
-            <p class="leaderEntry">Leader yay</p>
+            <ul class="leaderboard-list">
+               <li class="leaderboard-entry">All time leader yay</li>
+               <li class="leaderboard-entry">All time leader yay</li>
+               <li class="leaderboard-entry">All time leader yay</li>
+            </ul>
          </div>
 
+         <div class="leaderboard-switch-container">
+            <a class="leaderboard-switch-button" id="leaderboard-switch-button">Switch to weekly</a>
+         </div>
       </div>
    </div>
    <!-- Main container -->

@@ -87,8 +87,15 @@ window.addEventListener('load', () => {
          popup.style.display = "none";
       }, 500);
    });
-   // Switch between all time and weekly leaderboard
+   // Leaderboard switch button
    document.querySelector("#leaderboard-switch-button").addEventListener('click', () => {
+      if (document.querySelector("#leaderboard-all-time").classList.contains("hide")) {
+         document.querySelector("#leaderboard-all-time").classList.remove("hide");
+         document.querySelector("#leaderboard-weekly").classList.add("hide");
+      } else {
+         document.querySelector("#leaderboard-all-time").classList.add("hide");
+         document.querySelector("#leaderboard-weekly").classList.remove("hide");
+      }
    });
 
    /////////////// Login popup ///////////////
@@ -217,17 +224,17 @@ window.addEventListener('load', () => {
 function setTimerProgress(value) {
    document.querySelector("#timer-path-remaining").setAttribute.bind(document.querySelector("#timer-path-remaining"))("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
 }
-const circle = document.querySelector('#counter-circle');
-const radius = circle.r.baseVal.value;
-const circumference = radius * 2 * Math.PI;
-circle.style.strokeDasharray = `${circumference} ${circumference}`;
-circle.style.strokeDashoffset = `${circumference}`;
+const pomodoroCounterCircle = document.querySelector('#counter-circle');
+const pomodoroCounterRadius = pomodoroCounterCircle.r.baseVal.value;
+const pomodoroCounterCircumference = pomodoroCounterRadius * 2 * Math.PI;
+pomodoroCounterCircle.style.strokeDasharray = `${pomodoroCounterCircumference} ${pomodoroCounterCircumference}`;
+pomodoroCounterCircle.style.strokeDashoffset = `${pomodoroCounterCircumference}`;
 /**
  * Pomo counter progress function
  * @param {Number} percent
  */
 function setPomoCounterProgress(percent) {
-   circle.style.strokeDashoffset = circumference - percent / 100 * circumference;
+   pomodoroCounterCircle.style.strokeDashoffset = pomodoroCounterCircumference - percent / 100 * pomodoroCounterCircumference;
 }
 /**
  * Timer colour function
