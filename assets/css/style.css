@@ -671,16 +671,20 @@ li.leaderboard-entry {
    box-shadow: 0 3px 5px var(--shadow-color);
 }
 
+li.leaderboard-entry:last-child {
+   margin-bottom: 1rem;
+}
+
 @media only screen and (max-width: 1120px) {
    li.leaderboard-entry {
       width: 90%;
       padding: 0.5rem;
       margin-top: 0.5rem;
    }
-}
 
-li.leaderboard-entry:last-child {
-   margin-bottom: 0.5rem;
+   li.leaderboard-entry:last-child {
+      margin-bottom: 0.5rem;
+   }
 }
 
 div.leaderboard-switch-container {
