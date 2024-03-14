@@ -91,8 +91,10 @@ html.error-page a:hover {
 
 /* Images */
 img.banner-image {
-   max-width: 28rem;
+   max-width: 30rem;
    width: 100%;
+   max-height: 30rem;
+   height: 100%;
    display: block;
    margin: auto;
    margin-bottom: 0;
@@ -213,61 +215,54 @@ div.timer-grid-section div.timer-grid-container {
 }
 
 div.timer-container {
-   position: relative;
-   width: 18rem;
-   height: 18rem;
-   border-radius: 10rem;
+   max-height: 18rem;
+   max-width: 18rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 100%;
    box-shadow: 0 5px 15px var(--shadow-color);
-   background-color: #808080;
 }
 
-div.timer-container g.timer-background {
-   fill: none;
-   stroke: none;
+div.timer-container>svg.timer-svg-container {
+   width: 100%;
+   height: 100%;
+   border-radius: 100%;
 }
 
-g.timer-background>circle.timer-path-elapsed {
-   stroke-width: 0.5rem;
+svg.timer-svg-container>circle.timer-circle-track {
+   stroke-width: 0.65rem;
    stroke: #808080;
    fill: var(--background-color);
 }
 
-g.timer-background>path.timer-path-remaining {
-   stroke-width: 0.62rem;
-   stroke-linecap: round;
-   -webkit-transform: rotate(90deg);
-   -o-transform: rotate(90deg);
-   -ms-transform: rotate(90deg);
-   -moz-transform: rotate(90deg);
-   transform: rotate(90deg);
+svg.timer-svg-container>circle#timer-circle-progress {
+   -webkit-transform: rotate(-90deg);
+   -o-transform: rotate(-90deg);
+   -ms-transform: rotate(-90deg);
+   -moz-transform: rotate(-90deg);
+   transform: rotate(-90deg);
    -webkit-transform-origin: center;
    -o-transform-origin: center;
    -ms-transform-origin: center;
    -moz-transform-origin: center;
    transform-origin: center;
+   stroke-width: 0.65rem;
+   stroke-linecap: round;
+   stroke: var(--accent-color);
+   fill: none;
 }
 
-g.timer-background>path.path-remaining-transition {
+svg.timer-svg-container>circle.timer-circle-progress-transition {
    -webkit-transition: all 1s linear;
    -o-transition: all 1s linear;
    -moz-transition: all 1s linear;
    transition: all 1s linear;
 }
 
-span#timer {
+div.timer-container>h1#timer-text {
    color: #fff;
    position: absolute;
-   font-size: 2.7rem;
-   -webkit-transform: translate(-50%, -50%);
-   -o-transform: translate(-50%, -50%);
-   -ms-transform: translate(-50%, -50%);
-   -moz-transform: translate(-50%, -50%);
-   transform: translate(-50%, -50%);
-   top: 50%;
-   left: 50%;
-   display: flex;
-   align-items: center;
-   justify-content: center;
    text-shadow: #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness),
       #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
 }

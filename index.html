@@ -126,17 +126,13 @@
       <div class="timer-grid-section">
          <div class="timer-grid-container">
             <div class="timer-container">
-               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <g class="timer-background">
-                     <circle class="timer-path-elapsed" cx="50" cy="50" r="45" />
-                     <path id="timer-path-remaining" class="timer-path-remaining" stroke-dasharray="283"
-                        d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"></path>
-                  </g>
+               <h1 id="timer-text">25:00</h1>
+               <svg class="timer-svg-container" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle class="timer-circle-track" cx="50" cy="50" r="45" />
+                  <circle id="timer-circle-progress" cx="50" cy="50" r="45" />
                </svg>
-               <span id="timer">
-                  <h1 id="timerText">25:00</h1>
-               </span>
             </div>
+
             <div class="timer-controls-container">
                <div class="play-icon-container" id="startButton">
                   <div class="play-icon"></div>

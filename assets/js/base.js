@@ -23,7 +23,7 @@ window.addEventListener('load', () => {
       Notification.requestPermission();
    }
    setTimerColor("var(--background-color)");
-   document.querySelector("#timer-path-remaining").classList.add("path-remaining-transition");
+   document.querySelector("#timer-circle-progress").classList.add("timer-circle-progress-transition");
 
    /////////////// Todo popup ///////////////
    // Open todo popup button listener
@@ -222,7 +222,7 @@ window.addEventListener('load', () => {
  * @param {int} value
  */
 function setTimerProgress(value) {
-   document.querySelector("#timer-path-remaining").setAttribute.bind(document.querySelector("#timer-path-remaining"))("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
+   document.querySelector("#timer-circle-progress").setAttribute.bind(document.querySelector("#timer-circle-progress"))("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
 }
 const pomodoroCounterCircle = document.querySelector('#counter-circle');
 const pomodoroCounterRadius = pomodoroCounterCircle.r.baseVal.value;
@@ -241,7 +241,7 @@ function setPomoCounterProgress(percent) {
  * @param {String} input
  */
 function setTimerColor(input) {
-   document.querySelector("#timer-path-remaining").style.stroke = input == null ? "green" : input;
+   document.querySelector("#timer-circle-progress").style.stroke = input == null ? "green" : input;
 }
 /**
  * Milliseconds to timestamp

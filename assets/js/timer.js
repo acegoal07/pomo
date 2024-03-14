@@ -68,7 +68,7 @@ class PomoTimer {
                // this.playAlarm();
             }
             const actualValue = this.getCurrentPositionMS == 0 ? "00:00" : msToTime(this.getCurrentPositionMS());
-            document.querySelector("#timerText").innerHTML = actualValue;
+            document.querySelector("#timer-text").innerHTML = actualValue;
 
             setTimerProgress(this.getCurrentPositionMS() / this.timerLengthMS);
 
