@@ -234,7 +234,7 @@ g.timer-background>circle.timer-path-elapsed {
 }
 
 g.timer-background>path.timer-path-remaining {
-   stroke-width: 0.5rem;
+   stroke-width: 0.62rem;
    stroke-linecap: round;
    -webkit-transform: rotate(90deg);
    -o-transform: rotate(90deg);
