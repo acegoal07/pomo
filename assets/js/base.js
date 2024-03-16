@@ -74,7 +74,7 @@ window.addEventListener('load', () => {
 
    /////////////// Leaderboard popup ///////////////
    // Open leaderboard popup button
-   document.querySelector("#leaderboardButton").addEventListener('click', () => {
+   document.querySelector("#leaderboard-button").addEventListener('click', () => {
       const popup = document.querySelector("#leaderboard-popup");
       popup.style.animation = "popupOpenAnimation 0.5s forwards";
       popup.style.display = "flex";
@@ -100,7 +100,7 @@ window.addEventListener('load', () => {
 
    /////////////// Login popup ///////////////
    // Open login popup button
-   document.querySelector("#loginButton").addEventListener('click', () => {
+   document.querySelector("#login-button").addEventListener('click', () => {
       const popup = document.querySelector("#login-popup");
       popup.style.animation = "popupOpenAnimation 0.5s forwards";
       popup.style.display = "flex";

@@ -171,8 +171,7 @@ div.pomodoro-counter-container {
    transition: stroke-dashoffset 1s linear;
 }
 
-img#leaderboardButton,
-img#loginButton {
+img.nav-button {
    display: inline-block;
    height: 4.6rem;
    cursor: pointer;
@@ -185,11 +184,9 @@ img#loginButton {
    -moz-transition: transform 0.2s ease;
    transition: transform 0.2s ease;
    box-shadow: 0 3px 5px var(--shadow-color);
-
 }
 
-img#loginButton:hover,
-img#leaderboardButton:hover {
+img.nav-button:hover {
    -webkit-transform: translateY(-5px);
    -o-transform: translateY(-5px);
    -ms-transform: translateY(-5px);
