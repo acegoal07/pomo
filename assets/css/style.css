@@ -33,6 +33,12 @@ h1 {
       #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
 }
 
+@media only screen and (max-width: 1120px) {
+   h1 {
+      font-size: 2.75rem;
+   }
+}
+
 h2 {
    text-align: center;
    color: #fff;
