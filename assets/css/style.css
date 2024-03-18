@@ -655,11 +655,14 @@ a.btn:hover {
    input[type="password"] {
       width: 80%;
       outline-width: 2px;
+      padding: 0.6rem;
+      font-size: 1.25rem;
    }
 
    button[type="reset"],
    button[type="submit"],
    a.btn {
+      width: 90%;
       padding: 0.6rem;
       margin-top: 0.3rem;
       font-size: 1.25rem;
