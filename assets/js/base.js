@@ -153,7 +153,7 @@ window.addEventListener('load', () => {
    const times = [25, 5, 25, 5, 25, 5, 25, 15];
    let currentTime;
    let pomoProgress = 0;
-   document.querySelector("#startButton").addEventListener('click', () => {
+   document.querySelector("#timer-start-button").addEventListener('click', () => {
       if (!timer.isActive()) {
          if (timer.getCurrentPositionMS() === 0) {
             setTimerColor("var(--accent-color)");
@@ -211,7 +211,7 @@ window.addEventListener('load', () => {
       }
    });
    // Pause timer button
-   document.querySelector("#pauseButton").addEventListener('click', () => {
+   document.querySelector("#timer-pause-button").addEventListener('click', () => {
       timer.stopTimer();
    });
 });

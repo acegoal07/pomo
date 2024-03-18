@@ -173,7 +173,7 @@ div.pomodoro-counter-container {
 
 img.nav-button {
    display: inline-block;
-   height: 4.6rem;
+   max-height: 4.6rem;
    cursor: pointer;
    border-radius: 2.5rem;
    padding: 0;
@@ -271,93 +271,36 @@ div.timer-container>h1#timer-text {
 }
 
 div.timer-controls-container {
-   text-align: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 1rem;
+   padding: 1rem;
 }
 
-div.play-icon-container {
-   transform: rotate(90deg);
-   display: inline-block;
+svg.timer-controls {
+   max-height: 9rem;
 }
 
-div.play-icon-container>div.play-icon {
+path.timer-controls-cursor {
+   fill: #fff;
    cursor: pointer;
-   position: relative;
-   background-color: #fff;
-   text-align: left;
-   display: block;
-   margin: 2rem;
-   -webkit-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
-   -o-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
-   -ms-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
-   -moz-transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
-   transform: rotate(-60deg) skewX(-30deg) scale(1, .866);
+   -webkit-transition: transform 0.2s ease;
+   -o-transition: transform 0.2s ease;
+   -ms-transition: transform 0.2s ease;
+   -moz-transition: transform 0.2s ease;
+   transition: transform 0.2s ease;
+   filter: drop-shadow(0 3px 5px var(--shadow-color));
 }
 
-div.play-icon-container>div.play-icon:before,
-div.play-icon-container>div.play-icon:after {
-   content: '';
-   position: absolute;
-   background-color: inherit;
-}
-
-div.play-icon,
-div.play-icon:before,
-div.play-icon:after {
-   width: 4rem;
-   height: 4rem;
-   border-top-right-radius: 30%;
-}
-
-div.play-icon-container>div.play-icon:before {
-   -webkit-transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
-   -o-transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
-   -ms-transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
-   -moz-transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
-   transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
-}
-
-div.play-icon-container>div.play-icon:after {
-   -webkit-transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
-   -o-transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
-   -ms-transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
-   -moz-transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
-   transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
-}
-
-div.pause-icon-container {
-   height: 6rem;
-   cursor: pointer;
-   display: inline-block;
-}
-
-div.pause-icon-container>div.pause-icon-line-1 {
-   position: relative;
-   display: inline-block;
-   background-color: #fff;
-   width: 2rem;
-   height: 100%;
-   left: -5%;
-   border-radius: 0.5rem;
-   margin-bottom: 1rem;
-}
-
-div.pause-icon-container>div.pause-icon-line-2 {
-   display: inline-block;
-   position: relative;
-   background-color: #fff;
-   width: 2rem;
-   height: 100%;
-   left: 5%;
-   border-radius: 0.5rem;
-   margin-bottom: 1rem;
-}
-
-div.pause-icon-container:hover div.pause-icon-line-1,
-div.pause-icon-container:hover div.pause-icon-line-2,
-div.play-icon-container>div.play-icon:hover,
-div.play-icon-container>div.play-icon:hover:before,
-div.play-icon-container>div.play-icon:hover:after {
-   background-color: var(--accent-color);
+path.timer-controls-cursor:hover {
+   fill: var(--accent-color);
+   -webkit-transform: translateY(-5px);
+   -o-transform: translateY(-5px);
+   -ms-transform: translateY(-5px);
+   -moz-transform: translateY(-5px);
+   transform: translateY(-5px);
+   filter: drop-shadow(0 7px 15px var(--shadow-color));
 }
 
 /* Todo */
@@ -379,7 +322,6 @@ div.todo-grid-section div.todo-grid-container {
    border-radius: 1.5rem;
    padding: 1rem;
    max-height: 40%;
-   height: auto;
    box-shadow: 0 5px 15px var(--shadow-color);
 }
 
