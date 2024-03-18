@@ -387,6 +387,7 @@ div.todo-add-btn-background {
    border-radius: 1.5rem;
    width: 4rem;
    height: 4rem;
+   margin-bottom: 0.7rem;
    background-color: var(--accent-color);
    -webkit-transition: transform 0.2s ease;
    -o-transition: transform 0.2s ease;
@@ -425,9 +426,10 @@ div.todo-add-btn-background>div.todo-add-btn-vertical-plus {
 }
 
 div.todo-list-container {
-   max-height: 28rem;
+   max-height: 26rem;
    height: 100%;
    overflow: auto;
+   border-radius: 1.5rem;
 }
 
 div.todo-list-container>div.todo-item {
@@ -435,7 +437,7 @@ div.todo-list-container>div.todo-item {
    cursor: pointer;
    display: flex;
    margin: auto;
-   margin-top: 1rem;
+   margin-top: 0.3rem;
    margin-bottom: 1rem;
    border-radius: 1.5rem;
    background-color: var(--accent-color);
@@ -618,8 +620,10 @@ input[type="password"]:focus {
 button[type="reset"],
 button[type="submit"],
 a.btn {
+   text-align: center;
    width: -moz-fit-content;
    width: fit-content;
+   max-width: 50%;
    padding: 0.8rem;
    font-size: 1.5rem;
    border-radius: 1rem;
@@ -662,7 +666,7 @@ a.btn:hover {
    button[type="reset"],
    button[type="submit"],
    a.btn {
-      width: 90%;
+      max-width: 90%;
       padding: 0.6rem;
       margin-top: 0.3rem;
       font-size: 1.25rem;
@@ -699,7 +703,7 @@ li.leaderboard-entry:last-child {
 @media only screen and (max-width: 1120px) {
    li.leaderboard-entry {
       width: 90%;
-      padding: 0.5rem;
+      padding: 0.6rem;
       margin-top: 0.5rem;
    }
 
