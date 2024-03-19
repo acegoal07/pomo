@@ -173,7 +173,7 @@ div.pomodoro-counter-container {
 
 img.nav-button {
    display: inline-block;
-   max-height: 4.6rem;
+   height: 4.6rem;
    cursor: pointer;
    border-radius: 2.5rem;
    padding: 0;
@@ -291,6 +291,10 @@ path.timer-controls-cursor {
    -moz-transition: transform 0.2s ease;
    transition: transform 0.2s ease;
    filter: drop-shadow(0 3px 5px var(--shadow-color));
+}
+
+path.timer-controls-cursor.timer-controls-active {
+   fill: var(--accent-color);
 }
 
 path.timer-controls-cursor:hover {
