@@ -173,7 +173,7 @@ div.pomodoro-counter-container {
 
 img.nav-button {
    display: inline-block;
-   height: 4.6rem;
+   max-height: 4.6rem;
    cursor: pointer;
    border-radius: 2.5rem;
    padding: 0;
