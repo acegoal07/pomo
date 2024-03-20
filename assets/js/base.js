@@ -25,21 +25,27 @@ window.addEventListener('load', () => {
    setTimerColor("var(--background-color)");
    document.querySelector("#timer-circle-progress").classList.add("timer-circle-progress-transition");
 
-   /////////////// Todo popup ///////////////
-   // Open todo popup button listener
-   document.querySelector("#todo-add-button").addEventListener('click', () => {
-      const popup = document.querySelector("#todo-popup");
-      popup.style.animation = "popupOpenAnimation 0.5s forwards";
-      popup.style.display = "flex";
+   /////////////// Universal Popup functions ///////////////
+   // Popup open listener
+   document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
+      element.addEventListener('click', () => {
+         const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
+         popup.style.animation = "popupOpenAnimation 0.5s forwards";
+         popup.style.display = "flex";
+      });
    });
-   // Close todo popup button listener
-   document.querySelector("#todo-close-popup").addEventListener('click', () => {
-      const popup = document.querySelector("#todo-popup");
-      popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function () {
-         popup.style.display = "none";
-      }, 500);
+   // Popup close listener
+   document.querySelectorAll("[data-popup-close-target]").forEach((element) => {
+      element.addEventListener('click', () => {
+         const popup = document.querySelector(`#${element.getAttribute("data-popup-close-target")}`);
+         popup.style.animation = "popupCloseAnimation 0.5s forwards";
+         setTimeout(function () {
+            popup.style.display = "none";
+         }, 500);
+      });
    });
+
+   /////////////// Todo popup functions ///////////////
    // Add todo button listener
    document.querySelector("#addTodoButton").addEventListener("click", (event) => {
       event.preventDefault();
@@ -72,21 +78,7 @@ window.addEventListener('load', () => {
       }
    });
 
-   /////////////// Leaderboard popup ///////////////
-   // Open leaderboard popup button
-   document.querySelector("#leaderboard-button").addEventListener('click', () => {
-      const popup = document.querySelector("#leaderboard-popup");
-      popup.style.animation = "popupOpenAnimation 0.5s forwards";
-      popup.style.display = "flex";
-   });
-   // Close leaderboard popup button
-   document.querySelector("#leaderboard-close-popup").addEventListener('click', () => {
-      const popup = document.querySelector("#leaderboard-popup");
-      popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function () {
-         popup.style.display = "none";
-      }, 500);
-   });
+   /////////////// Leaderboard popup functions ///////////////
    // Leaderboard switch button
    document.querySelector("#leaderboard-switch-button").addEventListener('click', () => {
       if (document.querySelector("#leaderboard-all-time").classList.contains("hide")) {
@@ -98,21 +90,7 @@ window.addEventListener('load', () => {
       }
    });
 
-   /////////////// Login popup ///////////////
-   // Open login popup button
-   document.querySelector("#login-button").addEventListener('click', () => {
-      const popup = document.querySelector("#login-popup");
-      popup.style.animation = "popupOpenAnimation 0.5s forwards";
-      popup.style.display = "flex";
-   });
-   // Close login popup button
-   document.querySelector("#login-close-popup").addEventListener('click', () => {
-      const popup = document.querySelector("#login-popup");
-      popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function () {
-         popup.style.display = "none";
-      }, 500);
-   });
+   /////////////// Login popup functions ///////////////
    // Login page switch button
    document.querySelector("#go-to-registration").addEventListener('click', () => {
       // Remove all elements from the page
