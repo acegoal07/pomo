@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Pomo</title>
+   <meta name="description" content="A focus tracker">
+   <link rel="shortcut icon" href="assets/images/favi.ico">
+   <link rel="stylesheet" href="assets/css/style.css">
+   <script src="assets/js/timer.js" defer></script>
+   <script src="assets/js/base.js" defer></script>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap" rel="stylesheet">
+</head>
+
+<body>
+   <!-- Add todo popup -->
+   <div id="todo-popup" class="popup-background">
+      <div class="popup-body">
+         <a data-popup-close-target="todo-popup">
+            <div class="popup-close-btn-background">
+               <div class="popup-close-btn-line-1"></div>
+               <div class="popup-close-btn-line-2"></div>
+            </div>
+         </a>
+         <h1 class="popup-header">ADD YOUR TASK:</h1>
+         <h2>Insert the details of your task below</h2>
+         <form id="createTodoForm" method="post" class="popup-form">
+            <input type="text" id="todo-input" placeholder="Enter your to-do item here">
+            <button id="addTodoButton" type="submit">Add To-Do</button>
+         </form>
+      </div>
+   </div>
+
+   <!-- Todo item popups -->
+   <div id="todo-item-popup" class="popup-background">
+      <div class="popup-body">
+         <a data-popup-close-target="todo-item-popup">
+            <div class="popup-close-btn-background">
+               <div class="popup-close-btn-line-1"></div>
+               <div class="popup-close-btn-line-2"></div>
+            </div>
+         </a>
+
+         <!-- Add your code here -->
+
+
+      </div>
+   </div>
+
+   <!-- Login/registration popup -->
+   <div id="login-popup" class="popup-background">
+      <div class="popup-body">
+         <a data-popup-close-target="login-popup">
+            <div class="popup-close-btn-background">
+               <div class="popup-close-btn-line-1"></div>
+               <div class="popup-close-btn-line-2"></div>
+            </div>
+         </a>
+
+         <div id="login-page">
+            <h1 class="popup-header">Enter your details:</h1>
+            <form id="login-form" method="post" class="popup-form">
+               <input id="login-user-name-input" type="text" name="username" placeholder="Username" required>
+               <input id="login-password-input" type="password" name="password" placeholder="Password" required>
+               <button id="go-to-registration" type="reset">Don't have an account? Click Here To Register</button>
+               <button id="login-submit-button" type="submit">Login</button>
+            </form>
+         </div>
+
+         <div id="registration-page" class="hide">
+            <h1 class="popup-header">Register your account:</h1>
+            <form id="registration-form" method="post" class="popup-form">
+               <input id="registration-username-input" type="text" name="username" placeholder="Username" required>
+               <input id="registration-password-input" type="password" name="password" placeholder="Password" required>
+               <input id="registration-comfirm-password-input" type="password" name="password"
+                  placeholder="Confirm Password" required>
+               <button id="go-to-login" type="reset">Already have an account? Click Here To Login</button>
+               <button id="register-submit-button" type="submit">Register</button>
+            </form>
+         </div>
+
+      </div>
+   </div>
+
+   <!-- Weekly/all time leaderboard popup -->
+   <div id="leaderboard-popup" class="popup-background">
+      <div class="popup-body">
+         <a data-popup-close-target="leaderboard-popup">
+            <div class="popup-close-btn-background">
+               <div class="popup-close-btn-line-1"></div>
+               <div class="popup-close-btn-line-2"></div>
+            </div>
+         </a>
+
+         <div id="leaderboard-weekly">
+            <h1 class="popup-header">Weekly</h1>
+            <ul class="leaderboard-list">
+               <li class="leaderboard-entry">Weekly leader yay</li>
+               <li class="leaderboard-entry">Weekly leader yay</li>
+               <li class="leaderboard-entry">Weekly leader yay</li>
+            </ul>
+         </div>
+
+         <div class="hide" id="leaderboard-all-time">
+            <h1 class="popup-header">All Time</h1>
+            <ul class="leaderboard-list">
+               <li class="leaderboard-entry">All time leader yay</li>
+               <li class="leaderboard-entry">All time leader yay</li>
+               <li class="leaderboard-entry">All time leader yay</li>
+            </ul>
+         </div>
+
+         <div class="leaderboard-switch-container">
+            <a class="btn" id="leaderboard-switch-button">Switch leaderboard</a>
+         </div>
+      </div>
+   </div>
+   <!-- Main container -->
+   <main class="grid-layout">
+      <!-- Banner -->
+      <div class="banner-grid-section">
+         <img class="banner-image" src="assets/images/pomoLogoTrans.webp" alt="pomo logo">
+      </div>
+      <!-- Nav -->
+      <div class="nav-grid-section">
+         <img data-popup-open-target="leaderboard-popup" class="nav-button" src="assets/images/leaderboardIcon.webp"
+            alt="Leaderboard button">
+         <div class="pomodoro-counter-container">
+            <span class="pomodoro-counter" id="pomodoro-counter">0</span>
+            <svg class="progress-ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+               <circle class="pomodoro-counter-circle pomodoro-counter-circle-track" cx="50" cy="50" r="45" />
+               <circle id="counter-circle" class="pomodoro-counter-circle pomodoro-counter-circle-progress" cx="50"
+                  cy="50" r="45" />
+            </svg>
+         </div>
+         <img data-popup-open-target="login-popup" class="nav-button" src="assets/images/loginIcon.webp" alt="Login button">
+      </div>
+      <!-- Timer -->
+      <div class="timer-grid-section">
+         <div class="timer-grid-container">
+            <div class="timer-container">
+               <h1 id="timer-text">25:00</h1>
+               <svg class="timer-svg-container" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle class="timer-circle-track" cx="50" cy="50" r="45" />
+                  <circle id="timer-circle-progress" cx="50" cy="50" r="45" />
+               </svg>
+            </div>
+            <div class="timer-controls-container">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="timer-controls"
+                  id="timer-start-button">
+                  <path class="timer-controls-cursor"
+                     d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" />
+               </svg>
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="timer-controls"
+                  id="timer-pause-button">
+                  <path class="timer-controls-cursor"
+                     d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z" />
+               </svg>
+            </div>
+         </div>
+      </div>
+      <!-- Todo -->
+      <div class="todo-grid-section">
+         <div class="todo-grid-container">
+            <h1 class="todo-header">TO DO:</h1>
+            <div data-popup-open-target="todo-popup" class="todo-add-btn-background">
+               <div class="todo-add-btn-horizontal-plus"></div>
+               <div class="todo-add-btn-vertical-plus"></div>
+            </div>
+            <div class="todo-list-container">
+               <div class="todo-item" data-popup-open-target="todo-item-popup">
+                  <div class="todo-item-container">
+                     <div class="todo-text" >This is a test task with a lot of text in hopes that the container will grow
+                        with
+                        the text. If not I will cry. I need just a little bit more text to make sure that the container
+                        will
+                        grow. and we are nearly there.</div>
+                  </div>
+               </div>
+
+               <div class="todo-item" data-popup-open-target="todo-item-popup">
+                  <div class="todo-item-container">
+                     <div class="todo-text">This is a test task with a lot of text in hopes that the container will grow
+                        with
+                        the text. If not I will cry. I need just a little bit more text to make sure that the container
+                        will
+                        grow. and we are nearly there.</div>
+                  </div>
+               </div>
+
+               <div class="todo-item" data-popup-open-target="todo-item-popup">
+                  <div class="todo-item-container">
+                     <div class="todo-text">This is a test task with a lot of text in hopes that the container will grow
+                        with
+                        the text. If not I will cry. I need just a little bit more text to make sure that the container
+                        will
+                        grow. and we are nearly there.</div>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </div>
+
+   </main>
+</body>
+
+</html>
