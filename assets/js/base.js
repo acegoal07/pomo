@@ -27,11 +27,14 @@ window.addEventListener('load', () => {
 
    /////////////// Universal Popup functions ///////////////
    // Popup open listener
+   const popupOpenFunction = (element) => {
+      const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
+      popup.style.animation = "popupOpenAnimation 0.5s forwards";
+      popup.style.display = "flex";
+   };
    document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
       element.addEventListener('click', () => {
-         const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
-         popup.style.animation = "popupOpenAnimation 0.5s forwards";
-         popup.style.display = "flex";
+         popupOpenFunction(element);
       });
    });
    // Popup close listener
@@ -65,6 +68,9 @@ window.addEventListener('load', () => {
          const todoItem = document.createElement("div");
          todoItem.setAttribute("data-popup-open-target", "todo-item-popup");
          todoItem.classList.add("todo-item");
+         todoItem.addEventListener("click", (element) => {
+            popupOpenFunction(element.target);
+         });
          todoItem.appendChild(todoItemContainer);
 
          document.querySelector(".todo-list-container").appendChild(todoItem);
