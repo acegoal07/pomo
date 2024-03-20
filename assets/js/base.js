@@ -2,18 +2,18 @@
 const timer = new PomoTimer();
 // Focus listener
 const docTitle = document.title;
-window.onblur = function () {
+window.onblur = function() {
    timer.setBlurred(true);
 };
-window.onfocus = function () {
+window.onfocus = function() {
    timer.setBlurred(false);
    document.title = docTitle;
 };
 // Disable drag and drop
-window.ondragstart = function () {
+window.ondragstart = function() {
    return false;
 }
-window.ondrop = function () {
+window.ondrop = function() {
    return false;
 }
 // Onload handler
@@ -39,7 +39,7 @@ window.addEventListener('load', () => {
       element.addEventListener('click', () => {
          const popup = document.querySelector(`#${element.getAttribute("data-popup-close-target")}`);
          popup.style.animation = "popupCloseAnimation 0.5s forwards";
-         setTimeout(function () {
+         setTimeout(function() {
             popup.style.display = "none";
          }, 500);
       });
@@ -73,7 +73,7 @@ window.addEventListener('load', () => {
 
          const popup = document.querySelector("#todo-popup");
          popup.style.animation = "popupCloseAnimation 0.5s forwards";
-         setTimeout(function () {
+         setTimeout(function() {
             popup.style.display = "none";
          }, 500);
       }
@@ -105,7 +105,7 @@ window.addEventListener('load', () => {
       event.target.reset();
       const popup = document.querySelector("#login-popup");
       popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function () {
+      setTimeout(function() {
          popup.style.display = "none";
       }, 500);
    });
@@ -121,7 +121,7 @@ window.addEventListener('load', () => {
       event.target.reset();
       const popup = document.querySelector("#login-popup");
       popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function () {
+      setTimeout(function() {
          popup.style.display = "none";
       }, 500);
    });
@@ -157,16 +157,16 @@ window.addEventListener('load', () => {
                      lang: "en-GB",
                      icon: "assets/images/favi.webp"
                   });
-                  notification.onclick = function () {
+                  notification.onclick = function() {
                      window.focus();
                      notification.close();
                   };
-                  notification.onshow = function () {
+                  notification.onshow = function() {
                      setTimeout(() => {
                         notification.close();
                      }, 5000);
                   };
-                  notification.onerror = function (error) {
+                  notification.onerror = function(error) {
                      console.log("Notification error: " + error);
                   }
                }
