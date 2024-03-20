@@ -79,7 +79,6 @@ window.addEventListener('load', () => {
       }
    });
 
-
    /////////////// Leaderboard popup functions ///////////////
    // Leaderboard switch button
    document.querySelector("#leaderboard-switch-button").addEventListener('click', () => {
