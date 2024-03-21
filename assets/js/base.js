@@ -270,3 +270,16 @@ function isIOS() {
 
    return !!(['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platforms));
 }
+
+// This is gonna display the text of the to do item in the input box when clicked so that the user can then edit it.
+const todoItems = document.querySelectorAll('.todo-item');
+const taskInput = document.getElementById('task-input');
+
+todoItems.forEach(todoItem => {
+   todoItem.addEventListener('click', () => {
+      const todoText = todoItem.textContent.trim();
+
+      taskInput.value = todoText;
+   });
+});
+// Isn't currenty working anymore but it will soon
