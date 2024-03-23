@@ -2,18 +2,18 @@
 const timer = new PomoTimer();
 // Focus listener
 const docTitle = document.title;
-window.onblur = function() {
+window.onblur = function () {
   timer.setBlurred(true);
 };
-window.onfocus = function() {
+window.onfocus = function () {
   timer.setBlurred(false);
   document.title = docTitle;
 };
 // Disable drag and drop
-window.ondragstart = function() {
+window.ondragstart = function () {
   return false;
 };
-window.ondrop = function() {
+window.ondrop = function () {
   return false;
 };
 // Onload handler
@@ -52,7 +52,7 @@ window.addEventListener("load", () => {
   const popupCloseFunctionByID = (ID) => {
     const popup = document.querySelector(`#${ID}`);
     popup.style.animation = "popupCloseAnimation 0.5s forwards";
-    setTimeout(function() {
+    setTimeout(function () {
       popup.style.display = "none";
     }, 500);
   }
@@ -60,7 +60,7 @@ window.addEventListener("load", () => {
     element.addEventListener("click", () => {
       const popup = document.querySelector(`#${element.getAttribute("data-popup-close-target")}`);
       popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function() {
+      setTimeout(function () {
         popup.style.display = "none";
       }, 500);
     });
@@ -95,6 +95,8 @@ window.addEventListener("load", () => {
       document.querySelector(".todo-list-container").appendChild(todoItem);
 
       todoInput.value = "";
+
+      popupCloseFunctionByID("todo-item-popup");
     }
   });
   // Todo item delete button
@@ -132,7 +134,7 @@ window.addEventListener("load", () => {
     event.target.reset();
     const popup = document.querySelector("#login-popup");
     popup.style.animation = "popupCloseAnimation 0.5s forwards";
-    setTimeout(function() {
+    setTimeout(function () {
       popup.style.display = "none";
     }, 500);
   });
@@ -148,7 +150,7 @@ window.addEventListener("load", () => {
     event.target.reset();
     const popup = document.querySelector("#login-popup");
     popup.style.animation = "popupCloseAnimation 0.5s forwards";
-    setTimeout(function() {
+    setTimeout(function () {
       popup.style.display = "none";
     }, 500);
   });
@@ -179,20 +181,20 @@ window.addEventListener("load", () => {
           if (getNotificationPermission() && document.hasFocus() === false) {
             const notification = new Notification("Pomo Timer", {
               title: "Pomo Timer",
-              body: `${times[index] === 25 ? "Its time for your break comeback and start the timer" : "Your break has finished                                       comeback!"}`,
+              body: `${times[index] === 25 ? "Its time for your break comeback and start the timer" : "Your break has finished comeback!"}`,
               lang: "en-GB",
-              icon: "assets/images/favi.webp",
+              icon: "assets/images/favi.webp"
             });
-            notification.onclick = function() {
+            notification.onclick = function () {
               window.focus();
               notification.close();
             };
-            notification.onshow = function() {
+            notification.onshow = function () {
               setTimeout(() => {
                 notification.close();
               }, 5000);
             };
-            notification.onerror = function(error) {
+            notification.onerror = function (error) {
               console.log("Notification error: " + error);
             };
           }
@@ -296,6 +298,6 @@ function isIOS() {
     "iPod Simulator",
     "iPad",
     "iPhone",
-    "iPod",
+    "iPod"
   ].includes(navigator.platforms);
 }
