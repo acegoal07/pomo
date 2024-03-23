@@ -2,18 +2,18 @@
 const timer = new PomoTimer();
 // Focus listener
 const docTitle = document.title;
-window.onblur = function () {
+window.onblur = function() {
   timer.setBlurred(true);
 };
-window.onfocus = function () {
+window.onfocus = function() {
   timer.setBlurred(false);
   document.title = docTitle;
 };
 // Disable drag and drop
-window.ondragstart = function () {
+window.ondragstart = function() {
   return false;
 };
-window.ondrop = function () {
+window.ondrop = function() {
   return false;
 };
 // Onload handler
@@ -23,25 +23,19 @@ window.addEventListener("load", () => {
     Notification.requestPermission();
   }
   setTimerColor("var(--background-color)");
-  document
-    .querySelector("#timer-circle-progress")
-    .classList.add("timer-circle-progress-transition");
+  document.querySelector("#timer-circle-progress").classList.add("timer-circle-progress-transition");
 
   /////////////// Universal Popup functions ///////////////
   // Popup open listener
   const popupOpenFunction = (element) => {
-    const popup = document.querySelector(
-      `#${element.getAttribute("data-popup-open-target")}`,
-    );
+    const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
     popup.style.animation = "popupOpenAnimation 0.5s forwards";
     popup.style.display = "flex";
   };
   const todoPopupOpenFunction = (element) => {
     popupOpenFunction(element);
     document.querySelector("#task-input").value = "";
-    document.querySelector("#task-input").value = element
-      .querySelector(".todo-text")
-      .textContent.trim();
+    document.querySelector("#task-input").value = element.querySelector(".todo-text").textContent.trim();
   };
   document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
     if (element.getAttribute("data-target-popup-type") === "todo-item-popup") {
@@ -55,13 +49,18 @@ window.addEventListener("load", () => {
     }
   });
   // Popup close listener
+  const popupCloseFunctionByID = (ID) => {
+    const popup = document.querySelector(`#${ID}`);
+    popup.style.animation = "popupCloseAnimation 0.5s forwards";
+    setTimeout(function() {
+      popup.style.display = "none";
+    }, 500);
+  }
   document.querySelectorAll("[data-popup-close-target]").forEach((element) => {
     element.addEventListener("click", () => {
-      const popup = document.querySelector(
-        `#${element.getAttribute("data-popup-close-target")}`,
-      );
+      const popup = document.querySelector(`#${element.getAttribute("data-popup-close-target")}`);
       popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function () {
+      setTimeout(function() {
         popup.style.display = "none";
       }, 500);
     });
@@ -69,80 +68,71 @@ window.addEventListener("load", () => {
 
   /////////////// Todo popup functions ///////////////
   // Add todo button listener
-  document
-    .querySelector("#addTodoButton")
-    .addEventListener("click", (event) => {
-      event.preventDefault();
-      const todoInput = document.querySelector("#todo-input");
-      const todoText = todoInput.value;
+  document.querySelector("#todo-add-task").addEventListener("click", (event) => {
+    event.preventDefault();
+    const todoInput = document.querySelector("#todo-input");
+    const todoText = todoInput.value;
 
-      if (todoText.trim() !== "") {
-        const todoItemContainer = document.createElement("div");
-        todoItemContainer.classList.add("todo-item-container");
+    if (todoText.trim() !== "") {
+      const todoItemContainer = document.createElement("div");
+      todoItemContainer.classList.add("todo-item-container");
 
-        const todoTextElement = document.createElement("div");
-        todoTextElement.classList.add("todo-text");
-        todoTextElement.textContent = todoText;
+      const todoTextElement = document.createElement("div");
+      todoTextElement.classList.add("todo-text");
+      todoTextElement.textContent = todoText;
 
-        todoItemContainer.appendChild(todoTextElement);
+      todoItemContainer.appendChild(todoTextElement);
 
-        const todoItem = document.createElement("div");
-        todoItem.setAttribute("data-popup-open-target", "todo-item-popup");
-        todoItem.setAttribute("data-target-popup-type", "todo-item-popup");
-        todoItem.classList.add("todo-item");
-        todoItem.addEventListener("click", (element) => {
-          todoPopupOpenFunction(element.target);
-        });
-        todoItem.appendChild(todoItemContainer);
+      const todoItem = document.createElement("div");
+      todoItem.setAttribute("data-popup-open-target", "todo-item-popup");
+      todoItem.setAttribute("data-target-popup-type", "todo-item-popup");
+      todoItem.classList.add("todo-item");
+      todoItem.addEventListener("click", (element) => {
+        todoPopupOpenFunction(element.target);
+      });
+      todoItem.appendChild(todoItemContainer);
 
-        document.querySelector(".todo-list-container").appendChild(todoItem);
+      document.querySelector(".todo-list-container").appendChild(todoItem);
 
-        todoInput.value = "";
-
-        const popup = document.querySelector("#todo-popup");
-        popup.style.animation = "popupCloseAnimation 0.5s forwards";
-        setTimeout(function () {
-          popup.style.display = "none";
-        }, 500);
-      }
-    });
+      todoInput.value = "";
+    }
+  });
+  // Todo item delete button
+  document.querySelector("#todo-item-delete").addEventListener("click", (event) => {
+    event.preventDefault();
+  })
+  // Todo Save button
+  document.querySelector("#todo-item-save").addEventListener("click", (event) => {
+    event.preventDefault();
+    popupCloseFunctionByID("todo-item-popup");
+  })
 
   /////////////// Leaderboard popup functions ///////////////
   // Leaderboard switch button
-  document
-    .querySelector("#leaderboard-switch-button")
-    .addEventListener("click", () => {
-      if (
-        document
-          .querySelector("#leaderboard-all-time")
-          .classList.contains("hide")
-      ) {
-        document
-          .querySelector("#leaderboard-all-time")
-          .classList.remove("hide");
-        document.querySelector("#leaderboard-weekly").classList.add("hide");
-      } else {
-        document.querySelector("#leaderboard-all-time").classList.add("hide");
-        document.querySelector("#leaderboard-weekly").classList.remove("hide");
-      }
-    });
+  document.querySelector("#leaderboard-switch-button").addEventListener("click", () => {
+    if (document.querySelector("#leaderboard-all-time").classList.contains("hide")) {
+      document.querySelector("#leaderboard-all-time").classList.remove("hide");
+      document.querySelector("#leaderboard-weekly").classList.add("hide");
+    } else {
+      document.querySelector("#leaderboard-all-time").classList.add("hide");
+      document.querySelector("#leaderboard-weekly").classList.remove("hide");
+    }
+  });
 
   /////////////// Login popup functions ///////////////
   // Login page switch button
-  document
-    .querySelector("#go-to-registration")
-    .addEventListener("click", () => {
-      // Remove all elements from the page
-      document.querySelector("#registration-page").classList.remove("hide");
-      document.querySelector("#login-page").classList.add("hide");
-    });
+  document.querySelector("#go-to-registration").addEventListener("click", () => {
+    // Remove all elements from the page
+    document.querySelector("#registration-page").classList.remove("hide");
+    document.querySelector("#login-page").classList.add("hide");
+  });
   // Login submit button
   document.querySelector("#login-form").addEventListener("submit", (event) => {
     event.preventDefault();
     event.target.reset();
     const popup = document.querySelector("#login-popup");
     popup.style.animation = "popupCloseAnimation 0.5s forwards";
-    setTimeout(function () {
+    setTimeout(function() {
       popup.style.display = "none";
     }, 500);
   });
@@ -153,17 +143,15 @@ window.addEventListener("load", () => {
     document.querySelector("#login-page").classList.remove("hide");
   });
   // Registration submit button
-  document
-    .querySelector("#registration-form")
-    .addEventListener("submit", (event) => {
-      event.preventDefault();
-      event.target.reset();
-      const popup = document.querySelector("#login-popup");
-      popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function () {
-        popup.style.display = "none";
-      }, 500);
-    });
+  document.querySelector("#registration-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    event.target.reset();
+    const popup = document.querySelector("#login-popup");
+    popup.style.animation = "popupCloseAnimation 0.5s forwards";
+    setTimeout(function() {
+      popup.style.display = "none";
+    }, 500);
+  });
 
   /////////////// Timer Buttons ///////////////
   // Start timer button
@@ -172,75 +160,67 @@ window.addEventListener("load", () => {
   const times = [25, 5, 25, 5, 25, 5, 25, 15];
   let currentTime;
   let pomoProgress = 0;
-  document
-    .querySelector("#timer-start-button")
-    .addEventListener("click", () => {
-      if (!timer.isActive()) {
-        if (timer.getCurrentPositionMS() === 0) {
-          setTimerColor("var(--accent-color)");
-          currentTime = times[index] * 1000; // Needs to be switched back to 60000 when testing is finished
-          timer.setTimerLength(currentTime).startTimer();
-        } else {
-          timer.startTimer();
-        }
-        const halfWay = timer.timerLengthMS / 2;
-        const quarterWay = timer.timerLengthMS / 4;
-        const timeDisplay = setInterval(() => {
-          if (timer.getCurrentPositionMS() === -1000) {
-            clearInterval(timeDisplay);
-            timer.stopTimer();
-            timer.setCurrentPositionMS(0);
-            if (getNotificationPermission() && document.hasFocus() === false) {
-              const notification = new Notification("Pomo Timer", {
-                title: "Pomo Timer",
-                body: `${
-                  times[index] === 25
-                    ? "Its time for your break comeback and start the timer"
-                    : "Your break has finished comeback!"
-                }`,
-                lang: "en-GB",
-                icon: "assets/images/favi.webp",
-              });
-              notification.onclick = function () {
-                window.focus();
-                notification.close();
-              };
-              notification.onshow = function () {
-                setTimeout(() => {
-                  notification.close();
-                }, 5000);
-              };
-              notification.onerror = function (error) {
-                console.log("Notification error: " + error);
-              };
-            }
-            if (index < 7) {
-              index++;
-              pomoProgress = pomoProgress + 12.5;
-              setPomoCounterProgress(pomoProgress);
-            } else {
-              index = 0;
-              pomodoros++;
-              pomoProgress = 0;
-              document.querySelector("#pomodoro-counter").textContent =
-                pomodoros;
-            }
-          } else if (timer.getCurrentPositionMS() < quarterWay) {
-            setTimerColor("var(--background-color)");
-          } else if (timer.getCurrentPositionMS() < halfWay) {
-            setTimerColor("orange");
-          } else {
-            void 0;
-          }
-        }, 1000);
+  document.querySelector("#timer-start-button").addEventListener("click", () => {
+    if (!timer.isActive()) {
+      if (timer.getCurrentPositionMS() === 0) {
+        setTimerColor("var(--accent-color)");
+        currentTime = times[index] * 1000; // Needs to be switched back to 60000 when testing is finished
+        timer.setTimerLength(currentTime).startTimer();
+      } else {
+        timer.startTimer();
       }
-    });
+      const halfWay = timer.timerLengthMS / 2;
+      const quarterWay = timer.timerLengthMS / 4;
+      const timeDisplay = setInterval(() => {
+        if (timer.getCurrentPositionMS() === -1000) {
+          clearInterval(timeDisplay);
+          timer.stopTimer();
+          timer.setCurrentPositionMS(0);
+          if (getNotificationPermission() && document.hasFocus() === false) {
+            const notification = new Notification("Pomo Timer", {
+              title: "Pomo Timer",
+              body: `${times[index] === 25 ? "Its time for your break comeback and start the timer" : "Your break has finished                                       comeback!"}`,
+              lang: "en-GB",
+              icon: "assets/images/favi.webp",
+            });
+            notification.onclick = function() {
+              window.focus();
+              notification.close();
+            };
+            notification.onshow = function() {
+              setTimeout(() => {
+                notification.close();
+              }, 5000);
+            };
+            notification.onerror = function(error) {
+              console.log("Notification error: " + error);
+            };
+          }
+          if (index < 7) {
+            index++;
+            pomoProgress = pomoProgress + 12.5;
+            setPomoCounterProgress(pomoProgress);
+          } else {
+            index = 0;
+            pomodoros++;
+            pomoProgress = 0;
+            document.querySelector("#pomodoro-counter").textContent =
+              pomodoros;
+          }
+        } else if (timer.getCurrentPositionMS() < quarterWay) {
+          setTimerColor("var(--background-color)");
+        } else if (timer.getCurrentPositionMS() < halfWay) {
+          setTimerColor("orange");
+        } else {
+          void 0;
+        }
+      }, 1000);
+    }
+  });
   // Pause timer button
-  document
-    .querySelector("#timer-pause-button")
-    .addEventListener("click", () => {
-      timer.stopTimer();
-    });
+  document.querySelector("#timer-pause-button").addEventListener("click", () => {
+    timer.stopTimer();
+  });
 });
 
 /////////////// Additional functions ///////////////
@@ -249,12 +229,7 @@ window.addEventListener("load", () => {
  * @param {int} value
  */
 function setTimerProgress(value) {
-  document
-    .querySelector("#timer-circle-progress")
-    .setAttribute.bind(document.querySelector("#timer-circle-progress"))(
-    "stroke-dasharray",
-    `${(value * 283).toFixed(0)} 283`,
-  );
+  document.querySelector("#timer-circle-progress").setAttribute.bind(document.querySelector("#timer-circle-progress"))("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
 }
 const pomodoroCounterCircle = document.querySelector("#counter-circle");
 const pomodoroCounterRadius = pomodoroCounterCircle.r.baseVal.value;
@@ -266,17 +241,14 @@ pomodoroCounterCircle.style.strokeDashoffset = `${pomodoroCounterCircumference}`
  * @param {Number} percent
  */
 function setPomoCounterProgress(percent) {
-  pomodoroCounterCircle.style.strokeDashoffset =
-    pomodoroCounterCircumference -
-    (percent / 100) * pomodoroCounterCircumference;
+  pomodoroCounterCircle.style.strokeDashoffset = pomodoroCounterCircumference - (percent / 100) * pomodoroCounterCircumference;
 }
 /**
  * Timer colour function
  * @param {String} input
  */
 function setTimerColor(input) {
-  document.querySelector("#timer-circle-progress").style.stroke =
-    input == null ? "green" : input;
+  document.querySelector("#timer-circle-progress").style.stroke = input == null ? "green" : input;
 }
 /**
  * Milliseconds to timestamp

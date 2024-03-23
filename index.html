@@ -40,7 +40,7 @@
             id="todo-input"
             placeholder="Enter your to-do item here"
           />
-          <button id="addTodoButton" type="submit">Add To-Do</button>
+          <button id="todo-add-task" type="submit">Add To-Do</button>
         </form>
       </div>
     </div>
@@ -58,8 +58,8 @@
         <h1 class="popup-header">YOUR TASK:</h1>
         <textarea id="task-input" class="todo-textarea" rows="4"></textarea>
         <div class="button-container">
-          <button id="todo-task-delete" type="submit">Delete</button>
-          <button id="todo-task-finished" type="submit">Finished</button>
+          <button id="todo-item-delete" type="submit">Delete</button>
+          <button id="todo-item-save" type="submit">Save</button>
         </div>
       </div>
     </div>
@@ -267,6 +267,7 @@
               class="todo-item"
               data-popup-open-target="todo-item-popup"
               data-target-popup-type="todo-item-popup"
+               data-task-id="";
             >
               <div class="todo-item-container">
                 <div class="todo-text">
@@ -282,6 +283,7 @@
               class="todo-item"
               data-popup-open-target="todo-item-popup"
               data-target-popup-type="todo-item-popup"
+               data-task-id="";
             >
               <div class="todo-item-container">
                 <div class="todo-text">
@@ -297,6 +299,7 @@
               class="todo-item"
               data-popup-open-target="todo-item-popup"
               data-target-popup-type="todo-item-popup"
+               data-task-id=""
             >
               <div class="todo-item-container">
                 <div class="todo-text">
