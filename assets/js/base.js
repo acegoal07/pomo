@@ -86,6 +86,7 @@ window.addEventListener("load", () => {
       const todoItem = document.createElement("div");
       todoItem.setAttribute("data-popup-open-target", "todo-item-popup");
       todoItem.setAttribute("data-target-popup-type", "todo-item-popup");
+      todoItem.setAttribute("data-task-id", "");
       todoItem.classList.add("todo-item");
       todoItem.addEventListener("click", (element) => {
         todoPopupOpenFunction(element.target);
@@ -96,7 +97,7 @@ window.addEventListener("load", () => {
 
       todoInput.value = "";
 
-      popupCloseFunctionByID("todo-item-popup");
+      popupCloseFunctionByID("todo-popup");
     }
   });
   // Todo item delete button
