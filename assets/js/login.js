@@ -6,21 +6,16 @@ window.addEventListener('load', () => {
 });
 
 function authentication() {
-   const formData = new FormData(loginForm);
-
    fetch('assets/php/login.php', {
       method: 'POST',
-      body: formData
-   })
-   .then(response => {
+      body: new FormData(loginForm)
+   }).then(response => {
       if (response.ok) {
          response.json()
       }
-   })
-   .then(data => {
+   }).then(data => {
       console.log(data);
-   })
-   .catch(error => {
-      console.log(error) 
+   }).catch(error => {
+      console.log(error)
    });
 }

@@ -1,0 +1,1 @@
+let loginForm;function authentication(){fetch("assets/php/login.php",{method:"POST",body:new FormData(loginForm)}).then((o=>{o.ok&&o.json()})).then((o=>{})).catch((o=>{}))}window.addEventListener("load",(()=>{loginForm=document.querySelector("#login-form"),loginForm.addEventListener("submit",authentication())}));
