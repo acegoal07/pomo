@@ -34,7 +34,6 @@ window.addEventListener("load", () => {
    };
    const todoPopupOpenFunction = (element) => {
       popupOpenFunction(element);
-      document.querySelector("#task-input").value = "";
       document.querySelector("#task-input").value = element.querySelector(".todo-text").textContent.trim();
    };
    document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
@@ -103,6 +102,7 @@ window.addEventListener("load", () => {
    // Todo item delete button
    document.querySelector("#todo-item-delete").addEventListener("click", (event) => {
       event.preventDefault();
+      popupCloseFunctionByID("todo-item-popup");
    })
    // Todo Save button
    document.querySelector("#todo-item-save").addEventListener("click", (event) => {
