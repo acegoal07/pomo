@@ -279,7 +279,7 @@ div.timer-controls-container {
 }
 
 svg.timer-controls {
-   max-height: 9rem;
+   height: 9rem;
 }
 
 path.timer-controls-cursor {
