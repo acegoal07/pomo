@@ -130,14 +130,26 @@ window.addEventListener("load", () => {
       document.querySelector("#login-page").classList.add("hide");
    });
    // Login submit button
-   // document.querySelector("#login-form").addEventListener("submit", (event) => {
-   //    event.preventDefault();
-   //    const popup = document.querySelector("#login-popup");
-   //    popup.style.animation = "popupCloseAnimation 0.5s forwards";
-   //    setTimeout(function () {
-   //       popup.style.display = "none";
-   //    }, 500);
-   // });
+   document.querySelector("#login-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      await fetch('assets/php/login.php', {
+         method: 'POST',
+         body: new FormData(event.target)
+      })
+      .then(response => response.json())
+      .then(data => {
+         console.log(data);
+      })
+      .catch(error => {
+         console.error('Error:', error);
+      });
+      const popup = document.querySelector("#login-popup");
+      popup.style.animation = "popupCloseAnimation 0.5s forwards";
+      setTimeout(function () {
+         popup.style.display = "none";
+      }, 500);
+      event.target.reset();
+   });
    // Registration page switch button
    document.querySelector("#go-to-login").addEventListener("click", () => {
       // Remove all elements from the page
