@@ -130,15 +130,14 @@ window.addEventListener("load", () => {
       document.querySelector("#login-page").classList.add("hide");
    });
    // Login submit button
-   document.querySelector("#login-form").addEventListener("submit", (event) => {
-      event.preventDefault();
-      event.target.reset();
-      const popup = document.querySelector("#login-popup");
-      popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function () {
-         popup.style.display = "none";
-      }, 500);
-   });
+   // document.querySelector("#login-form").addEventListener("submit", (event) => {
+   //    event.preventDefault();
+   //    const popup = document.querySelector("#login-popup");
+   //    popup.style.animation = "popupCloseAnimation 0.5s forwards";
+   //    setTimeout(function () {
+   //       popup.style.display = "none";
+   //    }, 500);
+   // });
    // Registration page switch button
    document.querySelector("#go-to-login").addEventListener("click", () => {
       // Remove all elements from the page
@@ -148,7 +147,6 @@ window.addEventListener("load", () => {
    // Registration submit button
    document.querySelector("#registration-form").addEventListener("submit", (event) => {
       event.preventDefault();
-      event.target.reset();
       const popup = document.querySelector("#login-popup");
       popup.style.animation = "popupCloseAnimation 0.5s forwards";
       setTimeout(function () {
