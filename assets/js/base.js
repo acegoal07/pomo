@@ -135,12 +135,15 @@ window.addEventListener("load", () => {
       await fetch('assets/php/login.php', {
          method: 'POST',
          body: new FormData(event.target)
-      })
-      .then(response => response.json())
-      .then(data => {
+      }).then(response => {
+         if (response.ok) {
+            return response.json();
+         } else {
+            console.log('Error with the reponse from the database');
+         }
+      }).then(data => {
          console.log(data);
-      })
-      .catch(error => {
+      }).catch(error => {
          console.error('Error:', error);
       });
       const popup = document.querySelector("#login-popup");
