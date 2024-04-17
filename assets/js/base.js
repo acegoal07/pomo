@@ -139,19 +139,20 @@ window.addEventListener("load", () => {
          if (response.ok) {
             return response.json();
          } else {
-            console.log('Error with the reponse from the database');
+            console.log('Error with the response from the database');
          }
       }).then(data => {
+         if (data["success"] === true) {
+            popupCloseFunctionByID("login-popup");
+            event.target.reset();
+         } else {
+            console.log(data);
+            console.log("Login failed");
+         }
          console.log(data);
       }).catch(error => {
          console.error('Error:', error);
       });
-      const popup = document.querySelector("#login-popup");
-      popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function () {
-         popup.style.display = "none";
-      }, 500);
-      event.target.reset();
    });
    // Registration page switch button
    document.querySelector("#go-to-login").addEventListener("click", () => {
@@ -162,11 +163,8 @@ window.addEventListener("load", () => {
    // Registration submit button
    document.querySelector("#registration-form").addEventListener("submit", (event) => {
       event.preventDefault();
-      const popup = document.querySelector("#login-popup");
-      popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function () {
-         popup.style.display = "none";
-      }, 500);
+      popupCloseFunctionByID("login-popup");
+      event.target.reset();
    });
 
    /////////////// Timer Buttons ///////////////
