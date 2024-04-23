@@ -3,7 +3,7 @@ include 'index.php';
 
 $username = $_POST['username'];
 
-$stmt = $conn->prepare("SELECT * FROM todos WHERE userName = ?");
+$stmt = $conn->prepare("SELECT * FROM tasks WHERE userName = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 
