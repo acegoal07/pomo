@@ -13,6 +13,7 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
    $response['success'] = true;
    $response['message'] = "Login successful";
+   $response['username'] = $result->fetch_assoc()["userName"];
 } else {
    $response['success'] = false;
    $response['message'] = "This user does not exist, or the password you have entered is incorrect";

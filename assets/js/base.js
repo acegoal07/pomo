@@ -16,8 +16,34 @@ window.ondragstart = function () {
 window.ondrop = function () {
    return false;
 };
+/**
+ * setCookie
+ * Stores a cookie with the name and value that's provided
+ * @param {String} name The name of the cookie
+ * @param {any} value The value of the cookie
+ * @param {"Strict" | "Lax" | "None"} SameSite The type of SameSite to use
+ */
+const setCookie = function (name, value, SameSite = "Strict") {
+   const date = new Date();
+   date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
+   document.cookie = `${name}=${value || ""}; expires=${date.toString()}; SameSite=${SameSite}; path=/`;
+}
+/**
+ * getCookie
+ * Get's the value of the cookie with the provided name
+ * @param {String} name The name of the cookie
+ * @returns {any} The value of the cookie
+ */
+const getCookie = function (name) {
+   const nameEQ = name + "=";
+   for (let cookie of document.cookie.split(';')) {
+      while (cookie.startsWith(' ')) { cookie = cookie.substring(1, cookie.length); }
+      if (cookie.startsWith(nameEQ)) { return cookie.substring(nameEQ.length, cookie.length); }
+   }
+   return null;
+}
 // Onload handler
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
    /////////////// Onload changes ///////////////
    if (!getNotificationPermission() && !isIOS()) {
       Notification.requestPermission();
@@ -103,12 +129,55 @@ window.addEventListener("load", () => {
    document.querySelector("#todo-item-delete").addEventListener("click", (event) => {
       event.preventDefault();
       popupCloseFunctionByID("todo-item-popup");
-   })
+   });
    // Todo Save button
    document.querySelector("#todo-item-save").addEventListener("click", (event) => {
       event.preventDefault();
       popupCloseFunctionByID("todo-item-popup");
-   })
+   });
+   // Load todos on load
+   const loadTodos = async () => {
+      const form = new FormData();
+      form.append('username', getCookie('username'));
+
+      await fetch('assets/php/getTodos.php', {
+         method: 'POST',
+         body: form
+      })
+         .then(response => response.json())
+         .then(data => {
+            document.querySelector("#todo-list").querySelectorAll("*").forEach(n => n.remove());
+            data.todos.forEach(todo => {
+               console.log(todo);
+               const divTodoItem = document.createElement('div');
+               divTodoItem.classList.add('todo-item');
+               divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
+               divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
+               divTodoItem.setAttribute('data-task-id', todo.taskID);
+
+               const divTodoItemContainer = document.createElement('div');
+               divTodoItemContainer.classList.add('todo-item-container');
+               divTodoItem.appendChild(divTodoItemContainer);
+
+               const divTodoItemText = document.createElement('div');
+               divTodoItemText.classList.add('todo-text');
+               divTodoItemText.textContent = todo.taskName;
+               divTodoItemContainer.appendChild(divTodoItemText);
+
+               divTodoItem.addEventListener("click", (element) => {
+                  todoPopupOpenFunction(element.target);
+               });
+
+               document.querySelector('#todo-list').appendChild(divTodoItem);
+            });
+         })
+         .catch(error => {
+            console.error('Error:', error);
+         });
+   };
+   if (getCookie('username') !== null) {
+      loadTodos();
+   }
 
    /////////////// Leaderboard popup functions ///////////////
    // Leaderboard switch button
@@ -143,13 +212,14 @@ window.addEventListener("load", () => {
          }
       }).then(data => {
          if (data["success"] === true) {
+            setCookie('username', data["username"]);
+            loadTodos();
             popupCloseFunctionByID("login-popup");
             event.target.reset();
          } else {
             console.log(data);
             console.log("Login failed");
          }
-         console.log(data);
       }).catch(error => {
          console.error('Error:', error);
       });

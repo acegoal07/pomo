@@ -14,7 +14,7 @@ if ($result->num_rows > 0) {
    }
    $response['success'] = true;
    $response['message'] = "Todos retrieved successfully";
-   $response['todos'] = array($data);
+   $response['todos'] = $data;
 } else {
    $response['success'] = false;
    $response['message'] = "Failed to retrieve todos for ".$_POST["username"];
