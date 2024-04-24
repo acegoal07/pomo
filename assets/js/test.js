@@ -1,15 +1,22 @@
-window.addEventListener('load', async() => {
-   this.document.querySelector('todo-list')
+window.addEventListener('DOMContentLoaded', async() => {
+
+   const form = new FormData();
+   form.append('username', 'jeff');
 
    await fetch('assets/php/getTodos.php', {
       method: 'POST',
-      body: new FormData().append("username", "jeff")
+      body: form
    })
-   .then(response => response.json())
+   .then(response => {
+      console.log(response);
+      return response.json();
+   })
    .then(data => {
-      console.log(data);
+      data.todos[0].forEach(todo => {
+         console.log(todo);
+      });
    })
    .catch(error => {
-      console.error(error);
+      console.error('Error:', error);
    });
 });
