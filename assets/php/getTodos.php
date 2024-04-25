@@ -13,11 +13,9 @@ if ($result->num_rows > 0) {
       array_push($data, $row);
    }
    $response['success'] = true;
-   $response['message'] = "Todos retrieved successfully";
    $response['todos'] = $data;
 } else {
    $response['success'] = false;
-   $response['message'] = "Failed to retrieve todos for ".$_POST["username"];
 }
 
 $stmt->close();

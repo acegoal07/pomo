@@ -37,8 +37,12 @@ const setCookie = function (name, value, SameSite = "Strict") {
 const getCookie = function (name) {
    const nameEQ = name + "=";
    for (let cookie of document.cookie.split(';')) {
-      while (cookie.startsWith(' ')) { cookie = cookie.substring(1, cookie.length); }
-      if (cookie.startsWith(nameEQ)) { return cookie.substring(nameEQ.length, cookie.length); }
+      while (cookie.startsWith(' ')) {
+         cookie = cookie.substring(1, cookie.length);
+      }
+      if (cookie.startsWith(nameEQ)) {
+         return cookie.substring(nameEQ.length, cookie.length);
+      }
    }
    return null;
 }
@@ -148,7 +152,6 @@ window.addEventListener("load", async () => {
          .then(data => {
             document.querySelector("#todo-list").querySelectorAll("*").forEach(n => n.remove());
             data.todos.forEach(todo => {
-               console.log(todo);
                const divTodoItem = document.createElement('div');
                divTodoItem.classList.add('todo-item');
                divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
