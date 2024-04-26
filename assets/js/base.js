@@ -381,3 +381,4 @@ const getCookie = function (name) {
    }
    return null;
 }
+// Done
