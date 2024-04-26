@@ -16,36 +16,6 @@ window.ondragstart = function () {
 window.ondrop = function () {
    return false;
 };
-/**
- * setCookie
- * Stores a cookie with the name and value that's provided
- * @param {String} name The name of the cookie
- * @param {any} value The value of the cookie
- * @param {"Strict" | "Lax" | "None"} SameSite The type of SameSite to use
- */
-const setCookie = function (name, value, SameSite = "Strict") {
-   const date = new Date();
-   date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
-   document.cookie = `${name}=${value || ""}; expires=${date.toString()}; SameSite=${SameSite}; path=/`;
-}
-/**
- * getCookie
- * Get's the value of the cookie with the provided name
- * @param {String} name The name of the cookie
- * @returns {any} The value of the cookie
- */
-const getCookie = function (name) {
-   const nameEQ = name + "=";
-   for (let cookie of document.cookie.split(';')) {
-      while (cookie.startsWith(' ')) {
-         cookie = cookie.substring(1, cookie.length);
-      }
-      if (cookie.startsWith(nameEQ)) {
-         return cookie.substring(nameEQ.length, cookie.length);
-      }
-   }
-   return null;
-}
 // Onload handler
 window.addEventListener("load", async () => {
    /////////////// Onload changes ///////////////
@@ -167,10 +137,7 @@ window.addEventListener("load", async () => {
                divTodoItemText.textContent = todo.taskName;
                divTodoItemContainer.appendChild(divTodoItemText);
 
-               divTodoItem.addEventListener("click", (element) => {
-                  todoPopupOpenFunction(element.target);
-               });
-
+               divTodoItem.addEventListener("click", (element) => todoPopupOpenFunction(element.target));
                document.querySelector('#todo-list').appendChild(divTodoItem);
             });
          })
@@ -298,8 +265,6 @@ window.addEventListener("load", async () => {
                setTimerColor("var(--background-color)");
             } else if (timer.getCurrentPositionMS() < halfWay) {
                setTimerColor("orange");
-            } else {
-               void 0;
             }
          }, 1000);
       }
@@ -385,4 +350,34 @@ function isIOS() {
       "iPhone",
       "iPod"
    ].includes(navigator.platforms);
+}
+/**
+ * setCookie
+ * Stores a cookie with the name and value that's provided
+ * @param {String} name The name of the cookie
+ * @param {any} value The value of the cookie
+ * @param {"Strict" | "Lax" | "None"} SameSite The type of SameSite to use
+ */
+const setCookie = function (name, value, SameSite = "Strict") {
+   const date = new Date();
+   date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
+   document.cookie = `${name}=${value || ""}; expires=${date.toString()}; SameSite=${SameSite}; path=/`;
+}
+/**
+ * getCookie
+ * Get's the value of the cookie with the provided name
+ * @param {String} name The name of the cookie
+ * @returns {any} The value of the cookie
+ */
+const getCookie = function (name) {
+   const nameEQ = name + "=";
+   for (let cookie of document.cookie.split(';')) {
+      while (cookie.startsWith(' ')) {
+         cookie = cookie.substring(1, cookie.length);
+      }
+      if (cookie.startsWith(nameEQ)) {
+         return cookie.substring(nameEQ.length, cookie.length);
+      }
+   }
+   return null;
 }
