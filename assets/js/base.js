@@ -105,7 +105,7 @@ window.addEventListener("load", async () => {
       }
    });
    // Todo item delete button
-   document.querySelector("#todo-item-delete").addEventListener("click", async(event) => {
+   document.querySelector("#todo-item-delete").addEventListener("click", async (event) => {
       event.preventDefault();
       const form = new FormData();
       form.append("taskID", document.querySelector("#todo-item-popup").getAttribute("data-task-id-storage"));
