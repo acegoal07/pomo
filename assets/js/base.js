@@ -36,10 +36,23 @@ window.addEventListener("load", async () => {
     popupOpenFunction(element);
     document.querySelector("#task-input").value = element.querySelector(".todo-text").textContent.trim();
   };
+  const infoPopupOpenFunction = (element) => {
+    popupOpenFunction(element);
+    const carousel = document.querySelector('.main-carousel');
+    const flkty = Flickity.data(carousel);
+
+    for(let i = 0; i < 50; i++) {
+      flkty.resize();
+    }
+  }
   document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
     if (element.getAttribute("data-target-popup-type") === "todo-item-popup") {
       element.addEventListener("click", () => {
         todoPopupOpenFunction(element);
+      });
+    } else if (element.getAttribute("data-target-popup-type") === "information-popup") {
+      element.addEventListener("click", () => {
+        infoPopupOpenFunction(element);
       });
     } else {
       element.addEventListener("click", () => {

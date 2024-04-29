@@ -633,27 +633,6 @@ textarea {
   }
 }
 
-/* steps */
-ul.steps-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 1rem;
-  border-radius: 1.5rem;
-}
-
-li.steps-entry {
-  text-align: center;
-  color: var(--background-color);
-  background-color: var(--foreground-color);
-  width: 80%;
-  max-width: 40rem;
-  border-radius: 1.5rem;
-  padding: 1rem;
-  font-size: 1.5rem;
-  margin: auto;
-  margin-top: 1rem;
-  box-shadow: 0 3px 5px var(--shadow-color);
-}
 
 /* Leaderboard */
 ul.leaderboard-list {
@@ -700,4 +679,26 @@ div.leaderboard-switch-container {
   flex-direction: column;
   align-items: center;
   margin-top: 1rem;
+}
+
+/* steps */
+
+.main-carousel {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-cell {
+  text-align: center;
+  color: var(--background-color);
+  background-color: var(--foreground-color);
+  width: 80%;
+  height: 80%;
+  max-width: 40rem;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 3px 5px var(--shadow-color);
+  margin-left: 15px;
 }

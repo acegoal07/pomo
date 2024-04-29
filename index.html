@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 </head>
 
@@ -115,61 +116,40 @@
       <div id="information-page">
         <h1 class="popup-header">How to use Pomo</h1>
 
-        <div class="main-carousel" data-flickity='{"cellAlign": "left", "contain": true}'>
-          <ul class="steps-list">
+          <div class="main-carousel" data-flickity='{ "wrapAround": true, "pageDots": false }'>
+
             <div class="carousel-cell">
-              <li class="steps-entry">
                 <h2>Step 1:</h2>
                 <p>Add some items to your to-do list, feel free to edit these items whenever! </p>
-              </li>
             </div>
+
             <div class="carousel-cell">
-              <li class="steps-entry">
                 <h2>Step 2:</h2>
                 <p>Start your timer! You will be working through your to-do items for 25 minutes at a time!</p>
-              </li>
             </div>
+
             <div class="carousel-cell">
-              <li class="steps-entry">
                 <h2>Step 3:</h2>
                 <p>Once each 25 minutes is over, you will have a 5 minute break, so put your feet up and relax! </p>
-              </li>
             </div>
+
             <div class="carousel-cell">
-              <li class="steps-entry">
                 <h2>Step 4:</h2>
                 <p>After four sets of work, you will get to have a long break! Maybe go and make a cuppa!</p>
-              </li>
             </div>
+
             <div class="carousel-cell">
-              <li class="steps-entry">
                 <h2>Step 5:</h2>
                 <p>Repeat! Repeat! Repeat!<br>You will be collecting Pomodoros throughout! Try and make it onto the
                   leaderboard!
                 </p>
-              </li>
             </div>
-          </ul>
-        </div>
 
+        </div>
 
         <h2>Keep up the hard work, you're doing so well!</h2>
       </div>
-
-      <div id="registration-page" class="hide">
-        <h1 class="popup-header">Register your account:</h1>
-        <form id="registration-form" method="post" class="popup-form">
-          <input id="registration-username-input" type="text" name="username" placeholder="Username" required />
-          <input id="registration-password-input" type="password" name="password" placeholder="Password" required />
-          <input id="registration-comfirm-password-input" type="password" name="password" placeholder="Confirm Password"
-            required />
-          <button id="go-to-login" type="reset">
-            Already have an account? Click Here To Login
-          </button>
-          <button id="register-submit-button" type="submit">Register</button>
-        </form>
-      </div>
-    </div>
+  </div>
   </div>
 
   <!-- Weekly/all time leaderboard popup -->
@@ -229,7 +209,7 @@
       <img data-popup-open-target="login-popup" data-target-popup-type="" class="nav-button" src="assets/images/loginIcon.webp"
         alt="Login button" />
 
-      <img data-popup-open-target="information-popup" class="nav-button" src="assets/images/i.webp" alt="Information" />
+      <img data-popup-open-target="information-popup" data-target-popup-type="information-popup" class="nav-button" id="infoBtn" src="assets/images/i.webp" alt="Information" />
 
 
     </div>
@@ -268,7 +248,6 @@
     </div>
   </main>
 
-  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 </body>
 
 </html>
