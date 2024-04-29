@@ -637,28 +637,6 @@ textarea {
   }
 }
 
-/* steps */
-ul.steps-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 1rem;
-  border-radius: 1.5rem;
-}
-
-li.steps-entry {
-  text-align: center;
-  color: var(--background-color);
-  background-color: var(--foreground-color);
-  width: 80%;
-  max-width: 40rem;
-  border-radius: 1.5rem;
-  padding: 1rem;
-  font-size: 1.5rem;
-  margin: auto;
-  margin-top: 1rem;
-  box-shadow: 0 3px 5px var(--shadow-color);
-}
-
 /* Leaderboard */
 ul.leaderboard-list {
   list-style-type: none;
