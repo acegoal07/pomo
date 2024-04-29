@@ -105,15 +105,30 @@ window.addEventListener("load", async () => {
   // Todo item delete button
   document.querySelector("#todo-item-delete").addEventListener("click", (event) => {
     event.preventDefault();
+      console.log("Delete button clicked");
 
+      const form = new FormData();
+      form.append("taskID", document.querySelector("#todo-item-popup").getAttribute("data-task-id-storage"));
 
+      await fetch("assets/php/removeTodos.php", 
+         {
+            method: "POST",
+            body: form
+         }
+      )
+      .then(response => response.json())
+      .then(data => {
+         if (data.success) {
+            loadTodos();
+         }
+      })
+      .catch(error => console.log(error));
 
     popupCloseFunctionByID("todo-item-popup");
   });
 
   var saveButton = document.querySelector("#todo-item-save");
   saveButton.classList.add("hide");
-
 
   var textArea = document.querySelector("#task-input.todo-textarea");
   textArea.addEventListener("keyup", function(event) {
