@@ -148,25 +148,27 @@ window.addEventListener("load", async () => {
          .then(response => response.json())
          .then(data => {
             document.querySelector("#todo-list").querySelectorAll("*").forEach(n => n.remove());
-            data.todos.forEach(todo => {
-               const divTodoItem = document.createElement('div');
-               divTodoItem.classList.add('todo-item');
-               divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
-               divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
-               divTodoItem.setAttribute('data-task-id', todo.taskID);
+            if (data.todos) {
+               data.todos.forEach(todo => {
+                  const divTodoItem = document.createElement('div');
+                  divTodoItem.classList.add('todo-item');
+                  divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
+                  divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
+                  divTodoItem.setAttribute('data-task-id', todo.taskID);
 
-               const divTodoItemContainer = document.createElement('div');
-               divTodoItemContainer.classList.add('todo-item-container');
-               divTodoItem.appendChild(divTodoItemContainer);
+                  const divTodoItemContainer = document.createElement('div');
+                  divTodoItemContainer.classList.add('todo-item-container');
+                  divTodoItem.appendChild(divTodoItemContainer);
 
-               const divTodoItemText = document.createElement('div');
-               divTodoItemText.classList.add('todo-text');
-               divTodoItemText.textContent = todo.taskName;
-               divTodoItemContainer.appendChild(divTodoItemText);
+                  const divTodoItemText = document.createElement('div');
+                  divTodoItemText.classList.add('todo-text');
+                  divTodoItemText.textContent = todo.taskName;
+                  divTodoItemContainer.appendChild(divTodoItemText);
 
-               divTodoItem.addEventListener("click", (element) => todoPopupOpenFunction(element.target));
-               document.querySelector('#todo-list').appendChild(divTodoItem);
-            });
+                  divTodoItem.addEventListener("click", (element) => todoPopupOpenFunction(element.target));
+                  document.querySelector('#todo-list').appendChild(divTodoItem);
+               });
+            }
          })
          .catch(error => {
             console.error('Error:', error);
