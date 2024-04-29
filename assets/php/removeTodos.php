@@ -20,5 +20,5 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['taskID'])) {
    $conn->close();
 
    header('Content-Type: application/json');
-   echo json_encode($response);   
+   echo json_encode($response);
 }
