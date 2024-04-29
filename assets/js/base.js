@@ -93,7 +93,7 @@ window.addEventListener("load", async () => {
          todoItem.appendChild(todoItemContainer);
 
          document.querySelector(".todo-list-container").appendChild(todoItem);
-
+        
          todoInput.value = "";
 
          popupCloseFunctionByID("todo-popup");

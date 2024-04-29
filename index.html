@@ -14,6 +14,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 </head>
 
 <body>
@@ -94,23 +96,44 @@
   <!-- Information Popup -->
   <div id="information-popup" class="popup-background">
     <div class="popup-body">
-      <a data-popup-close-target="login-popup">
+      <a data-popup-close-target="information-popup">
         <div class="popup-close-btn-background">
           <div class="popup-close-btn-line-1"></div>
           <div class="popup-close-btn-line-2"></div>
         </div>
       </a>
 
-      <div id="login-page">
-        <h1 class="popup-header">This is a test!</h1>
-        <form id="login-form" name="login-form" class="popup-form">
-          <input id="login-user-name-input" type="text" name="username" placeholder="Username" required />
-          <input id="login-password-input" type="password" name="password" placeholder="Password" required />
-          <button id="go-to-registration" type="reset">
-            Don't have an account? Click Here To Register
-          </button>
-          <button id="login-submit-button" type="submit">Login</button>
-        </form>
+      <div id="information-page">
+        <h1 class="popup-header">How to use Pomo</h1>
+
+        <div class="main-carousel" id="steps-container" data-flickity='{ "cellAlign": "left", "contain": true }'>
+
+          <ul class="steps-list">
+            <li class="steps-entry">
+              <h2>Step 1:</h2>
+              <p>Add some items to your to-do list, feel free to edit these items whenever! </p>
+            </li>
+            <li class="steps-entry">
+              <h2>Step 2:</h2>
+              <p>Start your timer! You will be working through your to-do items for 25 minutes at a time!</p>
+            </li>
+            <li class="steps-entry">
+              <h2>Step 3:</h2>
+              <p>Once each 25 minutes is over, you will have a 5 minute break, so put your feet up and relax! </p>
+            </li>
+            <li class="steps-entry">
+              <h2>Step 4:</h2>
+              <p>After four sets of work, you will get to have a long break! Maybe go and make a cuppa!</p>
+            </li>
+            <li class="steps-entry">
+              <h2>Step 5:</h2>
+              <p>Repeat! Repeat! Repeat!<br>You will be collecting Pomodoros throughout! Try and make it onto the leaderboard!
+              </p>
+          </ul>
+        </div>
+        
+        
+        <h2>Keep up the hard work, you're doing so well!</h2>
       </div>
 
       <div id="registration-page" class="hide">
@@ -183,8 +206,7 @@
       <img data-popup-open-target="login-popup" class="nav-button" src="assets/images/loginIcon.webp"
         alt="Login button" />
 
-      <img data-popup-open-target="information-popup" class="nav-button" src="assets/images/leaves.png"
-        alt="Information" />
+      <img data-popup-open-target="information-popup" class="nav-button" src="assets/images/i.webp" alt="Information" />
 
 
     </div>
