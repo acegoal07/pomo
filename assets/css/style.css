@@ -9,6 +9,10 @@
   font-family: 'Fredoka', Arial, sans-serif;
 }
 
+.show {
+  display: inline-block;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-user-select: none;
