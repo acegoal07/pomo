@@ -9,6 +9,10 @@
   font-family: 'Fredoka', Arial, sans-serif;
 }
 
+.show {
+  display: inline-block;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-user-select: none;
@@ -128,7 +132,7 @@ main.grid-layout {
   }
 }
 
-/* Nav */
+/* -----------------Nav---------------------------- */
 main.grid-layout div.nav-grid-section {
   grid-area: nav;
   display: inline-flex;
@@ -197,12 +201,12 @@ img.nav-button:hover {
   box-shadow: 0 5px 15px var(--shadow-color);
 }
 
-/* Banner */
+/*---------------- Banner------------------------- */
 main.grid-layout div.banner-grid-section {
   grid-area: banner;
 }
 
-/* Timer */
+/* ---------------Timer------------------------ */
 main.grid-layout div.timer-grid-section {
   grid-area: timer;
 }
@@ -309,7 +313,7 @@ path.timer-controls-cursor:hover {
   filter: drop-shadow(0 7px 15px var(--shadow-color));
 }
 
-/* Todo */
+/* ---------------Todo----------------------- */
 main.grid-layout div.todo-grid-section {
   grid-area: todo;
   margin: 1rem;
@@ -421,7 +425,7 @@ h1.todo-header {
     #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
 }
 
-/* Popup */
+/* -----------------Popup--------------- */
 div.popup-background {
   display: none;
   justify-content: center;
@@ -540,7 +544,7 @@ div.popup-close-btn-background:hover div.popup-close-btn-line-2 {
   background-color: var(--background-color);
 }
 
-/* Forms */
+/* -------------------- Forms -------------------------------*/
 form.popup-form {
   display: flex;
   -ms-flex-direction: column;
@@ -633,6 +637,27 @@ textarea {
   }
 }
 
+/* steps */
+ul.steps-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 1rem;
+  border-radius: 1.5rem;
+}
+
+li.steps-entry {
+  text-align: center;
+  color: var(--background-color);
+  background-color: var(--foreground-color);
+  width: 80%;
+  max-width: 40rem;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  font-size: 1.5rem;
+  margin: auto;
+  margin-top: 1rem;
+  box-shadow: 0 3px 5px var(--shadow-color);
+}
 
 /* Leaderboard */
 ul.leaderboard-list {

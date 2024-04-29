@@ -40,7 +40,7 @@
   </div>
 
   <!-- Todo item popups -->
-  <div id="todo-item-popup" class="popup-background">
+  <div id="todo-item-popup" class="popup-background" data-task-id-storage="">
     <div class="popup-body">
       <a data-popup-close-target="todo-item-popup">
         <div class="popup-close-btn-background">
@@ -54,7 +54,7 @@
         <button id="todo-item-delete" type="submit">
           Delete
         </button>
-        <button id="todo-item-save" type="submit">
+        <button id="todo-item-save" type="submit" class="hide">
           Save
         </button>
       </form>
@@ -147,7 +147,7 @@
 
         </div>
 
-        <h2>Keep up the hard work, you're doing so well!</h2>
+        <h2>Keep up the hard work, you're doing so well! :(</h2>
       </div>
   </div>
   </div>
@@ -182,7 +182,7 @@
 
       <div class="leaderboard-switch-container">
         <a class="btn" id="leaderboard-switch-button">
-          <h4>Switch leaderboard</h4>
+          Switch leaderboard
         </a>
       </div>
     </div>
@@ -196,8 +196,8 @@
     </div>
     <!-- Nav -->
     <div class="nav-grid-section">
-      <img data-popup-open-target="leaderboard-popup" data-target-popup-type="" class="nav-button" src="assets/images/leaderboardIcon.webp"
-        alt="Leaderboard button" />
+      <img data-popup-open-target="leaderboard-popup" data-target-popup-type="" class="nav-button"
+        src="assets/images/leaderboardIcon.webp" alt="Leaderboard button" />
       <div class="pomodoro-counter-container">
         <span class="pomodoro-counter" id="pomodoro-counter">0</span>
         <svg class="progress-ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -206,8 +206,8 @@
             r="45" />
         </svg>
       </div>
-      <img data-popup-open-target="login-popup" data-target-popup-type="" class="nav-button" src="assets/images/loginIcon.webp"
-        alt="Login button" />
+      <img data-popup-open-target="login-popup" data-target-popup-type="" class="nav-button"
+        src="assets/images/loginIcon.webp" alt="Login button" />
 
       <img data-popup-open-target="information-popup" data-target-popup-type="information-popup" class="nav-button" id="infoBtn" src="assets/images/i.webp" alt="Information" />
 
