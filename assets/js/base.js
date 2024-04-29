@@ -131,6 +131,8 @@ window.addEventListener("load", async () => {
          .then(data => {
             if (data.success) {
                loadTodos();
+            } else {
+               console.log("Failed to delete todo: " + data);
             }
          })
          .catch(error => console.log(error));
@@ -152,7 +154,6 @@ window.addEventListener("load", async () => {
    const loadTodos = async () => {
       const form = new FormData();
       form.append('username', getCookie('username'));
-
       await fetch('assets/php/getTodos.php', {
          method: 'POST',
          body: form
@@ -160,26 +161,30 @@ window.addEventListener("load", async () => {
          .then(response => response.json())
          .then(data => {
             document.querySelector("#todo-list").querySelectorAll("*").forEach(n => n.remove());
-            if (data.todos) {
-               data.todos.forEach(todo => {
-                  const divTodoItem = document.createElement('div');
-                  divTodoItem.classList.add('todo-item');
-                  divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
-                  divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
-                  divTodoItem.setAttribute('data-task-id', todo.taskID);
+            if (data.success) {
+               if (data.todos) {
+                  data.todos.forEach(todo => {
+                     const divTodoItem = document.createElement('div');
+                     divTodoItem.classList.add('todo-item');
+                     divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
+                     divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
+                     divTodoItem.setAttribute('data-task-id', todo.taskID);
 
-                  const divTodoItemContainer = document.createElement('div');
-                  divTodoItemContainer.classList.add('todo-item-container');
-                  divTodoItem.appendChild(divTodoItemContainer);
+                     const divTodoItemContainer = document.createElement('div');
+                     divTodoItemContainer.classList.add('todo-item-container');
+                     divTodoItem.appendChild(divTodoItemContainer);
 
-                  const divTodoItemText = document.createElement('div');
-                  divTodoItemText.classList.add('todo-text');
-                  divTodoItemText.textContent = todo.taskName;
-                  divTodoItemContainer.appendChild(divTodoItemText);
+                     const divTodoItemText = document.createElement('div');
+                     divTodoItemText.classList.add('todo-text');
+                     divTodoItemText.textContent = todo.taskName;
+                     divTodoItemContainer.appendChild(divTodoItemText);
 
-                  divTodoItem.addEventListener("click", (element) => todoPopupOpenFunction(element.target));
-                  document.querySelector('#todo-list').appendChild(divTodoItem);
-               });
+                     divTodoItem.addEventListener("click", (element) => todoPopupOpenFunction(element.target));
+                     document.querySelector('#todo-list').appendChild(divTodoItem);
+                  });
+               }
+            } else {
+               console.log('Failed to load todos: ' + data);
             }
          })
          .catch(error => {
@@ -228,8 +233,7 @@ window.addEventListener("load", async () => {
             popupCloseFunctionByID("login-popup");
             event.target.reset();
          } else {
-            console.log(data);
-            console.log("Login failed");
+            console.log("Login failed: " + data);
          }
       }).catch(error => {
          console.error('Error:', error);
