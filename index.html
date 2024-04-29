@@ -15,7 +15,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 </head>
 
 <body>
@@ -32,7 +31,9 @@
       <h2>Insert the details of your task below</h2>
       <form id="createTodoForm" method="post" class="popup-form">
         <input type="text" id="todo-input" placeholder="Enter your to-do item here" />
-        <button id="todo-add-task" type="submit">Add To-Do</button>
+        <button id="todo-add-task" type="submit">
+          Add To-Do
+        </button>
       </form>
     </div>
   </div>
@@ -49,8 +50,12 @@
       <h1 class="popup-header">YOUR TASK:</h1>
       <form class="popup-form">
         <textarea id="task-input" class="todo-textarea" rows="4"></textarea>
-        <button id="todo-item-delete" type="submit">Delete</button>
-        <button id="todo-item-save" type="submit">Save</button>
+        <button id="todo-item-delete" type="submit">
+          Delete
+        </button>
+        <button id="todo-item-save" type="submit">
+          Save
+        </button>
       </form>
     </div>
   </div>
@@ -73,7 +78,9 @@
           <button id="go-to-registration" type="reset">
             Don't have an account? Click Here To Register
           </button>
-          <button id="login-submit-button" type="submit">Login</button>
+          <button id="login-submit-button" type="submit">
+            Login
+          </button>
         </form>
       </div>
 
@@ -87,7 +94,9 @@
           <button id="go-to-login" type="reset">
             Already have an account? Click Here To Login
           </button>
-          <button id="register-submit-button" type="submit">Register</button>
+          <button id="register-submit-button" type="submit">
+            Register
+          </button>
         </form>
       </div>
     </div>
@@ -106,33 +115,44 @@
       <div id="information-page">
         <h1 class="popup-header">How to use Pomo</h1>
 
-        <div class="main-carousel" id="steps-container" data-flickity='{ "cellAlign": "left", "contain": true }'>
-
+        <div class="main-carousel" data-flickity='{"cellAlign": "left", "contain": true}'>
           <ul class="steps-list">
-            <li class="steps-entry">
-              <h2>Step 1:</h2>
-              <p>Add some items to your to-do list, feel free to edit these items whenever! </p>
-            </li>
-            <li class="steps-entry">
-              <h2>Step 2:</h2>
-              <p>Start your timer! You will be working through your to-do items for 25 minutes at a time!</p>
-            </li>
-            <li class="steps-entry">
-              <h2>Step 3:</h2>
-              <p>Once each 25 minutes is over, you will have a 5 minute break, so put your feet up and relax! </p>
-            </li>
-            <li class="steps-entry">
-              <h2>Step 4:</h2>
-              <p>After four sets of work, you will get to have a long break! Maybe go and make a cuppa!</p>
-            </li>
-            <li class="steps-entry">
-              <h2>Step 5:</h2>
-              <p>Repeat! Repeat! Repeat!<br>You will be collecting Pomodoros throughout! Try and make it onto the leaderboard!
-              </p>
+            <div class="carousel-cell">
+              <li class="steps-entry">
+                <h2>Step 1:</h2>
+                <p>Add some items to your to-do list, feel free to edit these items whenever! </p>
+              </li>
+            </div>
+            <div class="carousel-cell">
+              <li class="steps-entry">
+                <h2>Step 2:</h2>
+                <p>Start your timer! You will be working through your to-do items for 25 minutes at a time!</p>
+              </li>
+            </div>
+            <div class="carousel-cell">
+              <li class="steps-entry">
+                <h2>Step 3:</h2>
+                <p>Once each 25 minutes is over, you will have a 5 minute break, so put your feet up and relax! </p>
+              </li>
+            </div>
+            <div class="carousel-cell">
+              <li class="steps-entry">
+                <h2>Step 4:</h2>
+                <p>After four sets of work, you will get to have a long break! Maybe go and make a cuppa!</p>
+              </li>
+            </div>
+            <div class="carousel-cell">
+              <li class="steps-entry">
+                <h2>Step 5:</h2>
+                <p>Repeat! Repeat! Repeat!<br>You will be collecting Pomodoros throughout! Try and make it onto the
+                  leaderboard!
+                </p>
+              </li>
+            </div>
           </ul>
         </div>
-        
-        
+
+
         <h2>Keep up the hard work, you're doing so well!</h2>
       </div>
 
@@ -181,10 +201,13 @@
       </div>
 
       <div class="leaderboard-switch-container">
-        <a class="btn" id="leaderboard-switch-button">Switch leaderboard</a>
+        <a class="btn" id="leaderboard-switch-button">
+          <h4>Switch leaderboard</h4>
+        </a>
       </div>
     </div>
   </div>
+
   <!-- Main container -->
   <main class="grid-layout">
     <!-- Banner -->
@@ -193,7 +216,7 @@
     </div>
     <!-- Nav -->
     <div class="nav-grid-section">
-      <img data-popup-open-target="leaderboard-popup" class="nav-button" src="assets/images/leaderboardIcon.webp"
+      <img data-popup-open-target="leaderboard-popup" data-target-popup-type="" class="nav-button" src="assets/images/leaderboardIcon.webp"
         alt="Leaderboard button" />
       <div class="pomodoro-counter-container">
         <span class="pomodoro-counter" id="pomodoro-counter">0</span>
@@ -203,7 +226,7 @@
             r="45" />
         </svg>
       </div>
-      <img data-popup-open-target="login-popup" class="nav-button" src="assets/images/loginIcon.webp"
+      <img data-popup-open-target="login-popup" data-target-popup-type="" class="nav-button" src="assets/images/loginIcon.webp"
         alt="Login button" />
 
       <img data-popup-open-target="information-popup" class="nav-button" src="assets/images/i.webp" alt="Information" />
@@ -244,6 +267,8 @@
       </div>
     </div>
   </main>
+
+  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 </body>
 
 </html>

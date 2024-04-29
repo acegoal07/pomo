@@ -488,7 +488,7 @@ a>div.popup-close-btn-background {
   border-radius: 1.5rem;
   width: 3.75rem;
   height: 3.75rem;
-  background-color: var(--accent-color-hover);
+  background-color: var(--accent-color);
   -webkit-transition: transform 0.2s ease;
   -moz-transition: transform 0.2s ease;
   -o-transition: transform 0.2s ease;
@@ -533,7 +533,6 @@ div.popup-close-btn-background:hover {
   -ms-transform: translateY(-5px);
   transform: translateY(-5px);
   box-shadow: 0 5px 15px var(--shadow-color);
-  background-color: var(--accent-color-hover);
 }
 
 div.popup-close-btn-background:hover div.popup-close-btn-line-1,
@@ -569,6 +568,7 @@ input[type="password"]:focus {
 button[type="reset"],
 button[type="submit"],
 a.btn {
+  font-family: 'Fredoka', cursive;
   text-align: center;
   width: -moz-fit-content;
   width: fit-content;
@@ -577,9 +577,10 @@ a.btn {
   font-size: 1.5rem;
   border-radius: 1rem;
   background-color: var(--accent-color);
-  cursor: pointer;
+  color: white;
   border: none;
-  color: #000;
+  cursor: pointer;
+  font-weight: bold;
   -webkit-transition: transform 0.2s ease;
   -o-transition: transform 0.2s ease;
   -ms-transition: transform 0.2s ease;
@@ -633,7 +634,6 @@ textarea {
 }
 
 /* steps */
-
 ul.steps-list {
   list-style-type: none;
   margin: 0;
