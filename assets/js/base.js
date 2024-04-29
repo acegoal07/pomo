@@ -36,6 +36,7 @@ window.addEventListener("load", async () => {
    const todoPopupOpenFunction = (element) => {
       popupOpenFunction(element);
       document.querySelector("#task-input").value = element.querySelector(".todo-text").textContent.trim();
+      document.querySelector("#todo-item-popup").setAttribute("data-task-id-storage", element.getAttribute("data-task-id"));
    };
    document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
       if (element.getAttribute("data-target-popup-type") === "todo-item-popup") {
@@ -103,10 +104,27 @@ window.addEventListener("load", async () => {
       }
    });
    // Todo item delete button
-   document.querySelector("#todo-item-delete").addEventListener("click", (event) => {
+   document.querySelector("#todo-item-delete").addEventListener("click", async(event) => {
       event.preventDefault();
 
+      console.log("Delete button clicked");
 
+      const form = new FormData();
+      form.append("taskID", document.querySelector("#todo-item-popup").getAttribute("data-task-id-storage"));
+
+      await fetch("assets/php/removeTodos.php", 
+         {
+            method: "POST",
+            body: form
+         }
+      )
+      .then(response => response.json())
+      .then(data => {
+         if (data.success) {
+            loadTodos();
+         }
+      })
+      .catch(error => console.log(error));
 
       popupCloseFunctionByID("todo-item-popup");
    });
