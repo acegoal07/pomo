@@ -136,7 +136,7 @@ window.addEventListener("load", async () => {
     if (popup.style.display = "none") {
       saveButton.classList.add("hide");
     }
-  })
+  });
 
   // Todo Save button
   document.querySelector("#todo-item-save").addEventListener("click", (event) => {
