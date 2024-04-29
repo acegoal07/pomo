@@ -25,52 +25,52 @@ window.addEventListener("load", async () => {
    setTimerColor("var(--background-color)");
    document.querySelector("#timer-circle-progress").classList.add("timer-circle-progress-transition");
 
-  /////////////// Universal Popup functions ///////////////
-  // Popup open listener
-  const popupOpenFunction = (element) => {
-    const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
-    popup.style.animation = "popupOpenAnimation 0.5s forwards";
-    popup.style.display = "flex";
-    document.body.style.overflow = "hidden";
-  };
-  const todoPopupOpenFunction = (element) => {
-    popupOpenFunction(element);
-    document.querySelector("#task-input").value = element.querySelector(".todo-text").textContent.trim();
-    document.querySelector("#todo-item-popup").setAttribute("data-task-id-storage", element.getAttribute("data-task-id"));
-    document.querySelector("#todo-item-save").classList.add("hide");
-  };
-  const infoPopupOpenFunction = (element) => {
-    popupOpenFunction(element);
-    const carousel = document.querySelector('.main-carousel');
-    const flkty = Flickity.data(carousel);
+   /////////////// Universal Popup functions ///////////////
+   // Popup open listener
+   const popupOpenFunction = (element) => {
+      const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
+      popup.style.animation = "popupOpenAnimation 0.5s forwards";
+      popup.style.display = "flex";
+      document.body.style.overflow = "hidden";
+   };
+   const todoPopupOpenFunction = (element) => {
+      popupOpenFunction(element);
+      document.querySelector("#task-input").value = element.querySelector(".todo-text").textContent.trim();
+      document.querySelector("#todo-item-popup").setAttribute("data-task-id-storage", element.getAttribute("data-task-id"));
+      document.querySelector("#todo-item-save").classList.add("hide");
+   };
+   const infoPopupOpenFunction = (element) => {
+      popupOpenFunction(element);
+      const carousel = document.querySelector('.main-carousel');
+      const flkty = Flickity.data(carousel);
 
-    for(let i = 0; i < 50; i++) {
-      flkty.resize();
-    }
-  }
-  document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
-    if (element.getAttribute("data-target-popup-type") === "todo-item-popup") {
-      element.addEventListener("click", () => {
-        todoPopupOpenFunction(element);
-      });
-    } else if (element.getAttribute("data-target-popup-type") === "information-popup") {
-      element.addEventListener("click", () => {
-        infoPopupOpenFunction(element);
-      });
-    } else {
-      element.addEventListener("click", () => {
-        popupOpenFunction(element);
-      });
-    }
-  });
-  // Popup close listener
-  const popupCloseFunctionByID = (ID) => {
-    const popup = document.querySelector(`#${ID}`);
-    popup.style.animation = "popupCloseAnimation 0.5s forwards";
-    setTimeout(function() {
-      popup.style.display = "none";
-    }, 500);
-  };
+      for (let i = 0; i < 50; i++) {
+         flkty.resize();
+      }
+   }
+   document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
+      if (element.getAttribute("data-target-popup-type") === "todo-item-popup") {
+         element.addEventListener("click", () => {
+            todoPopupOpenFunction(element);
+         });
+      } else if (element.getAttribute("data-target-popup-type") === "information-popup") {
+         element.addEventListener("click", () => {
+            infoPopupOpenFunction(element);
+         });
+      } else {
+         element.addEventListener("click", () => {
+            popupOpenFunction(element);
+         });
+      }
+   });
+   // Popup close listener
+   const popupCloseFunctionByID = (ID) => {
+      const popup = document.querySelector(`#${ID}`);
+      popup.style.animation = "popupCloseAnimation 0.5s forwards";
+      setTimeout(function () {
+         popup.style.display = "none";
+      }, 500);
+   };
    document.querySelectorAll("[data-popup-close-target]").forEach((element) => {
       element.addEventListener("click", () => {
          const popup = document.querySelector(`#${element.getAttribute("data-popup-close-target")}`);
