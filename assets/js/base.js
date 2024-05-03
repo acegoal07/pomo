@@ -26,9 +26,9 @@ window.addEventListener("load", async () => {
    document.querySelector("#timer-circle-progress").classList.add("timer-circle-progress-transition");
 
    /////////////// Universal Popup functions ///////////////
-   // Popup open listener
-   const popupOpenFunction = (element) => {
-      const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
+   // Popup open functions
+   const popupOpenFunction = async (element) => {
+      const popup = await document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
       popup.style.animation = "popupOpenAnimation 0.5s forwards";
       popup.style.display = "flex";
       document.body.style.overflow = "hidden";
@@ -40,14 +40,15 @@ window.addEventListener("load", async () => {
       document.querySelector("#todo-item-save").classList.add("hide");
    };
    const infoPopupOpenFunction = (element) => {
-      popupOpenFunction(element);
-      const carousel = document.querySelector('.main-carousel');
-      const flkty = Flickity.data(carousel);
-
-      for (let i = 0; i < 50; i++) {
-         flkty.resize();
-      }
+      popupOpenFunction(element).then(() => {
+         const carousel = document.querySelector('.main-carousel');
+         const flkty = Flickity.data(carousel);
+         for (let i = 0; i < 50; i++) {
+            flkty.resize();
+         }
+      });
    }
+   // Popup open listener and setter
    document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
       if (element.getAttribute("data-target-popup-type") === "todo-item-popup") {
          element.addEventListener("click", () => {
@@ -63,17 +64,18 @@ window.addEventListener("load", async () => {
          });
       }
    });
-   // Popup close listener
-   const popupCloseFunctionByID = (ID) => {
-      const popup = document.querySelector(`#${ID}`);
+   // Popup close functions
+   const popupCloseFunctionByID = async (ID) => {
+      const popup = await document.querySelector(`#${ID}`);
       popup.style.animation = "popupCloseAnimation 0.5s forwards";
       setTimeout(function () {
          popup.style.display = "none";
       }, 500);
    };
+   // Popup close listener and setter
    document.querySelectorAll("[data-popup-close-target]").forEach((element) => {
-      element.addEventListener("click", () => {
-         const popup = document.querySelector(`#${element.getAttribute("data-popup-close-target")}`);
+      element.addEventListener("click", async () => {
+         const popup = await document.querySelector(`#${element.getAttribute("data-popup-close-target")}`);
          popup.style.animation = "popupCloseAnimation 0.5s forwards";
          setTimeout(function () {
             popup.style.display = "none";
@@ -84,37 +86,30 @@ window.addEventListener("load", async () => {
 
    /////////////// Todo popup functions ///////////////
    // Add todo button listener
-   document.querySelector("#todo-add-task").addEventListener("click", (event) => {
+   document.querySelector("#todo-add-task").addEventListener("click", async (event) => {
       event.preventDefault();
       const todoInput = document.querySelector("#todo-input");
       const todoText = todoInput.value;
-
-      if (todoText.trim() !== "") {
-         const todoItemContainer = document.createElement("div");
-         todoItemContainer.classList.add("todo-item-container");
-
-         const todoTextElement = document.createElement("div");
-         todoTextElement.classList.add("todo-text");
-         todoTextElement.textContent = todoText;
-
-         todoItemContainer.appendChild(todoTextElement);
-
-         const todoItem = document.createElement("div");
-         todoItem.setAttribute("data-popup-open-target", "todo-item-popup");
-         todoItem.setAttribute("data-target-popup-type", "todo-item-popup");
-         todoItem.setAttribute("data-task-id", "");
-         todoItem.classList.add("todo-item");
-         todoItem.addEventListener("click", (element) => {
-            todoPopupOpenFunction(element.target);
-         });
-         todoItem.appendChild(todoItemContainer);
-
-         document.querySelector(".todo-list-container").appendChild(todoItem);
-
-         todoInput.value = "";
-
-         popupCloseFunctionByID("todo-popup");
-      }
+      const form = new FormData();
+      form.append("username", getCookie('username'));
+      form.append("taskContent", todoText);
+      await fetch("assets/php/createTodos.php",
+         {
+            method: "POST",
+            body: form
+         }
+      )
+         .then(response => response.json())
+         .then(data => {
+            if (data.success) {
+               loadTodos();
+               todoInput.value = "";
+               popupCloseFunctionByID("todo-popup");
+            } else {
+               console.log("Error creating task: " + data);
+            }
+         })
+         .catch(error => console.log(error));
    });
    // Todo item delete button
    document.querySelector("#todo-item-delete").addEventListener("click", async (event) => {

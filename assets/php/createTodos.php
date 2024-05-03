@@ -5,9 +5,9 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
    echo json_encode(array('success' => false));
 } else {
    $username = $_POST['username'];
-   $task = $_POST['task'];
+   $task = $_POST['taskContent'];
 
-   $stmt = $conn->prepare("INSERT INTO tasks (userName, task) VALUES (?, ?)");
+   $stmt = $conn->prepare("INSERT INTO tasks (userName, taskName) VALUES (?, ?)");
    $stmt->bind_param("ss", $username, $task);
    $stmt->execute();
 
