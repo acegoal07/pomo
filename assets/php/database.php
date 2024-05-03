@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
             }
             break;
             // Delete a specific todos for a user
-         case 'deleteTodos':
+         case 'deleteTodo':
             if (!isset($_POST['taskID'])) {
                http_response_code(400);
                echo json_encode(array('success' => false));

@@ -93,7 +93,7 @@ window.addEventListener("load", async () => {
       const form = new FormData();
       form.append("username", getCookie('username'));
       form.append("taskContent", todoText);
-      await fetch("assets/php/createTodos.php",
+      await fetch("assets/php/createTodo.php",
          {
             method: "POST",
             body: form
@@ -116,7 +116,7 @@ window.addEventListener("load", async () => {
       event.preventDefault();
       const form = new FormData();
       form.append("taskID", document.querySelector("#todo-item-popup").getAttribute("data-task-id-storage"));
-      await fetch("assets/php/removeTodos.php",
+      await fetch("assets/php/removeTodo.php",
          {
             method: "POST",
             body: form
