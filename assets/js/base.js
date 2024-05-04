@@ -91,9 +91,10 @@ window.addEventListener("load", async () => {
       const todoInput = document.querySelector("#todo-input");
       const todoText = todoInput.value;
       const form = new FormData();
+      form.append("requestType", "createTodo");
       form.append("username", getCookie('username'));
       form.append("taskContent", todoText);
-      await fetch("assets/php/createTodo.php",
+      await fetch("assets/php/database.php",
          {
             method: "POST",
             body: form
@@ -115,8 +116,9 @@ window.addEventListener("load", async () => {
    document.querySelector("#todo-item-delete").addEventListener("click", async (event) => {
       event.preventDefault();
       const form = new FormData();
+      form.append("requestType", "deleteTodo");
       form.append("taskID", document.querySelector("#todo-item-popup").getAttribute("data-task-id-storage"));
-      await fetch("assets/php/removeTodo.php",
+      await fetch("assets/php/database.php",
          {
             method: "POST",
             body: form
