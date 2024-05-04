@@ -19,19 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                $stmt->bind_param("s", $_POST['username']);
                if ($stmt->execute()) {
                   $result = $stmt->get_result();
+                  $data = array();
                   if ($result->num_rows > 0) {
-                     $data = array();
                      while ($row = $result->fetch_assoc()) {
                         array_push($data, $row);
                      }
-                     $response['success'] = true;
-                     $response['username'] = $_POST['username'];
-                     $response['todos'] = $data;
-                  } else {
-                     $response['success'] = false;
-                     $response['username'] = $_POST['username'];
-                     $response['error'] = $stmt->error;
                   }
+                  $response['success'] = true;
+                  $response['username'] = $_POST['username'];
+                  $response['todos'] = $data;
                   http_response_code(200);
                   echo json_encode($response);
                } else {

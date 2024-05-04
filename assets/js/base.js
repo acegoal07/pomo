@@ -148,8 +148,9 @@ window.addEventListener("load", async () => {
    // Load todos on load
    const loadTodos = async () => {
       const form = new FormData();
+      form.append('requestType', 'getTodos')
       form.append('username', getCookie('username'));
-      await fetch('assets/php/getTodos.php', {
+      await fetch('assets/php/database.php', {
          method: 'POST',
          body: form
       })
@@ -212,9 +213,11 @@ window.addEventListener("load", async () => {
    // Login submit button
    document.querySelector("#login-form").addEventListener("submit", async (event) => {
       event.preventDefault();
-      await fetch('assets/php/login.php', {
+      const form = new FormData(event.target);
+      form.append('requestType', 'login');
+      await fetch('assets/php/database.php', {
          method: 'POST',
-         body: new FormData(event.target)
+         body: form
       }).then(response => {
          if (response.ok) {
             return response.json();
@@ -223,7 +226,7 @@ window.addEventListener("load", async () => {
          }
       }).then(data => {
          if (data["success"] === true) {
-            setCookie('username', data["username"]);
+            setCookie('username', form.get('username'));
             loadTodos();
             popupCloseFunctionByID("login-popup");
             event.target.reset();
