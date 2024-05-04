@@ -47,6 +47,11 @@ window.addEventListener("load", async () => {
             flkty.resize();
          }
       });
+   };
+   const createTodoPopupOpenFunction = (element) => {
+      if (getCookie('username') !== null) {
+         popupOpenFunction(element);
+      }
    }
    // Popup open listener and setter
    document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
@@ -57,6 +62,10 @@ window.addEventListener("load", async () => {
       } else if (element.getAttribute("data-target-popup-type") === "information-popup") {
          element.addEventListener("click", () => {
             infoPopupOpenFunction(element);
+         });
+      } else if (element.getAttribute("data-target-popup-type") === "create-todo-popup") {
+         element.addEventListener("click", () => {
+            createTodoPopupOpenFunction(element);
          });
       } else {
          element.addEventListener("click", () => {
@@ -189,7 +198,10 @@ window.addEventListener("load", async () => {
             console.error('Error:', error);
          });
    };
+
+   /////////////// User onload auto login ///////////////
    if (getCookie('username') !== null) {
+      document.querySelector("#todo-create-button").classList.remove("disabled");
       loadTodos();
    }
 
@@ -228,6 +240,9 @@ window.addEventListener("load", async () => {
          }
       }).then(data => {
          if (data["success"] === true) {
+            if (getCookie('username') === null) {
+               document.querySelector("#todo-create-button").classList.remove("disabled");
+            }
             setCookie('username', form.get('username'));
             loadTodos();
             popupCloseFunctionByID("login-popup");

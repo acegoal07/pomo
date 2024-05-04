@@ -4,6 +4,7 @@
   --foreground-color: #eed847;
   --accent-color: #77b255;
   --accent-color-hover: #5da036;
+  --accent-color-disabled: #808080;
   --shadow-color: #0000004d;
   --text-outline-thickness: 4px;
   font-family: 'Fredoka', Arial, sans-serif;
@@ -376,6 +377,11 @@ div.todo-add-btn-background>div.todo-add-btn-vertical-plus {
   height: 50%;
   left: 43.75%;
   top: 12.5%;
+}
+
+div.todo-add-btn-background.disabled {
+  background-color: var(--accent-color-disabled);
+  cursor: not-allowed;
 }
 
 div.todo-list-container {
