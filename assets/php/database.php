@@ -127,6 +127,40 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                $conn->close();
             }
             break;
+            // Register a user
+         case 'register':
+            if (!isset($_POST['username']) || !isset($_POST['password'])) {
+               http_response_code(400);
+               echo json_encode(array('success' => false));
+            } else {
+               $username = $_POST['username'];
+               $password = $_POST['password'];
+               $stmt = $conn->prepare("SELECT * FROM users WHERE userName = ?");
+               $stmt->bind_param("s", $username);
+               if ($stmt->execute()) {
+                  $result = $stmt->get_result();
+                  if ($result->num_rows > 0) {
+                     $response['success'] = false;
+                     $response['message'] = 'Username already exists';
+                  } else {
+                     $stmt = $conn->prepare("INSERT INTO users (userName, Password) VALUES (?, ?)");
+                     $stmt->bind_param("ss", $username, $password);
+                     if ($stmt->execute()) {
+                        $response['success'] = true;
+                        $response['username'] = $username;
+                        echo json_encode($response);
+                     } else {
+                        http_response_code(500);
+                        echo json_encode(array('success' => false));
+                     }
+                  }
+               } else {
+                  http_response_code(500);
+                  echo json_encode(array('success' => false));
+               }
+               $stmt->close();
+               $conn->close();
+            }
             // No request type was provided
          default:
             http_response_code(400);
