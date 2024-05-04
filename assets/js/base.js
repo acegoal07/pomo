@@ -41,8 +41,7 @@ window.addEventListener("load", async () => {
    };
    const infoPopupOpenFunction = (element) => {
       popupOpenFunction(element).then(() => {
-         const carousel = document.querySelector('.main-carousel');
-         const flkty = Flickity.data(carousel);
+         const flkty = Flickity.data(document.querySelector('.main-carousel'));
          for (let i = 0; i < 50; i++) {
             flkty.resize();
          }
@@ -80,6 +79,7 @@ window.addEventListener("load", async () => {
       setTimeout(function () {
          popup.style.display = "none";
       }, 500);
+      document.body.style.overflow = "auto";
    };
    // Popup close listener and setter
    document.querySelectorAll("[data-popup-close-target]").forEach((element) => {
@@ -202,6 +202,8 @@ window.addEventListener("load", async () => {
    /////////////// User onload auto login ///////////////
    if (getCookie('username') !== null) {
       document.querySelector("#todo-create-button").classList.remove("disabled");
+      document.querySelector("#login-page").classList.add("hide");
+      document.querySelector("#user-page").classList.remove("hide");
       loadTodos();
    }
 
@@ -217,7 +219,7 @@ window.addEventListener("load", async () => {
       }
    });
 
-   /////////////// Login popup functions ///////////////
+   /////////////// User popup functions ///////////////
    // Login page switch button
    document.querySelector("#go-to-registration").addEventListener("click", () => {
       // Remove all elements from the page
@@ -246,6 +248,8 @@ window.addEventListener("load", async () => {
             setCookie('username', form.get('username'));
             loadTodos();
             popupCloseFunctionByID("login-popup");
+            document.querySelector("#login-page").classList.add("hide");
+            document.querySelector("#user-page").classList.remove("hide");
             event.target.reset();
          } else {
             console.log("Login failed: " + data);
@@ -265,6 +269,16 @@ window.addEventListener("load", async () => {
       event.preventDefault();
       popupCloseFunctionByID("login-popup");
       event.target.reset();
+   });
+   // Logout button
+   document.querySelector("#user-logout-button").addEventListener("click", (event) => {
+      event.preventDefault();
+      deleteCookie('username');
+      popupCloseFunctionByID("login-popup");
+      loadTodos();
+      document.querySelector("#todo-create-button").classList.add("disabled");
+      document.querySelector("#user-page").classList.add("hide");
+      document.querySelector("#login-page").classList.remove("hide");
    });
 
    /////////////// Timer Buttons ///////////////
@@ -427,9 +441,10 @@ const setCookie = function (name, value, SameSite = "Strict") {
  * deleteCookie
  * Deletes the cookie with the provided name
  * @param {String} name The name of the cookie
+ * @param {"Strict" | "Lax" | "None"} SameSite The type of SameSite to use
  */
-const deleteCookie = function (name) {
-   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+const deleteCookie = function (name, SameSite = "Strict") {
+   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=${SameSite}; path=/;`;
 }
 /**
  * getCookie

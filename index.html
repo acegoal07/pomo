@@ -102,6 +102,16 @@
                </button>
             </form>
          </div>
+
+         <div id="user-page" class="hide">
+            <h1 class="popup-header">Welcome back!</h1>
+            <form method="post" class="popup-form">
+               <button id="user-logout-button" type="submit">
+                  Logout
+               </button>
+            </form>
+         </div>
+
       </div>
    </div>
 
@@ -117,8 +127,10 @@
 
          <div id="information-page">
             <h1 class="popup-header">How to use Pomo</h1>
+            <h2>Keep up the hard work, you're doing so well!</h2>
 
-            <div class="main-carousel" data-flickity='{ "wrapAround": true, "pageDots": false }'>
+            <div class="main-carousel"
+               data-flickity='{ "pageDots": false, "selectedAttraction": 0.2, "friction": 0.8 }'>
 
                <div class="carousel-cell">
                   <h2>Step 1:</h2>
@@ -149,7 +161,6 @@
 
             </div>
 
-            <h2>Keep up the hard work, you're doing so well! :(</h2>
          </div>
       </div>
    </div>

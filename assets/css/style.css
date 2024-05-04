@@ -47,6 +47,8 @@ h1 {
 h2 {
   text-align: center;
   color: #fff;
+  text-shadow: #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness),
+    #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
 }
 
 .hide {
@@ -351,7 +353,7 @@ div.todo-add-btn-background {
   box-shadow: 0 3px 5px var(--shadow-color);
 }
 
-div.todo-add-btn-background:hover {
+div.todo-add-btn-background:hover:not(.disabled) {
   -webkit-transform: translateY(-5px);
   -o-transform: translateY(-5px);
   -ms-transform: translateY(-5px);
@@ -381,7 +383,7 @@ div.todo-add-btn-background>div.todo-add-btn-vertical-plus {
 
 div.todo-add-btn-background.disabled {
   background-color: var(--accent-color-disabled);
-  cursor: not-allowed;
+  cursor: default;
 }
 
 div.todo-list-container {
@@ -598,6 +600,8 @@ a.btn {
   -ms-transition: transform 0.2s ease;
   -moz-transition: transform 0.2s ease;
   transition: transform 0.2s ease;
+  text-shadow: #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px,
+    #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px;
 }
 
 button[type="reset"]:hover,
