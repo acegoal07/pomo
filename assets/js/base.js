@@ -27,8 +27,8 @@ window.addEventListener("load", async () => {
 
    /////////////// Universal Popup functions ///////////////
    // Popup open functions
-   const popupOpenFunction = async (element) => {
-      const popup = await document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
+   const popupOpenFunction = (element) => {
+      const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
       popup.style.animation = "popupOpenAnimation 0.5s forwards";
       popup.style.display = "flex";
       document.body.style.overflow = "hidden";
@@ -39,19 +39,6 @@ window.addEventListener("load", async () => {
       document.querySelector("#todo-item-popup").setAttribute("data-task-id-storage", element.getAttribute("data-task-id"));
       document.querySelector("#todo-item-save").classList.add("hide");
    };
-   const infoPopupOpenFunction = (element) => {
-      popupOpenFunction(element).then(() => {
-         const flkty = Flickity.data(document.querySelector('.main-carousel'));
-         for (let i = 0; i < 50; i++) {
-            flkty.resize();
-         }
-      });
-   };
-   const createTodoPopupOpenFunction = (element) => {
-      if (getCookie('username') !== null) {
-         popupOpenFunction(element);
-      }
-   }
    // Popup open listener and setter
    document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
       if (element.getAttribute("data-target-popup-type") === "todo-item-popup") {
@@ -60,11 +47,17 @@ window.addEventListener("load", async () => {
          });
       } else if (element.getAttribute("data-target-popup-type") === "information-popup") {
          element.addEventListener("click", () => {
-            infoPopupOpenFunction(element);
+            popupOpenFunction(element);
+            const flkty = Flickity.data(document.querySelector('.main-carousel'));
+            for (let i = 0; i < 50; i++) {
+               flkty.resize();
+            }
          });
       } else if (element.getAttribute("data-target-popup-type") === "create-todo-popup") {
          element.addEventListener("click", () => {
-            createTodoPopupOpenFunction(element);
+            if (getCookie('username') !== null) {
+               popupOpenFunction(element);
+            }
          });
       } else {
          element.addEventListener("click", () => {
@@ -73,8 +66,8 @@ window.addEventListener("load", async () => {
       }
    });
    // Popup close functions
-   const popupCloseFunctionByID = async (ID) => {
-      const popup = await document.querySelector(`#${ID}`);
+   const popupCloseFunctionByID = (ID) => {
+      const popup = document.querySelector(`#${ID}`);
       popup.style.animation = "popupCloseAnimation 0.5s forwards";
       setTimeout(function () {
          popup.style.display = "none";
@@ -83,8 +76,8 @@ window.addEventListener("load", async () => {
    };
    // Popup close listener and setter
    document.querySelectorAll("[data-popup-close-target]").forEach((element) => {
-      element.addEventListener("click", async () => {
-         const popup = await document.querySelector(`#${element.getAttribute("data-popup-close-target")}`);
+      element.addEventListener("click", () => {
+         const popup = document.querySelector(`#${element.getAttribute("data-popup-close-target")}`);
          popup.style.animation = "popupCloseAnimation 0.5s forwards";
          setTimeout(function () {
             popup.style.display = "none";
@@ -145,11 +138,23 @@ window.addEventListener("load", async () => {
 
       popupCloseFunctionByID("todo-item-popup");
    });
-
    // Todo Save button
-   document.querySelector("#todo-item-save").addEventListener("click", (event) => {
+   document.querySelector("#todo-item-save").addEventListener("click", async (event) => {
       event.preventDefault();
-      popupCloseFunctionByID("todo-item-popup");
+      const form = new FormData();
+      form.append("requestType", "editTodo");
+      form.append("taskID", document.querySelector("#todo-item-popup").getAttribute("data-task-id-storage"));
+      form.append("taskContent", document.querySelector("#task-input").value);
+      await fetch("assets/php/database.php", {
+         method: "POST",
+         body: form
+      })
+         .then(response => response.json())
+         .then(data => {
+            popupCloseFunctionByID("todo-item-popup");
+            loadTodos();
+         })
+         .catch(error => console.error('Error saving changes to todo:', error));
    });
    document.querySelector("#task-input").addEventListener("keyup", () => {
       if (document.querySelector("#todo-item-popup").style.display === "flex") {
@@ -186,7 +191,7 @@ window.addEventListener("load", async () => {
                      divTodoItemText.textContent = todo.taskName;
                      divTodoItemContainer.appendChild(divTodoItemText);
 
-                     divTodoItem.addEventListener("click", (element) => todoPopupOpenFunction(element.target));
+                     divTodoItem.addEventListener("click", () => todoPopupOpenFunction(divTodoItem));
                      document.querySelector('#todo-list').appendChild(divTodoItem);
                   });
                }
