@@ -30,6 +30,7 @@ window.addEventListener("load", async () => {
       document.querySelector("#todo-create-button").classList.remove("disabled");
       document.querySelector("#login-page").classList.add("hide");
       document.querySelector("#user-page").classList.remove("hide");
+      document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
 
       const form = new FormData();
       form.append('requestType', 'getPomoScore');
@@ -276,6 +277,7 @@ window.addEventListener("load", async () => {
             popupCloseFunctionByID("login-popup");
             document.querySelector("#registration-page").classList.add("hide");
             document.querySelector("#user-page").classList.remove("hide");
+            document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
             event.target.reset();
          } else {
             console.log("Failed to register: " + data);
