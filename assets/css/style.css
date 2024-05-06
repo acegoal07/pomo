@@ -298,11 +298,11 @@ svg.timer-controls {
 path.timer-controls-cursor {
   fill: #fff;
   cursor: pointer;
-  -webkit-transition: transform 0.2s ease;
-  -o-transition: transform 0.2s ease;
-  -ms-transition: transform 0.2s ease;
-  -moz-transition: transform 0.2s ease;
-  transition: transform 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
   filter: drop-shadow(0 3px 5px var(--shadow-color));
 }
 
@@ -415,10 +415,10 @@ div.todo-list-container>div.todo-item {
   align-items: center;
   padding: 1rem;
   width: 90%;
-  -webkit-transition: transform 0.2s ease, box-shadow 0.2s ease;
-  -o-transition: transform 0.2s ease, box-shadow 0.2s ease;
-  -moz-transition: transform 0.2s ease, box-shadow 0.2s ease;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-transition: all 0.2s ease, box-shadow 0.2s ease;
+  -o-transition: all 0.2s ease, box-shadow 0.2s ease;
+  -moz-transition: all 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 3px 5px var(--shadow-color);
 }
 
@@ -604,11 +604,11 @@ a.btn {
   border: none;
   cursor: pointer;
   font-weight: bold;
-  -webkit-transition: transform 0.2s ease;
-  -o-transition: transform 0.2s ease;
-  -ms-transition: transform 0.2s ease;
-  -moz-transition: transform 0.2s ease;
-  transition: transform 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
   text-shadow: var(--text-outline-thickness-light);
 }
 
