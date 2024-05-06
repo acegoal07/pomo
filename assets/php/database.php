@@ -114,7 +114,10 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                if ($stmt->execute()) {
                   $result = $stmt->get_result();
                   if ($result->num_rows > 0) {
+                     $row = $result->fetch_assoc();
                      $response['success'] = true;
+                     $response['partialPomoScore'] = $row['partialPomoScore'];
+                     $response['fullPomoScore'] = $row['fullPomoScore'];
                   } else {
                      $response['success'] = false;
                   }

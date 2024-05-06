@@ -135,7 +135,6 @@ window.addEventListener("load", async () => {
             }
          })
          .catch(error => console.log(error));
-
       popupCloseFunctionByID("todo-item-popup");
    });
    // Todo Save button
@@ -150,67 +149,18 @@ window.addEventListener("load", async () => {
          body: form
       })
          .then(response => response.json())
-         .then(data => {
+         .then(() => {
             popupCloseFunctionByID("todo-item-popup");
             loadTodos();
          })
          .catch(error => console.error('Error saving changes to todo:', error));
    });
+   // Todo input keyup listener
    document.querySelector("#task-input").addEventListener("keyup", () => {
       if (document.querySelector("#todo-item-popup").style.display === "flex") {
          document.querySelector("#todo-item-save").classList.remove("hide");
       }
    })
-   // Load todos on load
-   const loadTodos = async () => {
-      const form = new FormData();
-      form.append('requestType', 'getTodos')
-      form.append('username', getCookie('username'));
-      await fetch('assets/php/database.php', {
-         method: 'POST',
-         body: form
-      })
-         .then(response => response.json())
-         .then(data => {
-            document.querySelector("#todo-list").querySelectorAll("*").forEach(n => n.remove());
-            if (data.success) {
-               if (data.todos) {
-                  data.todos.forEach(todo => {
-                     const divTodoItem = document.createElement('div');
-                     divTodoItem.classList.add('todo-item');
-                     divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
-                     divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
-                     divTodoItem.setAttribute('data-task-id', todo.taskID);
-
-                     const divTodoItemContainer = document.createElement('div');
-                     divTodoItemContainer.classList.add('todo-item-container');
-                     divTodoItem.appendChild(divTodoItemContainer);
-
-                     const divTodoItemText = document.createElement('div');
-                     divTodoItemText.classList.add('todo-text');
-                     divTodoItemText.textContent = todo.taskName;
-                     divTodoItemContainer.appendChild(divTodoItemText);
-
-                     divTodoItem.addEventListener("click", () => todoPopupOpenFunction(divTodoItem));
-                     document.querySelector('#todo-list').appendChild(divTodoItem);
-                  });
-               }
-            } else {
-               console.log('Failed to load todos: ' + data);
-            }
-         })
-         .catch(error => {
-            console.error('Error:', error);
-         });
-   };
-
-   /////////////// User onload auto login ///////////////
-   if (getCookie('username') !== null) {
-      document.querySelector("#todo-create-button").classList.remove("disabled");
-      document.querySelector("#login-page").classList.add("hide");
-      document.querySelector("#user-page").classList.remove("hide");
-      loadTodos();
-   }
 
    /////////////// Leaderboard popup functions ///////////////
    // Leaderboard switch button
@@ -223,6 +173,15 @@ window.addEventListener("load", async () => {
          document.querySelector("#leaderboard-weekly").classList.remove("hide");
       }
    });
+
+   /////////////// User onload auto login ///////////////
+   if (getCookie('username') !== null) {
+      document.querySelector("#todo-create-button").classList.remove("disabled");
+      document.querySelector("#login-page").classList.add("hide");
+      document.querySelector("#user-page").classList.remove("hide");
+      setPomoCounter(getCookie('fullPomoScore'), getCookie('partialPomoScore'));
+      loadTodos();
+   }
 
    /////////////// User popup functions ///////////////
    // Login page switch button
@@ -251,6 +210,9 @@ window.addEventListener("load", async () => {
                document.querySelector("#todo-create-button").classList.remove("disabled");
             }
             setCookie('username', form.get('username'));
+            setCookie('fullPomoScore', data.fullPomoScore);
+            setCookie('partialPomoScore', data.partialPomoScore);
+            setPomoCounter(data.fullPomoScore, data.partialPomoScore);
             loadTodos();
             popupCloseFunctionByID("login-popup");
             document.querySelector("#login-page").classList.add("hide");
@@ -285,7 +247,10 @@ window.addEventListener("load", async () => {
    document.querySelector("#user-logout-button").addEventListener("click", (event) => {
       event.preventDefault();
       deleteCookie('username');
+      deleteCookie('fullPomoScore');
+      deleteCookie('partialPomoScore');
       popupCloseFunctionByID("login-popup");
+      resetPomoCounter();
       loadTodos();
       document.querySelector("#todo-create-button").classList.add("disabled");
       document.querySelector("#user-page").classList.add("hide");
@@ -343,8 +308,7 @@ window.addEventListener("load", async () => {
                   index = 0;
                   pomodoros++;
                   pomoProgress = 0;
-                  document.querySelector("#pomodoro-counter").textContent =
-                     pomodoros;
+                  document.querySelector("#pomodoro-counter").textContent = pomodoros;
                }
             } else if (timer.getCurrentPositionMS() < quarterWay) {
                setTimerColor("var(--background-color)");
@@ -360,14 +324,39 @@ window.addEventListener("load", async () => {
    });
 });
 
-/////////////// Additional functions ///////////////
+/////////////// Timer functions ///////////////
 /**
- * Timer count down function
+ * Set timer progress
  * @param {int} value
  */
 function setTimerProgress(value) {
    document.querySelector("#timer-circle-progress").setAttribute.bind(document.querySelector("#timer-circle-progress"))("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
 }
+/**
+ * Timer colour function
+ * @param {String} input
+ */
+function setTimerColor(input) {
+   document.querySelector("#timer-circle-progress").style.stroke = input == null ? "green" : input;
+}
+
+/////////////// Pomo Counter functions ///////////////
+/**
+ * Set pomo counter
+ * @param {Integer} fullPomoScore
+ * @param {Integer} partialPomoScore
+ */
+const setPomoCounter = (fullPomoScore, partialPomoScore) => {
+   document.querySelector("#pomodoro-counter").textContent = fullPomoScore;
+   setPomoCounterProgress(12.5 * partialPomoScore);
+};
+/**
+ * Reset pomo counter
+ */
+const resetPomoCounter = () => {
+   document.querySelector("#pomodoro-counter").textContent = "0";
+   setPomoCounterProgress(0);
+};
 const pomodoroCounterCircle = document.querySelector("#counter-circle");
 const pomodoroCounterRadius = pomodoroCounterCircle.r.baseVal.value;
 const pomodoroCounterCircumference = pomodoroCounterRadius * 2 * Math.PI;
@@ -380,13 +369,54 @@ pomodoroCounterCircle.style.strokeDashoffset = `${pomodoroCounterCircumference}`
 function setPomoCounterProgress(percent) {
    pomodoroCounterCircle.style.strokeDashoffset = pomodoroCounterCircumference - (percent / 100) * pomodoroCounterCircumference;
 }
+
+/////////////// Todo functions ///////////////
 /**
- * Timer colour function
- * @param {String} input
+ * Load todos
  */
-function setTimerColor(input) {
-   document.querySelector("#timer-circle-progress").style.stroke = input == null ? "green" : input;
-}
+const loadTodos = async () => {
+   const form = new FormData();
+   form.append('requestType', 'getTodos')
+   form.append('username', getCookie('username'));
+   await fetch('assets/php/database.php', {
+      method: 'POST',
+      body: form
+   })
+      .then(response => response.json())
+      .then(data => {
+         document.querySelector("#todo-list").querySelectorAll("*").forEach(n => n.remove());
+         if (data.success) {
+            if (data.todos) {
+               data.todos.forEach(todo => {
+                  const divTodoItem = document.createElement('div');
+                  divTodoItem.classList.add('todo-item');
+                  divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
+                  divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
+                  divTodoItem.setAttribute('data-task-id', todo.taskID);
+
+                  const divTodoItemContainer = document.createElement('div');
+                  divTodoItemContainer.classList.add('todo-item-container');
+                  divTodoItem.appendChild(divTodoItemContainer);
+
+                  const divTodoItemText = document.createElement('div');
+                  divTodoItemText.classList.add('todo-text');
+                  divTodoItemText.textContent = todo.taskName;
+                  divTodoItemContainer.appendChild(divTodoItemText);
+
+                  divTodoItem.addEventListener("click", () => todoPopupOpenFunction(divTodoItem));
+                  document.querySelector('#todo-list').appendChild(divTodoItem);
+               });
+            }
+         } else {
+            console.log('Failed to load todos: ' + data);
+         }
+      })
+      .catch(error => {
+         console.error('Error:', error);
+      });
+};
+
+/////////////// Helper functions ///////////////
 /**
  * Milliseconds to timestamp
  * @param {Number} s
@@ -397,13 +427,11 @@ function msToTime(s) {
       z = z || 2;
       return ("00" + n).slice(-z);
    }
-
    const ms = s % 1000;
    s = (s - ms) / 1000;
    const secs = s % 60;
    s = (s - secs) / 60;
    const mins = s % 60;
-
    return `${pad(mins)}:${pad(secs)}`;
 }
 /**
