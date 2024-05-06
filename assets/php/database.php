@@ -138,7 +138,6 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                echo json_encode(array('success' => false));
             } else {
                $username = $_POST['username'];
-               $password = hash('sha256', $_POST['password']);
                $stmt = $conn->prepare("SELECT * FROM users WHERE userName = ?");
                $stmt->bind_param("s", $username);
                if ($stmt->execute()) {
@@ -146,25 +145,28 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                   if ($result->num_rows > 0) {
                      $response['success'] = false;
                      $response['message'] = 'Username already exists';
+                     http_response_code(200);
                   } else {
                      $stmt = $conn->prepare("INSERT INTO users (userName, Password) VALUES (?, ?)");
+                     $password = hash('sha256', $_POST['password']);
                      $stmt->bind_param("ss", $username, $password);
                      if ($stmt->execute()) {
                         $response['success'] = true;
-                        $response['username'] = $username;
-                        echo json_encode($response);
+                        http_response_code(200);
                      } else {
+                        $response['success'] = false;
                         http_response_code(500);
-                        echo json_encode(array('success' => false));
                      }
                   }
                } else {
+                  $response['success'] = false;
                   http_response_code(500);
-                  echo json_encode(array('success' => false));
                }
                $stmt->close();
                $conn->close();
+               echo json_encode($response);
             }
+            break;
             // Update a user's password
          case 'updatePassword':
             if (!isset($_POST['currentPassword']) || !isset($_POST['newPassword']) || !isset($_POST['confirmNewPassword']) || !isset($_POST['username'])) {

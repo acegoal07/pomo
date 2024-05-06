@@ -38,22 +38,22 @@ window.addEventListener("load", async () => {
          method: 'POST',
          body: form
       })
-      .then(response => {
-         if (response.ok) {
-            return response.json();
-         } else {
-            console.log('Error with the response from the database');
-         }
-      })
-      .then(data => {
-         if (data.success) {
-            setCookie('fullPomoScore', data.fullPomoScore);
-            setCookie('partialPomoScore', data.partialPomoScore);
-            setPomoCounter(data.fullPomoScore, data.partialPomoScore);
-         } else {
-            console.log("Failed to get pomo score: " + data);
-         }
-      });
+         .then(response => {
+            if (response.ok) {
+               return response.json();
+            } else {
+               console.log('Error with the response from the database');
+            }
+         })
+         .then(data => {
+            if (data.success) {
+               setCookie('fullPomoScore', data.fullPomoScore);
+               setCookie('partialPomoScore', data.partialPomoScore);
+               setPomoCounter(data.fullPomoScore, data.partialPomoScore);
+            } else {
+               console.log("Failed to get pomo score: " + data);
+            }
+         });
       loadTodos();
    }
 
@@ -172,7 +172,7 @@ window.addEventListener("load", async () => {
       })
          .then(response => {
             if (response.ok) {
-               console.log(response.json());
+               return response.json();
             } else {
                console.log('Error with the response from the database');
             }
@@ -251,10 +251,36 @@ window.addEventListener("load", async () => {
       document.querySelector("#login-page").classList.remove("hide");
    });
    // Registration submit button
-   document.querySelector("#registration-form").addEventListener("submit", (event) => {
+   document.querySelector("#registration-form").addEventListener("submit", async (event) => {
       event.preventDefault();
-      popupCloseFunctionByID("login-popup");
-      event.target.reset();
+      const form = new FormData(event.target);
+      form.append('requestType', 'register');
+      await fetch('assets/php/database.php', {
+         method: 'POST',
+         body: form
+      }).then(response => {
+         if (response.ok) {
+            return response.json();
+         } else {
+            console.log('Error with the response from the database');
+         }
+      }).then(data => {
+         if (data.success) {
+            console.log(data);
+            if (getCookie('username') === null) {
+               document.querySelector("#todo-create-button").classList.remove("disabled");
+            }
+            setCookie('username', form.get('username'));
+            setPomoCounter(0, 0);
+            loadTodos();
+            popupCloseFunctionByID("login-popup");
+            document.querySelector("#login-page").classList.add("hide");
+            document.querySelector("#user-page").classList.remove("hide");
+            event.target.reset();
+         } else {
+            console.log("Failed to register: " + data);
+         }
+      });
    });
    // Change password submit button
    document.querySelector("#change-password-form").addEventListener("submit", async (event) => {
@@ -309,7 +335,7 @@ window.addEventListener("load", async () => {
       if (!timer.isActive()) {
          if (timer.getCurrentPositionMS() === 0) {
             setTimerColor("var(--accent-color)");
-            currentTime = times[index] * 1000; // 60000
+            currentTime = times[index] * 60000;
             timer.setTimerLength(currentTime).startTimer();
          } else {
             timer.startTimer();
