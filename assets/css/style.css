@@ -720,7 +720,12 @@ div.leaderboard-switch-container {
 
 .carousel-cell {
   text-align: center;
-  color: var(--background-color);
+  color: #fff;
+  text-shadow:
+    1px 1px 0 #000,
+    -1px 1px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000;
   background-color: var(--foreground-color);
   width: 80%;
   height: 80%;
