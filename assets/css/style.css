@@ -1,4 +1,4 @@
-/* Main body universal css */--text-outline-thickness-strong
+/* Main body universal css */
 :root {
   --background-color: #c42217;
   --foreground-color: #eed847;
@@ -6,8 +6,8 @@
   --accent-color-hover: #5da036;
   --accent-color-disabled: #808080;
   --shadow-color: #0000004d;
-  --text-outline-thickness-strong: 4px;
-  --text-outline-thickness-light: 1px;
+  --text-outline-thickness-strong: #000 0px 0px 4px, #000 0px 0px 4px, #000 0px 0px 4px, #000 0px 0px 4px, #000 0px 0px 4px, #000 0px 0px 4px;
+  --text-outline-thickness-light: #000 0px 0px 1px, #000 0px 0px 1px, #000 0px 0px 1px, #000 0px 0px 1px, #000 0px 0px 1px, #000 0px 0px 1px;
   font-family: 'Fredoka', Arial, sans-serif;
 }
 
@@ -35,8 +35,7 @@ h1 {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.125rem;
-  text-shadow: #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong),
-    #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong);
+  text-shadow: var(--text-outline-thickness-strong);
 }
 
 @media only screen and (max-width: 1120px) {
@@ -48,8 +47,7 @@ h1 {
 h2 {
   text-align: center;
   color: #fff;
-  text-shadow: #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong),
-    #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong);
+  text-shadow: var(--text-outline-thickness-strong);
 }
 
 .hide {
@@ -152,8 +150,7 @@ div.pomodoro-counter-container {
   text-align: center;
   height: 4.6rem;
   width: 4.6rem;
-  text-shadow: #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong),
-    #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong);
+  text-shadow: var(--text-outline-thickness-strong);
 }
 
 div.pomodoro-counter-container>span.pomodoro-counter {
@@ -284,8 +281,7 @@ svg.timer-svg-container>circle.timer-circle-progress-transition {
 div.timer-container>h1#timer-text {
   color: #fff;
   position: absolute;
-  text-shadow: #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong),
-    #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong);
+  text-shadow: var(--text-outline-thickness-strong);
 }
 
 div.timer-controls-container {
@@ -447,8 +443,7 @@ div.todo-item-container {
 h1.todo-header {
   margin-top: 1rem;
   margin-bottom: 0;
-  text-shadow: #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong),
-    #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong), #000 0px 0px var(--text-outline-thickness-strong);
+  text-shadow: var(--text-outline-thickness-strong);
 }
 
 /* Popup */
@@ -617,8 +612,7 @@ a.btn {
   -ms-transition: transform 0.2s ease;
   -moz-transition: transform 0.2s ease;
   transition: transform 0.2s ease;
-  text-shadow: #000 0px 0px var(--text-outline-thickness-light), #000 0px 0px var(--text-outline-thickness-light), #000 0px 0px var(--text-outline-thickness-light),
-    #000 0px 0px var(--text-outline-thickness-light), #000 0px 0px var(--text-outline-thickness-light), #000 0px 0px var(--text-outline-thickness-light);
+  text-shadow: var(--text-outline-thickness-light);
 }
 
 button[type="reset"]:hover,
