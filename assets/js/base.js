@@ -330,12 +330,12 @@ window.addEventListener("load", async () => {
    const times = [25, 5, 25, 5, 25, 5, 25, 15];
    let currentTime;
    document.querySelector("#timer-start-button").addEventListener("click", () => {
-      let pomodoros = getCookie('fullPomoScore') || 0;
-      let pomoProgress = getCookie('partialPomoScore') || 0;
+      let pomodoros = getCookie('fullPomoScore') || 0; 
+      let pomoProgress = getCookie('partialPomoScore') || 0; 
       if (!timer.isActive()) {
          if (timer.getCurrentPositionMS() === 0) {
             setTimerColor("var(--accent-color)");
-            currentTime = times[index] * 60000;
+            currentTime = times[index] * 60000; 
             timer.setTimerLength(currentTime).startTimer();
          } else {
             timer.startTimer();
