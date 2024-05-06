@@ -77,6 +77,8 @@ window.addEventListener("load", async () => {
          element.addEventListener("click", () => {
             if (getCookie('username') !== null) {
                popupOpenFunction(element);
+            } else {
+               popupOpenFunction(document.querySelector("#login-popup"));
             }
          });
       } else {
@@ -527,7 +529,7 @@ const popupCloseFunctionByID = (ID) => {
 };
 // Popup open functions
 const popupOpenFunction = (element) => {
-   const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
+   const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`) || element;
    popup.style.animation = "popupOpenAnimation 0.5s forwards";
    popup.style.display = "flex";
    document.body.style.overflow = "hidden";
