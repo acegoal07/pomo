@@ -222,11 +222,9 @@ div.timer-grid-section div.timer-grid-container {
   width: -moz-fit-content;
   width: fit-content;
   box-shadow: 0 5px 15px var(--shadow-color);
-  /* Temporary */
   transition: transform 0.3s ease-in-out;
 }
 
-/* Temporary */
 div.timer-grid-section div.timer-grid-container:hover {
   transform: scale(1.02);
   box-shadow: 0 8px 20px var(--shadow-color);
@@ -341,11 +339,9 @@ div.todo-grid-section div.todo-grid-container {
   padding: 1rem;
   max-height: 40%;
   box-shadow: 0 5px 15px var(--shadow-color);
-  /* Temporary */
   transition: transform 0.3s ease-in-out;
 }
 
-/* Temporary */
 div.todo-grid-section div.todo-grid-container:hover {
   transform: scale(1.02);
   box-shadow: 0 8px 20px var(--shadow-color);
