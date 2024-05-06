@@ -236,6 +236,7 @@ window.addEventListener("load", async () => {
             popupCloseFunctionByID("login-popup");
             document.querySelector("#login-page").classList.add("hide");
             document.querySelector("#user-page").classList.remove("hide");
+            document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
             event.target.reset();
          } else {
             console.log("Login failed: " + data);
