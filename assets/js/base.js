@@ -25,20 +25,39 @@ window.addEventListener("load", async () => {
    setTimerColor("var(--background-color)");
    document.querySelector("#timer-circle-progress").classList.add("timer-circle-progress-transition");
 
+   /////////////// User onload auto login ///////////////
+   if (getCookie('username') !== null) {
+      document.querySelector("#todo-create-button").classList.remove("disabled");
+      document.querySelector("#login-page").classList.add("hide");
+      document.querySelector("#user-page").classList.remove("hide");
+
+      const form = new FormData();
+      form.append('requestType', 'getPomoScore');
+      form.append('username', getCookie('username'));
+      await fetch('assets/php/database.php', {
+         method: 'POST',
+         body: form
+      })
+      .then(response => {
+         if (response.ok) {
+            return response.json();
+         } else {
+            console.log('Error with the response from the database');
+         }
+      })
+      .then(data => {
+         if (data.success) {
+            setCookie('fullPomoScore', data.fullPomoScore);
+            setCookie('partialPomoScore', data.partialPomoScore);
+            setPomoCounter(data.fullPomoScore, data.partialPomoScore);
+         } else {
+            console.log("Failed to get pomo score: " + data);
+         }
+      });
+      loadTodos();
+   }
+
    /////////////// Universal Popup functions ///////////////
-   // Popup open functions
-   const popupOpenFunction = (element) => {
-      const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
-      popup.style.animation = "popupOpenAnimation 0.5s forwards";
-      popup.style.display = "flex";
-      document.body.style.overflow = "hidden";
-   };
-   const todoPopupOpenFunction = (element) => {
-      popupOpenFunction(element);
-      document.querySelector("#task-input").value = element.querySelector(".todo-text").textContent.trim();
-      document.querySelector("#todo-item-popup").setAttribute("data-task-id-storage", element.getAttribute("data-task-id"));
-      document.querySelector("#todo-item-save").classList.add("hide");
-   };
    // Popup open listener and setter
    document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
       if (element.getAttribute("data-target-popup-type") === "todo-item-popup") {
@@ -65,15 +84,6 @@ window.addEventListener("load", async () => {
          });
       }
    });
-   // Popup close functions
-   const popupCloseFunctionByID = (ID) => {
-      const popup = document.querySelector(`#${ID}`);
-      popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function () {
-         popup.style.display = "none";
-      }, 500);
-      document.body.style.overflow = "auto";
-   };
    // Popup close listener and setter
    document.querySelectorAll("[data-popup-close-target]").forEach((element) => {
       element.addEventListener("click", () => {
@@ -102,7 +112,13 @@ window.addEventListener("load", async () => {
             body: form
          }
       )
-         .then(response => response.json())
+         .then(response => {
+            if (response.ok) {
+               return response.json();
+            } else {
+               console.log('Error with the response from the database');
+            }
+         })
          .then(data => {
             if (data.success) {
                loadTodos();
@@ -126,7 +142,13 @@ window.addEventListener("load", async () => {
             body: form
          }
       )
-         .then(response => response.json())
+         .then(response => {
+            if (response.ok) {
+               return response.json();
+            } else {
+               console.log('Error with the response from the database');
+            }
+         })
          .then(data => {
             if (data.success) {
                loadTodos();
@@ -148,7 +170,13 @@ window.addEventListener("load", async () => {
          method: "POST",
          body: form
       })
-         .then(response => response.json())
+         .then(response => {
+            if (response.ok) {
+               console.log(response.json());
+            } else {
+               console.log('Error with the response from the database');
+            }
+         })
          .then(() => {
             popupCloseFunctionByID("todo-item-popup");
             loadTodos();
@@ -173,15 +201,6 @@ window.addEventListener("load", async () => {
          document.querySelector("#leaderboard-weekly").classList.remove("hide");
       }
    });
-
-   /////////////// User onload auto login ///////////////
-   if (getCookie('username') !== null) {
-      document.querySelector("#todo-create-button").classList.remove("disabled");
-      document.querySelector("#login-page").classList.add("hide");
-      document.querySelector("#user-page").classList.remove("hide");
-      setPomoCounter(getCookie('fullPomoScore'), getCookie('partialPomoScore'));
-      loadTodos();
-   }
 
    /////////////// User popup functions ///////////////
    // Login page switch button
@@ -238,10 +257,32 @@ window.addEventListener("load", async () => {
       event.target.reset();
    });
    // Change password submit button
-   document.querySelector("#change-password-form").addEventListener("submit", (event) => {
+   document.querySelector("#change-password-form").addEventListener("submit", async (event) => {
       event.preventDefault();
-      event.target.reset();
+      const form = new FormData(event.target);
+      form.append('username', getCookie('username'));
+      form.append('requestType', 'updatePassword');
+      await fetch('assets/php/database.php', {
+         method: 'POST',
+         body: form
+      })
+         .then(response => {
+            if (response.ok) {
+               return response.json();
+            } else {
+               console.log('Error with the response from the database');
+            }
+         })
+         .then(data => {
+            if (data.success) {
+               popupCloseFunctionByID("login-popup");
+            } else {
+               console.log("Failed to change password: " + data);
+            }
+         })
+         .catch(error => console.error('Error:', error));
       popupCloseFunctionByID("login-popup");
+      event.target.reset();
    });
    // Logout button
    document.querySelector("#user-logout-button").addEventListener("click", (event) => {
@@ -259,23 +300,23 @@ window.addEventListener("load", async () => {
 
    /////////////// Timer Buttons ///////////////
    // Start timer button
-   let pomodoros = 0;
    let index = 0;
    const times = [25, 5, 25, 5, 25, 5, 25, 15];
    let currentTime;
-   let pomoProgress = 0;
    document.querySelector("#timer-start-button").addEventListener("click", () => {
+      let pomodoros = getCookie('fullPomoScore') || 0;
+      let pomoProgress = getCookie('partialPomoScore') || 0;
       if (!timer.isActive()) {
          if (timer.getCurrentPositionMS() === 0) {
             setTimerColor("var(--accent-color)");
-            currentTime = times[index] * 60000;
+            currentTime = times[index] * 1000; // 60000
             timer.setTimerLength(currentTime).startTimer();
          } else {
             timer.startTimer();
          }
          const halfWay = timer.timerLengthMS / 2;
          const quarterWay = timer.timerLengthMS / 4;
-         const timeDisplay = setInterval(() => {
+         const timeDisplay = setInterval(async () => {
             if (timer.getCurrentPositionMS() === -1000) {
                clearInterval(timeDisplay);
                timer.stopTimer();
@@ -302,14 +343,44 @@ window.addEventListener("load", async () => {
                }
                if (index < 7) {
                   index++;
-                  pomoProgress = pomoProgress + 12.5;
-                  setPomoCounterProgress(pomoProgress);
                } else {
                   index = 0;
-                  pomodoros++;
-                  pomoProgress = 0;
                   document.querySelector("#pomodoro-counter").textContent = pomodoros;
                }
+               if (pomoProgress < 8) {
+                  pomoProgress++;
+               } else {
+                  pomoProgress = 0;
+                  pomodoros++;
+               }
+               setPomoCounter(pomodoros, pomoProgress);
+               setCookie('fullPomoScore', pomodoros);
+               setCookie('partialPomoScore', pomoProgress);
+
+               const form = new FormData();
+               form.append('requestType', 'updatePomoScore');
+               form.append('username', getCookie('username'));
+               form.append('fullPomoScore', pomodoros);
+               form.append('partialPomoScore', pomoProgress);
+               await fetch('assets/php/database.php', {
+                  method: 'POST',
+                  body: form
+               })
+                  .then(response => {
+                     if (response.ok) {
+                        return response.json();
+                     } else {
+                        console.log('Error with the response from the database');
+                     }
+                  })
+                  .then(data => {
+                     if (!data.success) {
+                        console.log("Failed to update pomo score: " + data);
+                     }
+                  })
+                  .catch(error => {
+                     console.error('Error updating pomo score:', error);
+                  });
             } else if (timer.getCurrentPositionMS() < quarterWay) {
                setTimerColor("var(--background-color)");
             } else if (timer.getCurrentPositionMS() < halfWay) {
@@ -400,7 +471,7 @@ const loadTodos = async () => {
 
                   const divTodoItemText = document.createElement('div');
                   divTodoItemText.classList.add('todo-text');
-                  divTodoItemText.textContent = todo.taskName;
+                  divTodoItemText.textContent = todo.taskContent;
                   divTodoItemContainer.appendChild(divTodoItemText);
 
                   divTodoItem.addEventListener("click", () => todoPopupOpenFunction(divTodoItem));
@@ -414,6 +485,30 @@ const loadTodos = async () => {
       .catch(error => {
          console.error('Error:', error);
       });
+};
+
+/////////////// Popup functions ///////////////
+// Popup close function
+const popupCloseFunctionByID = (ID) => {
+   const popup = document.querySelector(`#${ID}`);
+   popup.style.animation = "popupCloseAnimation 0.5s forwards";
+   setTimeout(function () {
+      popup.style.display = "none";
+   }, 500);
+   document.body.style.overflow = "auto";
+};
+// Popup open functions
+const popupOpenFunction = (element) => {
+   const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
+   popup.style.animation = "popupOpenAnimation 0.5s forwards";
+   popup.style.display = "flex";
+   document.body.style.overflow = "hidden";
+};
+const todoPopupOpenFunction = (element) => {
+   popupOpenFunction(element);
+   document.querySelector("#task-input").value = element.querySelector(".todo-text").textContent.trim();
+   document.querySelector("#todo-item-popup").setAttribute("data-task-id-storage", element.getAttribute("data-task-id"));
+   document.querySelector("#todo-item-save").classList.add("hide");
 };
 
 /////////////// Helper functions ///////////////
