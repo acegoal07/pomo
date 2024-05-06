@@ -4,13 +4,12 @@
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>Pomo</title>
+   <title>Pomo - Focus Tracker</title>
    <meta name="description" content="A focus tracker" />
    <link rel="shortcut icon" href="assets/images/favi.ico" />
    <link rel="stylesheet" href="assets/css/style.css" />
    <script src="assets/js/timer.js" defer></script>
    <script src="assets/js/base.js" defer></script>
-   <script src="assets/js/registerTemp.js" defer></script>
    <link rel="preconnect" href="https://fonts.googleapis.com" />
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet" />
@@ -102,6 +101,23 @@
                </button>
             </form>
          </div>
+
+         <div id="user-page" class="hide">
+            <h1 class="popup-header">Welcome back!</h1>
+            <h2>Change password</h2>
+            <form id="change-password-form" method="post" class="popup-form">   
+               <input id="user-change-username-input-original" type="password" name="currentPassword" placeholder="Current password" required />
+               <input id="user-change-username-input-new" type="password" name="newPassword" placeholder="New password" required />
+               <input id="user-change-username-input-cpnfirm-new" type="password" name="confirmNewPassword" placeholder="Confirm new password" required />
+               <button id="user-change-password" type="submit">
+                  Change Password
+               </button>
+               <button id="user-logout-button" type="reset">
+                  Logout
+               </button>
+            </form>
+         </div>
+
       </div>
    </div>
 
@@ -117,8 +133,9 @@
 
          <div id="information-page">
             <h1 class="popup-header">How to use Pomo</h1>
-
-            <div class="main-carousel" data-flickity='{ "wrapAround": true, "pageDots": false }'>
+            <h2>Keep up the hard work, you're doing so well!</h2>
+            <div class="main-carousel"
+               data-flickity='{ "pageDots": false, "selectedAttraction": 0.2, "friction": 0.8 }'>
 
                <div class="carousel-cell">
                   <h2>Step 1:</h2>
@@ -146,10 +163,8 @@
                      leaderboard!
                   </p>
                </div>
-
             </div>
 
-            <h2>Keep up the hard work, you're doing so well! :(</h2>
          </div>
       </div>
    </div>
@@ -213,8 +228,6 @@
 
          <img data-popup-open-target="information-popup" data-target-popup-type="information-popup" class="nav-button"
             id="infoBtn" src="assets/images/i.webp" alt="Information" />
-
-
       </div>
       <!-- Timer -->
       <div class="timer-grid-section">
@@ -244,7 +257,8 @@
       <div class="todo-grid-section">
          <div class="todo-grid-container">
             <h1 class="todo-header">TO DO:</h1>
-            <div data-popup-open-target="todo-popup" class="todo-add-btn-background">
+            <div id="todo-create-button" data-popup-open-target="todo-popup" data-target-popup-type="create-todo-popup"
+               class="todo-add-btn-background disabled">
                <div class="todo-add-btn-horizontal-plus"></div>
                <div class="todo-add-btn-vertical-plus"></div>
             </div>

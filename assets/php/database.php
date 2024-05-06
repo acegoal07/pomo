@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
             } else {
                $username = $_POST['username'];
                $task = $_POST['taskContent'];
-               $stmt = $conn->prepare("INSERT INTO tasks (userName, taskName) VALUES (?, ?)");
+               $stmt = $conn->prepare("INSERT INTO tasks (userName, taskContent) VALUES (?, ?)");
                $stmt->bind_param("ss", $username, $task);
                if ($stmt->execute()) {
                   $response['success'] = true;
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                http_response_code(400);
                echo json_encode(array('success' => false));
             } else {
-               $stmt = $conn->prepare("UPDATE tasks SET taskName = ? WHERE taskID = ?");
+               $stmt = $conn->prepare("UPDATE tasks SET taskContent = ? WHERE taskID = ?");
                $stmt->bind_param("ss", $_POST['taskContent'], $_POST['taskID']);
                if ($stmt->execute()) {
                   $response['success'] = true;
@@ -109,11 +109,15 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                echo json_encode(array('success' => false));
             } else {
                $stmt = $conn->prepare("SELECT * FROM users WHERE userName = ? AND password = ?");
-               $stmt->bind_param("ss", $_POST['username'], $_POST['password']);
+               $password = hash('sha256', $_POST['password']);
+               $stmt->bind_param("ss", $_POST['username'], $password);
                if ($stmt->execute()) {
                   $result = $stmt->get_result();
                   if ($result->num_rows > 0) {
+                     $row = $result->fetch_assoc();
                      $response['success'] = true;
+                     $response['partialPomoScore'] = $row['partialPomoScore'];
+                     $response['fullPomoScore'] = $row['fullPomoScore'];
                   } else {
                      $response['success'] = false;
                   }
@@ -129,12 +133,11 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
             break;
             // Register a user
          case 'register':
-            if (!isset($_POST['username']) || !isset($_POST['password'])) {
+            if (!isset($_POST['username'])) {
                http_response_code(400);
                echo json_encode(array('success' => false));
             } else {
                $username = $_POST['username'];
-               $password = $_POST['password'];
                $stmt = $conn->prepare("SELECT * FROM users WHERE userName = ?");
                $stmt->bind_param("s", $username);
                if ($stmt->execute()) {
@@ -142,18 +145,63 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                   if ($result->num_rows > 0) {
                      $response['success'] = false;
                      $response['message'] = 'Username already exists';
+                     http_response_code(200);
                   } else {
                      $stmt = $conn->prepare("INSERT INTO users (userName, Password) VALUES (?, ?)");
+                     $password = hash('sha256', $_POST['password']);
                      $stmt->bind_param("ss", $username, $password);
                      if ($stmt->execute()) {
                         $response['success'] = true;
-                        $response['username'] = $username;
-                        echo json_encode($response);
+                        http_response_code(200);
                      } else {
+                        $response['success'] = false;
                         http_response_code(500);
-                        echo json_encode(array('success' => false));
                      }
                   }
+               } else {
+                  $response['success'] = false;
+                  http_response_code(500);
+               }
+               $stmt->close();
+               $conn->close();
+               echo json_encode($response);
+            }
+            break;
+            // Update a user's password
+         case 'updatePassword':
+            if (!isset($_POST['currentPassword']) || !isset($_POST['newPassword']) || !isset($_POST['confirmNewPassword']) || !isset($_POST['username'])) {
+               http_response_code(400);
+               echo json_encode(array('success' => false));
+            } else {
+               $stmt = $conn->prepare("SELECT * FROM users WHERE userName = ? AND Password = ?");
+               $oldPassword = $_POST['currentPassword'];
+               $newPassword = $_POST['newPassword'];
+               $confirmPassword = $_POST['confirmNewPassword'];
+               $username = $_POST['username'];
+               $oldPassword = hash('sha256', $oldPassword);
+               $newPassword = hash('sha256', $newPassword);
+               $confirmPassword = hash('sha256', $confirmPassword);
+               $stmt->bind_param("ss", $username, $oldPassword);
+               if ($stmt->execute()) {
+                  $result = $stmt->get_result();
+                  if ($result->num_rows > 0) {
+                     if ($newPassword == $confirmPassword) {
+                        $stmt2 = $conn->prepare("UPDATE users SET Password = ? WHERE userName = ?");
+                        $stmt2->bind_param("ss", $newPassword, $username);
+                        if ($stmt2->execute()) {
+                           $response['success'] = true;
+                        } else {
+                           $response['success'] = false;
+                        }
+                        $stmt2->close();
+                     } else {
+                        $response['success'] = false;
+                     }
+                  } else {
+                     $response['success'] = false;
+                  }
+                  http_response_code(200);
+                  echo json_encode($response);
                } else {
                   http_response_code(500);
                   echo json_encode(array('success' => false));
@@ -161,6 +209,55 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                $stmt->close();
                $conn->close();
             }
+            break;
+            // Get a user's pomo score
+         case 'getPomoScore':
+            if (!isset($_POST['username'])) {
+               http_response_code(400);
+               echo json_encode(array('success' => false));
+            } else {
+               $stmt = $conn->prepare("SELECT partialPomoScore, fullPomoScore FROM users WHERE userName = ?");
+               $stmt->bind_param("s", $_POST['username']);
+               if ($stmt->execute()) {
+                  $result = $stmt->get_result();
+                  if ($result->num_rows > 0) {
+                     $row = $result->fetch_assoc();
+                     $response['success'] = true;
+                     $response['partialPomoScore'] = $row['partialPomoScore'];
+                     $response['fullPomoScore'] = $row['fullPomoScore'];
+                  } else {
+                     $response['success'] = false;
+                  }
+                  http_response_code(200);
+                  echo json_encode($response);
+               } else {
+                  http_response_code(500);
+                  echo json_encode(array('success' => false));
+               }
+               $stmt->close();
+               $conn->close();
+            }
+            break;
+            // Update a user's pomo score
+         case 'updatePomoScore':
+            if (!isset($_POST['username']) || !isset($_POST['partialPomoScore']) || !isset($_POST['fullPomoScore'])) {
+               http_response_code(400);
+               echo json_encode(array('success' => false));
+            } else {
+               $stmt = $conn->prepare("UPDATE users SET partialPomoScore = ?, fullPomoScore = ? WHERE userName = ?");
+               $stmt->bind_param("sss", $_POST['partialPomoScore'], $_POST['fullPomoScore'], $_POST['username']);
+               if ($stmt->execute()) {
+                  $response['success'] = true;
+                  http_response_code(200);
+               } else {
+                  $response['success'] = false;
+                  http_response_code(500);
+               }
+               $stmt->close();
+               $conn->close();
+               echo json_encode($response);
+            }
+            break;
             // No request type was provided
          default:
             http_response_code(400);

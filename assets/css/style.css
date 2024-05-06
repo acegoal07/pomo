@@ -4,8 +4,11 @@
   --foreground-color: #eed847;
   --accent-color: #77b255;
   --accent-color-hover: #5da036;
+  --accent-color-disabled: #808080;
   --shadow-color: #0000004d;
-  --text-outline-thickness: 4px;
+  --text-outline-thickness-strong: #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px;
+  --text-outline-thickness-medium: #000 0px 0px 2.5px, #000 0px 0px 2.5px, #000 0px 0px 2.5px, #000 0px 0px 2.5px, #000 0px 0px 2.5px, #000 0px 0px 2.5px;
+  --text-outline-thickness-light: #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px;
   font-family: 'Fredoka', Arial, sans-serif;
 }
 
@@ -33,8 +36,7 @@ h1 {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.125rem;
-  text-shadow: #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness),
-    #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
+  text-shadow: var(--text-outline-thickness-strong);
 }
 
 @media only screen and (max-width: 1120px) {
@@ -46,6 +48,7 @@ h1 {
 h2 {
   text-align: center;
   color: #fff;
+  text-shadow: var(--text-outline-thickness-medium);
 }
 
 .hide {
@@ -148,8 +151,7 @@ div.pomodoro-counter-container {
   text-align: center;
   height: 4.6rem;
   width: 4.6rem;
-  text-shadow: #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness),
-    #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
+  text-shadow: var(--text-outline-thickness-strong);
 }
 
 div.pomodoro-counter-container>span.pomodoro-counter {
@@ -184,11 +186,11 @@ img.nav-button {
   border-radius: 2.5rem;
   padding: 0;
   margin: 0;
-  -webkit-transition: transform 0.2s ease;
-  -o-transition: transform 0.2s ease;
-  -ms-transition: transform 0.2s ease;
-  -moz-transition: transform 0.2s ease;
-  transition: transform 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
   box-shadow: 0 3px 5px var(--shadow-color);
 }
 
@@ -221,6 +223,12 @@ div.timer-grid-section div.timer-grid-container {
   width: -moz-fit-content;
   width: fit-content;
   box-shadow: 0 5px 15px var(--shadow-color);
+  transition: all 0.3s ease-in-out;
+}
+
+div.timer-grid-section div.timer-grid-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px var(--shadow-color);
 }
 
 div.timer-container {
@@ -272,8 +280,7 @@ svg.timer-svg-container>circle.timer-circle-progress-transition {
 div.timer-container>h1#timer-text {
   color: #fff;
   position: absolute;
-  text-shadow: #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness),
-    #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
+  text-shadow: var(--text-outline-thickness-strong);
 }
 
 div.timer-controls-container {
@@ -291,11 +298,11 @@ svg.timer-controls {
 path.timer-controls-cursor {
   fill: #fff;
   cursor: pointer;
-  -webkit-transition: transform 0.2s ease;
-  -o-transition: transform 0.2s ease;
-  -ms-transition: transform 0.2s ease;
-  -moz-transition: transform 0.2s ease;
-  transition: transform 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
   filter: drop-shadow(0 3px 5px var(--shadow-color));
 }
 
@@ -333,6 +340,12 @@ div.todo-grid-section div.todo-grid-container {
   padding: 1rem;
   max-height: 40%;
   box-shadow: 0 5px 15px var(--shadow-color);
+  transition: all 0.3s ease-in-out;
+}
+
+div.todo-grid-section div.todo-grid-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px var(--shadow-color);
 }
 
 div.todo-add-btn-background {
@@ -350,7 +363,7 @@ div.todo-add-btn-background {
   box-shadow: 0 3px 5px var(--shadow-color);
 }
 
-div.todo-add-btn-background:hover {
+div.todo-add-btn-background:hover:not(.disabled) {
   -webkit-transform: translateY(-5px);
   -o-transform: translateY(-5px);
   -ms-transform: translateY(-5px);
@@ -378,6 +391,11 @@ div.todo-add-btn-background>div.todo-add-btn-vertical-plus {
   top: 12.5%;
 }
 
+div.todo-add-btn-background.disabled {
+  background-color: var(--accent-color-disabled);
+  cursor: default;
+}
+
 div.todo-list-container {
   max-height: 26rem;
   height: 100%;
@@ -397,10 +415,10 @@ div.todo-list-container>div.todo-item {
   align-items: center;
   padding: 1rem;
   width: 90%;
-  -webkit-transition: transform 0.2s ease, box-shadow 0.2s ease;
-  -o-transition: transform 0.2s ease, box-shadow 0.2s ease;
-  -moz-transition: transform 0.2s ease, box-shadow 0.2s ease;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-transition: all 0.2s ease, box-shadow 0.2s ease;
+  -o-transition: all 0.2s ease, box-shadow 0.2s ease;
+  -moz-transition: all 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 3px 5px var(--shadow-color);
 }
 
@@ -422,8 +440,7 @@ div.todo-item-container {
 h1.todo-header {
   margin-top: 1rem;
   margin-bottom: 0;
-  text-shadow: #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness),
-    #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness), #000 0px 0px var(--text-outline-thickness);
+  text-shadow: var(--text-outline-thickness-strong);
 }
 
 /* Popup */
@@ -587,11 +604,12 @@ a.btn {
   border: none;
   cursor: pointer;
   font-weight: bold;
-  -webkit-transition: transform 0.2s ease;
-  -o-transition: transform 0.2s ease;
-  -ms-transition: transform 0.2s ease;
-  -moz-transition: transform 0.2s ease;
-  transition: transform 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  text-shadow: var(--text-outline-thickness-light);
 }
 
 button[type="reset"]:hover,
@@ -694,16 +712,27 @@ div.leaderboard-switch-container {
 
 .carousel-cell {
   text-align: center;
-  color: var(--background-color);
+  color: #fff;
+  text-shadow: var(--text-outline-thickness-light);
   background-color: var(--foreground-color);
   width: 80%;
-  height: 80%;
   max-width: 40rem;
   border-radius: 1.5rem;
-  padding: 1rem;
+  padding: 1.5rem;
   font-size: 1.5rem;
+  box-shadow: 0 3px 5px var(--shadow-color);
+}
+
+.carousel-cell:not(:first-child) {
+  margin-left: 15px;
+}
+
+.carousel-cell>h2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  box-shadow: 0 3px 5px var(--shadow-color);
-  margin-left: 15px;
+}
+
+.carousel-cell>p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }

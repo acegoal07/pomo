@@ -25,29 +25,39 @@ window.addEventListener("load", async () => {
    setTimerColor("var(--background-color)");
    document.querySelector("#timer-circle-progress").classList.add("timer-circle-progress-transition");
 
-   /////////////// Universal Popup functions ///////////////
-   // Popup open functions
-   const popupOpenFunction = async (element) => {
-      const popup = await document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
-      popup.style.animation = "popupOpenAnimation 0.5s forwards";
-      popup.style.display = "flex";
-      document.body.style.overflow = "hidden";
-   };
-   const todoPopupOpenFunction = (element) => {
-      popupOpenFunction(element);
-      document.querySelector("#task-input").value = element.querySelector(".todo-text").textContent.trim();
-      document.querySelector("#todo-item-popup").setAttribute("data-task-id-storage", element.getAttribute("data-task-id"));
-      document.querySelector("#todo-item-save").classList.add("hide");
-   };
-   const infoPopupOpenFunction = (element) => {
-      popupOpenFunction(element).then(() => {
-         const carousel = document.querySelector('.main-carousel');
-         const flkty = Flickity.data(carousel);
-         for (let i = 0; i < 50; i++) {
-            flkty.resize();
-         }
-      });
+   /////////////// User onload auto login ///////////////
+   if (getCookie('username') !== null) {
+      document.querySelector("#todo-create-button").classList.remove("disabled");
+      document.querySelector("#login-page").classList.add("hide");
+      document.querySelector("#user-page").classList.remove("hide");
+
+      const form = new FormData();
+      form.append('requestType', 'getPomoScore');
+      form.append('username', getCookie('username'));
+      await fetch('assets/php/database.php', {
+         method: 'POST',
+         body: form
+      })
+         .then(response => {
+            if (response.ok) {
+               return response.json();
+            } else {
+               console.log('Error with the response from the database');
+            }
+         })
+         .then(data => {
+            if (data.success) {
+               setCookie('fullPomoScore', data.fullPomoScore);
+               setCookie('partialPomoScore', data.partialPomoScore);
+               setPomoCounter(data.fullPomoScore, data.partialPomoScore);
+            } else {
+               console.log("Failed to get pomo score: " + data);
+            }
+         });
+      loadTodos();
    }
+
+   /////////////// Universal Popup functions ///////////////
    // Popup open listener and setter
    document.querySelectorAll("[data-popup-open-target]").forEach((element) => {
       if (element.getAttribute("data-target-popup-type") === "todo-item-popup") {
@@ -56,7 +66,17 @@ window.addEventListener("load", async () => {
          });
       } else if (element.getAttribute("data-target-popup-type") === "information-popup") {
          element.addEventListener("click", () => {
-            infoPopupOpenFunction(element);
+            popupOpenFunction(element);
+            const flkty = Flickity.data(document.querySelector('.main-carousel'));
+            for (let i = 0; i < 50; i++) {
+               flkty.resize();
+            }
+         });
+      } else if (element.getAttribute("data-target-popup-type") === "create-todo-popup") {
+         element.addEventListener("click", () => {
+            if (getCookie('username') !== null) {
+               popupOpenFunction(element);
+            }
          });
       } else {
          element.addEventListener("click", () => {
@@ -64,18 +84,10 @@ window.addEventListener("load", async () => {
          });
       }
    });
-   // Popup close functions
-   const popupCloseFunctionByID = async (ID) => {
-      const popup = await document.querySelector(`#${ID}`);
-      popup.style.animation = "popupCloseAnimation 0.5s forwards";
-      setTimeout(function () {
-         popup.style.display = "none";
-      }, 500);
-   };
    // Popup close listener and setter
    document.querySelectorAll("[data-popup-close-target]").forEach((element) => {
-      element.addEventListener("click", async () => {
-         const popup = await document.querySelector(`#${element.getAttribute("data-popup-close-target")}`);
+      element.addEventListener("click", () => {
+         const popup = document.querySelector(`#${element.getAttribute("data-popup-close-target")}`);
          popup.style.animation = "popupCloseAnimation 0.5s forwards";
          setTimeout(function () {
             popup.style.display = "none";
@@ -100,7 +112,13 @@ window.addEventListener("load", async () => {
             body: form
          }
       )
-         .then(response => response.json())
+         .then(response => {
+            if (response.ok) {
+               return response.json();
+            } else {
+               console.log('Error with the response from the database');
+            }
+         })
          .then(data => {
             if (data.success) {
                loadTodos();
@@ -124,7 +142,13 @@ window.addEventListener("load", async () => {
             body: form
          }
       )
-         .then(response => response.json())
+         .then(response => {
+            if (response.ok) {
+               return response.json();
+            } else {
+               console.log('Error with the response from the database');
+            }
+         })
          .then(data => {
             if (data.success) {
                loadTodos();
@@ -133,65 +157,38 @@ window.addEventListener("load", async () => {
             }
          })
          .catch(error => console.log(error));
-
       popupCloseFunctionByID("todo-item-popup");
    });
-
    // Todo Save button
-   document.querySelector("#todo-item-save").addEventListener("click", (event) => {
+   document.querySelector("#todo-item-save").addEventListener("click", async (event) => {
       event.preventDefault();
-      popupCloseFunctionByID("todo-item-popup");
+      const form = new FormData();
+      form.append("requestType", "editTodo");
+      form.append("taskID", document.querySelector("#todo-item-popup").getAttribute("data-task-id-storage"));
+      form.append("taskContent", document.querySelector("#task-input").value);
+      await fetch("assets/php/database.php", {
+         method: "POST",
+         body: form
+      })
+         .then(response => {
+            if (response.ok) {
+               return response.json();
+            } else {
+               console.log('Error with the response from the database');
+            }
+         })
+         .then(() => {
+            popupCloseFunctionByID("todo-item-popup");
+            loadTodos();
+         })
+         .catch(error => console.error('Error saving changes to todo:', error));
    });
+   // Todo input keyup listener
    document.querySelector("#task-input").addEventListener("keyup", () => {
       if (document.querySelector("#todo-item-popup").style.display === "flex") {
          document.querySelector("#todo-item-save").classList.remove("hide");
       }
    })
-   // Load todos on load
-   const loadTodos = async () => {
-      const form = new FormData();
-      form.append('requestType', 'getTodos')
-      form.append('username', getCookie('username'));
-      await fetch('assets/php/database.php', {
-         method: 'POST',
-         body: form
-      })
-         .then(response => response.json())
-         .then(data => {
-            document.querySelector("#todo-list").querySelectorAll("*").forEach(n => n.remove());
-            if (data.success) {
-               if (data.todos) {
-                  data.todos.forEach(todo => {
-                     const divTodoItem = document.createElement('div');
-                     divTodoItem.classList.add('todo-item');
-                     divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
-                     divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
-                     divTodoItem.setAttribute('data-task-id', todo.taskID);
-
-                     const divTodoItemContainer = document.createElement('div');
-                     divTodoItemContainer.classList.add('todo-item-container');
-                     divTodoItem.appendChild(divTodoItemContainer);
-
-                     const divTodoItemText = document.createElement('div');
-                     divTodoItemText.classList.add('todo-text');
-                     divTodoItemText.textContent = todo.taskName;
-                     divTodoItemContainer.appendChild(divTodoItemText);
-
-                     divTodoItem.addEventListener("click", (element) => todoPopupOpenFunction(element.target));
-                     document.querySelector('#todo-list').appendChild(divTodoItem);
-                  });
-               }
-            } else {
-               console.log('Failed to load todos: ' + data);
-            }
-         })
-         .catch(error => {
-            console.error('Error:', error);
-         });
-   };
-   if (getCookie('username') !== null) {
-      loadTodos();
-   }
 
    /////////////// Leaderboard popup functions ///////////////
    // Leaderboard switch button
@@ -205,7 +202,7 @@ window.addEventListener("load", async () => {
       }
    });
 
-   /////////////// Login popup functions ///////////////
+   /////////////// User popup functions ///////////////
    // Login page switch button
    document.querySelector("#go-to-registration").addEventListener("click", () => {
       // Remove all elements from the page
@@ -228,9 +225,17 @@ window.addEventListener("load", async () => {
          }
       }).then(data => {
          if (data["success"] === true) {
+            if (getCookie('username') === null) {
+               document.querySelector("#todo-create-button").classList.remove("disabled");
+            }
             setCookie('username', form.get('username'));
+            setCookie('fullPomoScore', data.fullPomoScore);
+            setCookie('partialPomoScore', data.partialPomoScore);
+            setPomoCounter(data.fullPomoScore, data.partialPomoScore);
             loadTodos();
             popupCloseFunctionByID("login-popup");
+            document.querySelector("#login-page").classList.add("hide");
+            document.querySelector("#user-page").classList.remove("hide");
             event.target.reset();
          } else {
             console.log("Login failed: " + data);
@@ -246,31 +251,98 @@ window.addEventListener("load", async () => {
       document.querySelector("#login-page").classList.remove("hide");
    });
    // Registration submit button
-   document.querySelector("#registration-form").addEventListener("submit", (event) => {
+   document.querySelector("#registration-form").addEventListener("submit", async (event) => {
       event.preventDefault();
+      const form = new FormData(event.target);
+      form.append('requestType', 'register');
+      await fetch('assets/php/database.php', {
+         method: 'POST',
+         body: form
+      }).then(response => {
+         if (response.ok) {
+            return response.json();
+         } else {
+            console.log('Error with the response from the database');
+         }
+      }).then(data => {
+         if (data.success) {
+            console.log(data);
+            if (getCookie('username') === null) {
+               document.querySelector("#todo-create-button").classList.remove("disabled");
+            }
+            setCookie('username', form.get('username'));
+            setPomoCounter(0, 0);
+            loadTodos();
+            popupCloseFunctionByID("login-popup");
+            document.querySelector("#login-page").classList.add("hide");
+            document.querySelector("#user-page").classList.remove("hide");
+            event.target.reset();
+         } else {
+            console.log("Failed to register: " + data);
+         }
+      });
+   });
+   // Change password submit button
+   document.querySelector("#change-password-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const form = new FormData(event.target);
+      form.append('username', getCookie('username'));
+      form.append('requestType', 'updatePassword');
+      await fetch('assets/php/database.php', {
+         method: 'POST',
+         body: form
+      })
+         .then(response => {
+            if (response.ok) {
+               return response.json();
+            } else {
+               console.log('Error with the response from the database');
+            }
+         })
+         .then(data => {
+            if (data.success) {
+               popupCloseFunctionByID("login-popup");
+            } else {
+               console.log("Failed to change password: " + data);
+            }
+         })
+         .catch(error => console.error('Error:', error));
       popupCloseFunctionByID("login-popup");
       event.target.reset();
+   });
+   // Logout button
+   document.querySelector("#user-logout-button").addEventListener("click", (event) => {
+      event.preventDefault();
+      deleteCookie('username');
+      deleteCookie('fullPomoScore');
+      deleteCookie('partialPomoScore');
+      popupCloseFunctionByID("login-popup");
+      resetPomoCounter();
+      loadTodos();
+      document.querySelector("#todo-create-button").classList.add("disabled");
+      document.querySelector("#user-page").classList.add("hide");
+      document.querySelector("#login-page").classList.remove("hide");
    });
 
    /////////////// Timer Buttons ///////////////
    // Start timer button
-   let pomodoros = 0;
    let index = 0;
    const times = [25, 5, 25, 5, 25, 5, 25, 15];
    let currentTime;
-   let pomoProgress = 0;
    document.querySelector("#timer-start-button").addEventListener("click", () => {
+      let pomodoros = getCookie('fullPomoScore') || 0;
+      let pomoProgress = getCookie('partialPomoScore') || 0;
       if (!timer.isActive()) {
          if (timer.getCurrentPositionMS() === 0) {
             setTimerColor("var(--accent-color)");
-            currentTime = times[index] * 1000; // Needs to be switched back to 60000 when testing is finished
+            currentTime = times[index] * 60000;
             timer.setTimerLength(currentTime).startTimer();
          } else {
             timer.startTimer();
          }
          const halfWay = timer.timerLengthMS / 2;
          const quarterWay = timer.timerLengthMS / 4;
-         const timeDisplay = setInterval(() => {
+         const timeDisplay = setInterval(async () => {
             if (timer.getCurrentPositionMS() === -1000) {
                clearInterval(timeDisplay);
                timer.stopTimer();
@@ -297,15 +369,44 @@ window.addEventListener("load", async () => {
                }
                if (index < 7) {
                   index++;
-                  pomoProgress = pomoProgress + 12.5;
-                  setPomoCounterProgress(pomoProgress);
                } else {
                   index = 0;
-                  pomodoros++;
-                  pomoProgress = 0;
-                  document.querySelector("#pomodoro-counter").textContent =
-                     pomodoros;
+                  document.querySelector("#pomodoro-counter").textContent = pomodoros;
                }
+               if (pomoProgress < 8) {
+                  pomoProgress++;
+               } else {
+                  pomoProgress = 0;
+                  pomodoros++;
+               }
+               setPomoCounter(pomodoros, pomoProgress);
+               setCookie('fullPomoScore', pomodoros);
+               setCookie('partialPomoScore', pomoProgress);
+
+               const form = new FormData();
+               form.append('requestType', 'updatePomoScore');
+               form.append('username', getCookie('username'));
+               form.append('fullPomoScore', pomodoros);
+               form.append('partialPomoScore', pomoProgress);
+               await fetch('assets/php/database.php', {
+                  method: 'POST',
+                  body: form
+               })
+                  .then(response => {
+                     if (response.ok) {
+                        return response.json();
+                     } else {
+                        console.log('Error with the response from the database');
+                     }
+                  })
+                  .then(data => {
+                     if (!data.success) {
+                        console.log("Failed to update pomo score: " + data);
+                     }
+                  })
+                  .catch(error => {
+                     console.error('Error updating pomo score:', error);
+                  });
             } else if (timer.getCurrentPositionMS() < quarterWay) {
                setTimerColor("var(--background-color)");
             } else if (timer.getCurrentPositionMS() < halfWay) {
@@ -320,14 +421,39 @@ window.addEventListener("load", async () => {
    });
 });
 
-/////////////// Additional functions ///////////////
+/////////////// Timer functions ///////////////
 /**
- * Timer count down function
+ * Set timer progress
  * @param {int} value
  */
 function setTimerProgress(value) {
    document.querySelector("#timer-circle-progress").setAttribute.bind(document.querySelector("#timer-circle-progress"))("stroke-dasharray", `${(value * 283).toFixed(0)} 283`);
 }
+/**
+ * Timer colour function
+ * @param {String} input
+ */
+function setTimerColor(input) {
+   document.querySelector("#timer-circle-progress").style.stroke = input == null ? "green" : input;
+}
+
+/////////////// Pomo Counter functions ///////////////
+/**
+ * Set pomo counter
+ * @param {Integer} fullPomoScore
+ * @param {Integer} partialPomoScore
+ */
+const setPomoCounter = (fullPomoScore, partialPomoScore) => {
+   document.querySelector("#pomodoro-counter").textContent = fullPomoScore;
+   setPomoCounterProgress(12.5 * partialPomoScore);
+};
+/**
+ * Reset pomo counter
+ */
+const resetPomoCounter = () => {
+   document.querySelector("#pomodoro-counter").textContent = "0";
+   setPomoCounterProgress(0);
+};
 const pomodoroCounterCircle = document.querySelector("#counter-circle");
 const pomodoroCounterRadius = pomodoroCounterCircle.r.baseVal.value;
 const pomodoroCounterCircumference = pomodoroCounterRadius * 2 * Math.PI;
@@ -340,13 +466,78 @@ pomodoroCounterCircle.style.strokeDashoffset = `${pomodoroCounterCircumference}`
 function setPomoCounterProgress(percent) {
    pomodoroCounterCircle.style.strokeDashoffset = pomodoroCounterCircumference - (percent / 100) * pomodoroCounterCircumference;
 }
+
+/////////////// Todo functions ///////////////
 /**
- * Timer colour function
- * @param {String} input
+ * Load todos
  */
-function setTimerColor(input) {
-   document.querySelector("#timer-circle-progress").style.stroke = input == null ? "green" : input;
-}
+const loadTodos = async () => {
+   const form = new FormData();
+   form.append('requestType', 'getTodos')
+   form.append('username', getCookie('username'));
+   await fetch('assets/php/database.php', {
+      method: 'POST',
+      body: form
+   })
+      .then(response => response.json())
+      .then(data => {
+         document.querySelector("#todo-list").querySelectorAll("*").forEach(n => n.remove());
+         if (data.success) {
+            if (data.todos) {
+               data.todos.forEach(todo => {
+                  const divTodoItem = document.createElement('div');
+                  divTodoItem.classList.add('todo-item');
+                  divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
+                  divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
+                  divTodoItem.setAttribute('data-task-id', todo.taskID);
+
+                  const divTodoItemContainer = document.createElement('div');
+                  divTodoItemContainer.classList.add('todo-item-container');
+                  divTodoItem.appendChild(divTodoItemContainer);
+
+                  const divTodoItemText = document.createElement('div');
+                  divTodoItemText.classList.add('todo-text');
+                  divTodoItemText.textContent = todo.taskContent;
+                  divTodoItemContainer.appendChild(divTodoItemText);
+
+                  divTodoItem.addEventListener("click", () => todoPopupOpenFunction(divTodoItem));
+                  document.querySelector('#todo-list').appendChild(divTodoItem);
+               });
+            }
+         } else {
+            console.log('Failed to load todos: ' + data);
+         }
+      })
+      .catch(error => {
+         console.error('Error:', error);
+      });
+};
+
+/////////////// Popup functions ///////////////
+// Popup close function
+const popupCloseFunctionByID = (ID) => {
+   const popup = document.querySelector(`#${ID}`);
+   popup.style.animation = "popupCloseAnimation 0.5s forwards";
+   setTimeout(function () {
+      popup.style.display = "none";
+   }, 500);
+   document.body.style.overflow = "auto";
+};
+// Popup open functions
+const popupOpenFunction = (element) => {
+   const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`);
+   popup.style.animation = "popupOpenAnimation 0.5s forwards";
+   popup.style.display = "flex";
+   document.body.style.overflow = "hidden";
+};
+const todoPopupOpenFunction = (element) => {
+   popupOpenFunction(element);
+   document.querySelector("#task-input").value = element.querySelector(".todo-text").textContent.trim();
+   document.querySelector("#todo-item-popup").setAttribute("data-task-id-storage", element.getAttribute("data-task-id"));
+   document.querySelector("#todo-item-save").classList.add("hide");
+};
+
+/////////////// Helper functions ///////////////
 /**
  * Milliseconds to timestamp
  * @param {Number} s
@@ -357,13 +548,11 @@ function msToTime(s) {
       z = z || 2;
       return ("00" + n).slice(-z);
    }
-
    const ms = s % 1000;
    s = (s - ms) / 1000;
    const secs = s % 60;
    s = (s - secs) / 60;
    const mins = s % 60;
-
    return `${pad(mins)}:${pad(secs)}`;
 }
 /**
@@ -412,9 +601,10 @@ const setCookie = function (name, value, SameSite = "Strict") {
  * deleteCookie
  * Deletes the cookie with the provided name
  * @param {String} name The name of the cookie
+ * @param {"Strict" | "Lax" | "None"} SameSite The type of SameSite to use
  */
-const deleteCookie = function (name) {
-   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+const deleteCookie = function (name, SameSite = "Strict") {
+   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=${SameSite}; path=/;`;
 }
 /**
  * getCookie
