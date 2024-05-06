@@ -222,7 +222,7 @@ div.timer-grid-section div.timer-grid-container {
   width: -moz-fit-content;
   width: fit-content;
   box-shadow: 0 5px 15px var(--shadow-color);
-  transition: transform 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 div.timer-grid-section div.timer-grid-container:hover {
@@ -339,7 +339,7 @@ div.todo-grid-section div.todo-grid-container {
   padding: 1rem;
   max-height: 40%;
   box-shadow: 0 5px 15px var(--shadow-color);
-  transition: transform 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 div.todo-grid-section div.todo-grid-container:hover {
