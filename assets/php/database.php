@@ -109,7 +109,8 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                echo json_encode(array('success' => false));
             } else {
                $stmt = $conn->prepare("SELECT * FROM users WHERE userName = ? AND password = ?");
-               $stmt->bind_param("ss", $_POST['username'], $_POST['password']);
+               $password = hash('sha256', $_POST['password']);
+               $stmt->bind_param("ss", $_POST['username'], $password);
                if ($stmt->execute()) {
                   $result = $stmt->get_result();
                   if ($result->num_rows > 0) {
@@ -129,12 +130,12 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
             break;
             // Register a user
          case 'register':
-            if (!isset($_POST['username']) || !isset($_POST['password'])) {
+            if (!isset($_POST['username'])) {
                http_response_code(400);
                echo json_encode(array('success' => false));
             } else {
                $username = $_POST['username'];
-               $password = $_POST['password'];
+               $password = hash('sha256', $_POST['password']);
                $stmt = $conn->prepare("SELECT * FROM users WHERE userName = ?");
                $stmt->bind_param("s", $username);
                if ($stmt->execute()) {
