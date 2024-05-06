@@ -275,6 +275,12 @@ window.addEventListener("load", async () => {
       popupCloseFunctionByID("login-popup");
       event.target.reset();
    });
+   // Change password submit button
+   document.querySelector("#change-password-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      event.target.reset();
+      popupCloseFunctionByID("login-popup");
+   });
    // Logout button
    document.querySelector("#user-logout-button").addEventListener("click", (event) => {
       event.preventDefault();
@@ -297,7 +303,7 @@ window.addEventListener("load", async () => {
       if (!timer.isActive()) {
          if (timer.getCurrentPositionMS() === 0) {
             setTimerColor("var(--accent-color)");
-            currentTime = times[index] * 1000; // Needs to be switched back to 60000 when testing is finished
+            currentTime = times[index] * 60000;
             timer.setTimerLength(currentTime).startTimer();
          } else {
             timer.startTimer();
