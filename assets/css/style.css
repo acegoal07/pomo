@@ -616,8 +616,8 @@ a.btn {
   -ms-transition: transform 0.2s ease;
   -moz-transition: transform 0.2s ease;
   transition: transform 0.2s ease;
-  text-shadow: #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px,
-    #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px;
+  text-shadow: #000 0px 0px 1px, #000 0px 0px 1px, #000 0px 0px 1px,
+    #000 0px 0px 1px, #000 0px 0px 1px, #000 0px 0px 1px;
 }
 
 button[type="reset"]:hover,
