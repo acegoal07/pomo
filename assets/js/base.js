@@ -266,7 +266,6 @@ window.addEventListener("load", async () => {
          }
       }).then(data => {
          if (data.success) {
-            console.log(data);
             if (getCookie('username') === null) {
                document.querySelector("#todo-create-button").classList.remove("disabled");
             }
@@ -274,7 +273,7 @@ window.addEventListener("load", async () => {
             setPomoCounter(0, 0);
             loadTodos();
             popupCloseFunctionByID("login-popup");
-            document.querySelector("#login-page").classList.add("hide");
+            document.querySelector("#registration-page").classList.add("hide");
             document.querySelector("#user-page").classList.remove("hide");
             event.target.reset();
          } else {
