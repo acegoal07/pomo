@@ -371,6 +371,12 @@ window.addEventListener("load", async () => {
       document.querySelector("#todo-create-button").classList.add("disabled");
       document.querySelector("#user-page").classList.add("hide");
       document.querySelector("#login-page").classList.remove("hide");
+      if (!document.querySelector("#user-current-password-error").contains("hide")) {
+         document.querySelector("#user-current-password-error").classList.add("hide");
+      }
+      if (!document.querySelector("#user-confirm-password-error").contains("hide")) {
+         document.querySelector("#user-confirm-password-error").classList.add("hide");
+      }
    });
 
    /////////////// Timer Buttons ///////////////
