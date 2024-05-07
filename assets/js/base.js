@@ -334,12 +334,12 @@ window.addEventListener("load", async () => {
    const times = [25, 5, 25, 5, 25, 5, 25, 15];
    let currentTime;
    document.querySelector("#timer-start-button").addEventListener("click", () => {
-      let pomodoros = getCookie('fullPomoScore') || 0; 
-      let pomoProgress = getCookie('partialPomoScore') || 0; 
+      let pomodoros = getCookie('fullPomoScore') || 0;
+      let pomoProgress = getCookie('partialPomoScore') || 0;
       if (!timer.isActive()) {
          if (timer.getCurrentPositionMS() === 0) {
             setTimerColor("var(--accent-color)");
-            currentTime = times[index] * 60000; 
+            currentTime = times[index] * 60000;
             timer.setTimerLength(currentTime).startTimer();
          } else {
             timer.startTimer();
@@ -352,8 +352,8 @@ window.addEventListener("load", async () => {
                timer.stopTimer();
                timer.setCurrentPositionMS(0);
                if (getNotificationPermission() && document.hasFocus() === false) {
-                  const notification = new Notification("Pomo Timer", {
-                     title: "Pomo Timer",
+                  const notification = new Notification(document.title, {
+                     title: document.title,
                      body: `${times[index] === 25 ? "Its time for your break comeback and start the timer" : "Your break has finished comeback!"}`,
                      lang: "en-GB",
                      icon: "assets/images/favi.webp"

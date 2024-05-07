@@ -6,6 +6,8 @@
   --accent-color-hover: #5da036;
   --accent-color-disabled: #808080;
   --shadow-color: #0000004d;
+  --shadow-settings-light: 0 3px 5px var(--shadow-color);
+  --shadow-settings-strong: 0 5px 15px var(--shadow-color);
   --text-outline-thickness-strong: #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px;
   --text-outline-thickness-medium: #000 0px 0px 2.5px, #000 0px 0px 2.5px, #000 0px 0px 2.5px, #000 0px 0px 2.5px, #000 0px 0px 2.5px, #000 0px 0px 2.5px;
   --text-outline-thickness-light: #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px;
@@ -86,11 +88,12 @@ html.error-page a {
   border: none;
   text-decoration: none;
   color: #000;
-  -webkit-transition: transform 0.2s ease;
-  -moz-transition: transform 0.2s ease;
-  -o-transition: transform 0.2s ease;
-  -ms-transition: transform 0.2s ease;
-  transition: transform 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-settings-light);
 }
 
 html.error-page a:hover {
@@ -100,6 +103,7 @@ html.error-page a:hover {
   -ms-transform: translateY(-5px);
   transform: translateY(-5px);
   background-color: var(--accent-color-hover);
+  box-shadow: var(--shadow-settings-strong);
 }
 
 /* Images */
@@ -191,7 +195,7 @@ img.nav-button {
   -ms-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   transition: all 0.2s ease;
-  box-shadow: 0 3px 5px var(--shadow-color);
+  box-shadow: var(--shadow-settings-light);
 }
 
 img.nav-button:hover {
@@ -200,7 +204,7 @@ img.nav-button:hover {
   -ms-transform: translateY(-5px);
   -moz-transform: translateY(-5px);
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px var(--shadow-color);
+  box-shadow: var(--shadow-settings-strong);
 }
 
 /* Banner */
@@ -222,7 +226,7 @@ div.timer-grid-section div.timer-grid-container {
   margin: auto;
   width: -moz-fit-content;
   width: fit-content;
-  box-shadow: 0 5px 15px var(--shadow-color);
+  box-shadow: var(--shadow-settings-strong);
   transition: all 0.3s ease-in-out;
 }
 
@@ -238,7 +242,7 @@ div.timer-container {
   justify-content: center;
   align-items: center;
   border-radius: 100%;
-  box-shadow: 0 5px 15px var(--shadow-color);
+  box-shadow: var(--shadow-settings-strong);
 }
 
 div.timer-container>svg.timer-svg-container {
@@ -339,7 +343,7 @@ div.todo-grid-section div.todo-grid-container {
   border-radius: 1.5rem;
   padding: 1rem;
   max-height: 40%;
-  box-shadow: 0 5px 15px var(--shadow-color);
+  box-shadow: var(--shadow-settings-strong);
   transition: all 0.3s ease-in-out;
 }
 
@@ -360,7 +364,7 @@ div.todo-add-btn-background {
   -moz-transition: all 0.2s ease;
   transition: all 0.2s ease;
   cursor: pointer;
-  box-shadow: 0 3px 5px var(--shadow-color);
+  box-shadow: var(--shadow-settings-light);
 }
 
 div.todo-add-btn-background:hover:not(.disabled) {
@@ -369,7 +373,7 @@ div.todo-add-btn-background:hover:not(.disabled) {
   -ms-transform: translateY(-5px);
   -moz-transform: translateY(-5px);
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px var(--shadow-color);
+  box-shadow: var(--shadow-settings-strong);
   background-color: var(--accent-color-hover);
 }
 
@@ -419,7 +423,7 @@ div.todo-list-container>div.todo-item {
   -o-transition: all 0.2s ease, box-shadow 0.2s ease;
   -moz-transition: all 0.2s ease, box-shadow 0.2s ease;
   transition: all 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 3px 5px var(--shadow-color);
+  box-shadow: var(--shadow-settings-light);
 }
 
 div.todo-item:hover {
@@ -469,7 +473,7 @@ div.popup-background>div.popup-body {
   height: 80%;
   border-radius: 1.5rem;
   overflow: auto;
-  box-shadow: 0 5px 15px var(--shadow-color);
+  box-shadow: var(--shadow-settings-strong);
 }
 
 @media only screen and (max-width: 1120px) {
@@ -517,7 +521,7 @@ a>div.popup-close-btn-background {
   -ms-transition: all 0.2s ease;
   transition: all 0.2s ease;
   cursor: pointer;
-  box-shadow: 0 3px 5px var(--shadow-color);
+  box-shadow: var(--shadow-settings-light);
 }
 
 div.popup-close-btn-background:hover {
@@ -526,7 +530,7 @@ div.popup-close-btn-background:hover {
   -o-transform: translateY(-5px);
   -ms-transform: translateY(-5px);
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px var(--shadow-color);
+  box-shadow: var(--shadow-settings-strong);
   background-color: var(--accent-color-hover);
 }
 
@@ -621,7 +625,7 @@ a.btn:hover {
   -ms-transform: translateY(-5px);
   transform: translateY(-5px);
   background-color: var(--accent-color-hover);
-  box-shadow: 0 5px 15px var(--shadow-color);
+  box-shadow: var(--shadow-settings-strong);
 }
 
 textarea {
@@ -677,7 +681,7 @@ li.leaderboard-entry {
   font-size: 1.5rem;
   margin: auto;
   margin-top: 1rem;
-  box-shadow: 0 3px 5px var(--shadow-color);
+  box-shadow: var(--shadow-settings-light);
 }
 
 li.leaderboard-entry:last-child {
@@ -720,7 +724,7 @@ div.leaderboard-switch-container {
   border-radius: 1.5rem;
   padding: 1.5rem;
   font-size: 1.5rem;
-  box-shadow: 0 3px 5px var(--shadow-color);
+  box-shadow: var(--shadow-settings-light);
 }
 
 .carousel-cell:not(:first-child) {

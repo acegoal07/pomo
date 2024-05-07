@@ -39,7 +39,7 @@
       </div>
    </div>
 
-   <!-- Todo item popups -->
+   <!-- Todo item popup -->
    <div id="todo-item-popup" class="popup-background" data-task-id-storage="">
       <div class="popup-body">
          <a data-popup-close-target="todo-item-popup">
@@ -91,7 +91,7 @@
                <input id="registration-username-input" type="text" name="username" placeholder="Username" required />
                <input id="registration-password-input" type="password" name="password" placeholder="Password"
                   required />
-               <input id="registration-comfirm-password-input" type="password" name="password"
+               <input id="registration-comfirm-password-input" type="password" name="confirmPassword"
                   placeholder="Confirm Password" required />
                <button id="go-to-login" type="reset">
                   Already have an account? Click Here To Login
@@ -105,10 +105,13 @@
          <div id="user-page" class="hide">
             <h1 class="popup-header" id="welcome-user-heading">Welcome back!</h1>
             <h2>Change password</h2>
-            <form id="change-password-form" method="post" class="popup-form">   
-               <input id="user-change-username-input-original" type="password" name="currentPassword" placeholder="Current password" required />
-               <input id="user-change-username-input-new" type="password" name="newPassword" placeholder="New password" required />
-               <input id="user-change-username-input-cpnfirm-new" type="password" name="confirmNewPassword" placeholder="Confirm new password" required />
+            <form id="change-password-form" method="post" class="popup-form">
+               <input id="user-change-username-input-original" type="password" name="currentPassword"
+                  placeholder="Current password" required />
+               <input id="user-change-username-input-new" type="password" name="newPassword" placeholder="New password"
+                  required />
+               <input id="user-change-username-input-cpnfirm-new" type="password" name="confirmNewPassword"
+                  placeholder="Confirm new password" required />
                <button id="user-change-password" type="submit">
                   Change Password
                </button>

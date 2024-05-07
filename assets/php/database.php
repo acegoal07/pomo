@@ -118,22 +118,23 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                      $response['success'] = true;
                      $response['partialPomoScore'] = $row['partialPomoScore'];
                      $response['fullPomoScore'] = $row['fullPomoScore'];
+                     http_response_code(200);
                   } else {
                      $response['success'] = false;
+                     http_response_code(400);
                   }
-                  http_response_code(200);
-                  echo json_encode($response);
                } else {
                   http_response_code(500);
-                  echo json_encode(array('success' => false));
+                  $response['success'] = false;
                }
                $stmt->close();
                $conn->close();
+               echo json_encode($response);
             }
             break;
             // Register a user
          case 'register':
-            if (!isset($_POST['username'])) {
+            if (!isset($_POST['username']) || !isset($_POST['password']) || !isset($_POST['confirmPassword'])) {
                http_response_code(400);
                echo json_encode(array('success' => false));
             } else {
@@ -147,15 +148,22 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                      $response['message'] = 'Username already exists';
                      http_response_code(200);
                   } else {
-                     $stmt = $conn->prepare("INSERT INTO users (userName, Password) VALUES (?, ?)");
-                     $password = hash('sha256', $_POST['password']);
-                     $stmt->bind_param("ss", $username, $password);
-                     if ($stmt->execute()) {
-                        $response['success'] = true;
-                        http_response_code(200);
+                     if ($_POST['password'] === $_POST['confirmPassword']) {
+                        $stmt = $conn->prepare("INSERT INTO users (userName, Password) VALUES (?, ?)");
+                        $password = hash('sha256', $_POST['password']);
+                        $stmt->bind_param("ss", $username, $password);
+                        if ($stmt->execute()) {
+                           $response['success'] = true;
+                           http_response_code(200);
+                        } else {
+                           $response['success'] = false;
+                           $response['message'] = 'Failed to register user';
+                           http_response_code(500);
+                        }
                      } else {
                         $response['success'] = false;
-                        http_response_code(500);
+                        $response['message'] = 'Passwords do not match';
+                        http_response_code(400);
                      }
                   }
                } else {
