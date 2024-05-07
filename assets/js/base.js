@@ -415,6 +415,8 @@ window.addEventListener("load", async () => {
                setTimerColor("var(--background-color)");
             } else if (timer.getCurrentPositionMS() < halfWay) {
                setTimerColor("orange");
+            } else {
+               void (0);
             }
          }, 1000);
       }
