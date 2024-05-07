@@ -103,6 +103,9 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
             }
             break;
             // Login a user
+            // Codes:
+            // 0 - Success
+            // 1 - Username/password does not exist
          case 'login':
             if (!isset($_POST['username']) || !isset($_POST['password'])) {
                http_response_code(400);
@@ -116,12 +119,14 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                   if ($result->num_rows > 0) {
                      $row = $result->fetch_assoc();
                      $response['success'] = true;
+                     $response['code'] = 0;
                      $response['partialPomoScore'] = $row['partialPomoScore'];
                      $response['fullPomoScore'] = $row['fullPomoScore'];
                      http_response_code(200);
                   } else {
                      $response['success'] = false;
-                     http_response_code(400);
+                     $response['code'] = 1;
+                     http_response_code(200);
                   }
                } else {
                   http_response_code(500);
@@ -133,6 +138,10 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
             }
             break;
             // Register a user
+            // Codes:
+            // 0 - Success
+            // 1 - Username already exists
+            // 2 - Passwords do not match
          case 'register':
             if (!isset($_POST['username']) || !isset($_POST['password']) || !isset($_POST['confirmPassword'])) {
                http_response_code(400);
@@ -145,6 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                   $result = $stmt->get_result();
                   if ($result->num_rows > 0) {
                      $response['success'] = false;
+                     $response['code'] = 1;
                      $response['message'] = 'Username already exists';
                      http_response_code(200);
                   } else {
@@ -154,16 +164,18 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                         $stmt->bind_param("ss", $username, $password);
                         if ($stmt->execute()) {
                            $response['success'] = true;
+                           $response['code'] = 0;
                            http_response_code(200);
                         } else {
                            $response['success'] = false;
                            $response['message'] = 'Failed to register user';
-                           http_response_code(500);
+                           http_response_code(200);
                         }
                      } else {
                         $response['success'] = false;
+                        $response['code'] = 2;
                         $response['message'] = 'Passwords do not match';
-                        http_response_code(400);
+                        http_response_code(200);
                      }
                   }
                } else {
@@ -176,6 +188,10 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
             }
             break;
             // Update a user's password
+            // Codes:
+            // 0 - Success
+            // 1 - Old password is incorrect
+            // 2 - New passwords do not match
          case 'updatePassword':
             if (!isset($_POST['currentPassword']) || !isset($_POST['newPassword']) || !isset($_POST['confirmNewPassword']) || !isset($_POST['username'])) {
                http_response_code(400);
@@ -198,15 +214,18 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                         $stmt2->bind_param("ss", $newPassword, $username);
                         if ($stmt2->execute()) {
                            $response['success'] = true;
+                           $response['code'] = 0;
                         } else {
                            $response['success'] = false;
                         }
                         $stmt2->close();
                      } else {
                         $response['success'] = false;
+                        $response['code'] = 2;
                      }
                   } else {
                      $response['success'] = false;
+                     $response['code'] = 1;
                   }
                   http_response_code(200);
                   echo json_encode($response);

@@ -211,10 +211,14 @@ window.addEventListener("load", async () => {
       // Remove all elements from the page
       document.querySelector("#registration-page").classList.remove("hide");
       document.querySelector("#login-page").classList.add("hide");
+      if (!document.querySelector("#login-input-error").classList.contains("hide")) {
+         document.querySelector("#login-input-error").classList.add("hide");
+      }
    });
    // Login submit button
    document.querySelector("#login-form").addEventListener("submit", async (event) => {
       event.preventDefault();
+      const loginErrorMessage = document.querySelector("#login-input-error");
       const form = new FormData(event.target);
       form.append('requestType', 'login');
       await fetch('assets/php/database.php', {
@@ -227,7 +231,10 @@ window.addEventListener("load", async () => {
             console.log('Error with the response from the database');
          }
       }).then(data => {
-         if (data["success"] === true) {
+         if (!loginErrorMessage.classList.contains("hide")) {
+            loginErrorMessage.classList.add("hide");
+         }
+         if (data.success) {
             if (getCookie('username') === null) {
                document.querySelector("#todo-create-button").classList.remove("disabled");
             }
@@ -242,7 +249,11 @@ window.addEventListener("load", async () => {
             document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
             event.target.reset();
          } else {
-            console.log("Login failed: " + data);
+            if (data.code === 1) {
+               loginErrorMessage.classList.remove("hide");
+            } else {
+               console.log("Login failed: " + data);
+            }
          }
       }).catch(error => {
          console.error('Error:', error);
@@ -253,10 +264,18 @@ window.addEventListener("load", async () => {
       // Remove all elements from the page
       document.querySelector("#registration-page").classList.add("hide");
       document.querySelector("#login-page").classList.remove("hide");
+      if (!document.querySelector("#registration-username-error").classList.contains("hide")) {
+         document.querySelector("#registration-username-error").classList.add("hide");
+      }
+      if (!document.querySelector("#registration-password-error").classList.contains("hide")) {
+         document.querySelector("#registration-password-error").classList.add("hide");
+      }
    });
    // Registration submit button
    document.querySelector("#registration-form").addEventListener("submit", async (event) => {
       event.preventDefault();
+      const usernameErrorMessage = document.querySelector("#registration-username-error");
+      const passwordErrorMessage = document.querySelector("#registration-password-error");
       const form = new FormData(event.target);
       form.append('requestType', 'register');
       await fetch('assets/php/database.php', {
@@ -269,6 +288,12 @@ window.addEventListener("load", async () => {
             console.log('Error with the response from the database');
          }
       }).then(data => {
+         if (!usernameErrorMessage.classList.contains("hide")) {
+            usernameErrorMessage.classList.add("hide");
+         }
+         if (!passwordErrorMessage.classList.contains("hide")) {
+            passwordErrorMessage.classList.add("hide");
+         }
          if (data.success) {
             if (getCookie('username') === null) {
                document.querySelector("#todo-create-button").classList.remove("disabled");
@@ -282,13 +307,21 @@ window.addEventListener("load", async () => {
             document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
             event.target.reset();
          } else {
-            console.log("Failed to register: " + data);
+            if (data.code === 1) {
+               usernameErrorMessage.classList.remove("hide");
+            } else if (data.code === 2) {
+               passwordErrorMessage.classList.remove("hide");
+            } else {
+               console.log("Failed to register: " + data);
+            }
          }
       });
    });
    // Change password submit button
    document.querySelector("#change-password-form").addEventListener("submit", async (event) => {
       event.preventDefault();
+      const currentPasswordErrorMessage = document.querySelector("#user-current-password-error");
+      const confirmPasswordErrorMessage = document.querySelector("#user-confirm-password-error");
       const form = new FormData(event.target);
       form.append('username', getCookie('username'));
       form.append('requestType', 'updatePassword');
@@ -304,10 +337,22 @@ window.addEventListener("load", async () => {
             }
          })
          .then(data => {
+            if (!currentPasswordErrorMessage.classList.contains("hide")) {
+               currentPasswordErrorMessage.classList.add("hide");
+            }
+            if (!confirmPasswordErrorMessage.classList.contains("hide")) {
+               confirmPasswordErrorMessage.classList.add("hide");
+            }
             if (data.success) {
                popupCloseFunctionByID("login-popup");
             } else {
-               console.log("Failed to change password: " + data);
+               if (data.code === 1) {
+                  currentPasswordErrorMessage.classList.remove("hide");
+               } else if (data.code === 2) {
+                  confirmPasswordErrorMessage.classList.remove("hide");
+               } else {
+                  console.log("Failed to change password: " + data);
+               }
             }
          })
          .catch(error => console.error('Error:', error));

@@ -576,6 +576,12 @@ form.popup-form {
   gap: 1.2rem;
 }
 
+form>.error-message {
+  font-size: 1.2rem;
+  text-align: center;
+  text-shadow: var(--text-outline-thickness-light);
+}
+
 input[type="text"],
 input[type="password"] {
   width: 50%;

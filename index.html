@@ -74,6 +74,7 @@
          <div id="login-page">
             <h1 class="popup-header">Enter your details:</h1>
             <form id="login-form" name="login-form" class="popup-form">
+               <span id="login-input-error" class="hide error-message"><strong>Username or password is incorrect</strong></span>
                <input id="login-user-name-input" type="text" name="username" placeholder="Username" required />
                <input id="login-password-input" type="password" name="password" placeholder="Password" required />
                <button id="go-to-registration" type="reset">
@@ -88,7 +89,9 @@
          <div id="registration-page" class="hide">
             <h1 class="popup-header">Register your account:</h1>
             <form id="registration-form" method="post" class="popup-form">
+               <span id="registration-username-error" class="hide error-message"><strong>Username is already taken</strong></span>
                <input id="registration-username-input" type="text" name="username" placeholder="Username" required />
+               <span id="registration-password-error" class="hide error-message"><strong>Passwords do not match</strong></span>
                <input id="registration-password-input" type="password" name="password" placeholder="Password"
                   required />
                <input id="registration-comfirm-password-input" type="password" name="confirmPassword"
@@ -106,8 +109,10 @@
             <h1 class="popup-header" id="welcome-user-heading">Welcome back!</h1>
             <h2>Change password</h2>
             <form id="change-password-form" method="post" class="popup-form">
+               <span id="user-current-password-error" class="hide error-message"><strong>Username is already taken</strong></span>
                <input id="user-change-username-input-original" type="password" name="currentPassword"
                   placeholder="Current password" required />
+               <span id="user-confirm-password-error" class="hide error-message"><strong>Passwords do not match</strong></span>
                <input id="user-change-username-input-new" type="password" name="newPassword" placeholder="New password"
                   required />
                <input id="user-change-username-input-cpnfirm-new" type="password" name="confirmNewPassword"
