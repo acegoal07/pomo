@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
             // Get all todos for a specific user
          case 'getTodos':
             if (!isset($_POST['username'])) {
+               http_response_code(400);
                echo json_encode(array('success' => false));
             } else {
                $stmt = $conn->prepare("SELECT * FROM tasks WHERE userName = ?");
@@ -29,13 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                   $response['username'] = $_POST['username'];
                   $response['todos'] = $data;
                   http_response_code(200);
-                  echo json_encode($response);
                } else {
+                  $response['success'] = false;
                   http_response_code(500);
-                  echo json_encode(array('success' => false));
                }
                $stmt->close();
                $conn->close();
+               echo json_encode($response);
             }
             break;
             // Create a new todo for a user
@@ -169,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                         } else {
                            $response['success'] = false;
                            $response['message'] = 'Failed to register user';
-                           http_response_code(200);
+                           http_response_code(500);
                         }
                      } else {
                         $response['success'] = false;
@@ -215,26 +216,29 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                         if ($stmt2->execute()) {
                            $response['success'] = true;
                            $response['code'] = 0;
+                           http_response_code(200);
                         } else {
                            $response['success'] = false;
+                           http_response_code(500);
                         }
                         $stmt2->close();
                      } else {
                         $response['success'] = false;
                         $response['code'] = 2;
+                        http_response_code(200);
                      }
                   } else {
                      $response['success'] = false;
                      $response['code'] = 1;
+                     http_response_code(200);
                   }
-                  http_response_code(200);
-                  echo json_encode($response);
                } else {
+                  $response['success'] = false;
                   http_response_code(500);
-                  echo json_encode(array('success' => false));
                }
                $stmt->close();
                $conn->close();
+               echo json_encode($response);
             }
             break;
             // Get a user's pomo score
@@ -256,13 +260,13 @@ if ($_SERVER['REQUEST_METHOD'] !== "POST") {
                      $response['success'] = false;
                   }
                   http_response_code(200);
-                  echo json_encode($response);
                } else {
+                  $response['success'] = false;
                   http_response_code(500);
-                  echo json_encode(array('success' => false));
                }
                $stmt->close();
                $conn->close();
+               echo json_encode($response);
             }
             break;
             // Update a user's pomo score
