@@ -572,27 +572,38 @@ const loadTodos = async () => {
 
 /////////////// Popup functions ///////////////
 // Popup close function
-const popupCloseFunctionByID = (ID) => {
+/**
+ * Popup close function by ID
+ * @param {String} ID
+ */
+function popupCloseFunctionByID(ID) {
    const popup = document.querySelector(`#${ID}`);
    popup.style.animation = "popupCloseAnimation 0.5s forwards";
    setTimeout(function () {
       popup.style.display = "none";
    }, 500);
    document.body.style.overflow = "auto";
-};
-// Popup open functions
-const popupOpenFunction = (element) => {
+}
+/**
+ * Popup open function
+ * @param {HTMLElement} element 
+ */
+function popupOpenFunction(element) {
    const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`) || element;
    popup.style.animation = "popupOpenAnimation 0.5s forwards";
    popup.style.display = "flex";
    document.body.style.overflow = "hidden";
-};
-const todoPopupOpenFunction = (element) => {
+}
+/**
+ * Todo popup open function
+ * @param {HTMLElement} element
+ */
+function todoPopupOpenFunction(element) {
    popupOpenFunction(element);
    document.querySelector("#task-input").value = element.querySelector(".todo-text").textContent.trim();
    document.querySelector("#todo-item-popup").setAttribute("data-task-id-storage", element.getAttribute("data-task-id"));
    document.querySelector("#todo-item-save").classList.add("hide");
-};
+}
 
 /////////////// Helper functions ///////////////
 /**
@@ -649,7 +660,7 @@ function isIOS() {
  * @param {any} value The value of the cookie
  * @param {"Strict" | "Lax" | "None"} SameSite The type of SameSite to use
  */
-const setCookie = function (name, value, SameSite = "Strict") {
+function setCookie(name, value, SameSite = "Strict") {
    const date = new Date();
    date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
    document.cookie = `${name}=${value || ""}; expires=${date.toString()}; SameSite=${SameSite}; path=/`;
@@ -660,7 +671,7 @@ const setCookie = function (name, value, SameSite = "Strict") {
  * @param {String} name The name of the cookie
  * @param {"Strict" | "Lax" | "None"} SameSite The type of SameSite to use
  */
-const deleteCookie = function (name, SameSite = "Strict") {
+function deleteCookie(name, SameSite = "Strict") {
    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=${SameSite}; path=/;`;
 }
 /**
@@ -669,7 +680,7 @@ const deleteCookie = function (name, SameSite = "Strict") {
  * @param {String} name The name of the cookie
  * @returns {any} The value of the cookie
  */
-const getCookie = function (name) {
+function getCookie(name) {
    const nameEQ = name + "=";
    for (let cookie of document.cookie.split(';')) {
       while (cookie.startsWith(' ')) {

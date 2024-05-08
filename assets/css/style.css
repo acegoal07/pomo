@@ -367,13 +367,20 @@ div.todo-add-btn-background {
   box-shadow: var(--shadow-settings-light);
 }
 
-div.todo-add-btn-background:hover:not(.disabled) {
+div.todo-add-btn-background.disabled {
+  background-color: var(--accent-color-disabled);
+}
+
+div.todo-add-btn-background:hover {
   -webkit-transform: translateY(-5px);
   -o-transform: translateY(-5px);
   -ms-transform: translateY(-5px);
   -moz-transform: translateY(-5px);
   transform: translateY(-5px);
   box-shadow: var(--shadow-settings-strong);
+}
+
+div.todo-add-btn-background:hover:not(.disabled) {
   background-color: var(--accent-color-hover);
 }
 
@@ -393,11 +400,6 @@ div.todo-add-btn-background>div.todo-add-btn-vertical-plus {
   height: 50%;
   left: 43.75%;
   top: 12.5%;
-}
-
-div.todo-add-btn-background.disabled {
-  background-color: var(--accent-color-disabled);
-  cursor: default;
 }
 
 div.todo-list-container {
