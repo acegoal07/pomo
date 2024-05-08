@@ -595,8 +595,24 @@ input[type="password"] {
   background-color: #fff;
 }
 
+textarea {
+  color: white;
+  background-color: var(--background-color);
+  width: 90% !important;
+  max-height: 400px !important;
+  height: 100%;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  outline: 4px solid var(--accent-color);
+  border: none;
+  margin-bottom: 1rem;
+  text-shadow: var(--text-outline-thickness-light);
+}
+
 input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+textarea:focus {
   outline-color: var(--foreground-color);
 }
 
@@ -634,16 +650,6 @@ a.btn:hover {
   transform: translateY(-5px);
   background-color: var(--accent-color-hover);
   box-shadow: var(--shadow-settings-strong);
-}
-
-textarea {
-  width: 90% !important;
-  height: 400px !important;
-  padding: 0.6rem;
-  font-size: 1.25rem;
-  border-radius: 1rem;
-  border: 2px solid var(--accent-color);
-  margin-bottom: 1rem;
 }
 
 @media only screen and (max-width: 1120px) {
