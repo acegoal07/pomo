@@ -103,35 +103,44 @@ window.addEventListener("load", async () => {
    // Add todo button listener
    document.querySelector("#todo-add-task").addEventListener("click", async (event) => {
       event.preventDefault();
-      const todoInput = document.querySelector("#todo-input");
-      const todoText = todoInput.value;
-      const form = new FormData();
-      form.append("requestType", "createTodo");
-      form.append("username", getCookie('username'));
-      form.append("taskContent", todoText);
-      await fetch("assets/php/database.php",
-         {
-            method: "POST",
-            body: form
+      const errorMessage = document.querySelector("#create-todo-error");
+      if (document.querySelector("#todo-input").value.trim() === "") {
+         errorMessage.classList.remove("hide");
+      } else {
+         if (!errorMessage.classList.contains("hide")) {
+            errorMessage.classList.add("hide");
          }
-      )
-         .then(response => {
-            if (response.ok) {
-               return response.json();
-            } else {
-               console.log('Error with the response from the database');
+         const todoInput = document.querySelector("#todo-input");
+         const todoText = todoInput.value;
+         const form = new FormData();
+         form.append("requestType", "createTodo");
+         form.append("username", getCookie('username'));
+         form.append("taskContent", todoText);
+         await fetch("assets/php/database.php",
+            {
+               method: "POST",
+               body: form
             }
-         })
-         .then(data => {
-            if (data.success) {
-               loadTodos();
-               todoInput.value = "";
-               popupCloseFunctionByID("todo-popup");
-            } else {
-               console.log("Error creating task: " + data);
-            }
-         })
-         .catch(error => console.log(error));
+         )
+            .then(response => {
+               if (response.ok) {
+                  return response.json();
+               } else {
+                  console.log('Error with the response from the database');
+               }
+            })
+            .then(data => {
+               if (data.success) {
+                  loadTodos();
+                  todoInput.value = "";
+                  popupCloseFunctionByID("todo-popup");
+               } else {
+                  console.log("Error creating task: " + data);
+               }
+            })
+            .catch(error => console.log(error));
+      }
+
    });
    // Todo item delete button
    document.querySelector("#todo-item-delete").addEventListener("click", async (event) => {
@@ -165,26 +174,34 @@ window.addEventListener("load", async () => {
    // Todo Save button
    document.querySelector("#todo-item-save").addEventListener("click", async (event) => {
       event.preventDefault();
-      const form = new FormData();
-      form.append("requestType", "editTodo");
-      form.append("taskID", document.querySelector("#todo-item-popup").getAttribute("data-task-id-storage"));
-      form.append("taskContent", document.querySelector("#task-input").value);
-      await fetch("assets/php/database.php", {
-         method: "POST",
-         body: form
-      })
-         .then(response => {
-            if (response.ok) {
-               return response.json();
-            } else {
-               console.log('Error with the response from the database');
-            }
+      const errorMessage = document.querySelector("#edit-todo-error");
+      if (document.querySelector("#task-input").value.trim() === "") {
+         errorMessage.classList.remove("hide");
+      } else {
+         if (!errorMessage.classList.contains("hide")) {
+            errorMessage.classList.add("hide");
+         }
+         const form = new FormData();
+         form.append("requestType", "editTodo");
+         form.append("taskID", document.querySelector("#todo-item-popup").getAttribute("data-task-id-storage"));
+         form.append("taskContent", document.querySelector("#task-input").value);
+         await fetch("assets/php/database.php", {
+            method: "POST",
+            body: form
          })
-         .then(() => {
-            popupCloseFunctionByID("todo-item-popup");
-            loadTodos();
-         })
-         .catch(error => console.error('Error saving changes to todo:', error));
+            .then(response => {
+               if (response.ok) {
+                  return response.json();
+               } else {
+                  console.log('Error with the response from the database');
+               }
+            })
+            .then(() => {
+               popupCloseFunctionByID("todo-item-popup");
+               loadTodos();
+            })
+            .catch(error => console.error('Error saving changes to todo:', error));
+      }
    });
    // Todo input keyup listener
    document.querySelector("#task-input").addEventListener("keyup", () => {
@@ -437,7 +454,6 @@ window.addEventListener("load", async () => {
                setPomoCounter(pomodoros, pomoProgress);
                setCookie('fullPomoScore', pomodoros);
                setCookie('partialPomoScore', pomoProgress);
-
                const form = new FormData();
                form.append('requestType', 'updatePomoScore');
                form.append('username', getCookie('username'));
@@ -586,7 +602,7 @@ function popupCloseFunctionByID(ID) {
 }
 /**
  * Popup open function
- * @param {HTMLElement} element 
+ * @param {HTMLElement} element
  */
 function popupOpenFunction(element) {
    const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`) || element;
