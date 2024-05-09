@@ -42,17 +42,23 @@ window.addEventListener("load", async () => {
          .then(response => {
             if (response.ok) {
                return response.json();
+            } else if (response.status === 400) {
+               console.log('Bad request');
+            } else if (response.status === 500) {
+               console.log('Internal server error');
             } else {
                console.log('Error with the response from the database');
             }
          })
          .then(data => {
-            if (data.success) {
-               setCookie('fullPomoScore', data.fullPomoScore);
-               setCookie('partialPomoScore', data.partialPomoScore);
-               setPomoCounter(data.fullPomoScore, data.partialPomoScore);
-            } else {
-               console.log("Failed to get pomo score: " + data);
+            if (data) {
+               if (data.success) {
+                  setCookie('fullPomoScore', data.fullPomoScore);
+                  setCookie('partialPomoScore', data.partialPomoScore);
+                  setPomoCounter(data.fullPomoScore, data.partialPomoScore);
+               } else {
+                  console.log("Failed to get pomo score: " + data);
+               }
             }
          });
       loadTodos();
@@ -125,17 +131,23 @@ window.addEventListener("load", async () => {
             .then(response => {
                if (response.ok) {
                   return response.json();
+               } else if (response.status === 400) {
+                  console.log('Bad request');
+               } else if (response.status === 500) {
+                  console.log('Internal server error');
                } else {
                   console.log('Error with the response from the database');
                }
             })
             .then(data => {
-               if (data.success) {
-                  loadTodos();
-                  todoInput.value = "";
-                  popupCloseFunctionByID("todo-popup");
-               } else {
-                  console.log("Error creating task: " + data);
+               if (data) {
+                  if (data.success) {
+                     loadTodos();
+                     todoInput.value = "";
+                     popupCloseFunctionByID("todo-popup");
+                  } else {
+                     console.log("Error creating task: " + data);
+                  }
                }
             })
             .catch(error => console.log(error));
@@ -157,15 +169,21 @@ window.addEventListener("load", async () => {
          .then(response => {
             if (response.ok) {
                return response.json();
+            } else if (response.status === 400) {
+               console.log('Bad request');
+            } else if (response.status === 500) {
+               console.log('Internal server error');
             } else {
                console.log('Error with the response from the database');
             }
          })
          .then(data => {
-            if (data.success) {
-               loadTodos();
-            } else {
-               console.log("Failed to delete todo: " + data);
+            if (data) {
+               if (data.success) {
+                  loadTodos();
+               } else {
+                  console.log("Failed to delete todo: " + data);
+               }
             }
          })
          .catch(error => console.log(error));
@@ -192,6 +210,10 @@ window.addEventListener("load", async () => {
             .then(response => {
                if (response.ok) {
                   return response.json();
+               } else if (response.status === 400) {
+                  console.log('Bad request');
+               } else if (response.status === 500) {
+                  console.log('Internal server error');
                } else {
                   console.log('Error with the response from the database');
                }
@@ -244,29 +266,33 @@ window.addEventListener("load", async () => {
       }).then(response => {
          if (response.ok) {
             return response.json();
+         } else if (response.status === 400) {
+            console.log('Bad request');
+         } else if (response.status === 500) {
+            console.log('Internal server error');
          } else {
             console.log('Error with the response from the database');
          }
       }).then(data => {
-         if (!loginErrorMessage.classList.contains("hide")) {
-            loginErrorMessage.classList.add("hide");
-         }
-         if (data.success) {
-            if (getCookie('username') === null) {
-               document.querySelector("#todo-create-button").classList.remove("disabled");
+         if (data) {
+            if (!loginErrorMessage.classList.contains("hide")) {
+               loginErrorMessage.classList.add("hide");
             }
-            setCookie('username', form.get('username'));
-            setCookie('fullPomoScore', data.fullPomoScore);
-            setCookie('partialPomoScore', data.partialPomoScore);
-            setPomoCounter(data.fullPomoScore, data.partialPomoScore);
-            loadTodos();
-            popupCloseFunctionByID("login-popup");
-            document.querySelector("#login-page").classList.add("hide");
-            document.querySelector("#user-page").classList.remove("hide");
-            document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
-            event.target.reset();
-         } else {
-            if (data.code === 1) {
+            if (data.success) {
+               if (getCookie('username') === null) {
+                  document.querySelector("#todo-create-button").classList.remove("disabled");
+               }
+               setCookie('username', form.get('username'));
+               setCookie('fullPomoScore', data.fullPomoScore);
+               setCookie('partialPomoScore', data.partialPomoScore);
+               setPomoCounter(data.fullPomoScore, data.partialPomoScore);
+               loadTodos();
+               popupCloseFunctionByID("login-popup");
+               document.querySelector("#login-page").classList.add("hide");
+               document.querySelector("#user-page").classList.remove("hide");
+               document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
+               event.target.reset();
+            } else if (data.code === 1) {
                loginErrorMessage.classList.remove("hide");
             } else {
                console.log("Login failed: " + data);
@@ -301,30 +327,34 @@ window.addEventListener("load", async () => {
       }).then(response => {
          if (response.ok) {
             return response.json();
+         } else if (response.status === 400) {
+            console.log('Bad request');
+         } else if (response.status === 500) {
+            console.log('Internal server error');
          } else {
             console.log('Error with the response from the database');
          }
       }).then(data => {
-         if (!usernameErrorMessage.classList.contains("hide")) {
-            usernameErrorMessage.classList.add("hide");
-         }
-         if (!passwordErrorMessage.classList.contains("hide")) {
-            passwordErrorMessage.classList.add("hide");
-         }
-         if (data.success) {
-            if (getCookie('username') === null) {
-               document.querySelector("#todo-create-button").classList.remove("disabled");
+         if (data) {
+            if (!usernameErrorMessage.classList.contains("hide")) {
+               usernameErrorMessage.classList.add("hide");
             }
-            setCookie('username', form.get('username'));
-            setPomoCounter(0, 0);
-            loadTodos();
-            popupCloseFunctionByID("login-popup");
-            document.querySelector("#registration-page").classList.add("hide");
-            document.querySelector("#user-page").classList.remove("hide");
-            document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
-            event.target.reset();
-         } else {
-            if (data.code === 1) {
+            if (!passwordErrorMessage.classList.contains("hide")) {
+               passwordErrorMessage.classList.add("hide");
+            }
+            if (data.success) {
+               if (getCookie('username') === null) {
+                  document.querySelector("#todo-create-button").classList.remove("disabled");
+               }
+               setCookie('username', form.get('username'));
+               setPomoCounter(0, 0);
+               loadTodos();
+               popupCloseFunctionByID("login-popup");
+               document.querySelector("#registration-page").classList.add("hide");
+               document.querySelector("#user-page").classList.remove("hide");
+               document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
+               event.target.reset();
+            } else if (data.code === 1) {
                usernameErrorMessage.classList.remove("hide");
             } else if (data.code === 2) {
                passwordErrorMessage.classList.remove("hide");
@@ -349,21 +379,25 @@ window.addEventListener("load", async () => {
          .then(response => {
             if (response.ok) {
                return response.json();
+            } else if (response.status === 400) {
+               console.log('Bad request');
+            } else if (response.status === 500) {
+               console.log('Internal server error');
             } else {
                console.log('Error with the response from the database');
             }
          })
          .then(data => {
-            if (!currentPasswordErrorMessage.classList.contains("hide")) {
-               currentPasswordErrorMessage.classList.add("hide");
-            }
-            if (!confirmPasswordErrorMessage.classList.contains("hide")) {
-               confirmPasswordErrorMessage.classList.add("hide");
-            }
-            if (data.success) {
-               popupCloseFunctionByID("login-popup");
-            } else {
-               if (data.code === 1) {
+            if (data) {
+               if (!currentPasswordErrorMessage.classList.contains("hide")) {
+                  currentPasswordErrorMessage.classList.add("hide");
+               }
+               if (!confirmPasswordErrorMessage.classList.contains("hide")) {
+                  confirmPasswordErrorMessage.classList.add("hide");
+               }
+               if (data.success) {
+                  popupCloseFunctionByID("login-popup");
+               } else if (data.code === 1) {
                   currentPasswordErrorMessage.classList.remove("hide");
                } else if (data.code === 2) {
                   confirmPasswordErrorMessage.classList.remove("hide");
@@ -388,10 +422,10 @@ window.addEventListener("load", async () => {
       document.querySelector("#todo-create-button").classList.add("disabled");
       document.querySelector("#user-page").classList.add("hide");
       document.querySelector("#login-page").classList.remove("hide");
-      if (!document.querySelector("#user-current-password-error").contains("hide")) {
+      if (!document.querySelector("#user-current-password-error").classList.contains("hide")) {
          document.querySelector("#user-current-password-error").classList.add("hide");
       }
-      if (!document.querySelector("#user-confirm-password-error").contains("hide")) {
+      if (!document.querySelector("#user-confirm-password-error").classList.contains("hide")) {
          document.querySelector("#user-confirm-password-error").classList.add("hide");
       }
    });
@@ -590,7 +624,7 @@ const loadTodos = async () => {
 // Popup close function
 /**
  * Popup close function by ID
- * @param {String} ID
+ * @param {String} ID The ID of the popup to close
  */
 function popupCloseFunctionByID(ID) {
    const popup = document.querySelector(`#${ID}`);
@@ -602,7 +636,7 @@ function popupCloseFunctionByID(ID) {
 }
 /**
  * Popup open function
- * @param {HTMLElement} element
+ * @param {HTMLElement} element The element that was clicked
  */
 function popupOpenFunction(element) {
    const popup = document.querySelector(`#${element.getAttribute("data-popup-open-target")}`) || element;
@@ -612,7 +646,7 @@ function popupOpenFunction(element) {
 }
 /**
  * Todo popup open function
- * @param {HTMLElement} element
+ * @param {HTMLElement} element The element that was clicked
  */
 function todoPopupOpenFunction(element) {
    popupOpenFunction(element);
@@ -624,8 +658,8 @@ function todoPopupOpenFunction(element) {
 /////////////// Helper functions ///////////////
 /**
  * Milliseconds to timestamp
- * @param {Number} s
- * @returns {String}
+ * @param {Number} s Milliseconds
+ * @returns {String} Timestamp
  */
 function msToTime(s) {
    function pad(n, z) {
@@ -641,7 +675,7 @@ function msToTime(s) {
 }
 /**
  * Notification permission getter
- * @returns {Boolean}
+ * @returns {Boolean} Whether the user has granted notification permissions
  */
 function getNotificationPermission() {
    if (isIOS()) {
@@ -651,7 +685,7 @@ function getNotificationPermission() {
 }
 /**
  * Check if the user is using an iOS device
- * @returns {Boolean}
+ * @returns {Boolean} Whether the user is using an iOS device
  */
 function isIOS() {
    const browserInfo = navigator.userAgent.toLowerCase();
@@ -675,10 +709,11 @@ function isIOS() {
  * @param {String} name The name of the cookie
  * @param {any} value The value of the cookie
  * @param {"Strict" | "Lax" | "None"} SameSite The type of SameSite to use
+ * @param {Number} expires The number of days until the cookie expires
  */
-function setCookie(name, value, SameSite = "Strict") {
+function setCookie(name, value, SameSite = "Strict", expires = 3) {
    const date = new Date();
-   date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
+   date.setTime(date.getTime() + (expires * 24 * 60 * 60 * 1000));
    document.cookie = `${name}=${value || ""}; expires=${date.toString()}; SameSite=${SameSite}; path=/`;
 }
 /**

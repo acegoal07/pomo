@@ -1,7 +1,10 @@
 <?php
 include 'index.php';
 header('Content-Type: application/json');
-if ($_SERVER['REQUEST_METHOD'] !== "POST") {
+if ($conn->connect_error) {
+   http_response_code(500);
+   echo json_encode(array('success' => false));
+} elseif ($_SERVER['REQUEST_METHOD'] !== "POST") {
    http_response_code(400);
    echo json_encode(array('success' => false));
 } else {
