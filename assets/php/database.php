@@ -20,7 +20,7 @@ try {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT * FROM tasks WHERE userName = ?");
+                  $stmt = $conn->prepare("SELECT taskID, taskContent FROM tasks WHERE userName = ?");
                   $stmt->bind_param("s", $_POST['username']);
                   if ($stmt->execute()) {
                      $result = $stmt->get_result();
@@ -116,7 +116,7 @@ try {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT * FROM users WHERE userName = ? AND password = ?");
+                  $stmt = $conn->prepare("SELECT fullPomoScore, partialPomoScore FROM users WHERE userName = ? AND password = ?");
                   $password = hash('sha256', $_POST['password']);
                   $stmt->bind_param("ss", $_POST['username'], $password);
                   if ($stmt->execute()) {
@@ -153,7 +153,7 @@ try {
                   echo json_encode(array('success' => false));
                } else {
                   $username = $_POST['username'];
-                  $stmt = $conn->prepare("SELECT * FROM users WHERE userName = ?");
+                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ?");
                   $stmt->bind_param("s", $username);
                   if ($stmt->execute()) {
                      $result = $stmt->get_result();
@@ -202,7 +202,7 @@ try {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT * FROM users WHERE userName = ? AND Password = ?");
+                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ? AND Password = ?");
                   $oldPassword = $_POST['currentPassword'];
                   $newPassword = $_POST['newPassword'];
                   $confirmPassword = $_POST['confirmNewPassword'];
