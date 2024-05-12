@@ -293,6 +293,28 @@ try {
                   echo json_encode($response);
                }
                break;
+               // Get all time leaderboard
+            case 'getAllTimeLeaderboard':
+               $stmt = $conn->prepare("SELECT * FROM allTimeLeaderboard");
+               if ($stmt->execute()) {
+                  $result = $stmt->get_result();
+                  $data = array();
+                  if ($result->num_rows > 0) {
+                     while ($row = $result->fetch_assoc()) {
+                        array_push($data, $row);
+                     }
+                  }
+                  $response['success'] = true;
+                  $response['leaderboard'] = $data;
+                  http_response_code(200);
+               } else {
+                  $response['success'] = false;
+                  http_response_code(500);
+               }
+               $stmt->close();
+               $conn->close();
+               echo json_encode($response);
+               break;
                // No request type was provided
             default:
                http_response_code(400);

@@ -32,7 +32,8 @@
          <h2>Insert the details of your task below</h2>
          <form id="createTodoForm" method="post" class="popup-form">
             <span id="create-todo-error" class="hide error-message"><strong>The task cannot be empty</strong></span>
-            <textarea id="todo-input" rows="6" placeholder="Enter your to-do item here" minlength="1" maxlength="255"></textarea>
+            <textarea id="todo-input" rows="6" placeholder="Enter your to-do item here" minlength="1"
+               maxlength="255"></textarea>
             <button id="todo-add-task" type="submit">
                Add To-Do
             </button>
@@ -52,7 +53,8 @@
          <h1 class="popup-header">YOUR TASK:</h1>
          <form class="popup-form">
             <span id="edit-todo-error" class="hide error-message"><strong>The task cannot be empty</strong></span>
-            <textarea id="task-input" rows="6" placeholder="Enter your to-do item here" minlength="1" maxlength="255"></textarea>
+            <textarea id="task-input" rows="6" placeholder="Enter your to-do item here" minlength="1"
+               maxlength="255"></textarea>
             <button id="todo-item-delete" type="submit">
                Delete
             </button>
@@ -76,7 +78,8 @@
          <div id="login-page">
             <h1 class="popup-header">Enter your details:</h1>
             <form id="login-form" name="login-form" class="popup-form">
-               <span id="login-input-error" class="hide error-message"><strong>Username or password is incorrect</strong></span>
+               <span id="login-input-error" class="hide error-message"><strong>Username or password is
+                     incorrect</strong></span>
                <input id="login-user-name-input" type="text" name="username" placeholder="Username" required />
                <input id="login-password-input" type="password" name="password" placeholder="Password" required />
                <button id="go-to-registration" type="reset">
@@ -91,9 +94,11 @@
          <div id="registration-page" class="hide">
             <h1 class="popup-header">Register your account:</h1>
             <form id="registration-form" method="post" class="popup-form">
-               <span id="registration-username-error" class="hide error-message"><strong>Username is already taken</strong></span>
+               <span id="registration-username-error" class="hide error-message"><strong>Username is already
+                     taken</strong></span>
                <input id="registration-username-input" type="text" name="username" placeholder="Username" required />
-               <span id="registration-password-error" class="hide error-message"><strong>Passwords do not match</strong></span>
+               <span id="registration-password-error" class="hide error-message"><strong>Passwords do not
+                     match</strong></span>
                <input id="registration-password-input" type="password" name="password" placeholder="Password"
                   required />
                <input id="registration-comfirm-password-input" type="password" name="confirmPassword"
@@ -111,10 +116,12 @@
             <h1 class="popup-header" id="welcome-user-heading">Welcome back!</h1>
             <h2>Change password</h2>
             <form id="change-password-form" method="post" class="popup-form">
-               <span id="user-current-password-error" class="hide error-message"><strong>Username is already taken</strong></span>
+               <span id="user-current-password-error" class="hide error-message"><strong>Username is already
+                     taken</strong></span>
                <input id="user-change-username-input-original" type="password" name="currentPassword"
                   placeholder="Current password" required />
-               <span id="user-confirm-password-error" class="hide error-message"><strong>Passwords do not match</strong></span>
+               <span id="user-confirm-password-error" class="hide error-message"><strong>Passwords do not
+                     match</strong></span>
                <input id="user-change-username-input-new" type="password" name="newPassword" placeholder="New password"
                   required />
                <input id="user-change-username-input-cpnfirm-new" type="password" name="confirmNewPassword"
@@ -189,21 +196,17 @@
             </div>
          </a>
 
-         <div id="leaderboard-weekly">
+         <div id="leaderboard-all-time">
+            <h1 class="popup-header">All Time</h1>
+            <ul class="leaderboard-list"></ul>
+         </div>
+
+         <div class="hide" id="leaderboard-weekly">
             <h1 class="popup-header">Weekly</h1>
             <ul class="leaderboard-list">
                <li class="leaderboard-entry">Weekly leader yay</li>
                <li class="leaderboard-entry">Weekly leader yay</li>
                <li class="leaderboard-entry">Weekly leader yay</li>
-            </ul>
-         </div>
-
-         <div class="hide" id="leaderboard-all-time">
-            <h1 class="popup-header">All Time</h1>
-            <ul class="leaderboard-list">
-               <li class="leaderboard-entry">All time leader yay</li>
-               <li class="leaderboard-entry">All time leader yay</li>
-               <li class="leaderboard-entry">All time leader yay</li>
             </ul>
          </div>
 
@@ -223,7 +226,7 @@
       </div>
       <!-- Nav -->
       <div class="nav-grid-section">
-         <img data-popup-open-target="leaderboard-popup" data-target-popup-type="" class="nav-button"
+         <img data-popup-open-target="leaderboard-popup" data-target-popup-type="leaderboard-popup" class="nav-button"
             src="assets/images/leaderboardIcon.webp" alt="Leaderboard button" />
          <div class="pomodoro-counter-container">
             <span class="pomodoro-counter" id="pomodoro-counter">0</span>
@@ -233,7 +236,7 @@
                   cy="50" r="45" />
             </svg>
          </div>
-         <img data-popup-open-target="login-popup" data-target-popup-type="" class="nav-button"
+         <img data-popup-open-target="login-popup" class="nav-button"
             src="assets/images/loginIcon.webp" alt="Login button" />
 
          <img data-popup-open-target="information-popup" data-target-popup-type="information-popup" class="nav-button"
@@ -271,6 +274,13 @@
                class="todo-add-btn-background disabled">
                <div class="todo-add-btn-horizontal-plus"></div>
                <div class="todo-add-btn-vertical-plus"></div>
+            </div>
+            <div id="todo-refresh-button" class="refresh-icon-background disabled">
+               <svg xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512">
+                  <path
+                     d="M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H352c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V80c0-17.7-14.3-32-32-32s-32 14.3-32 32v35.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V432c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H160c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z" />
+               </svg>
             </div>
             <div class="todo-list-container" id="todo-list"></div>
          </div>

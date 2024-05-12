@@ -353,6 +353,7 @@ div.todo-grid-section div.todo-grid-container:hover {
 }
 
 div.todo-add-btn-background {
+  display: inline-block;
   border-radius: 1.5rem;
   width: 4rem;
   height: 4rem;
@@ -367,11 +368,31 @@ div.todo-add-btn-background {
   box-shadow: var(--shadow-settings-light);
 }
 
-div.todo-add-btn-background.disabled {
+div.refresh-icon-background {
+  margin-left: 0.5rem;
+  position: absolute;
+  display: inline-flex;
+  justify-content: center;
+  border-radius: 1.5rem;
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--accent-color);
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: var(--shadow-settings-light);
+}
+
+div.todo-add-btn-background.disabled,
+div.refresh-icon-background.disabled {
   background-color: var(--accent-color-disabled);
 }
 
-div.todo-add-btn-background:hover {
+div.todo-add-btn-background:hover,
+div.refresh-icon-background:hover {
   -webkit-transform: translateY(-5px);
   -o-transform: translateY(-5px);
   -ms-transform: translateY(-5px);
@@ -380,7 +401,8 @@ div.todo-add-btn-background:hover {
   box-shadow: var(--shadow-settings-strong);
 }
 
-div.todo-add-btn-background:hover:not(.disabled) {
+div.todo-add-btn-background:hover:not(.disabled),
+div.refresh-icon-background:hover:not(.disabled) {
   background-color: var(--accent-color-hover);
 }
 
@@ -402,6 +424,27 @@ div.todo-add-btn-background>div.todo-add-btn-vertical-plus {
   top: 12.5%;
 }
 
+div.refresh-icon-background>svg {
+  margin: auto;
+  width: 60%;
+  height: 60%;
+  fill: #fff;
+}
+
+@keyframes refreshTodoSpinAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+div.refresh-icon-background:hover>svg {
+  animation: refreshTodoSpinAnimation 2s linear infinite;
+}
+
 div.todo-list-container {
   max-height: 26rem;
   height: 100%;
@@ -421,10 +464,10 @@ div.todo-list-container>div.todo-item {
   align-items: center;
   padding: 1rem;
   width: 90%;
-  -webkit-transition: all 0.2s ease, box-shadow 0.2s ease;
-  -o-transition: all 0.2s ease, box-shadow 0.2s ease;
-  -moz-transition: all 0.2s ease, box-shadow 0.2s ease;
-  transition: all 0.2s ease, box-shadow 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
   box-shadow: var(--shadow-settings-light);
 }
 
