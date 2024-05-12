@@ -94,7 +94,9 @@ window.addEventListener("load", async () => {
             break;
          case "leaderboard-popup":
             element.addEventListener("click", () => {
-               loadAllTimeLeaderboard();
+               loadAllTimeLeaderboard().then(() => {
+                  loadWeeklyLeaderboard();
+               });
                popupOpenFunction(element);
             });
             break;
@@ -455,9 +457,40 @@ window.addEventListener("load", async () => {
    let index = 0;
    const times = [25, 5, 25, 5, 25, 5, 25, 15];
    let currentTime;
-   document.querySelector("#timer-start-button").addEventListener("click", () => {
+   document.querySelector("#timer-start-button").addEventListener("click", async () => {
       let pomodoros = getCookie('fullPomoScore') || 0;
       let pomoProgress = getCookie('partialPomoScore') || 0;
+      const form = new FormData();
+      form.append('requestType', 'getPomoScore');
+      form.append('username', getCookie('username'));
+      await fetch('assets/php/database.php', {
+         method: 'POST',
+         body: form
+      })
+         .then(response => {
+            if (response.ok) {
+               return response.json();
+            } else if (response.status === 400) {
+               console.log('Bad request');
+            } else if (response.status === 500) {
+               console.log('Internal server error');
+            } else {
+               console.log('Error with the response from the database');
+            }
+         })
+         .then(data => {
+            if (data) {
+               if (data.success) {
+                  pomodoros = data.fullPomoScore;
+                  setCookie('fullPomoScore', pomodoros);
+                  pomoProgress = data.partialPomoScore;
+                  setCookie('partialPomoScore', pomoProgress);
+                  setPomoCounter(data.fullPomoScore, data.partialPomoScore);
+               } else {
+                  console.log("Failed to get pomo score: " + data);
+               }
+            }
+         });
       if (!timer.isActive()) {
          if (timer.getCurrentPositionMS() === 0) {
             setTimerColor("var(--accent-color)");
@@ -520,12 +553,16 @@ window.addEventListener("load", async () => {
                   .then(response => {
                      if (response.ok) {
                         return response.json();
+                     } else if (response.status === 400) {
+                        console.log('Bad request');
+                     } else if (response.status === 500) {
+                        console.log('Internal server error');
                      } else {
                         console.log('Error with the response from the database');
                      }
                   })
                   .then(data => {
-                     if (!data.success) {
+                     if (data && !data.success) {
                         console.log("Failed to update pomo score: " + data);
                      }
                   })
@@ -573,14 +610,14 @@ function setTimerColor(input) {
 function setPomoCounter(fullPomoScore, partialPomoScore) {
    document.querySelector("#pomodoro-counter").textContent = fullPomoScore;
    setPomoCounterProgress(12.5 * partialPomoScore);
-};
+}
 /**
  * Reset pomo counter
  */
 function resetPomoCounter() {
    document.querySelector("#pomodoro-counter").textContent = "0";
    setPomoCounterProgress(0);
-};
+}
 const pomodoroCounterCircle = document.querySelector("#counter-circle");
 const pomodoroCounterRadius = pomodoroCounterCircle.r.baseVal.value;
 const pomodoroCounterCircumference = pomodoroCounterRadius * 2 * Math.PI;
@@ -606,39 +643,51 @@ async function loadTodos() {
       method: 'POST',
       body: form
    })
-      .then(response => response.json())
-      .then(data => {
-         document.querySelector("#todo-list").querySelectorAll("*").forEach(n => n.remove());
-         if (data.success) {
-            if (data.todos) {
-               data.todos.forEach(todo => {
-                  const divTodoItem = document.createElement('div');
-                  divTodoItem.classList.add('todo-item');
-                  divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
-                  divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
-                  divTodoItem.setAttribute('data-task-id', todo.taskID);
-
-                  const divTodoItemContainer = document.createElement('div');
-                  divTodoItemContainer.classList.add('todo-item-container');
-                  divTodoItem.appendChild(divTodoItemContainer);
-
-                  const divTodoItemText = document.createElement('div');
-                  divTodoItemText.classList.add('todo-text');
-                  divTodoItemText.textContent = todo.taskContent;
-                  divTodoItemContainer.appendChild(divTodoItemText);
-
-                  divTodoItem.addEventListener("click", () => todoPopupOpenFunction(divTodoItem));
-                  document.querySelector('#todo-list').appendChild(divTodoItem);
-               });
-            }
+      .then(response => {
+         if (response.ok) {
+            return response.json();
+         } else if (response.status === 400) {
+            console.log('Bad request');
+         } else if (response.status === 500) {
+            console.log('Internal server error');
          } else {
-            console.log('Failed to load todos: ' + data);
+            console.log('Error with the response from the database');
+         }
+      })
+      .then(data => {
+         if (data) {
+            document.querySelector("#todo-list").querySelectorAll("*").forEach(n => n.remove());
+            if (data.success) {
+               if (data.todos) {
+                  data.todos.forEach(todo => {
+                     const divTodoItem = document.createElement('div');
+                     divTodoItem.classList.add('todo-item');
+                     divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
+                     divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
+                     divTodoItem.setAttribute('data-task-id', todo.taskID);
+
+                     const divTodoItemContainer = document.createElement('div');
+                     divTodoItemContainer.classList.add('todo-item-container');
+                     divTodoItem.appendChild(divTodoItemContainer);
+
+                     const divTodoItemText = document.createElement('div');
+                     divTodoItemText.classList.add('todo-text');
+                     divTodoItemText.textContent = todo.taskContent;
+                     divTodoItemContainer.appendChild(divTodoItemText);
+
+                     divTodoItem.addEventListener("click", () => todoPopupOpenFunction(divTodoItem));
+                     document.querySelector('#todo-list').appendChild(divTodoItem);
+                  });
+               }
+            } else {
+               console.log('Failed to load todos: ' + data);
+            }
          }
       })
       .catch(error => {
          console.error('Error:', error);
       });
-};
+}
 
 /////////////// Leaderboard functions ///////////////
 /**
@@ -651,27 +700,82 @@ async function loadAllTimeLeaderboard() {
       method: 'POST',
       body: form
    })
-      .then(response => response.json())
-      .then(data => {
-         const leaderboard = document.querySelector("#leaderboard-all-time").querySelector("ul");
-         leaderboard.querySelectorAll("*").forEach(n => n.remove());
-         if (data.success) {
-            if (data.leaderboard) {
-               data.leaderboard.forEach(user => {
-                  const li = document.createElement('li');
-                  li.classList.add('leaderboard-entry');
-                  li.textContent = `${user.userName} - ${user.fullPomoScore}`;
-                  leaderboard.appendChild(li);
-               });
-            }
+      .then(response => {
+         if (response.ok) {
+            return response.json();
+         } else if (response.status === 400) {
+            console.log('Bad request');
+         } else if (response.status === 500) {
+            console.log('Internal server error');
          } else {
-            console.log('Failed to load all time leaderboard: ' + data);
+            console.log('Error with the response from the database');
+         }
+      })
+      .then(data => {
+         if (data) {
+            const leaderboard = document.querySelector("#leaderboard-all-time").querySelector("ul");
+            leaderboard.querySelectorAll("*").forEach(n => n.remove());
+            if (data.success) {
+               if (data.leaderboard) {
+                  data.leaderboard.forEach(user => {
+                     const li = document.createElement('li');
+                     li.classList.add('leaderboard-entry');
+                     li.textContent = `${user.userName} - ${user.fullPomoScore}`;
+                     leaderboard.appendChild(li);
+                  });
+               }
+            } else {
+               console.log('Failed to load all time leaderboard: ' + data);
+            }
          }
       })
       .catch(error => {
          console.error('Error:', error);
       });
-};
+}
+/**
+ * Load weekly leaderboard
+ */
+async function loadWeeklyLeaderboard() {
+   const form = new FormData();
+   form.append('requestType', 'getWeeklyLeaderboard');
+   await fetch('assets/php/database.php', {
+      method: 'POST',
+      body: form
+   })
+      .then(response => {
+         if (response.ok) {
+            return response.json();
+         } else if (response.status === 400) {
+            console.log('Bad request');
+         } else if (response.status === 500) {
+            console.log('Internal server error');
+         } else {
+            console.log('Error with the response from the database');
+         }
+      })
+      .then(data => {
+         if (data) {
+            const leaderboard = document.querySelector("#leaderboard-weekly").querySelector("ul");
+            leaderboard.querySelectorAll("*").forEach(n => n.remove());
+            if (data.success) {
+               if (data.leaderboard) {
+                  data.leaderboard.forEach(user => {
+                     const li = document.createElement('li');
+                     li.classList.add('leaderboard-entry');
+                     li.textContent = `${user.userName} - ${user.score_difference}`;
+                     leaderboard.appendChild(li);
+                  });
+               }
+            } else {
+               console.log('Failed to load weekly leaderboard: ' + data);
+            }
+         }
+      })
+      .catch(error => {
+         console.error('Error:', error);
+      })
+}
 
 /////////////// Popup functions ///////////////
 /**
