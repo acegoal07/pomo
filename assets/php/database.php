@@ -16,24 +16,37 @@ try {
          switch ($_POST['requestType']) {
                // Get all todos for a specific user
             case 'getTodos':
-               if (!isset($_POST['username'])) {
+               if (!isset($_POST['username']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT taskID, taskContent FROM tasks WHERE userName = ?");
-                  $stmt->bind_param("s", $_POST['username']);
+                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ? AND secureID = ?");
+                  $stmt->bind_param("ss", $_POST['username'], $_POST['secureID']);
                   if ($stmt->execute()) {
                      $result = $stmt->get_result();
-                     $data = array();
                      if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                           array_push($data, $row);
+                        $stmt = $conn->prepare("SELECT taskID, taskContent FROM tasks WHERE userName = ?");
+                        $stmt->bind_param("s", $_POST['username']);
+                        if ($stmt->execute()) {
+                           $result = $stmt->get_result();
+                           $data = array();
+                           if ($result->num_rows > 0) {
+                              while ($row = $result->fetch_assoc()) {
+                                 array_push($data, $row);
+                              }
+                           }
+                           $response['success'] = true;
+                           $response['username'] = $_POST['username'];
+                           $response['todos'] = $data;
+                           http_response_code(200);
+                        } else {
+                           $response['success'] = false;
+                           http_response_code(500);
                         }
+                     } else {
+                        $response['success'] = false;
+                        http_response_code(400);
                      }
-                     $response['success'] = true;
-                     $response['username'] = $_POST['username'];
-                     $response['todos'] = $data;
-                     http_response_code(200);
                   } else {
                      $response['success'] = false;
                      http_response_code(500);
@@ -45,18 +58,31 @@ try {
                break;
                // Create a new todo for a user
             case 'createTodo':
-               if (!isset($_POST['username']) || !isset($_POST['taskContent'])) {
+               if (!isset($_POST['username']) || !isset($_POST['taskContent']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
                   $username = $_POST['username'];
                   $task = $_POST['taskContent'];
-                  $stmt = $conn->prepare("INSERT INTO tasks (userName, taskContent) VALUES (?, ?)");
-                  $stmt->bind_param("ss", $username, $task);
+                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ? AND secureID = ?");
+                  $stmt->bind_param("ss", $username, $_POST['secureID']);
                   if ($stmt->execute()) {
-                     $response['success'] = true;
-                     $response['taskID'] = $stmt->insert_id;
-                     http_response_code(200);
+                     $result = $stmt->get_result();
+                     if ($result->num_rows > 0) {
+                        $stmt = $conn->prepare("INSERT INTO tasks (userName, taskContent) VALUES (?, ?)");
+                        $stmt->bind_param("ss", $username, $task);
+                        if ($stmt->execute()) {
+                           $response['success'] = true;
+                           $response['taskID'] = $stmt->insert_id;
+                           http_response_code(200);
+                        } else {
+                           $response['success'] = false;
+                           http_response_code(500);
+                        }
+                     } else {
+                        $response['success'] = false;
+                        http_response_code(400);
+                     }
                   } else {
                      $response['success'] = false;
                      http_response_code(500);
@@ -68,15 +94,28 @@ try {
                break;
                // Delete a specific todo for a user
             case 'deleteTodo':
-               if (!isset($_POST['taskID'])) {
+               if (!isset($_POST['taskID']) || !isset($_POST['username']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("DELETE FROM tasks WHERE taskID = ?");
-                  $stmt->bind_param("s", $_POST['taskID']);
+                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ? AND secureID = ?");
+                  $stmt->bind_param("ss", $_POST['username'], $_POST['secureID']);
                   if ($stmt->execute()) {
-                     $response['success'] = true;
-                     http_response_code(200);
+                     $result = $stmt->get_result();
+                     if ($result->num_rows > 0) {
+                        $stmt = $conn->prepare("DELETE FROM tasks WHERE taskID = ?");
+                        $stmt->bind_param("s", $_POST['taskID']);
+                        if ($stmt->execute()) {
+                           $response['success'] = true;
+                           http_response_code(200);
+                        } else {
+                           $response['success'] = false;
+                           http_response_code(500);
+                        }
+                     } else {
+                        $response['success'] = false;
+                        http_response_code(400);
+                     }
                   } else {
                      $response['success'] = false;
                      http_response_code(500);
@@ -88,16 +127,29 @@ try {
                break;
                // Edit a specific todo for a user
             case 'editTodo':
-               if (!isset($_POST['taskID']) || !isset($_POST['taskContent'])) {
+               if (!isset($_POST['taskID']) || !isset($_POST['taskContent']) || !isset($_POST['username']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("UPDATE tasks SET taskContent = ? WHERE taskID = ?");
-                  $stmt->bind_param("ss", $_POST['taskContent'], $_POST['taskID']);
+                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ? AND secureID = ?");
+                  $stmt->bind_param("ss", $_POST['username'], $_POST['secureID']);
                   if ($stmt->execute()) {
-                     $response['success'] = true;
-                     $response['taskID'] = $_POST['taskID'];
-                     http_response_code(200);
+                     $result = $stmt->get_result();
+                     if ($result->num_rows > 0) {
+                        $stmt = $conn->prepare("UPDATE tasks SET taskContent = ? WHERE taskID = ?");
+                        $stmt->bind_param("ss", $_POST['taskContent'], $_POST['taskID']);
+                        if ($stmt->execute()) {
+                           $response['success'] = true;
+                           $response['taskID'] = $_POST['taskID'];
+                           http_response_code(200);
+                        } else {
+                           $response['success'] = false;
+                           http_response_code(500);
+                        }
+                     } else {
+                        $response['success'] = false;
+                        http_response_code(400);
+                     }
                   } else {
                      $response['success'] = false;
                      http_response_code(500);
@@ -116,7 +168,7 @@ try {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT fullPomoScore, partialPomoScore FROM users WHERE userName = ? AND password = ?");
+                  $stmt = $conn->prepare("SELECT fullPomoScore, partialPomoScore, secureID FROM users WHERE userName = ? AND password = ?");
                   $password = hash('sha256', $_POST['password']);
                   $stmt->bind_param("ss", $_POST['username'], $password);
                   if ($stmt->execute()) {
@@ -125,6 +177,7 @@ try {
                         $row = $result->fetch_assoc();
                         $response['success'] = true;
                         $response['code'] = 0;
+                        $response['secureID'] = $row['secureID'];
                         $response['partialPomoScore'] = $row['partialPomoScore'];
                         $response['fullPomoScore'] = $row['fullPomoScore'];
                         http_response_code(200);
@@ -164,12 +217,14 @@ try {
                         http_response_code(200);
                      } else {
                         if ($_POST['password'] === $_POST['confirmPassword']) {
-                           $stmt = $conn->prepare("INSERT INTO users (userName, Password) VALUES (?, ?)");
+                           $stmt = $conn->prepare("INSERT INTO users (userName, Password, secureID) VALUES (?, ?, ?)");
                            $password = hash('sha256', $_POST['password']);
-                           $stmt->bind_param("ss", $username, $password);
+                           $secureID = generateUserSecureID($username);
+                           $stmt->bind_param("sss", $username, $password, $secureID);
                            if ($stmt->execute()) {
                               $response['success'] = true;
                               $response['code'] = 0;
+                              $response['secureID'] = $secureID;
                               http_response_code(200);
                            } else {
                               $response['success'] = false;
@@ -198,11 +253,11 @@ try {
                // 1 - Old password is incorrect
                // 2 - New passwords do not match
             case 'updatePassword':
-               if (!isset($_POST['currentPassword']) || !isset($_POST['newPassword']) || !isset($_POST['confirmNewPassword']) || !isset($_POST['username'])) {
+               if (!isset($_POST['currentPassword']) || !isset($_POST['newPassword']) || !isset($_POST['confirmNewPassword']) || !isset($_POST['username']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ? AND Password = ?");
+                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ? AND Password = ? AND secureID = ?");
                   $oldPassword = $_POST['currentPassword'];
                   $newPassword = $_POST['newPassword'];
                   $confirmPassword = $_POST['confirmNewPassword'];
@@ -210,7 +265,7 @@ try {
                   $oldPassword = hash('sha256', $oldPassword);
                   $newPassword = hash('sha256', $newPassword);
                   $confirmPassword = hash('sha256', $confirmPassword);
-                  $stmt->bind_param("ss", $username, $oldPassword);
+                  $stmt->bind_param("sss", $username, $oldPassword, $_POST['secureID']);
                   if ($stmt->execute()) {
                      $result = $stmt->get_result();
                      if ($result->num_rows > 0) {
@@ -247,12 +302,12 @@ try {
                break;
                // Get a user's pomo score
             case 'getPomoScore':
-               if (!isset($_POST['username'])) {
+               if (!isset($_POST['username']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT partialPomoScore, fullPomoScore FROM users WHERE userName = ?");
-                  $stmt->bind_param("s", $_POST['username']);
+                  $stmt = $conn->prepare("SELECT partialPomoScore, fullPomoScore FROM users WHERE userName = ? AND secureID = ?");
+                  $stmt->bind_param("ss", $_POST['username'], $_POST['secureID']);
                   if ($stmt->execute()) {
                      $result = $stmt->get_result();
                      if ($result->num_rows > 0) {
@@ -275,12 +330,12 @@ try {
                break;
                // Update a user's pomo score
             case 'updatePomoScore':
-               if (!isset($_POST['username']) || !isset($_POST['partialPomoScore']) || !isset($_POST['fullPomoScore'])) {
+               if (!isset($_POST['username']) || !isset($_POST['partialPomoScore']) || !isset($_POST['fullPomoScore']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("UPDATE users SET partialPomoScore = ?, fullPomoScore = ? WHERE userName = ?");
-                  $stmt->bind_param("sss", $_POST['partialPomoScore'], $_POST['fullPomoScore'], $_POST['username']);
+                  $stmt = $conn->prepare("UPDATE users SET partialPomoScore = ?, fullPomoScore = ? WHERE userName = ? AND secureID = ?");
+                  $stmt->bind_param("ssss", $_POST['partialPomoScore'], $_POST['fullPomoScore'], $_POST['username'], $_POST['secureID']);
                   if ($stmt->execute()) {
                      $response['success'] = true;
                      http_response_code(200);

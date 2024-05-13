@@ -26,15 +26,11 @@ window.addEventListener("load", async () => {
    document.querySelector("#timer-circle-progress").classList.add("timer-circle-progress-transition");
 
    /////////////// User onload auto login ///////////////
-   if (getCookie('username') !== null) {
-      document.querySelector("#todo-create-button").classList.remove("disabled");
-      document.querySelector("#todo-refresh-button").classList.remove("disabled");
-      document.querySelector("#login-page").classList.add("hide");
-      document.querySelector("#user-page").classList.remove("hide");
-      document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
+   if (getCookie('username') !== null && getCookie('secureID') !== null) {
       const form = new FormData();
       form.append('requestType', 'getPomoScore');
       form.append('username', getCookie('username'));
+      form.append('secureID', getCookie('secureID'));
       await fetch('assets/php/database.php', {
          method: 'POST',
          body: form
@@ -56,12 +52,20 @@ window.addEventListener("load", async () => {
                   setCookie('fullPomoScore', data.fullPomoScore);
                   setCookie('partialPomoScore', data.partialPomoScore);
                   setPomoCounter(data.fullPomoScore, data.partialPomoScore);
+                  document.querySelector("#todo-create-button").classList.remove("disabled");
+                  document.querySelector("#todo-refresh-button").classList.remove("disabled");
+                  document.querySelector("#login-page").classList.add("hide");
+                  document.querySelector("#user-page").classList.remove("hide");
+                  document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
+                  loadTodos();
                } else {
-                  console.log("Failed to get pomo score: " + data);
+                  deleteCookie('username');
+                  deleteCookie('secureID');
+                  deleteCookie('fullPomoScore');
+                  deleteCookie('partialPomoScore');
                }
             }
          });
-      loadTodos();
    }
 
    /////////////// Universal Popup functions ///////////////
@@ -129,10 +133,11 @@ window.addEventListener("load", async () => {
             errorMessage.classList.add("hide");
          }
          const todoInput = document.querySelector("#todo-input");
-         const todoText = todoInput.value;
+         const todoText = todoInput.value.trim();
          const form = new FormData();
          form.append("requestType", "createTodo");
          form.append("username", getCookie('username'));
+         form.append('secureID', getCookie('secureID'));
          form.append("taskContent", todoText);
          await fetch("assets/php/database.php",
             {
@@ -164,13 +169,14 @@ window.addEventListener("load", async () => {
             })
             .catch(error => console.log(error));
       }
-
    });
    // Todo item delete button
    document.querySelector("#todo-item-delete").addEventListener("click", async (event) => {
       event.preventDefault();
       const form = new FormData();
       form.append("requestType", "deleteTodo");
+      form.append("username", getCookie('username'));
+      form.append('secureID', getCookie('secureID'));
       form.append("taskID", document.querySelector("#todo-item-popup").getAttribute("data-task-id-storage"));
       await fetch("assets/php/database.php",
          {
@@ -213,8 +219,10 @@ window.addEventListener("load", async () => {
          }
          const form = new FormData();
          form.append("requestType", "editTodo");
+         form.append("username", getCookie('username'));
+         form.append('secureID', getCookie('secureID'));
          form.append("taskID", document.querySelector("#todo-item-popup").getAttribute("data-task-id-storage"));
-         form.append("taskContent", document.querySelector("#task-input").value);
+         form.append("taskContent", document.querySelector("#task-input").value.trim());
          await fetch("assets/php/database.php", {
             method: "POST",
             body: form
@@ -302,6 +310,7 @@ window.addEventListener("load", async () => {
                   document.querySelector("#todo-refresh-button").classList.remove("disabled");
                }
                setCookie('username', form.get('username'));
+               setCookie('secureID', data.secureID);
                setCookie('fullPomoScore', data.fullPomoScore);
                setCookie('partialPomoScore', data.partialPomoScore);
                setPomoCounter(data.fullPomoScore, data.partialPomoScore);
@@ -367,6 +376,9 @@ window.addEventListener("load", async () => {
                   document.querySelector("#todo-refresh-button").classList.remove("disabled");
                }
                setCookie('username', form.get('username'));
+               setCookie('secureID', data.secureID);
+               setCookie('fullPomoScore', 0);
+               setCookie('partialPomoScore', 0);
                loadTodos();
                popupCloseFunctionByID("login-popup");
                document.querySelector("#registration-page").classList.add("hide");
@@ -390,6 +402,7 @@ window.addEventListener("load", async () => {
       const confirmPasswordErrorMessage = document.querySelector("#user-confirm-password-error");
       const form = new FormData(event.target);
       form.append('username', getCookie('username'));
+      form.append('secureID', getCookie('secureID'));
       form.append('requestType', 'updatePassword');
       await fetch('assets/php/database.php', {
          method: 'POST',
@@ -433,6 +446,7 @@ window.addEventListener("load", async () => {
    document.querySelector("#user-logout-button").addEventListener("click", (event) => {
       event.preventDefault();
       deleteCookie('username');
+      deleteCookie('secureID');
       deleteCookie('fullPomoScore');
       deleteCookie('partialPomoScore');
       popupCloseFunctionByID("login-popup");
@@ -461,6 +475,7 @@ window.addEventListener("load", async () => {
       const form = new FormData();
       form.append('requestType', 'getPomoScore');
       form.append('username', getCookie('username'));
+      form.append('secureID', getCookie('secureID'));
       await fetch('assets/php/database.php', {
          method: 'POST',
          body: form
@@ -542,6 +557,7 @@ window.addEventListener("load", async () => {
                const form = new FormData();
                form.append('requestType', 'updatePomoScore');
                form.append('username', getCookie('username'));
+               form.append('secureID', getCookie('secureID'));
                form.append('fullPomoScore', pomodoros);
                form.append('partialPomoScore', pomoProgress);
                await fetch('assets/php/database.php', {
@@ -634,9 +650,13 @@ function setPomoCounterProgress(percent) {
  * Load todos
  */
 async function loadTodos() {
+   if (getCookie('username') === null || getCookie('secureID') === null) {
+      return;
+   }
    const form = new FormData();
    form.append('requestType', 'getTodos')
    form.append('username', getCookie('username'));
+   form.append('secureID', getCookie('secureID'));
    await fetch('assets/php/database.php', {
       method: 'POST',
       body: form
@@ -730,43 +750,43 @@ async function loadLeaderboards() {
       .catch(error => {
          console.error('Error:', error);
       });
-      form.append('requestType', 'getWeeklyLeaderboard');
-      await fetch('assets/php/database.php', {
-         method: 'POST',
-         body: form
+   form.append('requestType', 'getWeeklyLeaderboard');
+   await fetch('assets/php/database.php', {
+      method: 'POST',
+      body: form
+   })
+      .then(response => {
+         if (response.ok) {
+            return response.json();
+         } else if (response.status === 400) {
+            console.log('Bad request');
+         } else if (response.status === 500) {
+            console.log('Internal server error');
+         } else {
+            console.log('Error with the response from the database');
+         }
       })
-         .then(response => {
-            if (response.ok) {
-               return response.json();
-            } else if (response.status === 400) {
-               console.log('Bad request');
-            } else if (response.status === 500) {
-               console.log('Internal server error');
-            } else {
-               console.log('Error with the response from the database');
-            }
-         })
-         .then(data => {
-            if (data) {
-               const leaderboard = document.querySelector("#leaderboard-weekly").querySelector("ul");
-               leaderboard.querySelectorAll("*").forEach(n => n.remove());
-               if (data.success) {
-                  if (data.leaderboard) {
-                     data.leaderboard.forEach(user => {
-                        const li = document.createElement('li');
-                        li.classList.add('leaderboard-entry');
-                        li.textContent = `${user.userName} - ${user.score_difference}`;
-                        leaderboard.appendChild(li);
-                     });
-                  }
-               } else {
-                  console.log('Failed to load weekly leaderboard: ' + data);
+      .then(data => {
+         if (data) {
+            const leaderboard = document.querySelector("#leaderboard-weekly").querySelector("ul");
+            leaderboard.querySelectorAll("*").forEach(n => n.remove());
+            if (data.success) {
+               if (data.leaderboard) {
+                  data.leaderboard.forEach(user => {
+                     const li = document.createElement('li');
+                     li.classList.add('leaderboard-entry');
+                     li.textContent = `${user.userName} - ${user.score_difference}`;
+                     leaderboard.appendChild(li);
+                  });
                }
+            } else {
+               console.log('Failed to load weekly leaderboard: ' + data);
             }
-         })
-         .catch(error => {
-            console.error('Error:', error);
-         });
+         }
+      })
+      .catch(error => {
+         console.error('Error:', error);
+      });
 }
 
 /////////////// Popup functions ///////////////
@@ -859,7 +879,7 @@ function isIOS() {
  * @param {"Strict" | "Lax" | "None"} SameSite The type of SameSite to use
  * @param {Number} expires The number of days until the cookie expires
  */
-function setCookie(name, value, SameSite = "Strict", expires = 3) {
+function setCookie(name, value, SameSite = "Strict", expires = 1) {
    const date = new Date();
    date.setTime(date.getTime() + (expires * 24 * 60 * 60 * 1000));
    document.cookie = `${name}=${value || ""}; expires=${date.toString()}; SameSite=${SameSite}; path=/`;

@@ -80,7 +80,7 @@
             <form id="login-form" name="login-form" class="popup-form">
                <span id="login-input-error" class="hide error-message"><strong>Username or password is
                      incorrect</strong></span>
-               <input id="login-user-name-input" type="text" name="username" placeholder="Username" required />
+               <input id="login-user-name-input" type="text" name="username" placeholder="Username" maxlength="30" minlength="1" required />
                <input id="login-password-input" type="password" name="password" placeholder="Password" required />
                <button id="go-to-registration" type="reset">
                   Don't have an account? Click Here To Register
@@ -96,7 +96,7 @@
             <form id="registration-form" method="post" class="popup-form">
                <span id="registration-username-error" class="hide error-message"><strong>Username is already
                      taken</strong></span>
-               <input id="registration-username-input" type="text" name="username" placeholder="Username" required />
+               <input id="registration-username-input" type="text" name="username" placeholder="Username" maxlength="30" minlength="1" required />
                <span id="registration-password-error" class="hide error-message"><strong>Passwords do not
                      match</strong></span>
                <input id="registration-password-input" type="password" name="password" placeholder="Password"
@@ -203,11 +203,7 @@
 
          <div class="hide" id="leaderboard-weekly">
             <h1 class="popup-header">Weekly</h1>
-            <ul class="leaderboard-list">
-               <li class="leaderboard-entry">Weekly leader yay</li>
-               <li class="leaderboard-entry">Weekly leader yay</li>
-               <li class="leaderboard-entry">Weekly leader yay</li>
-            </ul>
+            <ul class="leaderboard-list"></ul>
          </div>
 
          <div class="leaderboard-switch-container">
