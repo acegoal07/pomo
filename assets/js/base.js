@@ -289,6 +289,8 @@ window.addEventListener("load", async () => {
       loadingIcon.style.zIndex = "1000";
       loadingIcon.style.width = "100px";
       loadingIcon.style.height = "100px";
+      loadingIcon.style.backgroundColor = "#77b255";
+      loadingIcon.style.borderRadius = "50%";
       document.querySelector("#login-form").appendChild(loadingIcon);
       form.append('requestType', 'login');
       await fetch('assets/php/database.php', {
