@@ -330,12 +330,27 @@ window.addEventListener("load", async () => {
                event.target.reset();
             } else if (data.code === 1) {
                loginErrorMessage.classList.remove("hide");
+               loadingIcon.classList.add("hide");
+               var usernameInput = document.querySelector("#login-form input[type='text']");
+               var passwordInput = document.querySelector("#login-form input[type='password']");
+               usernameInput.classList.add("shake");
+               passwordInput.classList.add("shake");
+             
+             
+               // Remove the shake class after the animation completes
+               setTimeout(() => {
+                 usernameInput.classList.remove("shake");
+                 passwordInput.classList.remove("shake");
+               
+               }, 820); // The duration of the shake animation
             } else {
                console.log("Login failed: " + data);
+               loadingIcon.classList.add("hide");
             }
          }
       }).catch(error => {
          console.error('Error:', error);
+         loadingIcon.classList.add("hide");
       });
    });
    // Registration page switch button

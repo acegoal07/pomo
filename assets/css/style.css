@@ -714,6 +714,24 @@ a.btn:hover {
   }
 }
 
+
+@keyframes shake {
+  0% { transform: translateX(0px); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+  100% { transform: translateX(0px); }
+}
+
+.shake {
+  animation: shake 0.5s linear both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  background-color: lightcoral;
+}
+
 /* Leaderboard */
 ul.leaderboard-list {
   list-style-type: none;
