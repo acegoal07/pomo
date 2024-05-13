@@ -9,6 +9,7 @@ class PomoTimer {
    }
 
    /**
+    * Gets the timer length in milliseconds
     * @param {int} msInput
     * @returns {PomoTimer}
     */
@@ -18,6 +19,7 @@ class PomoTimer {
    }
 
    /**
+    * Gets the timer position in milliseconds
     * @returns {int}
     */
    getCurrentPositionMS() {
@@ -25,6 +27,7 @@ class PomoTimer {
    }
 
    /**
+    * Gets the current position of the timer in seconds
     * @returns {int}
     */
    getCurrentPosition() {
@@ -32,6 +35,7 @@ class PomoTimer {
    }
 
    /**
+    * Sets the current position of the timer in milliseconds
     * @param {int} ms
     * @returns {PomoTimer}
     */
@@ -41,6 +45,7 @@ class PomoTimer {
    }
 
    /**
+    * Checks whether the timer is active
     * @returns {boolean}
     */
    isActive() {
@@ -48,6 +53,7 @@ class PomoTimer {
    }
 
    /**
+    * Sets the blurred state of the timer
     * @param {boolean} bool
     * @returns {PomoTimer}
     */
@@ -56,6 +62,9 @@ class PomoTimer {
       return this;
    }
 
+   /**
+    * Starts the timer
+    */
    startTimer() {
       if (this.getCurrentPositionMS() === 0) {
          this.setCurrentPositionMS(this.timerLengthMS);
@@ -87,10 +96,25 @@ class PomoTimer {
       // this.alarmActive = false;
    }
 
+   /**
+    * Stops the timer
+    */
    stopTimer() {
       this.timerActive = false;
    }
 
+   /**
+    * Resets the timer to default values
+    */
+   resetTimer() {
+      this.timerLengthMS = null;
+      this.currentPositionMS = 0;
+      this.timerActive = false;
+   }
+
+   /**
+    * plays the alarm sound
+    */
    playAlarm() {
       const alarmAudio = new Audio("assets/sounds/digitalAlarm.wav");
       alarmAudio.addEventListener("ended", () => {

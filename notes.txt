@@ -1,0 +1,2 @@
+create animation for create todo
+add back finish check box
