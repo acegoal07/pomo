@@ -706,7 +706,6 @@ async function loadTodos() {
          console.error('Error:', error);
       });
 }
-
 /**
  * Remove todos
  */
@@ -889,7 +888,7 @@ function isIOS() {
 function setCookie(name, value, SameSite = "Strict", expires = 1) {
    const date = new Date();
    date.setTime(date.getTime() + (expires * 24 * 60 * 60 * 1000));
-   document.cookie = `${name}=${value || ""}; expires=${date.toString()}; SameSite=${SameSite}; path=/`;
+   document.cookie = `${name}=${value || ""}; expires=${date.toString()}; SameSite=${SameSite}; secure=true; path=/`;
 }
 /**
  * deleteCookie
@@ -898,7 +897,7 @@ function setCookie(name, value, SameSite = "Strict", expires = 1) {
  * @param {"Strict" | "Lax" | "None"} SameSite The type of SameSite to use
  */
 function deleteCookie(name, SameSite = "Strict") {
-   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=${SameSite}; path=/;`;
+   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=${SameSite}; secure=true; path=/;`;
 }
 /**
  * getCookie
