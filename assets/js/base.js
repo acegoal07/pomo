@@ -94,9 +94,7 @@ window.addEventListener("load", async () => {
             break;
          case "leaderboard-popup":
             element.addEventListener("click", () => {
-               loadAllTimeLeaderboard().then(() => {
-                  loadWeeklyLeaderboard();
-               });
+               loadLeaderboards();
                popupOpenFunction(element);
             });
             break;
@@ -691,9 +689,9 @@ async function loadTodos() {
 
 /////////////// Leaderboard functions ///////////////
 /**
- * Load all time leaderboard
+ * Load leaderboards
  */
-async function loadAllTimeLeaderboard() {
+async function loadLeaderboards() {
    const form = new FormData();
    form.append('requestType', 'getAllTimeLeaderboard');
    await fetch('assets/php/database.php', {
@@ -732,49 +730,43 @@ async function loadAllTimeLeaderboard() {
       .catch(error => {
          console.error('Error:', error);
       });
-}
-/**
- * Load weekly leaderboard
- */
-async function loadWeeklyLeaderboard() {
-   const form = new FormData();
-   form.append('requestType', 'getWeeklyLeaderboard');
-   await fetch('assets/php/database.php', {
-      method: 'POST',
-      body: form
-   })
-      .then(response => {
-         if (response.ok) {
-            return response.json();
-         } else if (response.status === 400) {
-            console.log('Bad request');
-         } else if (response.status === 500) {
-            console.log('Internal server error');
-         } else {
-            console.log('Error with the response from the database');
-         }
+      form.append('requestType', 'getWeeklyLeaderboard');
+      await fetch('assets/php/database.php', {
+         method: 'POST',
+         body: form
       })
-      .then(data => {
-         if (data) {
-            const leaderboard = document.querySelector("#leaderboard-weekly").querySelector("ul");
-            leaderboard.querySelectorAll("*").forEach(n => n.remove());
-            if (data.success) {
-               if (data.leaderboard) {
-                  data.leaderboard.forEach(user => {
-                     const li = document.createElement('li');
-                     li.classList.add('leaderboard-entry');
-                     li.textContent = `${user.userName} - ${user.score_difference}`;
-                     leaderboard.appendChild(li);
-                  });
-               }
+         .then(response => {
+            if (response.ok) {
+               return response.json();
+            } else if (response.status === 400) {
+               console.log('Bad request');
+            } else if (response.status === 500) {
+               console.log('Internal server error');
             } else {
-               console.log('Failed to load weekly leaderboard: ' + data);
+               console.log('Error with the response from the database');
             }
-         }
-      })
-      .catch(error => {
-         console.error('Error:', error);
-      })
+         })
+         .then(data => {
+            if (data) {
+               const leaderboard = document.querySelector("#leaderboard-weekly").querySelector("ul");
+               leaderboard.querySelectorAll("*").forEach(n => n.remove());
+               if (data.success) {
+                  if (data.leaderboard) {
+                     data.leaderboard.forEach(user => {
+                        const li = document.createElement('li');
+                        li.classList.add('leaderboard-entry');
+                        li.textContent = `${user.userName} - ${user.score_difference}`;
+                        leaderboard.appendChild(li);
+                     });
+                  }
+               } else {
+                  console.log('Failed to load weekly leaderboard: ' + data);
+               }
+            }
+         })
+         .catch(error => {
+            console.error('Error:', error);
+         });
 }
 
 /////////////// Popup functions ///////////////

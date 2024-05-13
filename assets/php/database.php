@@ -134,8 +134,8 @@ try {
                         http_response_code(200);
                      }
                   } else {
-                     http_response_code(500);
                      $response['success'] = false;
+                     http_response_code(500);
                   }
                   $stmt->close();
                   $conn->close();
