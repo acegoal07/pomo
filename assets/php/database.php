@@ -1,6 +1,25 @@
 <?php
 include 'index.php';
 header('Content-Type: application/json');
+
+/**
+ * Generates a secure ID for a user
+ * @param $username The users account name
+ * @return string The generated secure ID
+ */
+function generateUserSecureID($username)
+{
+   $idLength = 32;
+   $permittedChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+   $input_length = strlen($permittedChars);
+   $random_string = '';
+   for ($i = 0; $i < $idLength; $i++) {
+      $random_character = $permittedChars[mt_rand(0, $input_length - 1)];
+      $random_string .= $random_character;
+   }
+   return "$username-$random_string";
+}
+
 try {
    if ($conn->connect_error) {
       http_response_code(500);

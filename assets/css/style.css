@@ -215,6 +215,13 @@ main.grid-layout div.banner-grid-section {
 /* Timer */
 main.grid-layout div.timer-grid-section {
   grid-area: timer;
+  padding-top: 0.5rem;
+}
+
+@media (min-width: 70em) {
+  main.grid-layout div.timer-grid-section {
+    padding-top: 0;
+  }
 }
 
 div.timer-grid-section div.timer-grid-container {
@@ -634,7 +641,7 @@ input[type="password"] {
   width: 50%;
   padding: 0.7rem;
   font-size: 1.5rem;
-  outline: 4px solid var(--background-color);
+  outline: 4px solid var(--accent-color);
   border: none;
   border-radius: 1rem;
   -webkit-transition: all 0.2s ease;
@@ -642,19 +649,16 @@ input[type="password"] {
   -o-transition: all 0.2s ease;
   -ms-transition: all 0.2s ease;
   transition: all 0.2s ease;
-  background-color: #fff;
 }
 
 textarea {
-  color: white;
-  background-color: var(--foreground-color);
   width: 90% !important;
   max-height: 400px !important;
   height: 100%;
   padding: 1rem;
   font-size: 1.5rem;
   border-radius: 1rem;
-  outline: 4px solid var(--background-color);
+  outline: 4px solid var(--accent-color);
   border: none;
   margin-bottom: 1rem;
   -webkit-transition: all 0.2s ease;
@@ -662,13 +666,12 @@ textarea {
   -o-transition: all 0.2s ease;
   -ms-transition: all 0.2s ease;
   transition: all 0.2s ease;
-  text-shadow: var(--text-outline-thickness-light);
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus,
 textarea:focus {
-  outline-color: var(--accent-color);
+  outline-color: var(--foreground-color);
 }
 
 button[type="reset"],
@@ -717,6 +720,10 @@ a.btn:hover {
     outline-width: 2px;
     padding: 0.6rem;
     font-size: 1.25rem;
+  }
+
+  textarea {
+    outline-width: 2px;
   }
 
   button[type="reset"],
