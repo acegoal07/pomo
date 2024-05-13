@@ -424,6 +424,17 @@ div.todo-list-container {
   border-radius: 1.5rem;
 }
 
+@keyframes todoItemAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+  
+}
+
 div.todo-list-container>div.todo-item {
   word-break: break-word;
   cursor: pointer;
@@ -441,6 +452,7 @@ div.todo-list-container>div.todo-item {
   -moz-transition: all 0.2s ease;
   transition: all 0.2s ease;
   box-shadow: var(--shadow-settings-light);
+  animation: linear 0.5s todoItemAnimation;
 }
 
 div.todo-item:hover {
