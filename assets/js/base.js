@@ -278,6 +278,18 @@ window.addEventListener("load", async () => {
       event.preventDefault();
       const loginErrorMessage = document.querySelector("#login-input-error");
       const form = new FormData(event.target);
+      const loadingIcon = document.createElement("img");
+      loadingIcon.classList.remove("hide");
+      loadingIcon.src = "assets/images/loadingIcon.gif";
+      loadingIcon.alt = "Loading...";
+      loadingIcon.style.position = "absolute";
+      loadingIcon.style.top = "50%";
+      loadingIcon.style.left = "50%";
+      loadingIcon.style.transform = "translate(-50%, -50%)";
+      loadingIcon.style.zIndex = "1000";
+      loadingIcon.style.width = "100px";
+      loadingIcon.style.height = "100px";
+      document.querySelector("#login-form").appendChild(loadingIcon);
       form.append('requestType', 'login');
       await fetch('assets/php/database.php', {
          method: 'POST',
@@ -312,11 +324,14 @@ window.addEventListener("load", async () => {
                document.querySelector("#login-page").classList.add("hide");
                document.querySelector("#user-page").classList.remove("hide");
                document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
+               loadingIcon.classList.add("hide");
                event.target.reset();
             } else if (data.code === 1) {
                loginErrorMessage.classList.remove("hide");
+               loadingIcon.classList.add("hide");
             } else {
                console.log("Login failed: " + data);
+               loadingIcon.classList.add("hide");
             }
          }
       }).catch(error => {
