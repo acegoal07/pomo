@@ -451,7 +451,7 @@ window.addEventListener("load", async () => {
       deleteCookie('partialPomoScore');
       popupCloseFunctionByID("login-popup");
       resetPomoCounter();
-      loadTodos();
+      removeTodos();
       document.querySelector("#todo-create-button").classList.add("disabled");
       document.querySelector("#todo-refresh-button").classList.add("disabled");
       document.querySelector("#user-page").classList.add("hide");
@@ -705,6 +705,13 @@ async function loadTodos() {
       .catch(error => {
          console.error('Error:', error);
       });
+}
+
+/**
+ * Remove todos
+ */
+function removeTodos() {
+   document.querySelector("#todo-list").querySelectorAll("*").forEach(n => n.remove());
 }
 
 /////////////// Leaderboard functions ///////////////
