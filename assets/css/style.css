@@ -858,10 +858,6 @@ div.leaderboard-switch-container {
   margin-left: 15px;
 }
 
-.carousel-cell:not(:first-child) {
-  margin-left: 15px;
-}
-
 .carousel-cell>h2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
