@@ -817,20 +817,18 @@ input.form-input-shake {
   display: block;
 }
 
+.check-box-container input:hover~.checkmark:after {
+  border-color: #ffffff85;
+}
+
+.check-box-container input:checked~.checkmark:after {
+  border-color: #fff !important;
+}
+
 .check-box-container .checkmark:after {
   width: 11px;
   height: 28px;
-  border: solid white !important;
-  border-width: 0 4px 4px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.check-box-container:hover .checkmark:after {
-  width: 11px;
-  height: 28px;
-  border-color: #ffffff85;
+  border: solid;
   border-width: 0 4px 4px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
