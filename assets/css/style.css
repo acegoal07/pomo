@@ -338,18 +338,6 @@ path.timer-controls-cursor:hover {
   filter: drop-shadow(0 7px 15px var(--shadow-color));
 }
 
-.checkbox-div {
-  padding: 2px;
-  margin-right: 15px;
-}
-
-.todo-checkbox {
-  width: 40px;
-  height: 40px;
-  padding: 0.5rem;
-  accent-color: var(--accent-color);
-}
-
 /* Todo */
 main.grid-layout div.todo-grid-section {
   grid-area: todo;
@@ -483,7 +471,20 @@ div.todo-item-container {
   font-size: 1.125rem;
   width: 100%;
   height: 100%;
-  padding: 1.5rem;
+  margin: 1.5rem;
+  margin-left: 0.7rem;
+}
+
+.checkbox-div {
+  padding: 2px;
+  margin-right: 15px;
+}
+
+.todo-checkbox {
+  width: 40px;
+  height: 40px;
+  padding: 0.5rem;
+  accent-color: var(--accent-color);
 }
 
 h1.todo-header {
