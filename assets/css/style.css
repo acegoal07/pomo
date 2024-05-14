@@ -777,7 +777,7 @@ a.btn:hover {
   100% { transform: translateX(0px); }
 }
 
-.shake {
+input.form-input-shake {
   animation: inputElementsShake 0.5s linear both;
   backface-visibility: hidden;
   perspective: 1000px;
