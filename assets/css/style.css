@@ -791,6 +791,11 @@ div.leaderboard-switch-container {
   padding-bottom: 10px;
 }
 
+.main-carousel {
+  display: flex;
+  justify-content: space-between;
+}
+
 .carousel-cell {
   text-align: center;
   color: #fff;
