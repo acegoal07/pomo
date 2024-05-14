@@ -739,10 +739,19 @@ async function loadTodos() {
                      const divTodoItem = document.createElement('div');
                      divTodoItem.classList.add('todo-item');
 
-                     const checkBox = document.createElement('input');
-                     checkBox.type = 'checkbox';
-                     checkBox.classList.add('todo-checkbox');
-                     checkBox.addEventListener('click', async () => {
+                     const checkBoxLabel = document.createElement('label');
+                     checkBoxLabel.classList.add('check-box-container');
+
+                     const checkBoxInput = document.createElement('input');
+                     checkBoxInput.type = 'checkbox';
+                     checkBoxLabel.appendChild(checkBoxInput);
+
+                     const checkBoxSpan = document.createElement('span');
+                     checkBoxSpan.classList.add('checkmark');
+                     checkBoxLabel.appendChild(checkBoxSpan);
+
+                     divTodoItem.appendChild(checkBoxLabel);
+                     checkBoxLabel.addEventListener('click', async () => {
                         const form = new FormData();
                         form.append("requestType", "deleteTodo");
                         form.append("username", getCookie('username'));
@@ -776,7 +785,7 @@ async function loadTodos() {
                            })
                            .catch(error => console.log(error));
                      });
-                     divTodoItem.appendChild(checkBox);
+                     divTodoItem.appendChild(checkBoxLabel);
 
                      const divTodoItemContainer = document.createElement('div');
                      divTodoItemContainer.classList.add('todo-item-container');
