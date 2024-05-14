@@ -738,34 +738,22 @@ async function loadTodos() {
                   data.todos.forEach(todo => {
                      const divTodoItem = document.createElement('div');
                      divTodoItem.classList.add('todo-item');
-                     divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
-                     divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
-                     divTodoItem.setAttribute('data-task-id', todo.taskID);
 
                      const checkBox = document.createElement('input');
                      checkBox.type = 'checkbox';
                      checkBox.classList.add('todo-checkbox');
-                     divTodoItem.appendChild(checkBox);
-
-                     checkBox.addEventListener("change", async () => {
-                        if (checkBox.checked) {
-                           const taskID = divTodoItem.getAttribute("data-task-id");
-                           await removeTodoFromDatabase(taskID);
-                           divTodoItem.remove();
-                        }
-                     });
- 
-                     async function removeTodoFromDatabase(taskID) {
+                     checkBox.addEventListener('click', async () => {
                         const form = new FormData();
-                        form.append('requestType', 'deleteTodo');
-                        form.append('username', getCookie('username'));
+                        form.append("requestType", "deleteTodo");
+                        form.append("username", getCookie('username'));
                         form.append('secureID', getCookie('secureID'));
-                        form.append('taskID', taskID);
-                        await fetch('assets/php/database.php', {
-                           method: 'POST',
-                           body: form
-                        })
-
+                        form.append("taskID", todo.taskID);
+                        await fetch("assets/php/database.php",
+                           {
+                              method: "POST",
+                              body: form
+                           }
+                        )
                            .then(response => {
                               if (response.ok) {
                                  return response.json();
@@ -777,24 +765,24 @@ async function loadTodos() {
                                  console.log('Error with the response from the database');
                               }
                            })
-
                            .then(data => {
                               if (data) {
                                  if (data.success) {
-                                    console.log('Todo removed successfully');
+                                    loadTodos();
                                  } else {
-                                    console.log('Failed to remove todo: ' + data);
+                                    console.log("Failed to delete todo: " + data);
                                  }
                               }
                            })
-
-                           .catch(error => {
-                              console.error('Error:', error);
-                           });
-                     }
+                           .catch(error => console.log(error));
+                     });
+                     divTodoItem.appendChild(checkBox);
 
                      const divTodoItemContainer = document.createElement('div');
                      divTodoItemContainer.classList.add('todo-item-container');
+                     divTodoItemContainer.setAttribute('data-popup-open-target', 'todo-item-popup');
+                     divTodoItemContainer.setAttribute('data-target-popup-type', 'todo-item-popup');
+                     divTodoItemContainer.setAttribute('data-task-id', todo.taskID);
                      divTodoItem.appendChild(divTodoItemContainer);
 
                      const divTodoItemText = document.createElement('div');
@@ -802,7 +790,7 @@ async function loadTodos() {
                      divTodoItemText.textContent = todo.taskContent;
                      divTodoItemContainer.appendChild(divTodoItemText);
 
-                     divTodoItem.addEventListener("click", () => todoPopupOpenFunction(divTodoItem));
+                     divTodoItemContainer.addEventListener("click", () => todoPopupOpenFunction(divTodoItemContainer));
                      document.querySelector('#todo-list').appendChild(divTodoItem);
                   });
                }

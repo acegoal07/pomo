@@ -346,6 +346,7 @@ path.timer-controls-cursor:hover {
 .todo-checkbox {
   width: 40px;
   height: 40px;
+  padding: 0.5rem;
   accent-color: var(--accent-color);
 }
 
@@ -457,7 +458,7 @@ div.todo-list-container>div.todo-item {
   border-radius: 1.5rem;
   background-color: var(--accent-color);
   align-items: center;
-  padding: 1rem;
+  padding-left: 1rem;
   width: 90%;
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
@@ -480,6 +481,9 @@ div.todo-item-container {
   align-items: center;
   display: inline-flex;
   font-size: 1.125rem;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
 }
 
 h1.todo-header {
