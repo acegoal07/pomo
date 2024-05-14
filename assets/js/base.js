@@ -98,8 +98,8 @@ window.addEventListener("load", async () => {
             break;
          case "leaderboard-popup":
             element.addEventListener("click", () => {
+               popupOpenFunction(element)
                loadLeaderboards();
-               popupOpenFunction(element);
             });
             break;
          default:
@@ -134,6 +134,8 @@ window.addEventListener("load", async () => {
          }
          const todoInput = document.querySelector("#todo-input");
          const todoText = todoInput.value.trim();
+         const loadingIcon = document.querySelector("#create-todo-loading-icon");
+         loadingIcon.classList.remove("hide");
          const form = new FormData();
          form.append("requestType", "createTodo");
          form.append("username", getCookie('username'));
@@ -168,6 +170,7 @@ window.addEventListener("load", async () => {
                }
             })
             .catch(error => console.log(error));
+         loadingIcon.classList.add("hide");
       }
    });
    // Todo item delete button
@@ -408,7 +411,8 @@ window.addEventListener("load", async () => {
                console.log("Failed to register: " + data);
             }
          }
-      });
+      })
+      .catch(error => console.error('Error:', error));
       loadingIcon.classList.add("hide");
    });
    // Change password submit button
@@ -521,7 +525,8 @@ window.addEventListener("load", async () => {
                   console.log("Failed to get pomo score: " + data);
                }
             }
-         });
+         })
+         .catch(error => console.error('Error:', error));
       if (!timer.isActive()) {
          if (timer.getCurrentPositionMS() === 0) {
             setTimerColor("var(--accent-color)");
@@ -685,13 +690,8 @@ async function loadTodos() {
       return;
    }
    const form = new FormData();
-   const loadingIcon = document.createElement("img");
+   const loadingIcon = document.querySelector("#todo-list-loading-icon");
    loadingIcon.classList.remove("hide");
-   loadingIcon.src = "assets/images/loadingIcon.gif";
-   loadingIcon.alt = "Loading...";
-   loadingIcon.style.height = "100px";
-   loadingIcon.style.width = "100px";
-   document.querySelector("#todo-list").appendChild(loadingIcon);
    form.append('requestType', 'getTodos')
    form.append('username', getCookie('username'));
    form.append('secureID', getCookie('secureID'));
@@ -704,10 +704,8 @@ async function loadTodos() {
             return response.json();
          } else if (response.status === 400) {
             console.log('Bad request');
-            loadingIcon.classList.add("hide");
          } else if (response.status === 500) {
             console.log('Internal server error');
-            loadingIcon.classList.add("hide");
          } else {
             console.log('Error with the response from the database');
          }
@@ -732,7 +730,6 @@ async function loadTodos() {
                      divTodoItemText.classList.add('todo-text');
                      divTodoItemText.textContent = todo.taskContent;
                      divTodoItemContainer.appendChild(divTodoItemText);
-                     loadingIcon.classList.add("hide");
 
                      divTodoItem.addEventListener("click", () => todoPopupOpenFunction(divTodoItem));
                      document.querySelector('#todo-list').appendChild(divTodoItem);
@@ -746,6 +743,7 @@ async function loadTodos() {
       .catch(error => {
          console.error('Error:', error);
       });
+   loadingIcon.classList.add("hide");
 }
 /**
  * Remove todos
@@ -794,9 +792,7 @@ async function loadLeaderboards() {
             }
          }
       })
-      .catch(error => {
-         console.error('Error:', error);
-      });
+      .catch(error => console.error('Error:', error));
    form.append('requestType', 'getWeeklyLeaderboard');
    await fetch('assets/php/database.php', {
       method: 'POST',
@@ -831,9 +827,7 @@ async function loadLeaderboards() {
             }
          }
       })
-      .catch(error => {
-         console.error('Error:', error);
-      });
+      .catch(error => console.error('Error:', error));
 }
 
 /////////////// Popup functions ///////////////
