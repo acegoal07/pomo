@@ -740,10 +740,14 @@ async function loadTodos() {
                      divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
                      divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
                      divTodoItem.setAttribute('data-task-id', todo.taskID);
-                     const checkBox = document.createElement('input');                   
-                     checkBox.type = 'checkbox';                     
-                     checkBox.classList.add('todo-checkbox');                      
+
+                     const checkBox = document.createElement('input');
+                     checkBox.type = 'checkbox';
+                     checkBox.classList.add('todo-checkbox');
                      divTodoItem.appendChild(checkBox);
+                     checkBox.addEventListener("click", async () => {
+                        console.log("hello");
+                     });
 
                      const divTodoItemContainer = document.createElement('div');
                      divTodoItemContainer.classList.add('todo-item-container');
@@ -753,11 +757,6 @@ async function loadTodos() {
                      divTodoItemText.classList.add('todo-text');
                      divTodoItemText.textContent = todo.taskContent;
                      divTodoItemContainer.appendChild(divTodoItemText);
-
-                     checkBoxDiv.addEventListener("click", function(evt){
-                        evt.preventDefault;
-                        popupCloseFunctionByID("todo-item-popup");
-                     });
 
                      divTodoItem.addEventListener("click", () => todoPopupOpenFunction(divTodoItem));
                      document.querySelector('#todo-list').appendChild(divTodoItem);
