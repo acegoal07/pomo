@@ -721,6 +721,10 @@ async function loadTodos() {
                      divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
                      divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
                      divTodoItem.setAttribute('data-task-id', todo.taskID);
+                     const checkBox = document.createElement('input');                   
+                     checkBox.type = 'checkbox';                     
+                     checkBox.classList.add('todo-checkbox');                      
+                     divTodoItem.appendChild(checkBox);
 
                      const divTodoItemContainer = document.createElement('div');
                      divTodoItemContainer.classList.add('todo-item-container');
