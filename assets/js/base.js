@@ -324,18 +324,13 @@ window.addEventListener("load", async () => {
                document.querySelector("#account-popup-login-page").classList.add("hide");
                document.querySelector("#account-popup-user-page").classList.remove("hide");
                document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
-               event.target.reset();
             } else if (data.code === 1) {
-               loadingIcon.classList.add("hide");
-               const usernameInput = document.querySelector("#login-form input[type='text']");
-               const passwordInput = document.querySelector("#login-form input[type='password']");
-               usernameInput.classList.add("shake");
-               passwordInput.classList.add("shake");
-               // Remove the shake class after the animation completes
+               loginErrorMessage.classList.remove("hide");
+               const inputs = document.querySelectorAll("#login-form input");
+               inputs.forEach(input => { input.classList.add("form-input-shake") });
                setTimeout(() => {
-                  usernameInput.classList.remove("shake");
-                  passwordInput.classList.remove("shake");
-               }, 820); // The duration of the shake animation
+                  inputs.forEach(input => { input.classList.remove("form-input-shake") });
+               }, 820);
             } else {
                console.log("Login failed: " + data);
             }
@@ -405,14 +400,25 @@ window.addEventListener("load", async () => {
                event.target.reset();
             } else if (data.code === 1) {
                usernameErrorMessage.classList.remove("hide");
+               const usernameInput = document.querySelector("#registration-form input[type='text']");
+               console.log(usernameInput);
+               usernameInput.classList.add("form-input-shake");
+               setTimeout(() => {
+                  usernameInput.classList.remove("form-input-shake");
+               }, 820);
             } else if (data.code === 2) {
                passwordErrorMessage.classList.remove("hide");
+               const passwordInput = document.querySelectorAll("#registration-form input[type='password']");
+               passwordInput.forEach(input => { input.classList.add("form-input-shake") });
+               setTimeout(() => {
+                  passwordInput.forEach(input => { input.classList.remove("form-input-shake") });
+               }, 820);
             } else {
                console.log("Failed to register: " + data);
             }
          }
       })
-      .catch(error => console.error('Error:', error));
+         .catch(error => console.error('Error:', error));
       loadingIcon.classList.add("hide");
    });
    // Change password submit button
@@ -453,8 +459,21 @@ window.addEventListener("load", async () => {
                   popupCloseFunctionByID("account-popup");
                } else if (data.code === 1) {
                   currentPasswordErrorMessage.classList.remove("hide");
+                  const currentPasswordInput = document.querySelector("#changePasswordCurrent");
+                  currentPasswordInput.classList.add("form-input-shake");
+                  setTimeout(() => {
+                     currentPasswordInput.classList.remove("form-input-shake");
+                  }, 820);
                } else if (data.code === 2) {
                   confirmPasswordErrorMessage.classList.remove("hide");
+                  const newPasswordInput = document.querySelector("#changePasswordNew");
+                  const confirmNewPasswordInput = document.querySelector("#changePasswordConfirm");
+                  newPasswordInput.classList.add("form-input-shake");
+                  confirmNewPasswordInput.classList.add("form-input-shake");
+                  setTimeout(() => {
+                     newPasswordInput.classList.remove("form-input-shake");
+                     confirmNewPasswordInput.classList.remove("form-input-shake");
+                  }, 820);
                } else {
                   console.log("Failed to change password: " + data);
                }
@@ -721,15 +740,10 @@ async function loadTodos() {
                      divTodoItem.setAttribute('data-popup-open-target', 'todo-item-popup');
                      divTodoItem.setAttribute('data-target-popup-type', 'todo-item-popup');
                      divTodoItem.setAttribute('data-task-id', todo.taskID);
-
-                     const checkBoxDiv = document.createElement('div');
-                     checkBoxDiv.classList.add('checkbox-div')
                      const checkBox = document.createElement('input');                   
                      checkBox.type = 'checkbox';                     
-                     checkBox.classList.add('todo-checkbox');
-                     checkBoxDiv.appendChild(checkBox);                      
-                     divTodoItem.appendChild(checkBoxDiv);
-
+                     checkBox.classList.add('todo-checkbox');                      
+                     divTodoItem.appendChild(checkBox);
 
                      const divTodoItemContainer = document.createElement('div');
                      divTodoItemContainer.classList.add('todo-item-container');

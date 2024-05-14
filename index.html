@@ -40,8 +40,7 @@
          </form>
 
          <div class="popup-loading-icon hide" id="create-todo-loading-icon">
-            <svg xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 512 512">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                <path
                   d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
             </svg>
@@ -73,8 +72,7 @@
          </form>
 
          <div class="popup-loading-icon hide" id="todo-item-loading-icon">
-            <svg xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 512 512">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                <path
                   d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
             </svg>
@@ -135,14 +133,14 @@
             <form id="change-password-form" method="post" class="popup-form">
                <span id="user-current-password-error" class="hide error-message"><strong>Your current password is
                      incorrect</strong></span>
-               <input type="password" name="currentPassword" placeholder="Current password" maxlength="90" minlength="1"
-                  required />
+               <input id="changePasswordCurrent" type="password" name="currentPassword" placeholder="Current password"
+                  maxlength="90" minlength="1" required />
                <span id="user-confirm-password-error" class="hide error-message"><strong>Passwords do not
                      match</strong></span>
-               <input type="password" name="newPassword" placeholder="New password" maxlength="90" minlength="1"
-                  required />
-               <input type="password" name="confirmNewPassword" placeholder="Confirm new password" maxlength="90"
-                  minlength="1" required />
+               <input id="changePasswordNew" type="password" name="newPassword" placeholder="New password"
+                  maxlength="90" minlength="1" required />
+               <input id="changePasswordConfirm" type="password" name="confirmNewPassword"
+                  placeholder="Confirm new password" maxlength="90" minlength="1" required />
                <button id="user-change-password" type="submit">
                   Change Password
                </button>
@@ -153,8 +151,7 @@
          </div>
 
          <div class="popup-loading-icon hide" id="account-popup-loading-icon">
-            <svg xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 512 512">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                <path
                   d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
             </svg>
@@ -176,7 +173,7 @@
          <h1 class="popup-header">How to use Pomo</h1>
          <h2>Keep up the hard work, you're doing so well!</h2>
          <div class="main-carousel"
-            data-flickity='{ "pageDots": false, "selectedAttraction": 0.2, "friction": 0.8, "wrapAround": true}'>
+            data-flickity='{ "pageDots": false, "selectedAttraction": 0.2, "friction": 0.8, "wrapAround": true }'>
 
             <div class="carousel-cell">
                <h2>Step 1:</h2>
@@ -295,8 +292,7 @@
                <div class="todo-add-btn-vertical-plus"></div>
             </div>
             <div class="todo-list-loading-icon hide" id="todo-list-loading-icon">
-               <svg xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                   <path
                      d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
                </svg>
