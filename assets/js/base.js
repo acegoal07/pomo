@@ -747,6 +747,52 @@ async function loadTodos() {
                      checkBox.classList.add('todo-checkbox');
                      divTodoItem.appendChild(checkBox);
 
+                     checkBox.addEventListener("change", async () => {
+                        if (checkBox.checked) {
+                           const taskID = divTodoItem.getAttribute("data-task-id");
+                           await removeTodoFromDatabase(taskID);
+                           divTodoItem.remove();
+                        }
+                     });
+ 
+                     async function removeTodoFromDatabase(taskID) {
+                        const form = new FormData();
+                        form.append('requestType', 'deleteTodo');
+                        form.append('username', getCookie('username'));
+                        form.append('secureID', getCookie('secureID'));
+                        form.append('taskID', taskID);
+                        await fetch('assets/php/database.php', {
+                           method: 'POST',
+                           body: form
+                        })
+
+                           .then(response => {
+                              if (response.ok) {
+                                 return response.json();
+                              } else if (response.status === 400) {
+                                 console.log('Bad request');
+                              } else if (response.status === 500) {
+                                 console.log('Internal server error');
+                              } else {
+                                 console.log('Error with the response from the database');
+                              }
+                           })
+
+                           .then(data => {
+                              if (data) {
+                                 if (data.success) {
+                                    console.log('Todo removed successfully');
+                                 } else {
+                                    console.log('Failed to remove todo: ' + data);
+                                 }
+                              }
+                           })
+
+                           .catch(error => {
+                              console.error('Error:', error);
+                           });
+                     }
+
                      const divTodoItemContainer = document.createElement('div');
                      divTodoItemContainer.classList.add('todo-item-container');
                      divTodoItem.appendChild(divTodoItemContainer);
