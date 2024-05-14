@@ -54,7 +54,7 @@ h2 {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 /* 404 Page */
@@ -599,6 +599,38 @@ div.popup-close-btn-background:hover div.popup-close-btn-line-2 {
   background-color: var(--background-color);
 }
 
+
+.popup-loading-icon {
+  z-index: 2;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+@keyframes loadingAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.popup-loading-icon>svg {
+  border-radius: 100%;
+  width: 7rem;
+  height: 7rem;
+  animation: loadingAnimation 1s linear infinite;
+}
+
 /* Forms */
 form.popup-form {
   display: flex;
@@ -714,8 +746,7 @@ a.btn:hover {
   }
 }
 
-
-@keyframes shake {
+@keyframes inputElementsShake {
   0% { transform: translateX(0px); }
   20% { transform: translateX(-2px); }
   40% { transform: translateX(2px); }
@@ -725,8 +756,7 @@ a.btn:hover {
 }
 
 .shake {
-  animation: shake 0.5s linear both;
-  transform: translate3d(0, 0, 0);
+  animation: inputElementsShake 0.5s linear both;
   backface-visibility: hidden;
   perspective: 1000px;
   background-color: lightcoral;

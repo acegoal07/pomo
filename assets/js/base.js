@@ -24,6 +24,7 @@ window.addEventListener("load", async () => {
    }
    setTimerColor("var(--background-color)");
    document.querySelector("#timer-circle-progress").classList.add("timer-circle-progress-transition");
+   document.querySelectorAll("form").forEach(form => form.reset());
 
    /////////////// User onload auto login ///////////////
    if (getCookie('username') !== null && getCookie('secureID') !== null) {
@@ -53,8 +54,8 @@ window.addEventListener("load", async () => {
                   setCookie('partialPomoScore', data.partialPomoScore);
                   setPomoCounter(data.fullPomoScore, data.partialPomoScore);
                   document.querySelector("#todo-create-button").classList.remove("disabled");
-                  document.querySelector("#login-page").classList.add("hide");
-                  document.querySelector("#user-page").classList.remove("hide");
+                  document.querySelector("#account-popup-login-page").classList.add("hide");
+                  document.querySelector("#account-popup-user-page").classList.remove("hide");
                   document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
                   loadTodos();
                } else {
@@ -91,7 +92,7 @@ window.addEventListener("load", async () => {
                if (getCookie('username') !== null) {
                   popupOpenFunction(element);
                } else {
-                  popupOpenFunction(document.querySelector("#login-popup"));
+                  popupOpenFunction(document.querySelector("#account-popup"));
                }
             });
             break;
@@ -172,6 +173,8 @@ window.addEventListener("load", async () => {
    // Todo item delete button
    document.querySelector("#todo-item-delete").addEventListener("click", async (event) => {
       event.preventDefault();
+      const loadingIcon = document.querySelector("#todo-item-loading-icon");
+      loadingIcon.classList.remove("hide");
       const form = new FormData();
       form.append("requestType", "deleteTodo");
       form.append("username", getCookie('username'));
@@ -204,6 +207,7 @@ window.addEventListener("load", async () => {
             }
          })
          .catch(error => console.log(error));
+      loadingIcon.classList.add("hide");
       popupCloseFunctionByID("todo-item-popup");
    });
    // Todo Save button
@@ -216,6 +220,8 @@ window.addEventListener("load", async () => {
          if (!errorMessage.classList.contains("hide")) {
             errorMessage.classList.add("hide");
          }
+         const loadingIcon = document.querySelector("#todo-item-loading-icon");
+         loadingIcon.classList.remove("hide");
          const form = new FormData();
          form.append("requestType", "editTodo");
          form.append("username", getCookie('username'));
@@ -242,6 +248,7 @@ window.addEventListener("load", async () => {
                loadTodos();
             })
             .catch(error => console.error('Error saving changes to todo:', error));
+         loadingIcon.classList.add("hide");
       }
    });
    // Todo input keyup listener
@@ -267,8 +274,8 @@ window.addEventListener("load", async () => {
    // Login page switch button
    document.querySelector("#go-to-registration").addEventListener("click", () => {
       // Remove all elements from the page
-      document.querySelector("#registration-page").classList.remove("hide");
-      document.querySelector("#login-page").classList.add("hide");
+      document.querySelector("#account-popup-registration-page").classList.remove("hide");
+      document.querySelector("#account-popup-login-page").classList.add("hide");
       if (!document.querySelector("#login-input-error").classList.contains("hide")) {
          document.querySelector("#login-input-error").classList.add("hide");
       }
@@ -278,20 +285,8 @@ window.addEventListener("load", async () => {
       event.preventDefault();
       const loginErrorMessage = document.querySelector("#login-input-error");
       const form = new FormData(event.target);
-      const loadingIcon = document.createElement("img");
+      const loadingIcon = document.querySelector("#account-popup-loading-icon");
       loadingIcon.classList.remove("hide");
-      loadingIcon.src = "assets/images/loadingIcon.gif";
-      loadingIcon.alt = "Loading...";
-      loadingIcon.style.position = "absolute";
-      loadingIcon.style.top = "50%";
-      loadingIcon.style.left = "50%";
-      loadingIcon.style.transform = "translate(-50%, -50%)";
-      loadingIcon.style.zIndex = "1000";
-      loadingIcon.style.width = "100px";
-      loadingIcon.style.height = "100px";
-      loadingIcon.style.backgroundColor = "#77b255";
-      loadingIcon.style.borderRadius = "50%";
-      document.querySelector("#login-form").appendChild(loadingIcon);
       form.append('requestType', 'login');
       await fetch('assets/php/database.php', {
          method: 'POST',
@@ -301,10 +296,8 @@ window.addEventListener("load", async () => {
             return response.json();
          } else if (response.status === 400) {
             console.log('Bad request');
-            loadingIcon.classList.add("hide");
          } else if (response.status === 500) {
             console.log('Internal server error');
-            loadingIcon.classList.add("hide");
          } else {
             console.log('Error with the response from the database');
          }
@@ -324,42 +317,37 @@ window.addEventListener("load", async () => {
                setPomoCounter(data.fullPomoScore, data.partialPomoScore);
                loadTodos();
                resetTimer();
-               popupCloseFunctionByID("login-popup");
-               document.querySelector("#login-page").classList.add("hide");
-               document.querySelector("#user-page").classList.remove("hide");
+               popupCloseFunctionByID("account-popup");
+               document.querySelector("#account-popup-login-page").classList.add("hide");
+               document.querySelector("#account-popup-user-page").classList.remove("hide");
                document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
-               loadingIcon.classList.add("hide");
                event.target.reset();
             } else if (data.code === 1) {
-               loginErrorMessage.classList.remove("hide");
                loadingIcon.classList.add("hide");
-               var usernameInput = document.querySelector("#login-form input[type='text']");
-               var passwordInput = document.querySelector("#login-form input[type='password']");
+               const usernameInput = document.querySelector("#login-form input[type='text']");
+               const passwordInput = document.querySelector("#login-form input[type='password']");
                usernameInput.classList.add("shake");
                passwordInput.classList.add("shake");
-             
-             
                // Remove the shake class after the animation completes
                setTimeout(() => {
-                 usernameInput.classList.remove("shake");
-                 passwordInput.classList.remove("shake");
-               
+                  usernameInput.classList.remove("shake");
+                  passwordInput.classList.remove("shake");
                }, 820); // The duration of the shake animation
             } else {
                console.log("Login failed: " + data);
-               loadingIcon.classList.add("hide");
             }
+            event.target.reset();
          }
       }).catch(error => {
          console.error('Error:', error);
-         loadingIcon.classList.add("hide");
       });
+      loadingIcon.classList.add("hide");
    });
    // Registration page switch button
    document.querySelector("#go-to-login").addEventListener("click", () => {
       // Remove all elements from the page
-      document.querySelector("#registration-page").classList.add("hide");
-      document.querySelector("#login-page").classList.remove("hide");
+      document.querySelector("#account-popup-registration-page").classList.add("hide");
+      document.querySelector("#account-popup-login-page").classList.remove("hide");
       if (!document.querySelector("#registration-username-error").classList.contains("hide")) {
          document.querySelector("#registration-username-error").classList.add("hide");
       }
@@ -372,6 +360,8 @@ window.addEventListener("load", async () => {
       event.preventDefault();
       const usernameErrorMessage = document.querySelector("#registration-username-error");
       const passwordErrorMessage = document.querySelector("#registration-password-error");
+      const loadingIcon = document.querySelector("#account-popup-loading-icon");
+      loadingIcon.classList.remove("hide");
       const form = new FormData(event.target);
       form.append('requestType', 'register');
       await fetch('assets/php/database.php', {
@@ -405,9 +395,9 @@ window.addEventListener("load", async () => {
                setCookie('partialPomoScore', 0);
                loadTodos();
                resetTimer();
-               popupCloseFunctionByID("login-popup");
-               document.querySelector("#registration-page").classList.add("hide");
-               document.querySelector("#user-page").classList.remove("hide");
+               popupCloseFunctionByID("account-popup");
+               document.querySelector("#account-popup-registration-page").classList.add("hide");
+               document.querySelector("#account-popup-user-page").classList.remove("hide");
                document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
                event.target.reset();
             } else if (data.code === 1) {
@@ -419,12 +409,15 @@ window.addEventListener("load", async () => {
             }
          }
       });
+      loadingIcon.classList.add("hide");
    });
    // Change password submit button
    document.querySelector("#change-password-form").addEventListener("submit", async (event) => {
       event.preventDefault();
       const currentPasswordErrorMessage = document.querySelector("#user-current-password-error");
       const confirmPasswordErrorMessage = document.querySelector("#user-confirm-password-error");
+      const loadingIcon = document.querySelector("#account-popup-loading-icon");
+      loadingIcon.classList.remove("hide");
       const form = new FormData(event.target);
       form.append('username', getCookie('username'));
       form.append('secureID', getCookie('secureID'));
@@ -453,7 +446,7 @@ window.addEventListener("load", async () => {
                   confirmPasswordErrorMessage.classList.add("hide");
                }
                if (data.success) {
-                  popupCloseFunctionByID("login-popup");
+                  popupCloseFunctionByID("account-popup");
                } else if (data.code === 1) {
                   currentPasswordErrorMessage.classList.remove("hide");
                } else if (data.code === 2) {
@@ -464,7 +457,7 @@ window.addEventListener("load", async () => {
             }
          })
          .catch(error => console.error('Error:', error));
-      popupCloseFunctionByID("login-popup");
+      loadingIcon.classList.add("hide");
       event.target.reset();
    });
    // Logout button
@@ -474,13 +467,13 @@ window.addEventListener("load", async () => {
       deleteCookie('secureID');
       deleteCookie('fullPomoScore');
       deleteCookie('partialPomoScore');
-      popupCloseFunctionByID("login-popup");
+      popupCloseFunctionByID("account-popup");
       resetTimer();
       resetPomoCounter();
       removeTodos();
       document.querySelector("#todo-create-button").classList.add("disabled");
-      document.querySelector("#user-page").classList.add("hide");
-      document.querySelector("#login-page").classList.remove("hide");
+      document.querySelector("#account-popup-user-page").classList.add("hide");
+      document.querySelector("#account-popup-login-page").classList.remove("hide");
       if (!document.querySelector("#user-current-password-error").classList.contains("hide")) {
          document.querySelector("#user-current-password-error").classList.add("hide");
       }

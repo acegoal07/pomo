@@ -7,9 +7,9 @@
    <title>Pomo - Focus Tracker</title>
    <meta name="description" content="A focus tracker" />
    <link rel="shortcut icon" href="assets/images/faviNew.ico" />
-   <link rel="stylesheet" href="assets/css/style-min.css" />
+   <link rel="stylesheet" href="assets/css/style.css" />
    <script src="assets/js/timer-min.js" defer></script>
-   <script src="assets/js/base-min.js" defer></script>
+   <script src="assets/js/base.js" defer></script>
    <link rel="preconnect" href="https://fonts.googleapis.com" />
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet" />
@@ -62,20 +62,29 @@
                Save
             </button>
          </form>
+
+         <div class="popup-loading-icon hide" id="todo-item-loading-icon">
+            <svg xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 512 512">
+               <path
+                  d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
+            </svg>
+         </div>
+
       </div>
    </div>
 
    <!-- Login/registration popup -->
-   <div id="login-popup" class="popup-background">
+   <div id="account-popup" class="popup-background">
       <div class="popup-body">
-         <a data-popup-close-target="login-popup">
+         <a data-popup-close-target="account-popup">
             <div class="popup-close-btn-background">
                <div class="popup-close-btn-line-1"></div>
                <div class="popup-close-btn-line-2"></div>
             </div>
          </a>
 
-         <div id="login-page">
+         <div id="account-popup-login-page">
             <h1 class="popup-header">Enter your details:</h1>
             <form id="login-form" name="login-form" class="popup-form">
                <span id="login-input-error" class="hide error-message"><strong>Username or password is
@@ -91,7 +100,7 @@
             </form>
          </div>
 
-         <div id="registration-page" class="hide">
+         <div id="account-popup-registration-page" class="hide">
             <h1 class="popup-header">Register your account:</h1>
             <form id="registration-form" method="post" class="popup-form">
                <span id="registration-username-error" class="hide error-message"><strong>Username is already
@@ -111,7 +120,7 @@
             </form>
          </div>
 
-         <div id="user-page" class="hide">
+         <div id="account-popup-user-page" class="hide">
             <h1 class="popup-header" id="welcome-user-heading">Welcome back!</h1>
             <h2>Change password</h2>
             <form id="change-password-form" method="post" class="popup-form">
@@ -134,6 +143,14 @@
             </form>
          </div>
 
+         <div class="popup-loading-icon hide" id="account-popup-loading-icon">
+            <svg xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 512 512">
+               <path
+                  d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
+            </svg>
+         </div>
+
       </div>
    </div>
 
@@ -149,7 +166,8 @@
 
          <h1 class="popup-header">How to use Pomo</h1>
          <h2>Keep up the hard work, you're doing so well!</h2>
-         <div class="main-carousel" data-flickity='{ "pageDots": false, "selectedAttraction": 0.2, "friction": 0.8, "wrapAround": true}'>
+         <div class="main-carousel"
+            data-flickity='{ "pageDots": false, "selectedAttraction": 0.2, "friction": 0.8 }'>
 
             <div class="carousel-cell">
                <h2>Step 1:</h2>
@@ -228,7 +246,7 @@
                   cy="50" r="45" />
             </svg>
          </div>
-         <img data-popup-open-target="login-popup" class="nav-button" src="assets/images/loginIcon.webp"
+         <img data-popup-open-target="account-popup" class="nav-button" src="assets/images/loginIcon.webp"
             alt="Login button" />
 
          <img data-popup-open-target="information-popup" data-target-popup-type="information-popup" class="nav-button"
