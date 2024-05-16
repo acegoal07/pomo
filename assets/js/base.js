@@ -126,12 +126,12 @@ window.addEventListener("load", async () => {
    document.querySelector("#todo-add-task").addEventListener("click", async (event) => {
       event.preventDefault();
       const errorMessage = document.querySelector("#create-todo-error");
+      if (!errorMessage.classList.contains("hide")) {
+         errorMessage.classList.add("hide");
+      }
       if (document.querySelector("#todo-input").value.trim() === "") {
          errorMessage.classList.remove("hide");
       } else {
-         if (!errorMessage.classList.contains("hide")) {
-            errorMessage.classList.add("hide");
-         }
          const todoInput = document.querySelector("#todo-input");
          const todoText = todoInput.value.trim();
          const loadingIcon = document.querySelector("#create-todo-loading-icon");
@@ -218,12 +218,12 @@ window.addEventListener("load", async () => {
    document.querySelector("#todo-item-save").addEventListener("click", async (event) => {
       event.preventDefault();
       const errorMessage = document.querySelector("#edit-todo-error");
+      if (!errorMessage.classList.contains("hide")) {
+         errorMessage.classList.add("hide");
+      }
       if (document.querySelector("#task-input").value.trim() === "") {
          errorMessage.classList.remove("hide");
       } else {
-         if (!errorMessage.classList.contains("hide")) {
-            errorMessage.classList.add("hide");
-         }
          const loadingIcon = document.querySelector("#todo-item-loading-icon");
          loadingIcon.classList.remove("hide");
          const form = new FormData();
@@ -288,6 +288,9 @@ window.addEventListener("load", async () => {
    document.querySelector("#login-form").addEventListener("submit", async (event) => {
       event.preventDefault();
       const loginErrorMessage = document.querySelector("#login-input-error");
+      if (!loginErrorMessage.classList.contains("hide")) {
+         loginErrorMessage.classList.add("hide");
+      }
       const form = new FormData(event.target);
       const loadingIcon = document.querySelector("#account-popup-loading-icon");
       loadingIcon.classList.remove("hide");
@@ -307,9 +310,6 @@ window.addEventListener("load", async () => {
          }
       }).then(data => {
          if (data) {
-            if (!loginErrorMessage.classList.contains("hide")) {
-               loginErrorMessage.classList.add("hide");
-            }
             if (data.success) {
                if (getCookie('username') === null) {
                   document.querySelector("#todo-create-button").classList.remove("disabled");
@@ -358,86 +358,44 @@ window.addEventListener("load", async () => {
    document.querySelector("#registration-form").addEventListener("submit", async (event) => {
       event.preventDefault();
       const usernameErrorMessage = document.querySelector("#registration-username-error");
+      if (!usernameErrorMessage.classList.contains("hide")) {
+         usernameErrorMessage.classList.add("hide");
+      }
+      const usernameSpaceErrorMessage = document.querySelector("#registration-username-space-error");
+      if (!usernameSpaceErrorMessage.classList.contains("hide")) {
+         usernameSpaceErrorMessage.classList.add("hide");
+      }
       const passwordErrorMessage = document.querySelector("#registration-password-error");
+      if (!passwordErrorMessage.classList.contains("hide")) {
+         passwordErrorMessage.classList.add("hide");
+      }
+      const passwordSpaceErrorMessage = document.querySelector("#registration-password-space-error");
+      if (!passwordSpaceErrorMessage.classList.contains("hide")) {
+         passwordSpaceErrorMessage.classList.add("hide");
+      }
       const loadingIcon = document.querySelector("#account-popup-loading-icon");
       loadingIcon.classList.remove("hide");
       const form = new FormData(event.target);
       form.append('requestType', 'register');
-      await fetch('assets/php/database.php', {
-         method: 'POST',
-         body: form
-      }).then(response => {
-         if (response.ok) {
-            return response.json();
-         } else if (response.status === 400) {
-            console.log('Bad request');
-         } else if (response.status === 500) {
-            console.log('Internal server error');
-         } else {
-            console.log('Error with the response from the database');
-         }
-      }).then(data => {
-         if (data) {
-            if (!usernameErrorMessage.classList.contains("hide")) {
-               usernameErrorMessage.classList.add("hide");
-            }
-            if (!passwordErrorMessage.classList.contains("hide")) {
-               passwordErrorMessage.classList.add("hide");
-            }
-            if (data.success) {
-               if (getCookie('username') === null) {
-                  document.querySelector("#todo-create-button").classList.remove("disabled");
-               }
-               setCookie('username', form.get('username'));
-               setCookie('secureID', data.secureID);
-               setCookie('fullPomoScore', 0);
-               setCookie('partialPomoScore', 0);
-               loadTodos();
-               resetTimer();
-               popupCloseFunctionByID("account-popup");
-               document.querySelector("#account-popup-registration-page").classList.add("hide");
-               document.querySelector("#account-popup-user-page").classList.remove("hide");
-               document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
-               event.target.reset();
-            } else if (data.code === 1) {
-               usernameErrorMessage.classList.remove("hide");
-               const usernameInput = document.querySelector("#registration-form input[type='text']");
-               console.log(usernameInput);
-               usernameInput.classList.add("form-input-shake");
-               setTimeout(() => {
-                  usernameInput.classList.remove("form-input-shake");
-               }, 820);
-            } else if (data.code === 2) {
-               passwordErrorMessage.classList.remove("hide");
-               const passwordInput = document.querySelectorAll("#registration-form input[type='password']");
-               passwordInput.forEach(input => { input.classList.add("form-input-shake") });
-               setTimeout(() => {
-                  passwordInput.forEach(input => { input.classList.remove("form-input-shake") });
-               }, 820);
-            } else {
-               console.log("Failed to register: " + data);
-            }
-         }
-      })
-         .catch(error => console.error('Error:', error));
-      loadingIcon.classList.add("hide");
-   });
-   // Change password submit button
-   document.querySelector("#change-password-form").addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const currentPasswordErrorMessage = document.querySelector("#user-current-password-error");
-      const confirmPasswordErrorMessage = document.querySelector("#user-confirm-password-error");
-      const loadingIcon = document.querySelector("#account-popup-loading-icon");
-      loadingIcon.classList.remove("hide");
-      const form = new FormData(event.target);
-      form.append('username', getCookie('username'));
-      form.append('secureID', getCookie('secureID'));
-      form.append('requestType', 'updatePassword');
-      await fetch('assets/php/database.php', {
-         method: 'POST',
-         body: form
-      })
-         .then(response => {
+      if (form.get('username').includes(" ")) {
+         usernameSpaceErrorMessage.classList.remove("hide");
+         const usernameInput = document.querySelector("#registration-form input[type='text']");
+         usernameInput.classList.add("form-input-shake");
+         setTimeout(() => {
+            usernameInput.classList.remove("form-input-shake");
+         }, 820);
+      } else if (form.get('password').includes(" ")) {
+         passwordSpaceErrorMessage.classList.remove("hide");
+         const passwordInput = document.querySelectorAll("#registration-form input[type='password']");
+         passwordInput.forEach(input => { input.classList.add("form-input-shake") });
+         setTimeout(() => {
+            passwordInput.forEach(input => { input.classList.remove("form-input-shake") });
+         }, 820);
+      } else {
+         await fetch('assets/php/database.php', {
+            method: 'POST',
+            body: form
+         }).then(response => {
             if (response.ok) {
                return response.json();
             } else if (response.status === 400) {
@@ -447,40 +405,136 @@ window.addEventListener("load", async () => {
             } else {
                console.log('Error with the response from the database');
             }
-         })
-         .then(data => {
+         }).then(data => {
             if (data) {
-               if (!currentPasswordErrorMessage.classList.contains("hide")) {
-                  currentPasswordErrorMessage.classList.add("hide");
-               }
-               if (!confirmPasswordErrorMessage.classList.contains("hide")) {
-                  confirmPasswordErrorMessage.classList.add("hide");
-               }
                if (data.success) {
+                  if (getCookie('username') === null) {
+                     document.querySelector("#todo-create-button").classList.remove("disabled");
+                  }
+                  setCookie('username', form.get('username'));
+                  setCookie('secureID', data.secureID);
+                  setCookie('fullPomoScore', 0);
+                  setCookie('partialPomoScore', 0);
+                  loadTodos();
+                  resetTimer();
                   popupCloseFunctionByID("account-popup");
+                  document.querySelector("#account-popup-registration-page").classList.add("hide");
+                  document.querySelector("#account-popup-user-page").classList.remove("hide");
+                  document.querySelector('#welcome-user-heading').textContent = `Welcome back, ${getCookie('username')}!`;
+                  event.target.reset();
                } else if (data.code === 1) {
-                  currentPasswordErrorMessage.classList.remove("hide");
-                  const currentPasswordInput = document.querySelector("#changePasswordCurrent");
-                  currentPasswordInput.classList.add("form-input-shake");
+                  usernameErrorMessage.classList.remove("hide");
+                  const usernameInput = document.querySelector("#registration-form input[type='text']");
+                  console.log(usernameInput);
+                  usernameInput.classList.add("form-input-shake");
                   setTimeout(() => {
-                     currentPasswordInput.classList.remove("form-input-shake");
+                     usernameInput.classList.remove("form-input-shake");
                   }, 820);
                } else if (data.code === 2) {
-                  confirmPasswordErrorMessage.classList.remove("hide");
-                  const newPasswordInput = document.querySelector("#changePasswordNew");
-                  const confirmNewPasswordInput = document.querySelector("#changePasswordConfirm");
-                  newPasswordInput.classList.add("form-input-shake");
-                  confirmNewPasswordInput.classList.add("form-input-shake");
+                  passwordErrorMessage.classList.remove("hide");
+                  const passwordInput = document.querySelectorAll("#registration-form input[type='password']");
+                  passwordInput.forEach(input => { input.classList.add("form-input-shake") });
                   setTimeout(() => {
-                     newPasswordInput.classList.remove("form-input-shake");
-                     confirmNewPasswordInput.classList.remove("form-input-shake");
+                     passwordInput.forEach(input => { input.classList.remove("form-input-shake") });
                   }, 820);
                } else {
-                  console.log("Failed to change password: " + data);
+                  console.log("Failed to register: " + data);
                }
             }
          })
-         .catch(error => console.error('Error:', error));
+            .catch(error => console.error('Error:', error));
+      }
+      loadingIcon.classList.add("hide");
+   });
+   // Change password submit button
+   document.querySelector("#change-password-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const currentPasswordErrorMessage = document.querySelector("#user-current-password-error");
+      if (!currentPasswordErrorMessage.classList.contains("hide")) {
+         currentPasswordErrorMessage.classList.add("hide");
+      }
+      const confirmPasswordErrorMessage = document.querySelector("#user-confirm-password-error");
+      if (!confirmPasswordErrorMessage.classList.contains("hide")) {
+         confirmPasswordErrorMessage.classList.add("hide");
+      }
+      const passwordSpaceErrorMessage = document.querySelector("#user-confirm-password-space-error");
+      if (!passwordSpaceErrorMessage.classList.contains("hide")) {
+         passwordSpaceErrorMessage.classList.add("hide");
+      }
+      const passwordOriginalErrorMessage = document.querySelector("#user-confirm-password-original-error");
+      if (!passwordOriginalErrorMessage.classList.contains("hide")) {
+         passwordOriginalErrorMessage.classList.add("hide");
+      }
+      const loadingIcon = document.querySelector("#account-popup-loading-icon");
+      loadingIcon.classList.remove("hide");
+      const form = new FormData(event.target);
+      form.append('username', getCookie('username'));
+      form.append('secureID', getCookie('secureID'));
+      form.append('requestType', 'updatePassword');
+      if (form.get('newPassword').includes(" ") || form.get('confirmNewPassword').includes(" ")) {
+         passwordSpaceErrorMessage.classList.remove("hide");
+         const newPasswordInput = document.querySelector("#changePasswordNew");
+         const confirmNewPasswordInput = document.querySelector("#changePasswordConfirm");
+         newPasswordInput.classList.add("form-input-shake");
+         confirmNewPasswordInput.classList.add("form-input-shake");
+         setTimeout(() => {
+            newPasswordInput.classList.remove("form-input-shake");
+            confirmNewPasswordInput.classList.remove("form-input-shake");
+         }, 820);
+      } else {
+         await fetch('assets/php/database.php', {
+            method: 'POST',
+            body: form
+         })
+            .then(response => {
+               if (response.ok) {
+                  return response.json();
+               } else if (response.status === 400) {
+                  console.log('Bad request');
+               } else if (response.status === 500) {
+                  console.log('Internal server error');
+               } else {
+                  console.log('Error with the response from the database');
+               }
+            })
+            .then(data => {
+               if (data) {
+                  if (data.success) {
+                     popupCloseFunctionByID("account-popup");
+                  } else if (data.code === 1) {
+                     currentPasswordErrorMessage.classList.remove("hide");
+                     const currentPasswordInput = document.querySelector("#changePasswordCurrent");
+                     currentPasswordInput.classList.add("form-input-shake");
+                     setTimeout(() => {
+                        currentPasswordInput.classList.remove("form-input-shake");
+                     }, 820);
+                  } else if (data.code === 2) {
+                     confirmPasswordErrorMessage.classList.remove("hide");
+                     const newPasswordInput = document.querySelector("#changePasswordNew");
+                     const confirmNewPasswordInput = document.querySelector("#changePasswordConfirm");
+                     newPasswordInput.classList.add("form-input-shake");
+                     confirmNewPasswordInput.classList.add("form-input-shake");
+                     setTimeout(() => {
+                        newPasswordInput.classList.remove("form-input-shake");
+                        confirmNewPasswordInput.classList.remove("form-input-shake");
+                     }, 820);
+                  } else if (data.code === 3) {
+                     passwordOriginalErrorMessage.classList.remove("hide");
+                     const newPasswordInput = document.querySelector("#changePasswordNew");
+                     const confirmNewPasswordInput = document.querySelector("#changePasswordConfirm");
+                     newPasswordInput.classList.add("form-input-shake");
+                     confirmNewPasswordInput.classList.add("form-input-shake");
+                     setTimeout(() => {
+                        newPasswordInput.classList.remove("form-input-shake");
+                        confirmNewPasswordInput.classList.remove("form-input-shake");
+                     }, 820);
+                  } else {
+                     console.log("Failed to change password: " + data);
+                  }
+               }
+            })
+            .catch(error => console.error('Error:', error));
+      }
       loadingIcon.classList.add("hide");
       event.target.reset();
    });

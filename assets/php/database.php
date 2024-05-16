@@ -271,6 +271,7 @@ try {
                // 0 - Success
                // 1 - Old password is incorrect
                // 2 - New passwords do not match
+               // 3 - New password is the same as the old password
             case 'updatePassword':
                if (!isset($_POST['currentPassword']) || !isset($_POST['newPassword']) || !isset($_POST['confirmNewPassword']) || !isset($_POST['username']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
@@ -289,17 +290,22 @@ try {
                      $result = $stmt->get_result();
                      if ($result->num_rows > 0) {
                         if ($newPassword == $confirmPassword) {
-                           $stmt2 = $conn->prepare("UPDATE users SET Password = ? WHERE userName = ?");
-                           $stmt2->bind_param("ss", $newPassword, $username);
-                           if ($stmt2->execute()) {
-                              $response['success'] = true;
-                              $response['code'] = 0;
+                           if ($newPassword == $oldPassword) {
+                              $response['success'] = false;
+                              $response['code'] = 3;
                               http_response_code(200);
                            } else {
-                              $response['success'] = false;
-                              http_response_code(500);
+                              $stmt = $conn->prepare("UPDATE users SET Password = ? WHERE userName = ?");
+                              $stmt->bind_param("ss", $newPassword, $username);
+                              if ($stmt->execute()) {
+                                 $response['success'] = true;
+                                 $response['code'] = 0;
+                                 http_response_code(200);
+                              } else {
+                                 $response['success'] = false;
+                                 http_response_code(500);
+                              }
                            }
-                           $stmt2->close();
                         } else {
                            $response['success'] = false;
                            $response['code'] = 2;

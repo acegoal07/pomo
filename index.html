@@ -112,9 +112,13 @@
             <form id="registration-form" method="post" class="popup-form">
                <span id="registration-username-error" class="hide error-message"><strong>Username is already
                      taken</strong></span>
+               <span id="registration-username-space-error" class="hide error-message"><strong>Username can not contain
+                     spaces</strong></span>
                <input type="text" name="username" placeholder="Username" maxlength="30" minlength="1" required />
                <span id="registration-password-error" class="hide error-message"><strong>Passwords do not
                      match</strong></span>
+               <span id="registration-password-space-error" class="hide error-message"><strong>Password cannot contain
+                     spaces</strong></span>
                <input type="password" name="password" placeholder="Password" maxlength="90" minlength="1" required />
                <input type="password" name="confirmPassword" placeholder="Confirm Password" maxlength="90" minlength="1"
                   required />
@@ -137,6 +141,10 @@
                   maxlength="90" minlength="1" required />
                <span id="user-confirm-password-error" class="hide error-message"><strong>Passwords do not
                      match</strong></span>
+               <span id="user-confirm-password-space-error" class="hide error-message"><strong>Passwords cannot contain
+                     spaces</strong></span>
+               <span id="user-confirm-password-original-error" class="hide error-message"><strong>New Password matches
+                     original</strong></span>
                <input id="changePasswordNew" type="password" name="newPassword" placeholder="New password"
                   maxlength="90" minlength="1" required />
                <input id="changePasswordConfirm" type="password" name="confirmNewPassword"
