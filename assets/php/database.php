@@ -359,7 +359,7 @@ try {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("UPDATE users SET partialPomoScore = ?, fullPomoScore = ? WHERE userName = ? AND secureID = ?");
+                  $stmt = $conn->prepare("UPDATE users SET partialPomoScore = ?, fullPomoScore = ? WHERE username = ? AND secureID = ?");
                   $stmt->bind_param("ssss", $_POST['partialPomoScore'], $_POST['fullPomoScore'], $_POST['username'], $_POST['secureID']);
                   if ($stmt->execute()) {
                      $response['success'] = true;
