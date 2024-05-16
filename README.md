@@ -9,4 +9,4 @@ https://aw1443.brighton.domains/pomo/ - Full version with database access
 - Alan Crane - https://4lancrane.github.io/
 - Dara Corrigan - Couldn't find his website - And you wont
 - Alex Wood - https://acegoal07.dev/
-- Thomas Parker - https://img4.wikia.nocookie.net/__cb20110623200419/lossimpson/es/images/8/84/Ned_Flanders.png
+- Thomas Parker - Doesn't have one yet
