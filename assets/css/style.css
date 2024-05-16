@@ -900,7 +900,6 @@ div.leaderboard-switch-container {
   text-shadow: var(--text-outline-thickness-light);
   background-color: var(--foreground-color);
   width: 80%;
-  height: 10rem;
   max-width: 40rem;
   border-radius: 1.5rem;
   padding: 1.5rem;
