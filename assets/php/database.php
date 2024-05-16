@@ -39,12 +39,12 @@ try {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ? AND secureID = ?");
+                  $stmt = $conn->prepare("SELECT username FROM users WHERE username = ? AND secureID = ?");
                   $stmt->bind_param("ss", $_POST['username'], $_POST['secureID']);
                   if ($stmt->execute()) {
                      $result = $stmt->get_result();
                      if ($result->num_rows > 0) {
-                        $stmt = $conn->prepare("SELECT taskID, taskContent FROM tasks WHERE userName = ?");
+                        $stmt = $conn->prepare("SELECT taskID, taskContent FROM tasks WHERE username = ?");
                         $stmt->bind_param("s", $_POST['username']);
                         if ($stmt->execute()) {
                            $result = $stmt->get_result();
@@ -83,12 +83,12 @@ try {
                } else {
                   $username = $_POST['username'];
                   $task = $_POST['taskContent'];
-                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ? AND secureID = ?");
+                  $stmt = $conn->prepare("SELECT username FROM users WHERE username = ? AND secureID = ?");
                   $stmt->bind_param("ss", $username, $_POST['secureID']);
                   if ($stmt->execute()) {
                      $result = $stmt->get_result();
                      if ($result->num_rows > 0) {
-                        $stmt = $conn->prepare("INSERT INTO tasks (userName, taskContent) VALUES (?, ?)");
+                        $stmt = $conn->prepare("INSERT INTO tasks (username, taskContent) VALUES (?, ?)");
                         $stmt->bind_param("ss", $username, $task);
                         if ($stmt->execute()) {
                            $response['success'] = true;
@@ -117,7 +117,7 @@ try {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ? AND secureID = ?");
+                  $stmt = $conn->prepare("SELECT username FROM users WHERE username = ? AND secureID = ?");
                   $stmt->bind_param("ss", $_POST['username'], $_POST['secureID']);
                   if ($stmt->execute()) {
                      $result = $stmt->get_result();
@@ -150,7 +150,7 @@ try {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ? AND secureID = ?");
+                  $stmt = $conn->prepare("SELECT username FROM users WHERE username = ? AND secureID = ?");
                   $stmt->bind_param("ss", $_POST['username'], $_POST['secureID']);
                   if ($stmt->execute()) {
                      $result = $stmt->get_result();
@@ -187,7 +187,7 @@ try {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT fullPomoScore, partialPomoScore, secureID FROM users WHERE userName = ? AND password = ?");
+                  $stmt = $conn->prepare("SELECT fullPomoScore, partialPomoScore, secureID FROM users WHERE username = ? AND password = ?");
                   $password = hash('sha256', $_POST['password']);
                   $stmt->bind_param("ss", $_POST['username'], $password);
                   if ($stmt->execute()) {
@@ -225,7 +225,7 @@ try {
                   echo json_encode(array('success' => false));
                } else {
                   $username = $_POST['username'];
-                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ?");
+                  $stmt = $conn->prepare("SELECT username FROM users WHERE username = ?");
                   $stmt->bind_param("s", $username);
                   if ($stmt->execute()) {
                      $result = $stmt->get_result();
@@ -236,7 +236,7 @@ try {
                         http_response_code(200);
                      } else {
                         if ($_POST['password'] === $_POST['confirmPassword']) {
-                           $stmt = $conn->prepare("INSERT INTO users (userName, Password, secureID) VALUES (?, ?, ?)");
+                           $stmt = $conn->prepare("INSERT INTO users (username, password, secureID) VALUES (?, ?, ?)");
                            $password = hash('sha256', $_POST['password']);
                            $secureID = generateUserSecureID($username);
                            $stmt->bind_param("sss", $username, $password, $secureID);
@@ -277,7 +277,7 @@ try {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT userName FROM users WHERE userName = ? AND Password = ? AND secureID = ?");
+                  $stmt = $conn->prepare("SELECT username FROM users WHERE username = ? AND password = ? AND secureID = ?");
                   $oldPassword = $_POST['currentPassword'];
                   $newPassword = $_POST['newPassword'];
                   $confirmPassword = $_POST['confirmNewPassword'];
@@ -295,7 +295,7 @@ try {
                               $response['code'] = 3;
                               http_response_code(200);
                            } else {
-                              $stmt = $conn->prepare("UPDATE users SET Password = ? WHERE userName = ?");
+                              $stmt = $conn->prepare("UPDATE users SET password = ? WHERE username = ?");
                               $stmt->bind_param("ss", $newPassword, $username);
                               if ($stmt->execute()) {
                                  $response['success'] = true;
@@ -331,7 +331,7 @@ try {
                   http_response_code(400);
                   echo json_encode(array('success' => false));
                } else {
-                  $stmt = $conn->prepare("SELECT partialPomoScore, fullPomoScore FROM users WHERE userName = ? AND secureID = ?");
+                  $stmt = $conn->prepare("SELECT partialPomoScore, fullPomoScore FROM users WHERE username = ? AND secureID = ?");
                   $stmt->bind_param("ss", $_POST['username'], $_POST['secureID']);
                   if ($stmt->execute()) {
                      $result = $stmt->get_result();

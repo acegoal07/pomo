@@ -905,7 +905,7 @@ async function loadLeaderboards() {
                   data.leaderboard.forEach(user => {
                      const li = document.createElement('li');
                      li.classList.add('leaderboard-entry');
-                     li.textContent = `${user.userName} - ${user.fullPomoScore}`;
+                     li.textContent = `${user.username} - ${user.fullPomoScore}`;
                      leaderboard.appendChild(li);
                   });
                }
@@ -940,7 +940,7 @@ async function loadLeaderboards() {
                   data.leaderboard.forEach(user => {
                      const li = document.createElement('li');
                      li.classList.add('leaderboard-entry');
-                     li.textContent = `${user.userName} - ${user.score_difference}`;
+                     li.textContent = `${user.username} - ${user.scoreDifference}`;
                      leaderboard.appendChild(li);
                   });
                }
