@@ -10,6 +10,6 @@ https://youtu.be/GBkgLbfpVtA.
 
 - Abbie Reid - https://abbiereid.org/ 
 - Alan Crane - https://4lancrane.github.io/
-- Dara Corrigan - Couldn't find his website
+- Dara Corrigan - https://daracorrigan.dev/
 - Alex Wood - https://acegoal07.dev/
 - Thomas Parker - Doesn't have one yet
