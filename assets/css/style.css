@@ -12,7 +12,6 @@
   --text-outline-thickness-medium: #000 0px 0px 2.5px, #000 0px 0px 2.5px, #000 0px 0px 2.5px, #000 0px 0px 2.5px, #000 0px 0px 2.5px, #000 0px 0px 2.5px;
   --text-outline-thickness-light: #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px;
   font-family: 'Fredoka', Arial, sans-serif;
-  color-scheme: light;
 }
 
 .show {
