@@ -1,7 +1,5 @@
 # Pomo - The focus tracker
-https://acegoal07.dev/pomo - Visual no database access
-
-https://aw1443.brighton.domains/pomo/ - Full version with database access
+https://aw1443.brighton.domains/pomo/
 
 ## Our presentation
 https://youtu.be/GBkgLbfpVtA.
