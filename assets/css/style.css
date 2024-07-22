@@ -160,6 +160,10 @@ main.grid-layout div.nav-grid-section {
 }
 
 div.pomodoro-counter-container {
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
   transform: rotate(-90deg);
   position: relative;
   display: flex;
@@ -176,6 +180,10 @@ div.pomodoro-counter-container>span.pomodoro-counter {
   top: 0.3rem;
   font-family: 'Fredoka', cursive;
   font-size: 3.125rem;
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 
@@ -192,6 +200,10 @@ div.pomodoro-counter-container>span.pomodoro-counter {
   stroke-linecap: round;
   stroke-dasharray: 10;
   stroke: var(--accent-color);
+  -o-transition: stroke-dashoffset 1s linear;
+  -ms-transition: stroke-dashoffset 1s linear;
+  -moz-transition: stroke-dashoffset 1s linear;
+  -webkit-transition: stroke-dashoffset 1s linear;
   transition: stroke-dashoffset 1s linear;
 }
 
@@ -249,6 +261,10 @@ div.timer-grid-section div.timer-grid-container {
 }
 
 div.timer-grid-section div.timer-grid-container:hover {
+  -o-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -webkit-transform: scale(1.02);
   transform: scale(1.02);
   box-shadow: 0 8px 20px var(--shadow-color);
 }
@@ -325,6 +341,7 @@ path.timer-controls-cursor {
   -ms-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  -webkit-filter: drop-shadow(0 3px 5px var(--shadow-color));
   filter: drop-shadow(0 3px 5px var(--shadow-color));
 }
 
@@ -339,6 +356,7 @@ path.timer-controls-cursor:hover {
   -ms-transform: translateY(-5px);
   -moz-transform: translateY(-5px);
   transform: translateY(-5px);
+  -webkit-filter: drop-shadow(0 7px 15px var(--shadow-color));
   filter: drop-shadow(0 7px 15px var(--shadow-color));
 }
 
@@ -362,6 +380,10 @@ div.todo-grid-section div.todo-grid-container {
   padding: 1rem;
   max-height: 40%;
   box-shadow: var(--shadow-settings-strong);
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   transform: scale(1);
 }
@@ -440,6 +462,7 @@ div.todo-list-container {
 }
 
 div.todo-list-container>div.todo-item {
+  -ms-word-break: break-word;
   word-break: break-word;
   cursor: pointer;
   display: flex;
@@ -761,7 +784,12 @@ a.btn:hover {
 }
 
 input.form-input-shake {
+  -moz-animation: inputElementsShake 0.5s linear both;
+  -o-animation: inputElementsShake 0.5s linear both;
+  -webkit-animation: inputElementsShake 0.5s linear both;
   animation: inputElementsShake 0.5s linear both;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   perspective: 1000px;
   background-color: lightcoral;
@@ -832,6 +860,8 @@ input.form-input-shake {
   border-width: 0 4px 4px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 
@@ -947,5 +977,8 @@ div.loading-icon-container>svg {
   border-radius: 100%;
   width: 7rem;
   height: 7rem;
+  -o-animation: loadingAnimation 1s linear infinite;
+  -moz-animation: loadingAnimation 1s linear infinite;
+  -webkit-animation: loadingAnimation 1s linear infinite;
   animation: loadingAnimation 1s linear infinite;
 }
