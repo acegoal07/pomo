@@ -129,4 +129,11 @@ class PomoTimer {
          }
       }, 100);
    }
+
+   /**
+    * pauses the alarm sound
+    */
+   pauseAlarm() {
+      this.alarmActive = false;
+   }
 }

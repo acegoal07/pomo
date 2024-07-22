@@ -14,11 +14,19 @@
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet" />
    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap" rel="stylesheet" />
-   <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-   <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+   <script src="assets/js/flickity.pkgd-min.js" defer></script>
+   <link rel="stylesheet" href="assets/css/flickity-min.css">
 </head>
 
 <body>
+   <!-- Load svg's -->
+   <svg xmlns="http://www.w3.org/2000/svg" class="hide">
+      <symbol id="loading-icon" viewBox="0 0 512 512">
+         <path
+            d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
+      </symbol>
+   </svg>
+
    <!-- Add todo popup -->
    <div id="todo-popup" class="popup-background">
       <div class="popup-body">
@@ -40,9 +48,8 @@
          </form>
 
          <div class="loading-icon-container hide" id="create-todo-loading-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-               <path
-                  d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
+            <svg>
+               <use href="#loading-icon"></use>
             </svg>
          </div>
 
@@ -72,9 +79,8 @@
          </form>
 
          <div class="loading-icon-container hide" id="todo-item-loading-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-               <path
-                  d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
+            <svg>
+               <use href="#loading-icon"></use>
             </svg>
          </div>
 
@@ -159,9 +165,8 @@
          </div>
 
          <div class="loading-icon-container hide" id="account-popup-loading-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-               <path
-                  d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
+            <svg>
+               <use href="#loading-icon"></use>
             </svg>
          </div>
 
@@ -301,9 +306,8 @@
             </div>
 
             <div class="loading-icon-container border-radius hide" id="todo-list-loading-icon">
-               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path
-                     d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
+               <svg>
+                  <use href="#loading-icon"></use>
                </svg>
             </div>
             <div class="todo-list-container" id="todo-list"></div>
