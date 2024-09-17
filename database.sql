@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 17, 2024 at 04:16 PM
+-- Generation Time: Sep 17, 2024 at 05:13 PM
 -- Server version: 8.0.39
 -- PHP Version: 8.1.29
 
@@ -22,14 +22,6 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `aw1443_pomoDB` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE `aw1443_pomoDB`;
-
-DELIMITER $$
---
--- Procedures
---
-$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -123,6 +115,17 @@ ALTER TABLE `users`
 --
 ALTER TABLE `tasks`
   MODIFY `taskID` int NOT NULL AUTO_INCREMENT;
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`cpses_awn1nr5xr7`@`localhost` EVENT `weekly_reset` ON SCHEDULE EVERY 1 WEEK STARTS '2024-09-16 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE
+    users
+SET
+    oldScore = fullPomoScore$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
