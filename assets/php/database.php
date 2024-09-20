@@ -1,5 +1,13 @@
 <?php
 include 'index.php';
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+   header("Access-Control-Allow-Origin: *");
+   header("Access-Control-Allow-Methods: POST, OPTIONS");
+   header("Access-Control-Allow-Headers: Content-Type");
+   header("Content-Type: application/json");
+   exit(0);
+}
+
 header('Content-Type: application/json');
 
 /**
@@ -247,13 +255,11 @@ try {
                               http_response_code(200);
                            } else {
                               $response['success'] = false;
-                              $response['message'] = 'Failed to register user';
                               http_response_code(500);
                            }
                         } else {
                            $response['success'] = false;
                            $response['code'] = 2;
-                           $response['message'] = 'Passwords do not match';
                            http_response_code(200);
                         }
                      }
