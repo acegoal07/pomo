@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
    exit(0);
 }
 
+header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
 
 /**
@@ -41,7 +42,7 @@ try {
          echo json_encode(array('success' => false));
       } else {
          switch ($_POST['requestType']) {
-               // Get all todos for a specific user
+               ///////////////////////// getTodos //////////////////////////
             case 'getTodos':
                if (!isset($_POST['username']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
@@ -83,7 +84,7 @@ try {
                   echo json_encode($response);
                }
                break;
-               // Create a new todo for a user
+               ///////////////////////// createTodo //////////////////////////
             case 'createTodo':
                if (!isset($_POST['username']) || !isset($_POST['taskContent']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
@@ -119,7 +120,7 @@ try {
                   echo json_encode($response);
                }
                break;
-               // Delete a specific todo for a user
+               ///////////////////////// deleteTodo //////////////////////////
             case 'deleteTodo':
                if (!isset($_POST['taskID']) || !isset($_POST['username']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
@@ -152,7 +153,7 @@ try {
                   echo json_encode($response);
                }
                break;
-               // Edit a specific todo for a user
+               ///////////////////////// editTodo //////////////////////////
             case 'editTodo':
                if (!isset($_POST['taskID']) || !isset($_POST['taskContent']) || !isset($_POST['username']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
@@ -186,7 +187,7 @@ try {
                   echo json_encode($response);
                }
                break;
-               // Login a user
+               ///////////////////////// Login //////////////////////////
                // Codes:
                // 0 - Success
                // 1 - Username/password does not exist
@@ -222,7 +223,7 @@ try {
                   echo json_encode($response);
                }
                break;
-               // Register a user
+               ///////////////////////// Register //////////////////////////
                // Codes:
                // 0 - Success
                // 1 - Username already exists
@@ -240,7 +241,6 @@ try {
                      if ($result->num_rows > 0) {
                         $response['success'] = false;
                         $response['code'] = 1;
-                        $response['message'] = 'Username already exists';
                         http_response_code(200);
                      } else {
                         if ($_POST['password'] === $_POST['confirmPassword']) {
@@ -272,7 +272,7 @@ try {
                   echo json_encode($response);
                }
                break;
-               // Update a user's password
+               ///////////////////////// updatePassword //////////////////////////
                // Codes:
                // 0 - Success
                // 1 - Old password is incorrect
@@ -331,7 +331,100 @@ try {
                   echo json_encode($response);
                }
                break;
-               // Get a user's pomo score
+               ///////////////////////// changeUserName //////////////////////////
+               // Codes:
+               // 0 - Success
+               // 1 - Username already exists
+               // 2 - Password is incorrect
+            case 'changeUsername':
+               if (!isset($_POST['newUsername']) || !isset($_POST['password']) || !isset($_POST['username']) || !isset($_POST['secureID'])) {
+                  http_response_code(400);
+                  echo json_encode(array('success' => false));
+               } else {
+                  $stmt = $conn->prepare("SELECT username FROM users WHERE username = ? AND password = ? AND secureID = ?");
+                  $password = hash('sha256', $_POST['password']);
+                  $stmt->bind_param("sss", $_POST['username'], $password, $_POST['secureID']);
+                  if ($stmt->execute()) {
+                     $result = $stmt->get_result();
+                     if ($result->num_rows > 0) {
+                        $stmt = $conn->prepare("SELECT username FROM users WHERE username = ?");
+                        $stmt->bind_param("s", $_POST['newUsername']);
+                        if ($stmt->execute()) {
+                           $result = $stmt->get_result();
+                           if ($result->num_rows > 0) {
+                              $response['success'] = false;
+                              $response['code'] = 1;
+                              http_response_code(200);
+                           } else {
+                              $stmt = $conn->prepare("UPDATE users SET username = ? WHERE username = ?");
+                              $stmt->bind_param("ss", $_POST['newUsername'], $_POST['username']);
+                              if ($stmt->execute()) {
+                                 $response['success'] = true;
+                                 $response['code'] = 0;
+                                 http_response_code(200);
+                              } else {
+                                 $response['success'] = false;
+                                 http_response_code(500);
+                              }
+                           }
+                        } else {
+                           $response['success'] = false;
+                           http_response_code(500);
+                        }
+                     } else {
+                        $response['success'] = false;
+                        $response['code'] = 2;
+                        http_response_code(200);
+                     }
+                  } else {
+                     $response['success'] = false;
+                     http_response_code(500);
+                  }
+                  $stmt->close();
+                  $conn->close();
+                  echo json_encode($response);
+               }
+               break;
+               ///////////////////////// deleteAccount //////////////////////////
+               // Codes:
+               // 0 - Success
+               // 1 - Password is incorrect
+            case 'deleteAccount':
+               if (!isset($_POST['password']) || !isset($_POST['username']) || !isset($_POST['secureID'])) {
+                  http_response_code(400);
+                  echo json_encode(array('success' => false));
+               } else {
+                  $stmt = $conn->prepare("SELECT username FROM users WHERE username = ? AND password = ? AND secureID = ?");
+                  $password = hash('sha256', $_POST['password']);
+                  $stmt->bind_param("sss", $_POST['username'], $password, $_POST['secureID']);
+                  if ($stmt->execute()) {
+                     $result = $stmt->get_result();
+                     if ($result->num_rows > 0) {
+                        $stmt = $conn->prepare("DELETE FROM users WHERE username = ?");
+                        $stmt->bind_param("s", $_POST['username']);
+                        if ($stmt->execute()) {
+                           $response['success'] = true;
+                           $response['code'] = 0;
+                           http_response_code(200);
+                        } else {
+                           $response['success'] = false;
+                           http_response_code(500);
+                        }
+                     } else {
+                        $response['success'] = false;
+                        $response['code'] = 1;
+                        http_response_code(200);
+                     }
+                  } else {
+                     $response['success'] = false;
+                     http_response_code(500);
+                  }
+                  $stmt->close();
+                  $conn->close();
+                  echo json_encode($response);
+               }
+               break;
+               ///////////////////////// getPomoScore //////////////////////////
             case 'getPomoScore':
                if (!isset($_POST['username']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
@@ -359,7 +452,7 @@ try {
                   echo json_encode($response);
                }
                break;
-               // Update a user's pomo score
+               ///////////////////////// updatePomoScore //////////////////////////
             case 'updatePomoScore':
                if (!isset($_POST['username']) || !isset($_POST['partialPomoScore']) || !isset($_POST['fullPomoScore']) || !isset($_POST['secureID'])) {
                   http_response_code(400);
@@ -379,7 +472,7 @@ try {
                   echo json_encode($response);
                }
                break;
-               // Get all time leaderboard
+               ///////////////////////// getAllTimeLeaderboard //////////////////////////
             case 'getAllTimeLeaderboard':
                $stmt = $conn->prepare("SELECT * FROM allTimeLeaderboard");
                if ($stmt->execute()) {
@@ -401,7 +494,7 @@ try {
                $conn->close();
                echo json_encode($response);
                break;
-               // Get weekly leaderboard
+               ///////////////////////// getWeeklyLeaderboard //////////////////////////
             case 'getWeeklyLeaderboard':
                $stmt = $conn->prepare("SELECT * FROM weeklyLeaderboard");
                if ($stmt->execute()) {
@@ -423,7 +516,7 @@ try {
                $conn->close();
                echo json_encode($response);
                break;
-               // No request type was provided
+               ///////////////////////// No request //////////////////////////
             default:
                http_response_code(400);
                echo json_encode(array('success' => false));
