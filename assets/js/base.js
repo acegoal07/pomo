@@ -19,13 +19,11 @@ window.ondrop = function () {
 // Onload handler
 window.addEventListener("load", async () => {
    /////////////// Onload changes ///////////////
-   if (!getNotificationPermission() && !isIOS()) {
-      Notification.requestPermission();
-   }
    setTimerColor("var(--background-color)");
    document.querySelector("#timer-circle-progress").classList.add("timer-circle-progress-transition");
    document.querySelectorAll("form").forEach(form => form.reset());
-
+   document.querySelector("#study-duration").value = 25;
+   document.querySelector("#break-duration").value = 5;
    /////////////// User onload auto login ///////////////
    if (getCookie('username') !== null && getCookie('secureID') !== null) {
       const form = new FormData();
@@ -563,9 +561,11 @@ window.addEventListener("load", async () => {
    /////////////// Timer Buttons ///////////////
    // Start timer button
    let index = 0;
-   const times = [25, 5, 25, 5, 25, 5, 25, 15];
    let currentTime;
    document.querySelector("#timer-start-button").addEventListener("click", async () => {
+      const studyDuration = document.querySelector("#study-duration").value;
+      const breakDuration = document.querySelector("#break-duration").value;
+      const times = [studyDuration, breakDuration, studyDuration, breakDuration, studyDuration, breakDuration, studyDuration, 15];
       let pomodoros = getCookie('fullPomoScore') || 0;
       let pomoProgress = getCookie('partialPomoScore') || 0;
       const form = new FormData();
@@ -695,6 +695,13 @@ window.addEventListener("load", async () => {
    // Pause timer button
    document.querySelector("#timer-pause-button").addEventListener("click", () => {
       timer.stopTimer();
+   });
+
+   /////////////// Notification popup button ///////////////
+   document.querySelector('svg#notification-popup-button').addEventListener('click', () => {
+      if (!getNotificationPermission() && !isIOS()) {
+         Notification.requestPermission();
+      }
    });
 });
 
