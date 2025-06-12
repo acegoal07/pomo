@@ -26,13 +26,13 @@ window.addEventListener("load", async () => {
    document.querySelector("#break-duration").value = 5;
    /////////////// User onload auto login ///////////////
    if (getCookie('username') !== null && getCookie('secureID') !== null) {
-      const form = new FormData();
-      form.append('requestType', 'getPomoScore');
-      form.append('username', getCookie('username'));
-      form.append('secureID', getCookie('secureID'));
-      await fetch('assets/php/database.php', {
-         method: 'POST',
-         body: form
+      const params = new URLSearchParams({
+         requestType: 'getPomoScore',
+         username: getCookie('username'),
+         secureID: getCookie('secureID')
+      });
+      await fetch(`assets/php/database.php?${params.toString()}`, {
+         method: 'GET'
       })
          .then(response => {
             if (response.ok) {
@@ -770,15 +770,15 @@ async function loadTodos() {
    if (getCookie('username') === null || getCookie('secureID') === null) {
       return;
    }
-   const form = new FormData();
    const loadingIcon = document.querySelector("#todo-list-loading-icon");
    loadingIcon.classList.remove("hide");
-   form.append('requestType', 'getTodos')
-   form.append('username', getCookie('username'));
-   form.append('secureID', getCookie('secureID'));
-   await fetch('assets/php/database.php', {
-      method: 'POST',
-      body: form
+   const params = new URLSearchParams({
+      requestType: 'getTodos',
+      username: getCookie('username'),
+      secureID: getCookie('secureID')
+   });
+   await fetch(`assets/php/database.php?${params.toString()}`, {
+      method: 'GET'
    })
       .then(response => {
          if (response.ok) {
@@ -886,11 +886,11 @@ function removeTodos() {
  * Load leaderboards
  */
 async function loadLeaderboards() {
-   const form = new FormData();
-   form.append('requestType', 'getAllTimeLeaderboard');
-   await fetch('assets/php/database.php', {
-      method: 'POST',
-      body: form
+   const params = new URLSearchParams({
+      requestType: 'getAllTimeLeaderboard'
+   });
+   await fetch(`assets/php/database.php?${params.toString()}`, {
+      method: 'GET'
    })
       .then(response => {
          if (response.ok) {
@@ -922,10 +922,11 @@ async function loadLeaderboards() {
          }
       })
       .catch(error => console.error('Error:', error));
-   form.append('requestType', 'getWeeklyLeaderboard');
-   await fetch('assets/php/database.php', {
-      method: 'POST',
-      body: form
+   const weeklyParams = new URLSearchParams({
+      requestType: 'getWeeklyLeaderboard'
+   });
+   await fetch(`assets/php/database.php?${weeklyParams.toString()}`, {
+      method: 'GET'
    })
       .then(response => {
          if (response.ok) {
